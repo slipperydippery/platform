@@ -1,13 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light border-bottom">
     <div class="container">
         <a class="navbar-brand mr-4 d-flex" href="{{ url('/') }}">
-            @if(Request::is('/'))
-                    <img src="/img/logo.svg" width="120" height="70" class="align-top mr-1 d-none d-xl-block" alt="Logo">
-                    <span class="align-self-center brand-title">Digitale Gesprekshulp</span>
-            @else
-                    <img src="/img/logo.svg" width="120" height="70" class="align-top mr-1 d-none d-xl-block" alt="Logo">
-                    <span class="align-self-center brand-title">Digitale Gesprekshulp</span>
-            @endif
+            <span class="align-self-center brand-title">Participatie.scan</span>
         </a>
         
         <button class="navbar-toggler hidden-lg-up pull-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
@@ -47,11 +41,11 @@
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#"> Privacyverklaring </a>
-                        <a class="dropdown-item" href=" # "> Cookieverklaring </a>
                         <a class="dropdown-item" href=" # "> Contact </a>
                         <a class="dropdown-item" href="/pdf/Handleiding digitale gesprekshulp.pdf" target="blank"> Handleiding </a>
                         <a class="dropdown-item" href="/pdf/Literatuurlijst digitale gesprekshulp.pdf" target="blank"> Literatuurlijst </a>
+                        <a class="dropdown-item" href="#"> Privacyverklaring </a>
+                        <a class="dropdown-item" href=" # "> Cookieverklaring </a>
                     </div>
                 </li>
                 @guest
