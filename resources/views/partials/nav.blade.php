@@ -1,7 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-light border-bottom">
     <div class="container">
         <a class="navbar-brand mr-4 d-flex" href="{{ url('/') }}">
-            <span class="align-self-center brand-title">Participatie.scan</span>
+            @if(Request::is('/'))
+                <img src="/img/1627logo.svg" height="70" width="auto" class="align-top mr-1 d-none d-xl-block" alt="Logo">
+                <span class="align-self-center text-secondary ml-3">Participatie.scan</span>
+            @else
+                <img src="/img/1627logo-minimal.svg" height="40" width="auto" class="align-top mr-1 d-none d-xl-block" alt="Logo">
+                <span class="align-self-center text-secondary ml-3">Participatie.scan</span>
+            @endif
         </a>
         
         <button class="navbar-toggler hidden-lg-up pull-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
