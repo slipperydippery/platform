@@ -1,19 +1,27 @@
 nav.navbar {
-	// margin-bottom: 0;
-	// border-bottom: 0;
-	.brand-title {
-		// font-size: 1.4rem;
+	background: $body-bg;
+	.navbar-brand {
+		.h4 {
+			font-size: 2.5rem;
+		}
 	}
 	ul.navbar-nav {
 		flex-direction: row-reverse;
 	}
-}
-
-.nav-tabs__login {
-	margin-top: 4rem;
-	border-bottom: none;
-	.nav-item {
-		z-index: 10;
-		margin-left: -1px;
+	.nav-link {
+		&.btn, &.btn:hover {
+			color: white;
+			padding-left: 1.5rem;
+			padding-right: 1.5rem;
+		}
 	}
 }
+
+// .nav-tabs__login {
+// 	margin-top: 4rem;
+// 	border-bottom: none;
+// 	.nav-item {
+// 		z-index: 10;
+// 		margin-left: -1px;
+// 	}
+// }

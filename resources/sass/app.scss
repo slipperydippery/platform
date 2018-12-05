@@ -14,4 +14,10 @@
  */
 
 // Global and specific page layouts
+@import "partials/layout";
 @import "partials/navbar";
+@import "partials/footer";
+@import "partials/welcome";
+
+// Element markup
+@import "partials/buttons";

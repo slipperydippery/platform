@@ -1,12 +1,11 @@
-<nav class="navbar navbar-expand-lg navbar-light border-bottom">
-    <div class="container">
+<nav class="navbar navbar-expand-lg navbar-light px-5">
         <a class="navbar-brand mr-4 d-flex" href="{{ url('/') }}">
             @if(Request::is('/'))
-                <img src="/img/1627logo.svg" height="70" width="auto" class="align-top mr-1 d-none d-xl-block" alt="Logo">
-                <span class="align-self-center text-secondary ml-3">Participatie.scan</span>
+                <img src="/img/1627logo-minimal.svg" height="50" width="auto" class="align-top mr-1 d-none d-xl-block" alt="Logo">
+                <h4 class="align-self-center ml-3"><span class="text-primary">Participatie</span><span class="text-secondary">.</span><span class="text-muted">scan</span></h4>
             @else
                 <img src="/img/1627logo-minimal.svg" height="40" width="auto" class="align-top mr-1 d-none d-xl-block" alt="Logo">
-                <span class="align-self-center text-secondary ml-3">Participatie.scan</span>
+                <h4 class="align-self-center ml-3"><span class="text-primary">Participatie</span><span class="text-secondary">.</span><span class="text-muted">scan</span></h4>
             @endif
         </a>
         
@@ -19,8 +18,8 @@
             <ul class="navbar-nav mr-auto col">
                 <!-- Authentication Links -->
                 @guest
-                    <li><a class="nav-link" href="{{ route('login') }}">{{ __('Log in') }}</a></li>
-                    <li><a class="nav-link" href="{{ route('register') }}">{{ __('Registreer') }}</a></li>
+                    <li><a class="nav-link btn btn-primary" href="{{ route('register') }}">{{ __('Registreer') }}</a></li>
+                    <li><a class="nav-link mr-4" href="{{ route('login') }}">{{ __('Log in') }}</a></li>
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -62,5 +61,4 @@
 
             </ul>
         </div>
-    </div>
 </nav>
