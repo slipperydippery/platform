@@ -13,10 +13,12 @@
         <div class="container">
             <div class="row intro-block">
                 <div class="col-12">
-                    <h2 class="mt-5 font-weight-light">Een analyse- en actietool om te komen tot heldere regionale afspraken en een effectieve samenwerking voor het naar werk begeleiden van jongeren in een kwetsbare positie. Alles wat netwerkpartners nodig hebben om succesvol de handen ineen te slaan.</h2>
+                    <h2 class="mt-5 font-weight-light text-center"> Alles wat netwerkpartners nodig hebben om succesvol de handen ineen te slaan.</h2>
                     <div class="text-center pt-3 pb-3">
-                        <a href="#" class="btn btn-secondary mx-auto">BEKIJK DE SCAN</a> <br>
-                        <a href="/pdf/handleiding_participatiescan.pdf" data-toggle="modal" data-target="#exampleModal"><span class="fineprint fineprint--welcome">Lees hier hoe de scan werkt</span></a>
+                        <a href="#" class="btn btn-secondary mx-auto bounce-fade-top">BEKIJK DE SCAN</a> <br>
+                        <a href="/pdf/handleiding_participatiescan.pdf" data-toggle="modal" data-target="#exampleModal">
+                            <span class="fineprint fineprint--welcome fade-in-fwd">Hoe werkt de scan?</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -24,31 +26,33 @@
     </div>
 
 
-    <div class="container pb-5">
-        <div class="card-deck">
-            <div class="card">
-                <img class="card-img-top" src="https://dummyimage.com/348x200/ddd/999" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Instructiefilms</h5>
-                    <p class="card-text">Bekijk de instructiefilm om te zien hoe de digitale gesprekshulp werkt.</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    <div class="container mb-5">
+        <div class="row" id="welcomedeck">
+            <div class="card-deck">
+                <div class="card shadow-sm mb-3">
+                    <img class="card-img-top" src="https://dummyimage.com/348x200/ddd/999" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Instructiefilms</h5>
+                        <p class="card-text">Bekijk de instructiefilm om te zien hoe de digitale gesprekshulp werkt.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <img class="card-img-top" src="https://dummyimage.com/348x200/ddd/999" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Kennisbank</h5>
-                    <p class="card-text">
-                        Schulden voorkomen? <br>
-                        Hoe kunnen we dat samen doen?
-                    </p>
+                <div class="card shadow-sm mb-3">
+                    <img class="card-img-top" src="https://dummyimage.com/348x200/ddd/999" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Kennisbank</h5>
+                        <p class="card-text">
+                            Schulden voorkomen? <br>
+                            Hoe kunnen we dat samen doen?
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="card">
-                <img class="card-img-top" src="https://dummyimage.com/348x200/ddd/999" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">Cijfers uit jouw regio</h5>
-                    <p class="card-text">De kennisbank is nog in ontwikkeling.</p>
+                <div class="card shadow-sm mb-3">
+                    <img class="card-img-top" src="https://dummyimage.com/348x200/ddd/999" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Cijfers uit jouw regio</h5>
+                        <p class="card-text">De kennisbank is nog in ontwikkeling.</p>
+                    </div>
                 </div>
             </div>
         </div>

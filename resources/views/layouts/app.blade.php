@@ -22,6 +22,7 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-93563705-6"></script>
@@ -52,7 +53,7 @@
 
     @include('partials.instructie')
 
-    <footer class="footer p-5">
+    <footer class="footer p-5 mt-5">
         <div class="row pt-5">
             <div class="col-4">
                 <h3><span class="">Participatie</span><span class="text-secondary">.</span><span class="text-muted">scan</span></h3>

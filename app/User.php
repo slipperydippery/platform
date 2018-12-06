@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Scan;
+use App\Dashmessage;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -28,4 +30,14 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function scans()
+    {
+        return $this->hasMany(Scan::class);
+    }
+
+    public function dashmessages()
+    {
+        return $this->morphMany(Dashmessage::class, 'dashmessagable');
+    }
 }

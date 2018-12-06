@@ -17,8 +17,8 @@ class CreateDashmessagesTable extends Migration
             $table->increments('id');
             $table->text('message');
             $table->string('type')->nullable();
-            $table->integer('dashmessable_id')->unsigned();
-            $table->string('dashmessable_type');
+            $table->integer('dashmessagable_id')->unsigned();
+            $table->string('dashmessagable_type');
             $table->timestamps();
         });
     }

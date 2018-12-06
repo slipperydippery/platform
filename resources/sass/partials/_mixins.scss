@@ -1,0 +1,18 @@
+@mixin make-card-col($size, $columns) {
+	$width: calc(#{percentage($size / $columns)} - #{2 * $card-deck-margin});
+	flex: 0 0 $width;
+	// TODO: Fix for IE10+, can be done by switching from "flex" to "width"
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+	@include media-breakpoint-up($breakpoint) {
+		@for $columns from 1 through $grid-columns {
+			.card-deck .card-col-#{$breakpoint}-#{$columns} {
+				@include make-card-col($columns, $grid-columns);
+			}
+			.card-deck-#{$breakpoint}-#{$columns} .card {
+				@include make-card-col(1, $columns);
+			}
+		}
+	}
+}

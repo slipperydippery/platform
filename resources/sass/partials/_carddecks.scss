@@ -1,0 +1,23 @@
+#welcomedeck .card-deck {
+  display: grid;
+}
+@media (min-width: 0) {
+  #welcomedeck .card-deck {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media (min-width: 768px) {
+  #welcomedeck .card-deck {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+@media (min-width: 992px) {
+  #welcomedeck .card-deck {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 1400px) {
+  #welcomedeck .card-deck {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
