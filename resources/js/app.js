@@ -26,6 +26,7 @@ export let store = {
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('district-decoration', require('./components/DistrictDecoration.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -35,36 +36,4 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 
 const app = new Vue({
     el: '#app',
-    data() {
-        return {
-        	filter: '',
-        	selected: []
-        }
-    },
-
-    methods: {
-    	toggleSelected(object) {
-    		var iscontained = false;
-    		this.selected.forEach( item => {
-    			if( item.id == object.id ) {
-    				this.selected.splice(this.selected.indexOf(item), 1);
-    				iscontained = true;
-    			}
-    		} );
-    		if( ! iscontained ) {
-	    		this.selected.push(object);
-    		}
-    		this.filter = '';
-    	},
-
-    	isSelected(object) {
-    		var iscontained = false;
-    		this.selected.forEach( item => {
-    			if( item.id == object.id ) {
-    				iscontained = true;
-    			}
-    		});
-    		return iscontained;
-    	}
-    }
 });

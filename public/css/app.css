@@ -11672,6 +11672,10 @@ nav.navbar .nav-link.btn:hover {
   border-top: none;
 }
 
+.vueelement {
+  display: none;
+}
+
 .hidden {
   display: none;
 }
@@ -11709,12 +11713,7 @@ nav.navbar .nav-link.btn:hover {
   }
 }
 
-.checkboxgroup {
-  height: 200px;
-  overflow-y: auto;
-}
-
-.checkboxgroup .checkboxinput:checked + .checkboxlabel {
+.checkboxinput:checked + .checkboxlabel {
   background: #3490dc;
 }
 

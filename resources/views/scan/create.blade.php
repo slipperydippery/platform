@@ -6,6 +6,7 @@
 	        <div class="col-md-12">
 	            <div class="page--title">
 	                <h1 class="pagetitle">Nieuwe scan zonder groep</h1>
+	                <p>lorem ipsum</p>
 	            </div>
 	        </div>
 		</div>
