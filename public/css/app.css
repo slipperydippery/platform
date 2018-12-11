@@ -11672,8 +11672,11 @@ nav.navbar .nav-link.btn:hover {
   border-top: none;
 }
 
+.hidden {
+  display: none;
+}
+
 .btn {
-  border-radius: 2em;
   padding-left: 1.5em;
   padding-right: 1.5em;
 }
@@ -11704,6 +11707,15 @@ nav.navbar .nav-link.btn:hover {
   #welcomedeck .card-deck {
     grid-template-columns: repeat(3, 1fr);
   }
+}
+
+.checkboxgroup {
+  height: 200px;
+  overflow-y: auto;
+}
+
+.checkboxgroup .checkboxinput:checked + .checkboxlabel {
+  background: #3490dc;
 }
 
 

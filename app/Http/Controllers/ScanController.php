@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Scan;
+use App\District;
+use App\Instantie;
 use Illuminate\Http\Request;
 
 class ScanController extends Controller
@@ -24,7 +26,9 @@ class ScanController extends Controller
      */
     public function create()
     {
-        //
+        $instanties = Instantie::get();
+        $districts = District::get();
+        return view('scan.create', compact('instanties', 'districts'));
     }
 
     /**
@@ -35,7 +39,7 @@ class ScanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request->all();
     }
 
     /**

@@ -13924,8 +13924,11 @@ module.exports = __webpack_require__(43);
 
 /***/ }),
 /* 12 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "store", function() { return store; });
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -13936,6 +13939,10 @@ module.exports = __webpack_require__(43);
 __webpack_require__(13);
 
 window.Vue = __webpack_require__(36);
+
+var store = {
+  filter: 'hello'
+};
 
 /**
  * The following block of code may be used to automatically register your
@@ -13957,7 +13964,41 @@ Vue.component('example-component', __webpack_require__(39));
  */
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  data: function data() {
+    return {
+      filter: '',
+      selected: []
+    };
+  },
+
+
+  methods: {
+    toggleSelected: function toggleSelected(object) {
+      var _this = this;
+
+      var iscontained = false;
+      this.selected.forEach(function (item) {
+        if (item.id == object.id) {
+          _this.selected.splice(_this.selected.indexOf(item), 1);
+          iscontained = true;
+        }
+      });
+      if (!iscontained) {
+        this.selected.push(object);
+      }
+      this.filter = '';
+    },
+    isSelected: function isSelected(object) {
+      var iscontained = false;
+      this.selected.forEach(function (item) {
+        if (item.id == object.id) {
+          iscontained = true;
+        }
+      });
+      return iscontained;
+    }
+  }
 });
 
 /***/ }),
