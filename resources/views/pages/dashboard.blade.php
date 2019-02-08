@@ -69,7 +69,7 @@
 		    				<i class="material-icons md-inactive"> account_circle </i> hier is nog een scan
 		    			</div>
 		    		</div>
-		    		<a href="#" class="">+ Maak een nieuwe scan aan</a>
+		    		<a href=" {{ route('scan.new') }} " class="">+ Maak een nieuwe scan aan</a>
     			</div>
     		</div>
     		<div class="row mb-5">

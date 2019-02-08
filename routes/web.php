@@ -13,5 +13,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'PagesController@dashboard')->name('dashboard')->middleware('auth');
 Route::get('/introductiefilm', 'PagesController@introductiefilm')->name('introductiefilm');
 
-Route::resource('inventarisatie', 'InventarisatieController');
+Route::get('/scan/new', 'ScanPagesController@new')->name('scan.new');
+Route::get('/scan/createwithgroup', 'ScanPagesController@createwithgroup')->name('scan.createwithgroup');
+Route::resource('scan', 'ScanController');
+// Route::resource('inventarisatie', 'InventarisatieController');
 
