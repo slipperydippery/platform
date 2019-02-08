@@ -16,7 +16,37 @@
     </div>
     <div class="row mt-3">
     	{{-- main Scan stuff --}}
-    	<div class="col-md-9">
+    	<div class="col-md-9 bg-white shadow-sm">
+            <table class="table table-sm table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Naam</th>
+                        <th scope="col">Gemeente</th>
+                        <th scope="col">Voortgang</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Hier een scan</td>
+                        <td>Amsterdam</td>
+                        <td>0/15</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Hier nog een scan</td>
+                        <td>Beverwijk</td>
+                        <td>15/15</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Hier de laatste</td>
+                        <td>Heemskerk</td>
+                        <td>7/15</td>
+                    </tr>
+                </tbody>
+            </table>
     		<div class="row mb-5">
     			<div class="col border">
     				<div class="row">
