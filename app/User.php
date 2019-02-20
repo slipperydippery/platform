@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Scan;
+use App\Group;
 use App\Dashmessage;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -34,6 +35,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function scans()
     {
         return $this->hasMany(Scan::class);
+    }
+
+    public function groups()
+    {
+        return $this->hasMany(Group::class);
     }
 
     public function dashmessages()

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Scan;
 use App\Group;
+use App\District;
+use App\Instantie;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
@@ -24,7 +27,10 @@ class GroupController extends Controller
      */
     public function create()
     {
-        //
+        $instanties = Instantie::get();
+        $districts = District::get();
+
+        return view('group.create', compact('instanties', 'districts'));
     }
 
     /**
@@ -35,7 +41,17 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'title' => 'required|min:3|max:255',
+            'instantie_id' => 'required|integer',
+            'districts' => 'required'
+        ]);
+
+        $scan = Scan::register( $request->all() );
+
+        $group = Group::register( $scan );
+
+        return redirect()->route('dashboard');
     }
 
     /**

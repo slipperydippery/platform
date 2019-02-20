@@ -5,7 +5,11 @@
 		<div class="row">
 	        <div class="col-md-12">
 	            <div class="page--title">
-	                <h1 class="pagetitle">Nieuwe scan zonder groep</h1>
+	            	@if ($isgroup)
+		                <h1 class="pagetitle">Nieuwe scan met groep</h1>
+            		@else
+		                <h1 class="pagetitle">Nieuwe scan zonder groep</h1>
+	            	@endif
 	                <p>lorem ipsum</p>
 	            </div>
 	        </div>

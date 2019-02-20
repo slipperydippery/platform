@@ -18,57 +18,64 @@
     	{{-- main Scan stuff --}}
     	<div class="col-md-9">
     		<div class="row mb-5">
-    			<div class="col border">
+    			<div class="col border shadow-sm">
     				<div class="row">
-    					<div class="col-12 pt-2" >
+    					<div class="col-12 pt-2 border-bottom" >
 				    		<h6>Mijn Scans</h6>
     					</div>
     				</div>
-		    		<div class="row p-1 bg-white text-secondary border">
-		    			<div class="col-12">
-		    				<i class="material-icons md-inactive"> star </i> hier is een scan
-		    			</div>
-		    		</div>
-		    		<div class="row p-1 bg-white text-secondary border">
-		    			<div class="col-12">
-		    				<i class="material-icons md-inactive"> account_circle </i> hier is nog een scan
-		    			</div>
-		    		</div>
-		    		<div class="row p-1 bg-white text-secondary border">
-		    			<div class="col-12">
-		    				<i class="material-icons md-inactive"> account_circle </i> hier is nog een scan
-		    			</div>
-		    		</div>
-		    		<a href=" {{ route('scan.new') }} " class="">+ Maak een nieuwe scan aan</a>
-    			</div>
-    		</div>
-    		<div class="row mb-5">
-    			<div class="col shadow">
-    				<div class="row">
-    					<div class="col-12 pt-2 border-top border-primary">
-				    		<h6>Mijn groepen</h6>
-    					</div>
-    				</div>
-		    		<div class="row p-1 bg-white text-secondary border">
-		    			<div class="col-12">
-		    				hier is een groep
-		    			</div>
-		    		</div>
-		    		<div class="row p-1 bg-white text-secondary border">
-		    			<div class="col-12">
-		    				hier is nog een groep
-		    			</div>
-		    		</div>
-		    		<div class="row p-1 bg-white text-secondary border">
-		    			<div class="col-12">
-		    				hier is nog een groep
-		    			</div>
-		    		</div>
-		    		<a href="#" class=""> + Maak een nieuwe groep aan</a>
-    			</div>
-    		</div>
-    		
-    	</div>
+                    @foreach (auth()->user()->scans as $scan)
+                        @if (! $scan->isowner())
+                            <div class="row p-1 bg-white text-secondary border-bottom">
+                                <div class="col-12 d-flex">
+                                    @if ($scan->group)
+                                        <i class="material-icons md-inactive mr-2"> supervised_user_circle </i> 
+                                    @else
+                                        <i class="material-icons md-inactive mr-2"> account_circle </i> 
+                                    @endif
+                                    <a href=" {{ route('scan.show', $scan) }} " class="flex-grow-1 mx-2 nowrap">{{ $scan->title }}</a>
+                                    <span class="mx-2 text-right">
+                                        @foreach ($scan->districts as $district)
+                                            <span class="badge badge-pill badge-secondary font-weight-light text-white">{{ $district->name }}</span>
+                                        @endforeach
+                                    </span>
+                                    <span class="mx-2 nowrap"> {{ $scan->answercount() }} /15</span>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                    <a href=" {{ route('createscan.start') }} " class="">+ Maak een nieuwe scan aan</a>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col border shadow-sm">
+                    <div class="row">
+                        <div class="col-12 pt-2 border-bottom">
+                            <h6>Mijn groepen</h6>
+                        </div>
+                    </div>
+                    @foreach (auth()->user()->groups as $group)
+                        <div class="row p-1 bg-white text-secondary border-bottom">
+                            <div class="col-12 d-flex">
+                                <i class="material-icons md-inactive mr-2"> star </i> 
+                                <a href=" {{ route('group.show', $group) }} " class="flex-grow-1 mx-2 nowrap">{{ $group->title }}</a>
+                                <span class="mx-2 text-right">
+                                    @foreach ($scan->districts as $district)
+                                        <span class="badge badge-pill badge-secondary font-weight-light text-white">{{ $district->name }}</span>
+                                    @endforeach
+                                </span>
+                                <span class="mx-2">
+                                    <i class="material-icons md-inactive mr-2"> group </i> 
+                                    {{ $group->usercount() }}
+                                </span>
+                            </div>
+                        </div>
+                    @endforeach
+                    <a href=" {{ route('group.create') }} " class=""> + Maak een nieuwe groep aan</a>
+                </div>
+            </div>
+            
+        </div>
 
     	{{-- Sidebar functions --}}
     	<div class="col-md-3">

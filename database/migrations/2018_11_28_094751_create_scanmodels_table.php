@@ -18,6 +18,7 @@ class CreateScanmodelsTable extends Migration
             $table->string('title');
             $table->text('short');
             $table->text('body');
+            $table->tinyInteger('finalized')->default(0);
             $table->timestamps();
         });
     }

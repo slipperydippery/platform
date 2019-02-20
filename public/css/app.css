@@ -11680,6 +11680,10 @@ nav.navbar .nav-link.btn:hover {
   display: none;
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 .btn {
   padding-left: 1.5em;
   padding-right: 1.5em;

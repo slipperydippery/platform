@@ -44,13 +44,6 @@
         <portal-target name="modals"></portal-target>
     </main>
 
-    @hasSection('prevnext')
-        <div class="container">
-            @yield('prevnext')
-            @include('partials.progressbar')
-        </div>
-    @endif
-
     @include('partials.instructie')
 
     <footer class="footer p-5 mt-5">

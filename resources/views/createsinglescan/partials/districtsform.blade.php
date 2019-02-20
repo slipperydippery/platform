@@ -1,59 +1,3 @@
-<!-- Hidden Form Input -->
-<input type="hidden" id="isgroup" name="isgroup" value=" {{ $isgroup }} ">
-<input type="hidden" id="scanmodel_id" name="scanmodel_id" value="1">
-
-@if( ! $isgroup )
-	<!-- Naam Form Input -->
-	<div class="form-group">
-	    <label for="title">Naam</label>
-	    <input id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title', request('title') ?? $scan->title ?? null) }}" autofocus>
-
-		@if ($errors->has('title'))
-	        <span class="invalid-feedback">
-		        <strong>{{ $errors->first('title') }}</strong>
-		    </span>
-		@endif
-	</div>
-@endif
-
-@if( $isgroup )
-<!-- Groep Form Input -->
-<div class="form-group">
-    <label for="group">Groep</label> <br/>
-    <select class="form-control{{ $errors->has('group_id') ? ' is-invalid' : '' }}" name="group_id">
-	    <option disabled selected value style="display:none;">  </option>
-		@foreach($groups as $group)
-		    <option value="{{ old('group', request('group') ?? $group->id ?? null) }}">  {{ $group->title }}  </option>
-		@endforeach
-    </select>
-
-	@if ($errors->has('group_id'))
-        <span class="invalid-feedback">
-	        <strong>{{ $errors->first('group_id') }}</strong>
-	    </span>
-	@endif
-</div>
-
-@endif
-
-<!-- Instantie Form Input -->
-<div class="form-group">
-    <label for="instantie">Instantie</label> <br>
-    <select class="form-control{{ $errors->has('instantie_id') ? ' is-invalid' : '' }}" name="instantie_id">
-		    <option disabled selected value style="display:none;">  </option>
-		@foreach($instanties as $instantie)
-		    <option value="{{ old('instantie', request('instantie') ?? $instantie->id ?? null) }}">  {{ $instantie->title }}  </option>
-		@endforeach
-    </select>
-
-	@if ($errors->has('instantie_id'))
-        <span class="invalid-feedback">
-	        <strong>{{ $errors->first('instantie_id') }}</strong>
-	    </span>
-	@endif
-</div>
-
-@if(! $isgroup)
 <label for="filter">Gemeente</label>
 <district-decoration inline-template>
 <div class="row">
@@ -102,10 +46,8 @@
 		</div>
 </div>
 </district-decoration>
-@endif
 
 <!-- Add Submit Field -->
 <div class="form-group">
     <input type="submit" value=" {{ $submittext }} " class="btn btn-primary form-control" />
 </div>
-

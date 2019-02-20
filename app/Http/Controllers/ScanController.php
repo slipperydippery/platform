@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Scan;
+use App\Group;
 use App\District;
 use App\Instantie;
 use Illuminate\Http\Request;
@@ -28,7 +29,12 @@ class ScanController extends Controller
     {
         $instanties = Instantie::get();
         $districts = District::get();
-        return view('scan.create', compact('instanties', 'districts'));
+        $groups = Group::with('user')->get();
+        $isgroup = false;
+        if (request()->query('group')){
+            $isgroup = true;
+        }
+        return view('scan.create', compact('instanties', 'districts', 'isgroup', 'groups'));
     }
 
     /**
@@ -39,7 +45,25 @@ class ScanController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+        if($request->isgroup) {
+            request()->validate([
+                'group_id' => 'required|integer',
+                'instantie_id' => 'required|integer',
+            ]);
+            if(Group::find($request->group_id)->authhasscan()){
+                return 'sorry you have a scan already bro';
+            }
+        } else {
+            request()->validate([
+                'title' => 'required|min:3|max:255',
+                'instantie_id' => 'required|integer',
+                'districts' => 'required'
+            ]);
+        }
+
+        $scan = Scan::register($request->all());
+
+        return redirect()->route('scan.created', $scan);
     }
 
     /**

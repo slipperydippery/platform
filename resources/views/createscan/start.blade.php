@@ -19,10 +19,10 @@
 					</div>
 					<div class="row my-5">
 						<div class="col-sm-6">
-							<a href=" {{ route('scan.create') }} " class="btn btn-block btn-secondary">Ik wil de scan alleen maken</a>
+							<a href=" {{ route('createsinglescan.name') }} " class="btn btn-block btn-secondary">Ik wil de scan alleen maken</a>
 						</div>
 						<div class="col-sm-6">
-							<a href=" {{ route('scan.createwithgroup') }} " class="btn btn-block btn-secondary">Ik ga samen met een groep aan de slag</a>
+							<a href=" {{ route('creategroupscan.group') }} " class="btn btn-block btn-secondary">Ik ga samen met een groep aan de slag</a>
 						</div>
 					</div>
 				</div>
