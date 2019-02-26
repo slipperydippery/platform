@@ -6,54 +6,41 @@
     @include('partials.dashmessage')
 @endforeach
 
-<div class="container container--page">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="page--title">
-                <h1 class="pagetitle">Dashboard</h1>
+@if ( ! auth()->user()->scans->count() )
+    <div class="welcome">
+        <img src="/img/hero_main_feet.jpg" alt="" class="img-fluid">
+        <div class="container">
+            <div class="row intro-block">
+                <div class="col-12">
+                    <h2 class="mt-5 font-weight-light text-center"> Alles wat netwerkpartners nodig hebben om succesvol de handen ineen te slaan.</h2>
+                    <div class="text-center pt-3 pb-3">
+                        <a href="#" class="btn btn-secondary mx-auto bounce-fade-top">BEKIJK DE SCAN</a> <br>
+                        <a href="/pdf/handleiding_participatiescan.pdf" data-toggle="modal" data-target="#exampleModal">
+                            <span class="fineprint fineprint--welcome fade-in-fwd">Hoe werkt de scan?</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+@else
+
+<div class="container container--page">
+    <div class="container-fluid">
+        <img src="/img/hero_main_feet.jpg" alt="" class="img-fluid">
+    </div>
+
     <div class="row mt-3">
-    	{{-- main Scan stuff --}}
-    	<div class="col-md-9 bg-white shadow-sm">
-            <table class="table table-sm table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Naam</th>
-                        <th scope="col">Gemeente</th>
-                        <th scope="col">Voortgang</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Hier een scan</td>
-                        <td>Amsterdam</td>
-                        <td>0/15</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Hier nog een scan</td>
-                        <td>Beverwijk</td>
-                        <td>15/15</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Hier de laatste</td>
-                        <td>Heemskerk</td>
-                        <td>7/15</td>
-                    </tr>
-                </tbody>
-            </table>
-    		<div class="row mb-5">
-    			<div class="col border shadow-sm">
-    				<div class="row">
-    					<div class="col-12 pt-2 border-bottom" >
-				    		<h6>Mijn Scans</h6>
-    					</div>
-    				</div>
+        {{-- main Scan stuff --}}
+        <div class="col-md-9 bg-white shadow-sm">
+                <a href=" {{ route('createscan.start') }} " class="">+ Maak een nieuwe scan aan</a>
+            <div class="row mb-5">
+                <div class="col border shadow-sm">
+                    <div class="row">
+                        <div class="col-12 pt-2 border-bottom" >
+                            <h6>Mijn Scans</h6>
+                        </div>
+                    </div>
                     @foreach (auth()->user()->scans as $scan)
                         @if (! $scan->isowner())
                             <div class="row p-1 bg-white text-secondary border-bottom">
@@ -74,7 +61,6 @@
                             </div>
                         @endif
                     @endforeach
-                    <a href=" {{ route('createscan.start') }} " class="">+ Maak een nieuwe scan aan</a>
                 </div>
             </div>
             <div class="row mb-5">
@@ -107,16 +93,16 @@
             
         </div>
 
-    	{{-- Sidebar functions --}}
-    	<div class="col-md-3">
-    		<a href=" {{ route('introductiefilm') }} " title="">
-    		    <div class="card card__dashboard mb-4">
-    		        <div class="card-body">
-		    		    <h5 class="card-title">Instructiefilm</h5>
-    		            <img src="/img/films.jpg" alt="">
-    		        </div>
-    		    </div>
-    		</a>
+        {{-- Sidebar functions --}}
+        <div class="col-md-3">
+            <a href=" {{ route('introductiefilm') }} " title="">
+                <div class="card card__dashboard mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Instructiefilm</h5>
+                        <img src="/img/films.jpg" alt="">
+                    </div>
+                </div>
+            </a>
             <div class="card card__dashboard mb-4" data-toggle="tooltip" data-placement="top" title="De kennisbank is nog in ontwikkeling">
                 <div class="card-body">
                     <h5 class="card-title disabled">Kennisbank</h5>
@@ -129,11 +115,12 @@
                     <img src="/img/book_disabled.jpg" alt="">
                 </div>
             </div>
-    		
-    	</div>
+            
+        </div>
     </div>
         
 </div>
+@endif
 @endsection
 
 @section('additional-scripts')
