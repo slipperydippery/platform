@@ -7,6 +7,18 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('verified');
+        $this->middleware('two_factor');
+    }
+    
     public function dashboard()
     {
         $user = Auth::user();

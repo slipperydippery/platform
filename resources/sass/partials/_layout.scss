@@ -6,3 +6,12 @@ body {
 main {
 	flex-grow: 1;
 }
+
+.container--page {
+	position: relative;
+    background: white;
+    border: 1px solid #ffffff;
+    border-radius: 0.4em;
+    margin-top: -3rem;
+    padding: 2rem;
+}

@@ -5,10 +5,15 @@ use App\User;
 Route::get('/admin/loginasuser/{user}', 'AdminPagesController@loginasuser')->name('loginasuser');
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.dashboard');
 });
 
 Auth::routes(['verify' => true]);
+
+// Two Factor Authentication
+Route::get('2fa', 'TwoFactorController@showTwoFactorForm');
+Route::post('2fa', 'TwoFactorController@verifyTwoFactor');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 

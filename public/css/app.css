@@ -11631,6 +11631,15 @@ main {
           flex-grow: 1;
 }
 
+.container--page {
+  position: relative;
+  background: white;
+  border: 1px solid #ffffff;
+  border-radius: 0.4em;
+  margin-top: -3rem;
+  padding: 2rem;
+}
+
 nav.navbar {
   background: #fafafa;
 }
@@ -11666,6 +11675,10 @@ nav.navbar .nav-link.btn:hover {
 
 .intro-block > div {
   margin-left: -150px;
+}
+
+.main--sidebar {
+  border-left: 1px solid #ced4da;
 }
 
 .card__login {
