@@ -21766,6 +21766,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 __webpack_require__(86);
 
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});
+
 window.Vue = __webpack_require__(109);
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_bootstrap_vue___default.a);
@@ -21804,6 +21808,7 @@ var app = new Vue({
 
 
 window._ = __webpack_require__(87);
+window.Popper = __webpack_require__(15).default;
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -21812,7 +21817,6 @@ window._ = __webpack_require__(87);
  */
 
 try {
-  window.Popper = __webpack_require__(15).default;
   window.$ = window.jQuery = __webpack_require__(37);
 
   __webpack_require__(89);

@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-md-9">
                 @if(Auth::check() && auth()->user()->scans->count())
-                    include(partials.mainscansoverview)
+                    @include('pages.partials.mainscansoverview')
                 @else
                     @include('pages.partials.mainempty')
                 @endif

@@ -9,6 +9,7 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
 
 // Mixins
 @import "partials/mixins";
@@ -26,6 +27,7 @@
 @import "partials/footer";
 @import "partials/dashboard"; 
 @import "partials/auth";
+@import "partials/scan";
 @import "partials/progressbar";
 
 // Element markup
