@@ -9,6 +9,11 @@ class ScanPagesController extends Controller
 {
     public function start(Scan $scan)
     {
-    	return view	('scan.start');
+    	return view	('scan.start', compact('scan'));
+    }
+
+    public function kennismaken(Scan $scan)
+    {
+    	return view('scan.kennismaken', compact('scan'));
     }
 }

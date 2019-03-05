@@ -18,11 +18,6 @@
                 @else
                     @include('pages.partials.mainempty')
                 @endif
-                <div class="row">
-                    <div class="col bg-white shadow-sm">
-                        hier is een col
-                    </div>
-                </div>
             </div>
             <div class="col-md-3 main--sidebar">
                 @include('pages.partials.sidebar')

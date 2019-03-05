@@ -8,6 +8,9 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import BootstrapVue from 'bootstrap-vue'
+Vue.use(BootstrapVue);
+
 
 export let store = {
     filter: 'hello',
