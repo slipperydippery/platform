@@ -37,6 +37,7 @@ Route::get('/nieuwegroupsscan/{scan}/klaar', 'CreateGroupScanController@created'
 
 Route::resource('scan', 'ScanController');
 Route::get('/scan/{scan}/start', 'ScanPagesController@start')->name('scan.start');
+Route::get('/scan/{scan}/introductiefilm', 'ScanPagesController@introductiefilm')->name('scan.introductiefilm');
 Route::get('/scan/{scan}/kennismaken', 'ScanPagesController@kennismaken')->name('scan.kennismaken');
 Route::get('/sessie/{scan}/regioincijfers', 'ScanPagesController@regioincijfers')->name('scan.regioincijfers');
 Route::get('/sessie/{scan}/algemeenbeeld', 'ScanPagesController@algemeenbeeld')->name('scan.algemeenbeeld');

@@ -19,6 +19,7 @@ class CreateThemesTable extends Migration
             $table->text('short');
             $table->text('info')->nullable();
             $table->text('body');
+            $table->tinyInteger('order')->unsigned();
             $table->integer('scanmodel_id')->unsigned();
             $table->foreign('scanmodel_id')->references('id')->on('scanmodels')->onDelete('cascade');
             $table->timestamps();

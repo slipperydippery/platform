@@ -19,21 +19,32 @@ class ThemeTableSeeder extends Seeder
                 'title' => 'Focus op werk en talent',
                 'short' => '',
                 'body' => '',
-                'scanmodel_id' => '1'
+                'scanmodel_id' => '1',
+                'order' => '1',
             ],
             [
                 'id' => '2',
                 'title' => 'Kwaliteit begeleiding',
                 'short' => '',
                 'body' => '',
-                'scanmodel_id' => '1'
+                'scanmodel_id' => '1',
+                'order' => '2',
             ],
             [
                 'id' => '3',
+                'title' => 'Overige randvoorwaarden voor goede begeleiding',
+                'short' => '',
+                'body' => '',
+                'scanmodel_id' => '1',
+                'order' => '3',
+            ],
+            [
+                'id' => '4',
                 'title' => 'Effectieve samenwerking',
                 'short' => '',
                 'body' => '',
-                'scanmodel_id' => '1'
+                'scanmodel_id' => '1',
+                'order' => '4',
             ],
         ];
 

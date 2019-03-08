@@ -19,10 +19,10 @@
 @section('prevnext')
     <div class="row row__prevnext justify-content-between">
         <div class="col-md-4">
-            <a href=" {{ route('scan.regioincijfers', $scan) }} " class="btn btn-primary btn-block btn__prevnext"><i class="material-icons"> navigate_before </i> vorige</a>
+            <a href=" {{ route('scan.regioincijfers', $scan) }} " class="btn btn-secondary btn-block btn__prevnext"><i class="material-icons"> navigate_before </i> vorige</a>
         </div>
         <div class="col-md-4">
-            <a href=" {{ route('scan.algemeenbeeldresultaten', $scan) }} " class="btn btn-primary btn-block btn__prevnext">volgende <i class="material-icons"> navigate_next </i></a>
+            <a href=" {{ route('scan.algemeenbeeldresultaten', $scan) }} " class="btn btn-secondary btn-block btn__prevnext">volgende <i class="material-icons"> navigate_next </i></a>
         </div>
     </div>
 @stop

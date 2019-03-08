@@ -41,6 +41,19 @@ Vue.component('district-decoration', require('./components/DistrictDecoration.vu
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+// Vue.component('algemeenbeeld', require('./components/Algemeenbeeld.vue'));
+// Vue.component('algemeenbeeldresultaten', require('./components/Algemeenbeeldresultaten.vue'));
+
+// Vue.component('scan-results', require('./components/ScanResults.vue'));
+
+Vue.component('scan-slider', require('./components/ScanSlider.vue'));
+
+// Utility
+Vue.component('countdown', require('./components/Countdown.vue'));
+
+// Controlled Components
+Vue.component('slider-input', require('./components/SliderInput.vue'));
+
 const app = new Vue({
     el: '#app',
 });

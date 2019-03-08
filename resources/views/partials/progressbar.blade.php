@@ -4,12 +4,34 @@
             <div class="col-sm-12">
                 <div class="progressbar d-flex justify-content-between">
                     <div class="progress-element">
+                        @if ( url()->current() == route('scan.introductiefilm', $scan) )
+                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Introductiefilm">
+                                <img src="/img/simplecircle_full.svg" alt="">
+                            </span>
+                        @else
+                            <a href=" {{ route('scan.introductiefilm', $scan) }} " class="" data-toggle="tooltip" data-placement="top" title="Introductiefilm">
+                                <img src="/img/simplecircle.svg" alt="">
+                            </a>
+                        @endif
+                    </div>
+                    <div class="progress-element">
                         @if ( url()->current() == route('scan.kennismaken', $scan) )
                             <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Kennismaken">
                                 <img src="/img/simplecircle_full.svg" alt="">
                             </span>
                         @else
                             <a href=" {{ route('scan.kennismaken', $scan) }} " class="" data-toggle="tooltip" data-placement="top" title="Kennismaken">
+                                <img src="/img/simplecircle.svg" alt="">
+                            </a>
+                        @endif
+                    </div>
+                    <div class="progress-element">
+                        @if ( url()->current() == route('scan.regioincijfers', $scan) )
+                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Kennismaken">
+                                <img src="/img/simplecircle_full.svg" alt="">
+                            </span>
+                        @else
+                            <a href=" {{ route('scan.regioincijfers', $scan) }} " class="" data-toggle="tooltip" data-placement="top" title="Regio in cijfers">
                                 <img src="/img/simplecircle.svg" alt="">
                             </a>
                         @endif

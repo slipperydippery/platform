@@ -1,6 +1,8 @@
 
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,900');
+@import url('https://fonts.googleapis.com/css?family=Nunito:600');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700');
 @import "partials/materialicons";
 
 // Variables
@@ -20,6 +22,8 @@
 /**
  * Site style
  */
+@import "partials/typography";
+
 
 // Global and specific page layouts
 @import "partials/layout";
@@ -29,6 +33,7 @@
 @import "partials/auth";
 @import "partials/scan";
 @import "partials/progressbar";
+@import "partials/slider";
 
 // Element markup
 @import "partials/vue";

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Cache;
 use App\Scan;
 use App\Group;
 use App\Dashmessage;
@@ -45,5 +46,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function dashmessages()
     {
         return $this->morphMany(Dashmessage::class, 'dashmessagable');
+    }
+
+    public function isOnline()
+    {
+        return Cache::has('user-is-online-' . $this->id);
     }
 }

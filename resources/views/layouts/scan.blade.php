@@ -71,9 +71,6 @@
     <!-- Additional Scripts -->
     @yield('additional-scripts')
     <script>
-        $(document).ready(function(){
-            $('[data-toggle="tooltip"]').tooltip()
-        });
     </script>
 
 </body>

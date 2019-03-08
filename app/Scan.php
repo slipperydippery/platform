@@ -7,6 +7,7 @@ use App\Group;
 use App\Answer;
 use App\District;
 use App\Question;
+use App\Instantie;
 use App\Scanmodel;
 use Illuminate\Database\Eloquent\Model;
 use Dyrynda\Database\Support\GeneratesUuid;
@@ -25,6 +26,11 @@ class Scan extends Model
     public function group()
     {
     	return $this->belongsTo(Group::class);
+    }
+
+    public function instantie()
+    {
+        return $this->belongsTo(Instantie::class);
     }
 
     public function ownsgroups()
