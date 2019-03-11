@@ -16,7 +16,7 @@ class PagesController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('verified');
-        $this->middleware('two_factor');
+        // $this->middleware('two_factor');
     }
     
     public function dashboard()

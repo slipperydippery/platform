@@ -1,7 +1,12 @@
-<h2 class="mt-5 font-weight-light text-center"> Alles wat netwerkpartners nodig hebben om succesvol de handen ineen te slaan.</h2>
+<div class="block">
+	<h3 class="block-title">Wat is de Participatiescan?</h3>
+	<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Nunc sed turpis. Nam eget dui. In consectetuer turpis ut velit. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum.</p>
+
+	<p>Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Pellentesque libero tortor, tincidunt et, tincidunt eget, semper nec, quam. Vivamus consectetuer hendrerit lacus. Praesent turpis. Sed cursus turpis vitae tortor.</p>
+</div>
 <div class="text-center pt-3 pb-3">
-    <a href=" {{ route('createscan.start') }} " class="btn btn-secondary mx-auto bounce-fade-top">BEKIJK DE SCAN</a> <br>
+    <a href=" {{ route('createscan.start') }} " class="btn btn-secondary mx-auto bounce-fade-top">START NU JE EIGEN GROEP</a> <br>
     <a href="/pdf/handleiding_participatiescan.pdf" data-toggle="modal" data-target="#exampleModal">
-        <span class="fineprint fineprint--welcome fade-in-fwd">Hoe werkt de scan?</span>
+        <span class="fineprint fineprint--welcome fade-in-fwd">Of maak een individuele scan</span>
     </a>
 </div>

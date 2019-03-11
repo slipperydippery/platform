@@ -12,14 +12,14 @@
 
     <div class="container container--page">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-8">
                 @if(Auth::check() && auth()->user()->scans->count())
                     @include('pages.partials.mainscansoverview')
                 @else
                     @include('pages.partials.mainempty')
                 @endif
             </div>
-            <div class="col-md-3 main--sidebar">
+            <div class="col-md-4 main--sidebar ">
                 @include('pages.partials.sidebar')
             </div>
         </div>

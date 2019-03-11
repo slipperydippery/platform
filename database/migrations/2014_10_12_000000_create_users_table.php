@@ -17,8 +17,6 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('phone_number')->unique();
-            $table->string('token_2fa')->nullable();
-            $table->datetime('token_2fa_expiry')->nullable();
             $table->string('email')->unique();
             $table->string('password');
             $table->tinyInteger('dev')->default(0);
