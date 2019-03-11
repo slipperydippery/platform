@@ -6,7 +6,7 @@
 	        <div class="col-md-12">
 	            <div class="page--title">
 	                <h1 class="pagetitle">
-	                	Thema {{ $theme->id }}: {{ $theme->name }} 
+	                	Thema {{ $theme->id }}: {{ $theme->title }} 
 	                	@if ($theme->info)
 	                		<i class="material-icons clickable muted h1" data-toggle="tooltip" data-placement="top" title=" {{ $theme->info }} "> info </i>
 	                	@endif
@@ -18,28 +18,39 @@
 			<div class="col-md-12">	
 				<div class="card card__question">
                     <div class="card-body">
-                        <h5 class="card-title">Vraag {{ $question->id }}/17 </h5>
+                        <h5 class="card-title">Vraag {{ $question->id }}/20 </h5>
 
                         <span class="card-text card-text__question"> 
-			                <h5> {!! $question->question !!} </h5>
-			                <div class="alert alert-success alert--scanfactor" role="alert">
-								<i class="material-icons"> check </i>{!! $question->successfactor !!}
-			                </div>
-			                <div class="alert alert-danger alert--scanfactor" role="alert">
-				                <i class="material-icons"> close </i>{!! $question->riskfactor !!}
-			                </div>
-			                <p> </p>
+			                <h5> {!! $question->question !!} <i class="material-icons"> info </i></h5>
 		            	</span>
+
+
+
 						<countdown date="60"></countdown>
                         <scan-slider
 	                        :nvt=" {{ $question->nvt }} "
                         	:answer_id=" {{ $answer->id }} "
                         >
                         </scan-slider>
+                        <div class="row row--scanfactor">
+                        	<div class="col-4">
+				                <div class="alert alert-danger alert--scanfactor" role="alert">
+					                <strong>Risocofactor:</strong> {!! $question->riskfactor !!}
+				                </div>
+                        	</div>
+                        	<div class="col-4">
+                        	</div>
+                        	<div class="col-4">
+				                <div class="alert alert-success alert--scanfactor" role="alert">
+									<strong>Succesfactor:</strong> {!! $question->successfactor !!}
+				                </div>
+                        		
+                        	</div>
+                        </div>
                         
                     </div>
                     <div class="card-footer">
-	                    <p>Geef met een cijfer aan in hoeverre de stelling van toepassing is.</p>
+	                    <p class="text-center">Geef met een cijfer antwoord op de vraag.</p>
                     </div>
 				</div>
 			</div>
@@ -72,10 +83,10 @@
 @section('prevnext')
 	<div class="row row__prevnext justify-content-between">
 		<div class="col-md-4">
-			<a href=" {{ url($previous) }} " class="btn btn-primary btn-block btn__prevnext"><i class="material-icons"> navigate_before </i> vorige</a>
+			<a href=" {{ url($previous) }} " class="btn btn-secondary btn-block btn__prevnext"><i class="material-icons"> navigate_before </i> vorige</a>
 		</div>
 		<div class="col-md-4">
-			<a href=" {{ url($next) }} " class="btn btn-primary btn-block btn__prevnext">volgende <i class="material-icons"> navigate_next </i></a>
+			<a href=" {{ url($next) }} " class="btn btn-secondary btn-block btn__prevnext">volgende <i class="material-icons"> navigate_next </i></a>
 		</div>
 	</div>
 @stop

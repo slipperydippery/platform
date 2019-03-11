@@ -13623,6 +13623,10 @@ nav.navbar .nav-link.btn:hover {
   font-size: .8rem;
 }
 
+.row--scanfactor {
+  margin-top: -3rem;
+}
+
 .progressbar--container {
   padding-top: 1rem;
   padding-bottom: 2.5rem;
@@ -13889,6 +13893,36 @@ input[type=range]:disabled::-moz-range-thumb {
 
 .checkboxinput:checked + .checkboxlabel {
   background: #1C154B;
+}
+
+.countdown {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row nowrap;
+          flex-flow: row nowrap;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.countdown .block {
+  border: 1px solid #008390;
+  float: left;
+  margin: 20px;
+  font-size: 2rem;
+  color: #6c757d;
+}
+
+.countdown .text {
+  text-align: center;
+}
+
+.countdown .digit {
+  margin: 10px;
 }
 
 

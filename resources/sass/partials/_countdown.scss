@@ -1,0 +1,23 @@
+.countdown {
+	display: flex;
+	width: 100%;
+	flex-flow: row nowrap;
+	justify-content: flex-end;
+
+	.block {
+		border: 1px solid $secondary;
+		float: left;
+		margin: 20px;
+		font-size: 2rem;
+		color: $gray-600;
+		// border: 2px solid;
+	}
+	.text {
+		text-align: center;
+	}
+	.digit {
+		margin: 10px;
+	}
+		
+}
+
