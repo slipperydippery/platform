@@ -29,8 +29,14 @@ Route::get('/nieuwesoloscan/gemeentes', 'CreateSingleScanController@districts')-
 Route::post('/nieuwesoloscan/regios', 'CreateSingleScanController@storedistricts')->name('createsinglescan.storedistricts');
 Route::get('/nieuwesoloscan/{scan}/klaar', 'CreateSingleScanController@created')->name('createsinglescan.created');
 
-Route::get('/nieuwegroupsscan/groep', 'CreateGroupScanController@group')->name('creategroupscan.group');
+Route::get('/nieuwegroupsscan/naam', 'CreateGroupScanController@title')->name('creategroupscan.title');
+Route::post('/nieuwegroupsscan/naam', 'CreateGroupScanController@storetitle')->name('creategroupscan.storetitle');
+Route::get('/nieuwegroupsscan/gemeenten', 'CreateGroupScanController@districts')->name('creategroupscan.districts');
+Route::post('/nieuwegroupsscan/gemeenten', 'CreateGroupScanController@storedistricts')->name('creategroupscan.storedistricts');
 Route::get('/nieuwegroupsscan/instantie', 'CreateGroupScanController@instantie')->name('creategroupscan.instantie');
+Route::post('/nieuwegroupsscan/instantie', 'CreateGroupScanController@storeinstantie')->name('creategroupscan.storeinstantie');
+Route::get('/nieuwegroupsscan/datetime', 'CreateGroupScanController@datetime')->name('creategroupscan.datetime');
+Route::post('/nieuwegroupsscan/datetime', 'CreateGroupScanController@storedatetime')->name('creategroupscan.storedatetime');
 Route::get('/nieuwegroupsscan/{scan}/klaar', 'CreateGroupScanController@created')->name('creategroupscan.created');
 
 

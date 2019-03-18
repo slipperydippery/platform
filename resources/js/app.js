@@ -47,12 +47,15 @@ Vue.component('district-decoration', require('./components/DistrictDecoration.vu
 // Vue.component('scan-results', require('./components/ScanResults.vue'));
 
 Vue.component('scan-slider', require('./components/ScanSlider.vue'));
+Vue.component('date-input', require('./components/DateInput.vue'));
+Vue.component('date-picker', require('./components/DatePicker.vue'));
 
 // Utility
 Vue.component('countdown', require('./components/Countdown.vue'));
 
 // Controlled Components
 Vue.component('slider-input', require('./components/SliderInput.vue'));
+Vue.component('copy-icon', require('./components/CopyIcon.vue'));
 
 const app = new Vue({
     el: '#app',

@@ -18,6 +18,7 @@ class CreateGroupsTable extends Migration
             $table->string('uuid')->unique();
             $table->string('title');
             $table->string('code');
+            $table->dateTime('datetime')->nullable();
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

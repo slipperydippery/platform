@@ -17,7 +17,7 @@ class TwoFactorController extends Controller
             $user = Auth::user();
             $user->token_2fa_expiry = \Carbon\Carbon::now()->addMinutes(config('session.lifetime'));
             $user->save();       
-            return redirect('/dashboard');
+            return redirect()->intended('dashboard');
         } else {
             return redirect('/ark-2fa')->with('message', 'Incorrect code.');
         }

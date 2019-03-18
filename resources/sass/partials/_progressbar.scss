@@ -41,3 +41,17 @@
 		}
 	}
 }
+.progressbar--container__secondary{
+	border: 0;
+	.progressbar {
+		background: rgba($secondary, .3);
+		.progress-element {
+			background: $secondary;
+			a, .imgcontainer {
+				img {
+					margin-top: -0.6rem;
+				}
+			}
+		}
+	}
+}
