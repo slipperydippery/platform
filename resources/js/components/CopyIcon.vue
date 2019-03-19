@@ -4,9 +4,10 @@
 			id="copy-icon"
 			v-clipboard:copy="copy_content"
 	    	v-clipboard:success="onCopy"
+            ref="copyicon"
 		> file_copy </i> 
 
-		<b-tooltip :disabled.sync="disabled" ref="tooltip" target="copy-icon">
+		<b-tooltip ref="tooltip" :target="() => $refs.copyicon" class="clickable">
 	        {{ status }}
 		</b-tooltip>
 	</span>
@@ -23,7 +24,7 @@
 
         data() {
             return {
-            	status: 'Gekopieerd naar het klembord!',
+            	status: 'Kopieer deze link naar je klembord',
             	disabled: true
             }
         },
@@ -42,6 +43,10 @@
 	        		this.$refs.tooltip.$emit('close');
         			this.disabled=true;
         		 }, 2000);
+
+                setTimeout( () => { 
+                    this.status='Kopieer deze link naar je klembord';
+                 }, 2500);
         	}
         }
     }

@@ -40,6 +40,12 @@
         
         @include('partials.nav')
 
+        @if ($status = Session::get('status'))
+            <div class="alert alert-primary" role="alert">
+                {{ $status }}
+            </div>
+        @endif
+
         <main class="flex-grow" id="app">
             <div class="container container--scan">
                 @yield('content')

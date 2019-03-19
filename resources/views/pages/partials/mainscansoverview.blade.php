@@ -6,9 +6,16 @@
 </nav>
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-groups" role="tabpanel" aria-labelledby="nav-groups-tab">
+    <div class="row">
+        <div class="col py-2">
+            <a href=" {{ route('creategroupscan.title') }} " class="btn btn-secondary">Maak nog een groupssessie aan</a>
+        </div>
+    </div>
+
+
     @foreach (auth()->user()->scans as $scan)
         @if ($scan->group)
-            <div class="row p-1 bg-white text-secondary border">
+            <div class="row py-2 my-2 bg-white text-secondary border">
                 <div class="col-12">
                     <h4><a href=" {{ route('scan.start', $scan) }} " class="flex-grow-1 mx-2 nowrap">{{ $scan->group->title }}</a> </h4>
                     <div class="row">
@@ -21,12 +28,20 @@
                                     @endforeach
                                     <br>
                                     Datum sessie: {{ date('d-m-Y', strtotime($scan->group->datetime)) }} om {{ date('H:m', strtotime($scan->group->datetime)) }}
+                                    <br>
+                                    <span class="text-nowrap">
+                                        <span id="groupcode">{{ Request::root() }}/groep/{{ $scan->group->id }}/sluitaan/{{ $scan->group->code }}</span> 
+                                        <copy-icon
+                                            copy_content=" {{ Request::root() }}/groep/{{ $scan->group->id }}/sluitaan/{{ $scan->group->code }} "
+                                        >
+                                        </copy-icon>
+                                    </span>
                                 </em>
                             </p>
                         </div>
                         <div class="col">
-                            <a href="#" class="btn btn-outline-secondary btn-outline-secondary--nooutline">Bekijk resultaten</a>
-                            <a href=" {{ route('scan.start', $scan) }} " class="btn btn-outline-secondary">Start sessie</a>
+                            <a href="#" class="btn btn-outline-secondary btn-outline-secondary--nooutline btn-sm">Bekijk resultaten</a>
+                            <a href=" {{ route('scan.start', $scan) }} " class="btn btn-outline-secondary btn-sm">Start sessie</a>
                         </div>
                     </div>
 
@@ -55,9 +70,6 @@
                         @endforeach
                     </table>
 
-
-
-                    <span class="mx-2 nowrap"> {{ $scan->answercount() }} /15</span>
                 </div>
             </div>
         @endif

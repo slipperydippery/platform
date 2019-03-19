@@ -14731,6 +14731,10 @@ input[type=range]:disabled::-moz-range-thumb {
   white-space: nowrap;
 }
 
+.clickable {
+  cursor: pointer;
+}
+
 .btn {
   padding-left: 1.5em;
   padding-right: 1.5em;

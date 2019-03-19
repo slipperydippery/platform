@@ -72607,6 +72607,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_clipboard2___default.a);
@@ -72616,7 +72617,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_clipboard2___default.a);
 
     data: function data() {
         return {
-            status: 'Gekopieerd naar het klembord!',
+            status: 'Kopieer deze link naar je klembord',
             disabled: true
         };
     },
@@ -72635,6 +72636,10 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_clipboard2___default.a);
                 _this.$refs.tooltip.$emit('close');
                 _this.disabled = true;
             }, 2000);
+
+            setTimeout(function () {
+                _this.status = 'Kopieer deze link naar je klembord';
+            }, 2500);
         }
     }
 });
@@ -72774,6 +72779,7 @@ var render = function() {
               arg: "success"
             }
           ],
+          ref: "copyicon",
           staticClass: "material-icons clickable",
           attrs: { id: "copy-icon" }
         },
@@ -72784,14 +72790,14 @@ var render = function() {
         "b-tooltip",
         {
           ref: "tooltip",
-          attrs: { disabled: _vm.disabled, target: "copy-icon" },
-          on: {
-            "update:disabled": function($event) {
-              _vm.disabled = $event
+          staticClass: "clickable",
+          attrs: {
+            target: function() {
+              return _vm.$refs.copyicon
             }
           }
         },
-        [_vm._v("\n        " + _vm._s(_vm.status) + "\n\t")]
+        [_vm._v("\n\t        " + _vm._s(_vm.status) + "\n\t\t")]
       )
     ],
     1

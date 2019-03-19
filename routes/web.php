@@ -39,6 +39,8 @@ Route::get('/nieuwegroupsscan/datetime', 'CreateGroupScanController@datetime')->
 Route::post('/nieuwegroupsscan/datetime', 'CreateGroupScanController@storedatetime')->name('creategroupscan.storedatetime');
 Route::get('/nieuwegroupsscan/{scan}/klaar', 'CreateGroupScanController@created')->name('creategroupscan.created');
 
+Route::get('/groep/{group}/sluitaan/{code}', 'CreateGroupScanController@addscan')->name('creategroupscan.addscan');	
+
 
 
 Route::resource('scan', 'ScanController');
