@@ -8,14 +8,55 @@
   <div class="tab-pane fade show active" id="nav-groups" role="tabpanel" aria-labelledby="nav-groups-tab">
     @foreach (auth()->user()->scans as $scan)
         @if ($scan->group)
-            <div class="row p-1 bg-white text-secondary border-bottom">
-                <div class="col-12 d-flex">
-                    <a href=" {{ route('scan.start', $scan) }} " class="flex-grow-1 mx-2 nowrap">{{ $scan->title }}</a>
-                    <span class="mx-2 text-right">
-                        @foreach ($scan->districts as $district)
-                            <span class="badge badge-pill badge-secondary font-weight-light text-white">{{ $district->name }}</span>
+            <div class="row p-1 bg-white text-secondary border">
+                <div class="col-12">
+                    <h4><a href=" {{ route('scan.start', $scan) }} " class="flex-grow-1 mx-2 nowrap">{{ $scan->group->title }}</a> </h4>
+                    <div class="row">
+                        <div class="col">
+                            <p>
+                                <em>
+                                    Gemeenten: 
+                                    @foreach ($scan->districts as $district)
+                                        {{ $district->name }}@if(! $loop->last),@endif
+                                    @endforeach
+                                    <br>
+                                    Datum sessie: {{ date('d-m-Y', strtotime($scan->group->datetime)) }} om {{ date('H:m', strtotime($scan->group->datetime)) }}
+                                </em>
+                            </p>
+                        </div>
+                        <div class="col">
+                            <a href="#" class="btn btn-outline-secondary btn-outline-secondary--nooutline">Bekijk resultaten</a>
+                            <a href=" {{ route('scan.start', $scan) }} " class="btn btn-outline-secondary">Start sessie</a>
+                        </div>
+                    </div>
+
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col"> {{ $scan->group->user->name }} </th>
+                                <th scope="col">Beheerder</th>
+                                <th scope="col"> {{ $scan->group->scan->answercount() }} / {{ $scan->scanmodel->questioncount() }} </th>
+                                <th scope="col"> (-) </th>
+                            </tr>
+                        </thead>
+                        @foreach ($scan->group->scans as $thisscan)
+                            @if ($thisscan->id !== $scan->group->scan->id)
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td> {{ $thisscan->user->name }} </td>
+                                        <td> {{ $thisscan->instanties }} </td>
+                                        <td> {{ $thisscan->answercount() }} </td>
+                                        <td> (-) </td>
+                                    </tr>
+                                </tbody>
+                            @endif
                         @endforeach
-                    </span>
+                    </table>
+
+
+
                     <span class="mx-2 nowrap"> {{ $scan->answercount() }} /15</span>
                 </div>
             </div>

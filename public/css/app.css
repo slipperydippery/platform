@@ -14744,7 +14744,8 @@ input[type=range]:disabled::-moz-range-thumb {
   background: #008390;
 }
 
-.btn-outline-primary--nooutline {
+.btn-outline-primary--nooutline,
+.btn-outline-secondary--nooutline {
   border: 0;
 }
 

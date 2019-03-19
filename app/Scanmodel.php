@@ -11,4 +11,13 @@ class Scanmodel extends Model
     {
     	return $this->hasMany(Theme::class);
     }
+
+    public function questioncount()
+    {	
+    	$questioncounter = 0;
+    	foreach ($this->themes as $thistheme) {
+    		$questioncounter += $thistheme->questions->count();
+    	}
+    	return $questioncounter;
+    }
 }
