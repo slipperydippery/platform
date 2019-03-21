@@ -8,12 +8,12 @@
 					<h5 class="card-header bg-primary text-white">Nieuwe groep: Instantie</h5>
 					<div class="card-body">
 						<h5 class="card-title">Welke instantie vertegenwoordige je tijdens deze scan?</h5>
-						<form action="{{ route('creategroupscan.storeinstantie') }}" method="post" accept-charset="utf-8">
+						<form action="{{ route('joingroupscan.storescan', [$group, $code]) }}" method="post" accept-charset="utf-8">
 						    {{ csrf_field() }}
 							@include('creategroupscan.partials.instantieform', ['submittext' => 'Sla instantie op'])
 						</form>
 						
-						@include('creategroupscan.partials.creategroupprogress')
+						@include('creategroupscan.partials.joingroupprogress')
 					</div>
 				</div>
 				

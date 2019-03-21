@@ -21,10 +21,10 @@
 				@if ($scan->group_id)
 					<div class="row">
 					    <div class="col-sm-2">
-					        <div class="card card__2 card--partner owner {{ $group->owner->user->isOnline() ? '' : 'inactive' }} ">
+					        <div class="card card__2 card--partner owner {{ $scan->group->user->isOnline() ? '' : 'inactive' }} ">
 					            <div class="card-icons">
 					                <i class="material-icons clickable"  data-toggle="tooltip" data-placement="top" title="Beheerder"> star </i>
-					                @if($group->owner->user->isOnline())
+					                @if($scan->group->user->isOnline())
 					                    <i class="material-icons clickable" data-toggle="tooltip" data-placement="top" title="online"> wifi </i>
 					                @else
 					                    <i class="material-icons clickable" data-toggle="tooltip" data-placement="top" title="offline"> wifi_off </i>
@@ -32,25 +32,25 @@
 					            </div>
 					            <img src="/img/user.svg" alt="">
 					            <div class="card-footer">
-					                {{ $group->owner->user->name }} <br>
+					                {{ $scan->group->user->name }} <br>
 					                Beheerder
 					            </div>
 					        </div>
 					    </div>
 
-					    @foreach ($scan->scanmodel->instantietypes as $instantietype)
+					    @foreach ($scan->scanmodel->instanties as $instantie)
 					    @foreach($scan->group->scans as $thisscan)
-					        @if($thisscan->instantie->instantietype->id == $instantietype->id)
-					        @if($thisscan->id != $group->owner->id)
+					        @if($thisscan->instantie->id == $instantie->id)
+					        @if($thisscan->user->id != $scan->group->user->id)
 					             <div class="col-sm-2">
-					                 <div class="card card__2 card--partner instantietype-{{ $thisscan->instantie->instantietype->id }} {{ $thisscan->user->isOnline() ? '' : 'inactive' }} ">
+					                 <div class="card card__2 card--partner instantie-{{ $thisscan->instantie->id }} {{ $thisscan->user->isOnline() ? '' : 'inactive' }} ">
 					                     <div class="card-icons">
 					                         @if($thisscan->user->isOnline())
 					                             <i class="material-icons" data-toggle="tooltip" data-placement="top" title="online"> wifi </i>
 					                         @else
 					                             <i class="material-icons"> wifi_off </i>
 					                         @endif
-					                         @if ($scan->group->owner->id == $scan->id)
+					                         @if ($scan->group->user->id == $scan->id)
 					                             <span class="card-closeicon">
 					                                 <i class="material-icons clickable" data-toggle="modal" data-target="#deleteUserModal-{{ $thisscan->id }}"> close </i>
 					                             </span>
@@ -59,12 +59,12 @@
 					                     <img src="/img/user.svg" alt="">
 					                     <div class="card-footer">
 					                         {{ $thisscan->user->name }} <br>
-					                         {{ $thisscan->instantie->name }}
+					                         {{ $thisscan->instantie->title }}
 					                     </div>
 					                 </div>
 					             </div>
 
-					             @if ($scan->group->owner->id == $scan->id)
+					             @if ($scan->group->user->id == $scan->id)
 					                 <!-- Modal -->
 					                 <div class="modal fade" id="deleteUserModal-{{ $thisscan->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
 					                     <div class="modal-dialog" role="document">

@@ -39,7 +39,11 @@ Route::get('/nieuwegroupsscan/datetime', 'CreateGroupScanController@datetime')->
 Route::post('/nieuwegroupsscan/datetime', 'CreateGroupScanController@storedatetime')->name('creategroupscan.storedatetime');
 Route::get('/nieuwegroupsscan/{scan}/klaar', 'CreateGroupScanController@created')->name('creategroupscan.created');
 
-Route::get('/groep/{group}/sluitaan/{code}', 'CreateGroupScanController@addscan')->name('creategroupscan.addscan');	
+Route::get('/groep/{group}/sluitaan/{code}', 'JoinGroupScanController@addscan')->name('joingroupscan.addscan');	
+Route::post('/groep/{group}/sluitaan/{code}', 'JoinGroupScanController@storescan')->name('joingroupscan.storescan');	
+Route::get('/groep/{group}/aangesloten', 'JoinGroupScanController@created')->name('joingroupscan.created');	
+
+Route::post('/groep/promoot', 'ManageGroupScanController@promoteuser')->name('managegroupscan.promoteuser');
 
 
 

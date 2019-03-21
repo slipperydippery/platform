@@ -1,5 +1,30 @@
 .rangeslider--container {
 	margin: 1rem 0;
+	.rangeslider--directinput {
+		> div {
+			display: inline-block;
+			position: relative;
+		}
+		.directinput {
+			padding: 1rem;
+			margin: -0.5rem;
+		}
+		.directinput--minus {
+			border: 1px solid blue;
+
+		}
+		.question--answer {
+			border: 1px solid $secondary;
+			padding: 1rem 2rem;
+			background: white;
+			border-radius: 0.5rem;
+			z-index: 10;
+		}
+		.directinput--plus {
+			border: 1px solid $success;
+
+		}
+	}
 }
 
 input[type=range] {
@@ -114,6 +139,8 @@ input[type=range]:focus::-ms-fill-upper {
 		background: desaturate(lighten($secondary, 40%), 40%);
 	}
 }
+
+
 
 .question--answer {
     display: block;

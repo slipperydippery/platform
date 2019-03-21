@@ -20,4 +20,9 @@ class Scanmodel extends Model
     	}
     	return $questioncounter;
     }
+
+    public function instanties()
+    {
+    	return $this->hasMany(Instantie::class);
+    }
 }

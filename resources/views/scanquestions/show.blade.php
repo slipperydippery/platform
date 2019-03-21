@@ -6,10 +6,7 @@
 	        <div class="col-md-12">
 	            <div class="page--title">
 	                <h1 class="pagetitle">
-	                	Thema {{ $theme->id }}: {{ $theme->title }} 
-	                	@if ($theme->info)
-	                		<i class="material-icons clickable muted h1" data-toggle="tooltip" data-placement="top" title=" {{ $theme->info }} "> info </i>
-	                	@endif
+	                	Thema {{ $theme->id }}: {{ $theme->title }}
 	                </h1>
 	            </div>
 	        </div>
@@ -21,7 +18,7 @@
                         <h5 class="card-title">Vraag {{ $question->id }}/20 </h5>
 
                         <span class="card-text card-text__question"> 
-			                <h5> {!! $question->question !!} <i class="material-icons"> info </i></h5>
+			                <h5> {!! $question->question !!} <i class="material-icons clickable" data-toggle="modal" data-target="#justificationModal"> info </i></h5>
 		            	</span>
 
 
@@ -32,21 +29,7 @@
                         	:answer_id=" {{ $answer->id }} "
                         >
                         </scan-slider>
-                        <div class="row row--scanfactor">
-                        	<div class="col-4">
-				                <div class="alert alert-danger alert--scanfactor" role="alert">
-					                <strong>Risocofactor:</strong> {!! $question->riskfactor !!}
-				                </div>
-                        	</div>
-                        	<div class="col-4">
-                        	</div>
-                        	<div class="col-4">
-				                <div class="alert alert-success alert--scanfactor" role="alert">
-									<strong>Succesfactor:</strong> {!! $question->successfactor !!}
-				                </div>
-                        		
-                        	</div>
-                        </div>
+                        
                         
                     </div>
                     <div class="card-footer">
@@ -78,6 +61,34 @@
 		</div>
 
 	@endif
+
+	<!-- Modal -->
+	<div class="modal fade" id="justificationModal" tabindex="-1" role="dialog" aria-labelledby="justificationModalLabel" aria-hidden="true">
+	    <div class="modal-dialog modal-lg" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title" id="justificationModalLabel"> {!! $question->question !!} </h5>
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	                <span aria-hidden="true">&times;</span>
+	                </button>
+	            </div>
+	            <div class="modal-body">
+	                {!! $question->justification !!}
+	                <div class="alert alert-danger alert--scanfactor" role="alert">
+		                <strong>Risocofactor:</strong> {!! $question->riskfactor !!}
+	                </div>
+	                <div class="alert alert-success alert--scanfactor" role="alert">
+						<strong>Succesfactor:</strong> {!! $question->successfactor !!}
+	                </div>
+	                <a href="/img/Tips voor het gesprek.jpg" target="_blank">
+	                <a href="/pdf/Handleiding digitale gesprekshulp.pdf" class="btn"> Lees de handleiding</a>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluit</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
 @stop
 
 @section('prevnext')

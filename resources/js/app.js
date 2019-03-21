@@ -13,7 +13,9 @@ $(function () {
 
 window.Vue = require('vue');
 import BootstrapVue from 'bootstrap-vue'
+import PortalVue from 'portal-vue'
 Vue.use(BootstrapVue);
+Vue.use(PortalVue);
 
 
 export let store = {

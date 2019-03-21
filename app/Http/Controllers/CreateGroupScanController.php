@@ -91,16 +91,4 @@ class CreateGroupScanController extends Controller
     	$group = $scan->group;
         return view('creategroupscan.created', compact('scan', 'group'));
     }
-
-    public function addscan(Group $group, $code)
-    {
-        foreach (Auth::user()->scans as $thisscan) {
-            if ($thisscan->group->id === $group->id) {
-                session()->flash('status', 'Je doet al mee aan deze scan');
-                return redirect()->route('scan.start', $thisscan);
-            }
-        }
-        $instanties = Instantie::get();
-        return view('creategroupscan.addscan', compact('instanties'));
-    }
 }

@@ -11,16 +11,12 @@
 						<p>Weet je al precies wie je wilt uitnodigen? Stuur de deelnemers een email met de volgende code:</p>
 
 						<div class="alert alert-primary" role="alert">
-							{{ url('/') }}/{{ $group->code }}
-						</div>
-
-						<p class="page-highlight">
-						    <span id="groupcode">{{ Request::root() }}/group/{{ $scan->group->id }}/createscan/{{ $scan->group->code }}</span> 
+						    <span id="groupcode">{{ Request::root() }}/groep/{{ $scan->group->id }}/sluitaan/{{ $scan->group->code }}</span> 
 						    <copy-icon
-						        copy_content=" {{ Request::root() }}/group/{{ $scan->group->id }}/createscan/{{ $scan->group->code }} "
+						        copy_content=" {{ Request::root() }}/groep/{{ $scan->group->id }}/sluitaan/{{ $scan->group->code }} "
 						    >
 						    </copy-icon>
-						</p>
+						</div>
 
 						<p>Je kunt ook gebruik maken van onze <a href="#">voorbeeld e-mail</a>.</p>
 

@@ -9,6 +9,7 @@ class ScanPagesController extends Controller
 {
     public function start(Scan $scan)
     {
+        return redirect()->route('scan.introductiefilm', compact('scan') );
     	return view('scan.start', compact('scan'));
     }
 

@@ -24,6 +24,15 @@ class UserTableSeeder extends Seeder
                 'verified' => 1,
                 'email_verified_at' => date('Y-m-d H:i:s'),
             ],
+            [
+                'name' => 'Susanne Meeuwissen',
+                'phone_number' => '+31685033971',
+                'email' => 'susanne@embav.nl',
+                'password' => Hash::make('password'),
+                'dev' => 1,
+                'verified' => 1,
+                'email_verified_at' => date('Y-m-d H:i:s'),
+            ],
         ];
 
         DB::table('users')->insert($users);

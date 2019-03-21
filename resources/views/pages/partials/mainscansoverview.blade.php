@@ -15,7 +15,7 @@
 
     @foreach (auth()->user()->scans as $scan)
         @if ($scan->group)
-            <div class="row py-2 my-2 bg-white text-secondary border">
+            <div class="row py-2 my-5 bg-white text-secondary border shadow">
                 <div class="col-12">
                     <h4><a href=" {{ route('scan.start', $scan) }} " class="flex-grow-1 mx-2 nowrap">{{ $scan->group->title }}</a> </h4>
                     <div class="row">
@@ -44,15 +44,16 @@
                             <a href=" {{ route('scan.start', $scan) }} " class="btn btn-outline-secondary btn-sm">Start sessie</a>
                         </div>
                     </div>
+                    {{ $scan->group->scan->user->name }}
 
-                    <table class="table">
+                    <table class="table table-sm">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col"> {{ $scan->group->user->name }} </th>
                                 <th scope="col">Beheerder</th>
                                 <th scope="col"> {{ $scan->group->scan->answercount() }} / {{ $scan->scanmodel->questioncount() }} </th>
-                                <th scope="col"> (-) </th>
+                                <th scope="col"> </th>
                             </tr>
                         </thead>
                         @foreach ($scan->group->scans as $thisscan)
@@ -61,9 +62,30 @@
                                     <tr>
                                         <th scope="row">1</th>
                                         <td> {{ $thisscan->user->name }} </td>
-                                        <td> {{ $thisscan->instanties }} </td>
-                                        <td> {{ $thisscan->answercount() }} </td>
-                                        <td> (-) </td>
+                                        <td> {{ $thisscan->instantie->title }} </td>
+                                        <td> {{ $thisscan->answercount() }} / {{ $scan->scanmodel->questioncount() }} </td>
+                                        <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <a class="dropdown-item" href="#">Stuur bericht</a>
+                                                    <form action="{{ route('managegroupscan.promoteuser') }}" method="post" accept-charset="utf-8" id="promootform{{ $thisscan->id }}">
+                                                        {{ csrf_field() }}
+                                                        <!-- Hidden group_id Type Form Input -->
+                                                        <input type="hidden" id="group_id" name="group_id" value=" {{ $thisscan->group->id }} ">
+                                                        <!-- Hidden scan_id Type Form Input -->
+                                                        <input type="hidden" id="scan_id" name="scan_id" value=" {{ $thisscan->id }} ">
+                                                            
+                                                    </form>
+                                                    <a class="dropdown-item" href="javascript:{}" onclick="document.getElementById('promootform{{ $thisscan->id }}').submit(); return false;">Promoot tot eigenaar</a>
+
+                                        
+                                                    <a class="dropdown-item" href="#">Verwijder uit sessie</a>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             @endif

@@ -14571,6 +14571,32 @@ nav.navbar .nav-link.btn:hover {
   margin: 1rem 0;
 }
 
+.rangeslider--container .rangeslider--directinput > div {
+  display: inline-block;
+  position: relative;
+}
+
+.rangeslider--container .rangeslider--directinput .directinput {
+  padding: 1rem;
+  margin: -0.5rem;
+}
+
+.rangeslider--container .rangeslider--directinput .directinput--minus {
+  border: 1px solid blue;
+}
+
+.rangeslider--container .rangeslider--directinput .question--answer {
+  border: 1px solid #008390;
+  padding: 1rem 2rem;
+  background: white;
+  border-radius: 0.5rem;
+  z-index: 10;
+}
+
+.rangeslider--container .rangeslider--directinput .directinput--plus {
+  border: 1px solid #119822;
+}
+
 input[type=range] {
   -webkit-appearance: none;
   width: 100%;
