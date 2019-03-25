@@ -19,8 +19,36 @@ Vue.use(PortalVue);
 
 
 export let store = {
-    filter: 'hello',
+	scan: {
+		answers: [
+			 { "id": 1, "answer": null},
+			 { "id": 2, "answer": null},
+			 { "id": 3, "answer": null},
+			 { "id": 4, "answer": null},
+			 { "id": 5, "answer": null},
+			 { "id": 6, "answer": null},
+			 { "id": 7, "answer": null},
+			 { "id": 8, "answer": null},
+			 { "id": 9, "answer": null},
+			 { "id": 10, "answer": null},
+			 { "id": 11, "answer": null},
+			 { "id": 12, "answer": null},
+			 { "id": 13, "answer": null},
+			 { "id": 14, "answer": null},
+			 { "id": 15, "answer": null},
+			 { "id": 16, "answer": null},
+			 { "id": 17, "answer": null},
+			 { "id": 18, "answer": null},
+			 { "id": 19, "answer": null},
+			 { "id": 20, "answer": null},
+		],
+	},
+	group: {},
+	partners: {
+	},
+    activetheme: 1,
 };
+
 
 
 /**
@@ -46,9 +74,24 @@ Vue.component('district-decoration', require('./components/DistrictDecoration.vu
 // Vue.component('algemeenbeeld', require('./components/Algemeenbeeld.vue'));
 // Vue.component('algemeenbeeldresultaten', require('./components/Algemeenbeeldresultaten.vue'));
 
-// Vue.component('scan-results', require('./components/ScanResults.vue'));
+// Scan itself
+Vue.component('algemeenbeeld', require('./components/Algemeenbeeld.vue'));
+Vue.component('algemeenbeeldresultaten', require('./components/Algemeenbeeldresultaten.vue'));
+
+Vue.component('scan-results', require('./components/ScanResults.vue'));
 
 Vue.component('scan-slider', require('./components/ScanSlider.vue'));
+// Vue.component('answer-result-slider', require('./components/AnswerResultSlider.vue'));
+Vue.component('result-slider', require('./components/ResultSlider.vue'));
+Vue.component('result-slider-average', require('./components/ResultSliderAverage.vue'));
+Vue.component('average-slider', require('./components/AverageSlider.vue'));
+
+Vue.component('mini-measure', require('./components/MiniMeasure.vue'));
+Vue.component('big-measure', require('./components/BigMeasure.vue'));
+Vue.component('frontrunner', require('./components/Frontrunner.vue'));
+
+Vue.component('set-followup', require('./components/SetFollowup.vue'));
+
 Vue.component('date-input', require('./components/DateInput.vue'));
 Vue.component('date-picker', require('./components/DatePicker.vue'));
 

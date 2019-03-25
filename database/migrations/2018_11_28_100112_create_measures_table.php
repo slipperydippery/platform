@@ -21,8 +21,8 @@ class CreateMeasuresTable extends Migration
             $table->foreign('scan_id')->references('id')->on('scans')->onDelete('cascade');
             $table->integer('question_id')->unsigned();
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
-            $table->integer('user_id')->unsigned()->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('frontrunner_id')->unsigned()->nullable();
+            $table->foreign('frontrunner_id')->references('id')->on('scans')->onDelete('cascade');
             $table->timestamps();
         });
     }

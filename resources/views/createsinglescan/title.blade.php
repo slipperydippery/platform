@@ -12,9 +12,9 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<form action="{{ route('createsinglescan.storename') }}" method="post" accept-charset="utf-8">
+				<form action="{{ route('createsinglescan.storetitle') }}" method="post" accept-charset="utf-8">
 				    {{ csrf_field() }}
-					@include('createsinglescan.partials.nameform', ['submittext' => 'sla naam op'])
+					@include('createsinglescan.partials.titleform', ['submittext' => 'sla naam op'])
 				</form>
 			</div>
 		</div>

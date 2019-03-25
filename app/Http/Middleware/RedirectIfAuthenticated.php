@@ -18,9 +18,9 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
+            return redirect('/scan/112/start');
             
             return redirect()->intended('dashboard');
-            // return redirect('/home');
         }
 
         return $next($request);

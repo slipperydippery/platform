@@ -21,10 +21,10 @@
 @section('prevnext')
     <div class="row row__prevnext justify-content-between">
         <div class="col-md-4">
-            <a href=" {{ route('scan.start', $scan) }} " class="btn btn-secondary btn-block btn__prevnext"><i class="material-icons"> navigate_before </i> vorige</a>
+            <a href=" {{ url($previous) }} " class="btn btn-secondary btn-block btn__prevnext"><i class="material-icons"> navigate_before </i> vorige</a>
         </div>
         <div class="col-md-4">
-            <a href=" {{ route('scan.kennismaken', $scan) }} " class="btn btn-secondary btn-block btn__prevnext">volgende <i class="material-icons"> navigate_next </i></a>
+            <a href=" {{ url($next) }} " class="btn btn-secondary btn-block btn__prevnext">volgende <i class="material-icons"> navigate_next </i></a>
         </div>
     </div>
 @stop

@@ -37,12 +37,23 @@
 									<div class="col-sm-2 average">Gemiddeld</div>
 								@foreach ($theme->questions as $question)
 									<div class="col-sm-2">
+										@if ($scan->group)
+											<average-slider
+												:scan_id=" {{ $scan->id }} "
+												:group_id=" {{ $scan->group->id }} "
+												:question_id=" {{ $question->id }} "
+											>
+											</average-slider>
+										@else	
+											@php
+												$thisvalue = $scan->answers->where('question_id', $question->id)->first()->answer ? $scan->answers->where('question_id', $question->id)->first()->answer : "null";
+											@endphp
+											<result-slider
+												:value=" {{ $thisvalue }} "
+											>
+											</result-slider>										
+										@endif
 
-										<average-slider
-											:scan_id=" {{ $scan->id }} "
-											:question_id=" {{ $question->id }} "
-										>
-										</average-slider>
 
 									</div>
 								@endforeach
@@ -52,11 +63,19 @@
 								<div class="col-sm-2"> Actiepunten - <em>steekwoorden</em></div>
 								@foreach ($theme->questions as $question)
 									<div class="col-sm-2">
-										<mini-measure
-											{{-- :measure_id=" {{ $question->measures->where('scan_id', $scan->group->owner->id)->first()->id }} " --}}
-											{{-- :is_manager=" {{ $is_manager = $scan->group->owner->id == $scan->id ? 1 : 0 }} " --}}
-										>
-										</mini-measure>
+										@if ($scan->group)
+											<mini-measure
+												:measure_id=" {{ $question->measures->where('scan_id', $scan->group->scan->id)->first()->id }} "
+												:is_manager=" {{ $is_manager = $scan->group->scan->id == $scan->id ? 1 : 0 }} "
+											>
+											</mini-measure>
+										@else
+											<mini-measure
+												:measure_id=" {{ $question->measures->where('scan_id', $scan->id)->first()->id }} "
+												:is_manager=" 1 "
+											>
+											</mini-measure>
+										@endif
 									</div>	
 								@endforeach
 							</div>

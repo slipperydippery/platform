@@ -14,17 +14,19 @@
                             </a>
                         @endif
                     </div>
-                    <div class="progress-element">
-                        @if ( url()->current() == route('scan.kennismaken', $scan) )
-                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Kennismaken">
-                                <img src="/img/simplecircle_full.svg" alt="">
-                            </span>
-                        @else
-                            <a href=" {{ route('scan.kennismaken', $scan) }} " class="" data-toggle="tooltip" data-placement="top" title="Kennismaken">
-                                <img src="/img/simplecircle.svg" alt="">
-                            </a>
-                        @endif
-                    </div>
+                    @if ($scan->group)
+                        <div class="progress-element">
+                            @if ( url()->current() == route('scan.kennismaken', $scan) )
+                                <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Kennismaken">
+                                    <img src="/img/simplecircle_full.svg" alt="">
+                                </span>
+                            @else
+                                <a href=" {{ route('scan.kennismaken', $scan) }} " class="" data-toggle="tooltip" data-placement="top" title="Kennismaken">
+                                    <img src="/img/simplecircle.svg" alt="">
+                                </a>
+                            @endif
+                        </div>
+                    @endif
                     <div class="progress-element">
                         @if ( url()->current() == route('scan.regioincijfers', $scan) )
                             <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Kennismaken">
@@ -47,17 +49,19 @@
                             </a>
                         @endif
                     </div>
-                    <div class="progress-element">
-                        @if ( url()->current() == route('scan.algemeenbeeldresultaten', $scan) )
-                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Resultaten beoordeling huidige aanpak">
-                                <img src="/img/simplecircle_full.svg" alt="">
-                            </span>
-                        @else
-                            <a href=" {{ route('scan.algemeenbeeldresultaten', $scan) }} " class="" data-toggle="tooltip" data-placement="top" title="Resultaten beoordeling huidige aanpak">
-                                <img src="/img/simplecircle.svg" alt="">
-                            </a>
-                        @endif
-                    </div>
+                    @if ($scan->group)
+                        <div class="progress-element">
+                            @if ( url()->current() == route('scan.algemeenbeeldresultaten', $scan) )
+                                <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Resultaten beoordeling huidige aanpak">
+                                    <img src="/img/simplecircle_full.svg" alt="">
+                                </span>
+                            @else
+                                <a href=" {{ route('scan.algemeenbeeldresultaten', $scan) }} " class="" data-toggle="tooltip" data-placement="top" title="Resultaten beoordeling huidige aanpak">
+                                    <img src="/img/simplecircle.svg" alt="">
+                                </a>
+                            @endif
+                        </div>
+                    @endif
                     @foreach ($scan->scanmodel->themes as $theme)
                         <div class="progress-element themeintro">
                             @if ( url()->current() == route('scanquestions.intro', [$scan, $theme]) )
@@ -84,17 +88,19 @@
                                 @endif
                             </div>
                         @endforeach
-                        <div class="progress-element progress-element__layer2">
-                            @if ( url()->current() == route('scanquestions.results', [$scan, $theme]) )
-                                <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Thema {{ $theme->id }} resultaten">
-                                    <img src="/img/simplecircle_full.svg" alt="">
-                                </span>
-                            @else
-                                <a href=" {{ route('scanquestions.results', [$scan, $theme]) }} " data-toggle="tooltip" data-placement="top" title="Thema {{ $theme->id }} resultaten">
-                                    <img src="/img/simplecircle.svg" alt="">
-                                </a>
-                            @endif
-                        </div>
+                        @if ($scan->group)
+                            <div class="progress-element progress-element__layer2">
+                                @if ( url()->current() == route('scanquestions.results', [$scan, $theme]) )
+                                    <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Thema {{ $theme->id }} resultaten">
+                                        <img src="/img/simplecircle_full.svg" alt="">
+                                    </span>
+                                @else
+                                    <a href=" {{ route('scanquestions.results', [$scan, $theme]) }} " data-toggle="tooltip" data-placement="top" title="Thema {{ $theme->id }} resultaten">
+                                        <img src="/img/simplecircle.svg" alt="">
+                                    </a>
+                                @endif
+                            </div>
+                        @endif
                         <div class="progress-element progress-element__layer2 progress-element__last">
                             @if ( url()->current() == route('scanquestions.measures', [$scan, $theme]) )
                                 <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Thema {{ $theme->id }} acties">

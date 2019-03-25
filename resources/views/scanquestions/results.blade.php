@@ -25,7 +25,7 @@
 
 					<div class="row">
 						<scan-results
-							{{-- :group_id = " {{ $scan->group->id }} "  --}}
+							:group_id = " {{ $scan->group->id }} " 
 							:theme_id = " {{ $theme->id }} "
 						>
 						</scan-results>

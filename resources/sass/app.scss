@@ -37,8 +37,11 @@
 @import "partials/progressbar";
 @import "partials/slider";
 @import "partials/sidebar";
+@import "partials/locked";
+
 
 // Element markup
+@import "partials/elementcolors";
 @import "partials/vue";
 @import "partials/elements";
 @import "partials/buttons";
@@ -47,4 +50,5 @@
 @import "partials/countdown";	
 @import "partials/text";
 @import "partials/inputs";
+
 

@@ -16,3 +16,11 @@
 .btn-outline-primary--nooutline, .btn-outline-secondary--nooutline {
 	border: 0;
 }
+
+.dropdown-toggle__round {
+    padding: 5px;
+    border-radius: 100%;
+    width: 25px;
+    height: 25px;
+    border: 0px;
+}

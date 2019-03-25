@@ -1,0 +1,11 @@
+.container__locked {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left:0;
+	right:0;
+	background: url("/img/lockedbg.png");
+	filter: blur(8px) brightness(0.8);
+	background-size: cover;
+}
+

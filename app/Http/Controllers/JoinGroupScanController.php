@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 
 class JoinGroupScanController extends Controller
 {
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+
+
     public function addscan(Group $group, $code)
     {
         foreach (Auth::user()->scans as $thisscan) {

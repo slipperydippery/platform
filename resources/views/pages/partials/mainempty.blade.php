@@ -6,7 +6,7 @@
 </div>
 <div class="text-center pt-3 pb-3">
     <a href=" {{ route('creategroupscan.title') }} " class="btn btn-secondary mx-auto bounce-fade-top">START NU JE EIGEN GROEP</a> <br>
-    <a href=" {{ route('createsinglescan.name') }} " data-toggle="modal" data-target="#exampleModal">
+    <a href=" {{ route('createsinglescan.title') }} " data-toggle="modal" data-target="#exampleModal">
         <span class="fineprint fineprint--welcome fade-in-fwd">Of maak een individuele scan</span>
     </a>
 </div>

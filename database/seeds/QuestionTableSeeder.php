@@ -15,7 +15,7 @@ class QuestionTableSeeder extends Seeder
 
         $questions = [
             [
-                'title'           => '',
+                'title'           => 'Re&euml;le werkervaring',
                 'question'        => 'Staat de opleiding al volop in het teken van het opdoen van re&euml;le werkervaring?',
                 'successfactor'   => 'School werkt volgens het principe Learning by doing. Zo realistisch mogelijk, werkend  leren staat centraal.',
                 'riskfactor'      => 'Er wordt te lang gewacht met echte werkervaring bij bedrijven laten opdoen, waardoor het lastiger wordt voor jongeren in een kwetsbare positie om een baan te vinden. ',

@@ -5,6 +5,7 @@ namespace App;
 use App\User;
 use App\Group;
 use App\Answer;
+use App\Measure;
 use App\District;
 use App\Question;
 use App\Instantie;
@@ -48,6 +49,11 @@ class Scan extends Model
     	return $this->hasMany(Answer::class);
     }
 
+    public function measures()
+    {
+        return $this->hasMany(Measure::class);
+    }
+
     public function districts()
     {
     	return $this->belongsToMany(District::class);
@@ -70,6 +76,26 @@ class Scan extends Model
             }
         }
     	return $answerCount;
+    }
+
+    public function isComplete()
+    {
+        if($this->complete) {
+            return true;
+        }
+        if(! $this->algemeenbeeld) {
+            return false;
+        }
+        $answerCount = 0;
+        forEach($this->answers as $answer) {
+            if ($answer->updated_at != $answer->created_at){
+                $answerCount++;
+            }
+        }
+        if($answerCount != $this->answers->count()){
+            return false;
+        }
+        return true;
     }
 
     public static function register($attributes)

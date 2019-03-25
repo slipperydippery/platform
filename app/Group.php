@@ -4,6 +4,7 @@ namespace App;
 
 use App\Scan;
 use App\User;
+use App\Followup;
 use Illuminate\Database\Eloquent\Model;
 use Dyrynda\Database\Support\GeneratesUuid;
 
@@ -25,6 +26,11 @@ class Group extends Model
     public function user()
     {
     	return $this->belongsTo(User::class);
+    }
+
+    public function followup()
+    {
+        return $this->hasOne(Followup::class);
     }
 
     public function usercount()
@@ -51,10 +57,12 @@ class Group extends Model
     	    'scan_id' => $scan->id,
     	]);
 
+
     	auth()->user()->groups()->save($group);
 
     	$group->scans()->save($scan);
     	$group->scan()->associate($scan);
+
 
     	return $group;
 

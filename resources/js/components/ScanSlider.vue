@@ -38,7 +38,7 @@
         			})
         	},
         	saveAnswer() {
-        		axios.post('/api/answer/' + this.answer_id + '/update', {
+        		axios.put('/api/answer/' + this.answer_id, {
         			'answer': this.answer,
         		})
         	},

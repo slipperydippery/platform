@@ -22,7 +22,9 @@
   "dependencies": {
     "bootstrap-vue": "^2.0.0-rc.14",
     "flatpickr": "^4.5.7",
+    "laravel-echo": "^1.5.3",
     "portal-vue": "^1.5.1",
+    "pusher-js": "^4.4.0",
     "vue-clipboard2": "^0.3.0"
   }
 }

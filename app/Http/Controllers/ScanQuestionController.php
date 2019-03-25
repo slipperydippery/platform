@@ -23,6 +23,9 @@ class ScanQuestionController extends Controller
     	$previous = '/sessie/' . $scan->id . '/theme/' . ($theme->id - 1) . '/measures';
     	if($theme->id == Theme::get()->first()->id){
     		$previous = '/sessie/' . $scan->id . '/algemeenbeeldresultaten';
+            if( ! $scan->group) {
+                $previous = '/sessie/' . $scan->id . '/algemeenbeeld';
+            }
     	}
 
     	$next = '/sessie/' . $scan->id . '/thema/' . $theme->id . '/vraag/' . $theme->questions()->first()->id;
@@ -46,6 +49,9 @@ class ScanQuestionController extends Controller
     	$next = '/sessie/' . $scan->id . '/thema/' . $theme->id . '/vraag/' . ($question->id + 1);
     	if($question->id == $theme->questions->last()->id){
     		$next = '/sessie/' . $scan->id . '/thema/' . $theme->id . '/resultaten';
+            if (! $scan->group) {
+                $next = '/sessie/' . $scan->id . '/thema/' . $theme->id . '/acties';
+            }
     	}
 
     	return view('scanquestions.show', compact('scan', 'theme', 'question', 'previous', 'next', 'answer'));
@@ -61,6 +67,9 @@ class ScanQuestionController extends Controller
     public function measures(Scan $scan, Theme $theme)
     {
     	$previous = '/sessie/' . $scan->id . '/thema/' . $theme->id . '/resultaten';
+        if ($scan->group) {
+            $previous = '/sessie/' . $scan->id . '/thema/' . $theme->id . '/vraag/' . $theme->questions->last()->id;
+        }
     	$next = '/sessie/' . $scan->id . '/thema/' . ($theme->id + 1) . '/introductie';
     	if($theme->id == Theme::get()->last()->id) {
     		$next = '/sessie/' . $scan->id . '/thema/' . Theme::get()->first()->id . '/actiesuitwerken';

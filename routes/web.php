@@ -21,8 +21,8 @@ Route::get('/dashboard', 'PagesController@dashboard')->name('dashboard')->middle
 Route::get('/introductiefilm', 'PagesController@introductiefilm')->name('introductiefilm');
 
 Route::get('/nieuwescan/start', 'CreateScanController@start')->name('createscan.start');
-Route::get('/nieuwesoloscan/naam', 'CreateSingleScanController@name')->name('createsinglescan.name');
-Route::post('/nieuwesoloscan/naam', 'CreateSingleScanController@storename')->name('createsinglescan.storename');
+Route::get('/nieuwesoloscan/naam', 'CreateSingleScanController@title')->name('createsinglescan.title');
+Route::post('/nieuwesoloscan/naam', 'CreateSingleScanController@storetitle')->name('createsinglescan.storetitle');
 Route::get('/nieuwesoloscan/instantie', 'CreateSingleScanController@instantie')->name('createsinglescan.instantie');
 Route::post('/nieuwesoloscan/instantie', 'CreateSingleScanController@storeinstantie')->name('createsinglescan.storeinstantie');
 Route::get('/nieuwesoloscan/gemeentes', 'CreateSingleScanController@districts')->name('createsinglescan.districts');
@@ -35,8 +35,8 @@ Route::get('/nieuwegroupsscan/gemeenten', 'CreateGroupScanController@districts')
 Route::post('/nieuwegroupsscan/gemeenten', 'CreateGroupScanController@storedistricts')->name('creategroupscan.storedistricts');
 Route::get('/nieuwegroupsscan/instantie', 'CreateGroupScanController@instantie')->name('creategroupscan.instantie');
 Route::post('/nieuwegroupsscan/instantie', 'CreateGroupScanController@storeinstantie')->name('creategroupscan.storeinstantie');
-Route::get('/nieuwegroupsscan/datetime', 'CreateGroupScanController@datetime')->name('creategroupscan.datetime');
-Route::post('/nieuwegroupsscan/datetime', 'CreateGroupScanController@storedatetime')->name('creategroupscan.storedatetime');
+Route::get('/nieuwegroupsscan/datum', 'CreateGroupScanController@datetime')->name('creategroupscan.datetime');
+Route::post('/nieuwegroupsscan/datum', 'CreateGroupScanController@storedatetime')->name('creategroupscan.storedatetime');
 Route::get('/nieuwegroupsscan/{scan}/klaar', 'CreateGroupScanController@created')->name('creategroupscan.created');
 
 Route::get('/groep/{group}/sluitaan/{code}', 'JoinGroupScanController@addscan')->name('joingroupscan.addscan');	
@@ -44,6 +44,7 @@ Route::post('/groep/{group}/sluitaan/{code}', 'JoinGroupScanController@storescan
 Route::get('/groep/{group}/aangesloten', 'JoinGroupScanController@created')->name('joingroupscan.created');	
 
 Route::post('/groep/promoot', 'ManageGroupScanController@promoteuser')->name('managegroupscan.promoteuser');
+Route::get('/groep/{group}/ontgrendel', 'ManageGroupScanController@unlock')->name('managegroupscan.unlock');
 
 
 
@@ -55,7 +56,6 @@ Route::get('/sessie/{scan}/regioincijfers', 'ScanPagesController@regioincijfers'
 Route::get('/sessie/{scan}/algemeenbeeld', 'ScanPagesController@algemeenbeeld')->name('scan.algemeenbeeld');
 Route::get('/sessie/{scan}/algemeenbeeldresultaten', 'ScanPagesController@algemeenbeeldresultaten')->name('scan.algemeenbeeldresultaten');
 Route::get('/sessie/{scan}/sessieintro', 'ScanPagesController@sessieintro')->name('scan.sessieintro');
-Route::post('/api/scan/{scan}', 'ApiScanController@update');
 Route::get('/sessie/{scan}/thema/{theme}/introductie', 'ScanQuestionController@intro')->name('scanquestions.intro');
 Route::get('/sessie/{scan}/thema/{theme}/vraag/{question}', 'ScanQuestionController@show')->name('scanquestions.show');
 Route::get('/sessie/{scan}/thema/{theme}/resultaten', 'ScanQuestionController@results')->name('scanquestions.results');

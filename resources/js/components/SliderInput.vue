@@ -5,8 +5,8 @@
 				<div class="directinput directinput--minus clickable" @click="subtractValue()">
 					-
 				</div>
-			    <div class="question--answer" v-if="currentvalue != null">{{ value }}</div>
-			    <div class="question--answer question--answer__preanswer" v-else>-</div>
+			    <div class="question--answer shadow" v-if="value != null">{{ value }}</div>
+			    <div class="question--answer shadow question--answer__preanswer" v-else>-</div>
 			    <div class="directinput directinput--plus clickable" @click="addValue()">
 			    	+
 			    </div>
@@ -15,7 +15,7 @@
 	    <input type="range" 
 	        min="0" max="10"
 	        step="1"
-	        :value="currentvalue" 
+	        :value="value" 
 	        v-on:change="onChange($event.target.value)"
 	        :disabled="disabled"
 	    >
@@ -32,43 +32,43 @@
 
         data() {
         	return {
-        		'currentvalue': 5,
         	}
         },
 
         mounted() {
-        		this.currentvalue = this.value;
         },
 
         methods: {
         	onChange(newValue) {
-        		this.currentvalue = newValue;
-        		console.log('changed');
+        		// this.value = newValue;
+        		// console.log('changed');
         		this.$emit('input', newValue);
         	},
 
         	addValue() {
-        		if(this.currentvalue != null){
-        			this.currentvalue++;
-        			if(this.currentvalue > 10) {
-        				this.currentvalue = 10;
+                var tempvalue = this.value;
+        		if(tempvalue != null){
+        			tempvalue++;
+        			if(tempvalue > 10) {
+        				tempvalue = 10;
         			}
         		} else {
-        			this.currentvalue = 6;
+        			tempvalue = 6;
         		}
-        		this.onChange(this.currentvalue);
+        		this.onChange(tempvalue);
         	},
 
         	subtractValue() {
-        		if(this.currentvalue != null ){
-        			this.currentvalue--;
-        			if(this.currentvalue < 0) {
-        				this.currentvalue = 0;
+                var tempvalue = this.value;
+        		if(tempvalue != null ){
+        			tempvalue--;
+        			if(tempvalue < 0) {
+        				tempvalue = 0;
         			}
         		} else {
-        			this.currentvalue = 4;
+        			tempvalue = 4;
         		}
-        		this.onChange(this.currentvalue);
+        		this.onChange(tempvalue);
         	}
 
         }

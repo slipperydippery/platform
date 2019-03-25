@@ -14,12 +14,12 @@ class CreateSingleScanController extends Controller
         $this->middleware('auth');
     }
     
-    public function name()
+    public function title()
     {
-    	return view('createsinglescan.name');
+    	return view('createsinglescan.title');
     }
 
-    public function storename(Request $request)
+    public function storetitle(Request $request)
     {
         request()->validate([
             'title' => 'required|min:3|max:255',

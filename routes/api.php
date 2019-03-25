@@ -17,6 +17,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::resource('answer', 'ApiAnswerController');
+Route::resource('theme', 'ApiThemeController');
+Route::resource('group', 'ApiGroupController');
+Route::resource('scan', 'ApiScanController');
+Route::resource('measure', 'ApiMeasureController');
+Route::resource('followup', 'ApiFollowupController');
+
+Route::get('/scan/{scan}/question/{question}/getanswers', 'ApiScanQuestionController@getanswers');
+
+Route::get('/group/{group}/scan', 'ApiGroupScanController@index');
 
 Route::get('skillz', function () {
 	return['Hello', 'this', 'is', 'an', 'array'];

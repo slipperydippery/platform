@@ -6,22 +6,27 @@
 			position: relative;
 		}
 		.directinput {
-			padding: 1rem;
-			margin: -0.5rem;
+			padding: 1.3rem;
+			margin: .6rem -0.7rem;
+			border-radius: .5rem;
+			vertical-align: top;
+			user-select: none;
 		}
 		.directinput--minus {
-			border: 1px solid blue;
+			color: $danger;
+			background: rgba($danger, 0.3);
 
 		}
 		.question--answer {
-			border: 1px solid $secondary;
+			border: 2px solid $secondary;
 			padding: 1rem 2rem;
 			background: white;
-			border-radius: 0.5rem;
+			border-radius: 0;
 			z-index: 10;
 		}
 		.directinput--plus {
-			border: 1px solid $success;
+			color: $success;
+			background: rgba($success, 0.3);
 
 		}
 	}
