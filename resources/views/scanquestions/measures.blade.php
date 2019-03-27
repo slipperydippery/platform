@@ -29,7 +29,7 @@
 								@foreach ($theme->questions as $question)
 									<div class="col-sm-2">
 										<strong>Vraag {{ $question->id }} <br></strong>
-										<span data-toggle="tooltip" data-placement="top" title=" {{ $question->body }} ">{{ $question->title }}</span>
+										<span data-toggle="tooltip" data-placement="top" title=" {{ $question->question }} ">{!! $question->title !!}</span>
 									</div>
 								@endforeach
 							</div>

@@ -68,7 +68,7 @@ class QuestionTableSeeder extends Seeder
                 'order' => 5,
             ],
             [
-                'title'           => '',
+                'title'           => 'Individueel gestimuleerd',
                 'question'        => 'Worden jongeren individueel en stimulerend behandeld?',
                 'successfactor'   => 'Jongeren ontvangen een individuele, op empowerment gericht en dus stimulerende benadering.',
                 'riskfactor'      => 'De focus wordt gelegd op de criteria die moeten worden behaald, in plaats van uit te gaan van wat de talenten en mogelijkheden van de individuele jongere. ',
@@ -77,7 +77,7 @@ class QuestionTableSeeder extends Seeder
                 'order' => 1,
             ],
             [
-                'title'           => '',
+                'title'           => 'Deskundige begeleiding',
                 'question'        => 'Worden jongeren op school, in re-integratie of op de werkplek door deskundige begeleiders begeleid, die dat ook qua stimulerende persoonlijkheid en caseload kunnen waarmaken? ',
                 'successfactor'   => 'Docenten en begeleiders zijn qua caseload, competenties en persoonlijkheid in staat om jongeren goed te begeleiden, vertrouwen te geven en zo te laten groeien.',
                 'riskfactor'      => 'Jongeren hebben te maken met veel wisselingen van begeleiders, waardoor begeleiders niet goed op de hoogte zijn van de voortgang van het traject. Of de begeleiders hebben niet de goede competenties en randvoorwaarden (caseload) om jongeren echt te kunnen helpen en stimuleren. ',
@@ -86,7 +86,7 @@ class QuestionTableSeeder extends Seeder
                 'order' => 2,
             ],
             [
-                'title'           => '',
+                'title'           => 'Vroegtijdige signalering',
                 'question'        => 'Hebben begeleiders van jongeren in een kwetsbare positie vroegtijdig zicht op belemmeringen, mogelijkheden en loopbaanwensen?',
                 'successfactor'   => 'Vroegtijdige signalering en diagnostiek zijn nodig. Docenten en klantmanagers hebben met het oog op gerichte begeleiding en tijdige inzet van interventies vroegtijdig zicht op belemmeringen, mogelijkheden en loopbaanwensen. ',
                 'riskfactor'      => 'Docenten of klantmanagers onderschatten de problematiek van de jongere, niet of onvoldoende wordt gezien dat er op een of meer leefgebieden beperkingen of lastige factoren zijn die onderkend en aangepakt moeten worden. Hierdoor worden kansen gemist.',
@@ -95,7 +95,7 @@ class QuestionTableSeeder extends Seeder
                 'order' => 3,
             ],
             [
-                'title'           => '',
+                'title'           => 'Ouders/verzorgers actief betrokken',
                 'question'        => 'Zijn de ouders/verzorgers actief betrokken bij het stimuleren en op weg helpen van de jongeren op weg naar betere kansen op de arbeidsmarkt?',
                 'successfactor'   => 'Impact van ouders wordt actief en gericht benut door hen actief te betrekken, stimuleren en committeren bij de voortgang op school en op de stageplek/werkervaringsplek.',
                 'riskfactor'      => 'Ouders/verzorgers zijn niet goed betrokken bij de jongere, waardoor verwachtingen niet helder zijn en kansen worden gemist als het gaat om het zetten van stappen in de goede richting op weg naar talenten onderkennen en benutten.',
@@ -110,7 +110,7 @@ class QuestionTableSeeder extends Seeder
                 'order' => 4,
             ],
             [
-                'title'           => '',
+                'title'           => 'Vroegtijdige begeleiding en overdracht',
                 'question'        => 'Wordt de begeleiding van jongeren al opgestart voordat ze vroegtijdig de schoolverlaten en wordt de kennis over de jongere van de school nog steeds benut in de periode dat de jongere niet meer op school zit? ',
                 'successfactor'   => 'Er is sprake van een vroegtijdige warme overdracht van scholen naar gemeenten zodra het moment dat de jongere school verlaat dichterbij komt en daarna. ‘Het estafettestokje mag niet vallen.’ ',
                 'riskfactor'      => 'Gemeenten zijn onvoldoende preventief bezig, hebben geen zicht op het aantal jongeren dat school gaat verlaten, kennis bij de school wordt onvoldoende benut bij de arbeidstoeleiding, waardoor jongeren onnodig werkloos worden of uit beeld kunnen verdwijnen.',
@@ -119,7 +119,7 @@ class QuestionTableSeeder extends Seeder
                 'order' => 5,
             ],
             [
-                'title'           => '',
+                'title'           => 'Jongere maakt zelf toekomstplan',
                 'question'        => 'Maakt de jongere zelf een toekomstplan, dat alle leefgebieden omvat?',
                 'successfactor'   => 'De jongere brengt, met hulp van anderen, zijn/haar vragen en problemen op alle leefdomeinen in beeld, en maakt daar een toekomstplan van.',
                 'riskfactor'      => ' Er zijn veel mensen betrokken bij de jongere, maar ze werken langs elkaar heen én er is geen duidelijk plan.',
@@ -130,7 +130,7 @@ class QuestionTableSeeder extends Seeder
                 'order' => 1,
             ],
             [
-                'title'           => '',
+                'title'           => 'Soepele overgang boven 18',
                 'question'        => 'Is er, indien nodig, ondersteuning mogelijk na 18 jaar en zijn de overgangen van de jeugdwet naar voorzieningen uit de WMO, ZVW of WLZ soepel geregeld?',
                 'successfactor'   => 'De jongere merkt zo min mogelijk van de overgang naar een ander wettelijk kader en kan hulp blijven ontvangen na de 18e verjaardag.',
                 'riskfactor'      => 'Zodra de jongere 18 wordt stopt de hulp en staat hij/zij er alleen voor.',
@@ -139,7 +139,7 @@ class QuestionTableSeeder extends Seeder
                 'order' => 2,
             ],
             [
-                'title'           => '',
+                'title'           => 'Snel een passende woonplek',
                 'question'        => 'Kunnen jongeren binnen afzienbare tijd een betaalbare en passende woonplek vinden?',
                 'successfactor'   => 'Jongeren kunnen binnen afzienbare tijd (6 maanden) een woonplek vinden als zij die nodig hebben.',
                 'riskfactor'      => 'Jongeren moeten jaren wachten op een zelfstandige woonplek, blijven ongewenst thuiswonen, of verblijven langer in de jeugdzorg omdat er geen andere optie is.',
@@ -148,7 +148,7 @@ class QuestionTableSeeder extends Seeder
                 'order' => 3,
             ],
             [
-                'title'           => '',
+                'title'           => 'Vertrouwde volwassene',
                 'question'        => 'Kan elke jongere bij vragen en problemen terecht bij een vertrouwde volwassene (ouder, mentor, maatje)?',
                 'successfactor'   => 'Elke jongere kan bij een vertrouwde volwassene terecht met vragen en problemen.',
                 'riskfactor'      => 'Jongeren in een kwetsbare positie staan er veelal alleen voor, en hulpverleners wisselen elkaar snel af.',
@@ -157,7 +157,7 @@ class QuestionTableSeeder extends Seeder
                 'order' => 4,
             ],
             [
-                'title'           => '',
+                'title'           => 'Hulpverleners herkennen financi&euml;le problematiek',
                 'question'        => 'Zijn hulpverleners in staat financi&euml;le problematiek en/of LVB te herkennen?',
                 'successfactor'   => 'Hulpverleners zijn in staat om financi&euml;le problematiek en/of LVB bij jongeren te herkennen en oplossingen aan te dragen.',
                 'riskfactor'      => 'Hulpverleners herkennen financi&euml;le problematiek en/of LVB bij jongeren niet. Er wordt geen gepaste hulp geboden, waardoor schulden oplopen en jongeren niet in staat zijn om te participeren in de samenleving.',
@@ -179,7 +179,7 @@ In de uitvoeringspraktijk is sprake van twee scholen. De ene school is van menin
                 'order' => 5,
             ],
             [
-                'title'           => '',
+                'title'           => 'Gedeelde visie tussen betrokken partners',
                 'question'        => 'Is er een gedeelde visie tussen betrokken partners op de verschillende leefgebieden (zoals school, werk, zorg, inkomen, wonen) over de randvoorwaarden voor een goede arbeidstoeleiding van jongeren?',
                 'successfactor'   => 'Er is een gedeelde visie onder partners op de arbeidstoeleiding van jongeren, op de verantwoordelijkheden en de inzet van betrokken partijen. ',
                 'riskfactor'      => 'Partners worden pas te laat ingelicht, waardoor de kans groot is dat jongeren uit beeld verdwijnen.',
@@ -188,7 +188,7 @@ In de uitvoeringspraktijk is sprake van twee scholen. De ene school is van menin
                 'order' => 1,
             ],
             [
-                'title'           => '',
+                'title'           => 'Samenwerking op en tussen niveaus',
                 'question'        => 'Wordt de samenwerking gedragen op strategisch, tactisch en operationeel niveau?',
                 'successfactor'   => 'Er vindt structureel op en tussen verschillende niveaus overleg plaats tussen netwerkpartners over de samenwerking.',
                 'riskfactor'      => 'Er vindt niet voldoende overleg plaats op en tussen verschillende niveaus, waardoor het de arbeidstoeleiding van jongeren wordt bemoeilijkt.',
@@ -197,7 +197,7 @@ In de uitvoeringspraktijk is sprake van twee scholen. De ene school is van menin
                 'order' => 2,
             ],
             [
-                'title'           => '',
+                'title'           => 'Duidelijke regie',
                 'question'        => 'Er bestaat duidelijkheid over wie de regie heeft over begeleiding van de jongere en wanneer?',
                 'successfactor'   => 'Helder is per fase in de begeleiding welke docent of (traject)begeleider de regie heeft over de begeleiding van de jongere. Deze heeft overzicht en co&ouml;rdineert interventies naar de jongere toe.',
                 'riskfactor'      => 'Voor de jongeren is het niet duidelijk bij wie hij/zij terecht moet voor vragen/ondersteuning.',
@@ -206,7 +206,7 @@ In de uitvoeringspraktijk is sprake van twee scholen. De ene school is van menin
                 'order' => 3,
             ],
             [
-                'title'           => '',
+                'title'           => 'Eenduidige afspraken',
                 'question'        => 'Werken de betrokken scholen (met name VSO, PrO en Entree) scholen in de regio zodanig samen dat er eenduidige afspraken met gemeenten kunnen worden gemaakt?',
                 'successfactor'   => 'De scholen werken zodanig samen dat er een goede samenwerking met gemeenten mogelijk is.',
                 'riskfactor'      => 'Er is geen sprake van zodanige afstemming en samenwerking tussen de betreffende scholen, dat het voor gemeenten helder is hoe zij het beste de scholen op een eenduidige en efficiente wijze kunnen ondersteunen bij het betreden van de arbeidsmarkt door de leerlingen.',
@@ -215,7 +215,7 @@ In de uitvoeringspraktijk is sprake van twee scholen. De ene school is van menin
                 'order' => 4,
             ],
             [
-                'title'           => '',
+                'title'           => 'Samenwerking gemeenten',
                 'question'        => 'Werken gemeenten in een arbeidsregio met elkaar samen op het vlak van arbeidsparticipatie van jongeren in een kwetsbare positie?',
                 'successfactor'   => 'De gemeenten werken zodanig samen dat er een eenduidige en goede samenwerking met scholen mogelijk is.',
                 'riskfactor'      => 'De scholen worden geconfronteerd met een groot aantal verschillen tussen gemeenten in de werkwijze, subsidies, begeleiding, moment van overpakken en andere facetten van succesvolle arbeidstoeleiding. Dat maakt de samenwerking met gemeenten erg lastig en ineffici&euml;nt.',
