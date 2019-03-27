@@ -22,7 +22,7 @@
 					<div class="row">
 					    <div class="col-sm-2">
 					        <div class="card card__2 card--partner owner {{ $scan->group->user->isOnline() ? '' : 'inactive' }} ">
-					            <div class="card-icons">
+					            <div class="card-icons card-header p-0 text-right">
 					                <i class="material-icons clickable"  data-toggle="tooltip" data-placement="top" title="Beheerder"> star </i>
 					                @if($scan->group->user->isOnline())
 					                    <i class="material-icons clickable" data-toggle="tooltip" data-placement="top" title="online"> wifi </i>
@@ -31,10 +31,13 @@
 					                @endif
 					            </div>
 					            <img src="/img/user.svg" alt="">
-					            <div class="card-footer">
-					                {{ $scan->group->user->name }} <br>
-					                Beheerder
+					            <div class="card-body">
+					                <h5>{{ $scan->group->user->name }}</h5>
 					            </div>
+
+								<div class="card-footer py-1">
+									<strong class="align-bottom">Beheerder</strong>
+								</div>
 					        </div>
 					    </div>
 
@@ -42,9 +45,9 @@
 					    @foreach($scan->group->scans as $thisscan)
 					        @if($thisscan->instantie->id == $instantie->id)
 					        @if($thisscan->user->id != $scan->group->user->id)
-					             <div class="col-sm-2">
-					                 <div class="card card__2 card--partner instantie-{{ $thisscan->instantie->id }} {{ $thisscan->user->isOnline() ? '' : 'inactive' }} ">
-					                     <div class="card-icons">
+					             <div class="col-sm-2 d-flex align-items-stretch mb-5">
+					                 <div class="card w-100 card__2 card--partner instantie-{{ $thisscan->instantie->id }} {{ $thisscan->user->isOnline() ? '' : 'inactive' }} ">
+					                     <div class="card-icons card-header py-0 px-2 text-right">
 					                         @if($thisscan->user->isOnline())
 					                             <i class="material-icons" data-toggle="tooltip" data-placement="top" title="online"> wifi </i>
 					                         @else
@@ -57,10 +60,12 @@
 					                         @endif
 					                     </div>
 					                     <img src="/img/user.svg" alt="">
-					                     <div class="card-footer">
-					                         {{ $thisscan->user->name }} <br>
-					                         {{ $thisscan->instantie->title }}
+					                     <div class="card-body align-bottom">
+						                         <h5>{{ $thisscan->user->name }}</h5>
 					                     </div>
+					                         <div class="card-footer py-1">
+						                        {{ $thisscan->instantie->title }}
+				                         </div>
 					                 </div>
 					             </div>
 

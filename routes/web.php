@@ -43,15 +43,15 @@ Route::get('/groep/{group}/sluitaan/{code}', 'JoinGroupScanController@addscan')-
 Route::post('/groep/{group}/sluitaan/{code}', 'JoinGroupScanController@storescan')->name('joingroupscan.storescan');	
 Route::get('/groep/{group}/aangesloten', 'JoinGroupScanController@created')->name('joingroupscan.created');	
 
-Route::post('/groep/promoot', 'ManageGroupScanController@promoteuser')->name('managegroupscan.promoteuser');
+Route::post('/groep/{group}/promoot', 'ManageGroupScanController@promoteuser')->name('managegroupscan.promoteuser');
 Route::get('/groep/{group}/ontgrendel', 'ManageGroupScanController@unlock')->name('managegroupscan.unlock');
 
 
 
 Route::resource('scan', 'ScanController');
 Route::get('/scan/{scan}/start', 'ScanPagesController@start')->name('scan.start');
-Route::get('/scan/{scan}/introductiefilm', 'ScanPagesController@introductiefilm')->name('scan.introductiefilm');
-Route::get('/scan/{scan}/kennismaken', 'ScanPagesController@kennismaken')->name('scan.kennismaken');
+Route::get('/sessie/{scan}/introductiefilm', 'ScanPagesController@introductiefilm')->name('scan.introductiefilm');
+Route::get('/sessie/{scan}/kennismaken', 'ScanPagesController@kennismaken')->name('scan.kennismaken');
 Route::get('/sessie/{scan}/regioincijfers', 'ScanPagesController@regioincijfers')->name('scan.regioincijfers');
 Route::get('/sessie/{scan}/algemeenbeeld', 'ScanPagesController@algemeenbeeld')->name('scan.algemeenbeeld');
 Route::get('/sessie/{scan}/algemeenbeeldresultaten', 'ScanPagesController@algemeenbeeldresultaten')->name('scan.algemeenbeeldresultaten');

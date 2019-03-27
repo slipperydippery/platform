@@ -13,7 +13,7 @@
 		</div>
 		<div class="row">	
 			<div class="col-md-12">	
-				<div class="card card__question">
+				<div class="card card__question shadow">
                     <div class="card-body">
                         <h5 class="card-title">Vraag {{ $question->id }}/20 </h5>
 

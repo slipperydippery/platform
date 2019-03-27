@@ -88,7 +88,7 @@
                                                         <a class="dropdown-item" href="#">Stuur bericht</a>
 
                                                         @if (Auth::user()->id == $scan->group->user->id)
-                                                            <form action="{{ route('managegroupscan.promoteuser') }}" method="post" accept-charset="utf-8" id="promootform{{ $thisscan->id }}">
+                                                            <form action="{{ route('managegroupscan.promoteuser', $scan->group) }}" method="post" accept-charset="utf-8" id="promootform{{ $thisscan->id }}">
                                                                 {{ csrf_field() }}
                                                                 <!-- Hidden group_id Type Form Input -->
                                                                 <input type="hidden" id="group_id" name="group_id" value=" {{ $thisscan->group->id }} ">

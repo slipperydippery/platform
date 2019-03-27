@@ -5,13 +5,11 @@
 	        <div class="col-md-12">
 	            <div class="page--title">
 	                <h1 class="pagetitle">Algemeen beeld</h1>
-	                <p>stap 1</p>
 	            </div>
 	        </div>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				Bepaal het algemene beeld
 				<div class="card card__question">
                     <div class="card-body">
 

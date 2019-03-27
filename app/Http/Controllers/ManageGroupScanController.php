@@ -14,7 +14,7 @@ class ManageGroupScanController extends Controller
         $this->middleware('manager');
     }
 
-    public function promoteuser(Request $request)
+    public function promoteuser(Request $request, Group $group)
     {
     	$scan = Scan::find($request->scan_id);
     	$group = Group::find($request->group_id);

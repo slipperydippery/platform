@@ -5,8 +5,8 @@
 	<p>Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Pellentesque libero tortor, tincidunt et, tincidunt eget, semper nec, quam. Vivamus consectetuer hendrerit lacus. Praesent turpis. Sed cursus turpis vitae tortor.</p>
 </div>
 <div class="text-center pt-3 pb-3">
-    <a href=" {{ route('creategroupscan.title') }} " class="btn btn-secondary mx-auto bounce-fade-top">START NU JE EIGEN GROEP</a> <br>
+    <a href=" {{ route('creategroupscan.title') }} " class="btn btn-primary mx-auto bounce-fade-top">START NU JE EIGEN GROEP</a> <br>
     <a href=" {{ route('createsinglescan.title') }} " data-toggle="modal" data-target="#exampleModal">
-        <span class="fineprint fineprint--welcome fade-in-fwd">Of maak een individuele scan</span>
+        <span class="fineprint fineprint--welcome fade-in-fwd"> > Of maak een individuele scan</span>
     </a>
 </div>

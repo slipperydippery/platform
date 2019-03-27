@@ -24,7 +24,7 @@ class QuestionTableSeeder extends Seeder
                 'order' => 1,
             ],
             [
-                'title'           => '',
+                'title'           => 'Deskundigheid omgaan met werkgevers',
                 'question'        => 'Hebben gemeenten en scholen deskundigheid ten aanzien van omgaan met werkgevers? Met als doel om jongeren werkervaring daar te laten opdoen en de arbeidstoeleiding van jongeren in een kwetsbare positie te verbeteren.',
                 'successfactor'   => 'Professionele aanpak in de relatie met werkgevers, met kennis van context, belangen en taal van bedrijven.',
                 'riskfactor'      => 'Er is weinig contact met werkgevers in de regio, waardoor gemeenten en scholen niet goed weten om te gaan met werkgevers.',
@@ -41,7 +41,7 @@ class QuestionTableSeeder extends Seeder
                 'order' => 2,
             ],
             [
-                'title'           => '',
+                'title'           => 'Samenwerking met werkgevers',
                 'question'        => 'Vindt er proactieve samenwerking plaats met werkgevers en andere relevante organisaties voor een goede arbeidstoeleiding?',
                 'successfactor'   => 'Op het vlak van arbeidstoeleiding vindt proactieve samenwerking plaats met werkgevers en andere relevante organisaties, zoals (andere) scholen en werkgeversservicepunten.',
                 'riskfactor'      => 'Door gebrek aan samenwerking blijven kansen bij werkgevers onbenut.',
@@ -50,7 +50,7 @@ class QuestionTableSeeder extends Seeder
                 'order' => 3,
             ],
             [
-                'title'           => '',
+                'title'           => 'Ondersteuning bij stages',
                 'question'        => 'Hebben scholen in de regio, zelf of via samenwerking, kennis en mogelijkheden om werkgevers te ondersteunen bij stages en arbeidstoeleiding?',
                 'successfactor'   => 'School heeft kennis en mogelijkheden om werkgevers direct en/of via samenwerking te ontzorgen bij stages en arbeidstoeleiding.',
                 'riskfactor'      => 'Werkgevers in de regio bieden beperkt arbeidsplaatsen aan of haken af, omdat ze niet goed worden ondersteund door scholen en gemeente.',
@@ -59,7 +59,7 @@ class QuestionTableSeeder extends Seeder
                 'order' => 4,
             ],
             [
-                'title'           => '',
+                'title'           => 'Goed en breed netwerk',
                 'question'        => 'Beschikken scholen en gemeenten over een goed en breed en divers genoeg netwerk onder regionale werkgevers?',
                 'successfactor'   => 'School en gemeente hebben voldoende netwerk van geschikte bedrijven voor stages en plaatsingskansen.',
                 'riskfactor'      => 'Scholen en gemeenten hebben niet genoeg contacten met werkgevers, waardoor de plaatsingskansen voor leerlingen beperkt zijn. ',
