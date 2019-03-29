@@ -67,15 +67,7 @@
         @include('partials.instructie')
 
     </div>
-    <footer class="footer p-5 mt-5">
-        <div class="row pt-5">
-            <div class="col-4">
-                <h3><span class="">Participatie</span><span class="text-secondary">.</span><span class="text-muted">scan</span></h3>
-                <br>
-                <span class="">De Participatiescan is ontwikkeld in opdracht van Lecso, Divosa, VNG, MBO Raad, VO Raad, Sectorraad Praktijkonderwijs, Ingrado, UWV, S-BB, MEE NL, VOBC en de ministeries van SZW en OCW door ECORYS en NJi. Concept programmering en uitvoering door EMB AV &copy; </span>
-            </div>
-        </div>
-    </footer>
+    @include('partials.footer')
 
     <!-- Additional Scripts -->
     @yield('additional-scripts')
