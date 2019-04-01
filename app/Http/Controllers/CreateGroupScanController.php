@@ -40,6 +40,7 @@ class CreateGroupScanController extends Controller
 
     public function storedistricts(Request $request)
     {
+        return $request->all();
         request()->validate([
             'districts' => 'required',
             'districts.*' => 'integer',

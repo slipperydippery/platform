@@ -23,6 +23,7 @@ Route::resource('group', 'ApiGroupController');
 Route::resource('scan', 'ApiScanController');
 Route::resource('measure', 'ApiMeasureController');
 Route::resource('followup', 'ApiFollowupController');
+Route::resource('district', 'ApiDistrictController');
 
 Route::get('/scan/{scan}/question/{question}/getanswers', 'ApiScanQuestionController@getanswers');
 

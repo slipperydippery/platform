@@ -25,8 +25,8 @@ Route::get('/nieuwesoloscan/naam', 'CreateSingleScanController@title')->name('cr
 Route::post('/nieuwesoloscan/naam', 'CreateSingleScanController@storetitle')->name('createsinglescan.storetitle');
 Route::get('/nieuwesoloscan/instantie', 'CreateSingleScanController@instantie')->name('createsinglescan.instantie');
 Route::post('/nieuwesoloscan/instantie', 'CreateSingleScanController@storeinstantie')->name('createsinglescan.storeinstantie');
-Route::get('/nieuwesoloscan/gemeentes', 'CreateSingleScanController@districts')->name('createsinglescan.districts');
-Route::post('/nieuwesoloscan/regios', 'CreateSingleScanController@storedistricts')->name('createsinglescan.storedistricts');
+Route::get('/nieuwesoloscan/gemeenten', 'CreateSingleScanController@districts')->name('createsinglescan.districts');
+Route::post('/nieuwesoloscan/gemeenten', 'CreateSingleScanController@storedistricts')->name('createsinglescan.storedistricts');
 Route::get('/nieuwesoloscan/{scan}/klaar', 'CreateSingleScanController@created')->name('createsinglescan.created');
 
 Route::get('/nieuwegroupsscan/naam', 'CreateGroupScanController@title')->name('creategroupscan.title');

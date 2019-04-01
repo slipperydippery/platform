@@ -1784,6 +1784,7 @@ var store = {
 
 Vue.component('example-component', __webpack_require__(228));
 Vue.component('district-decoration', __webpack_require__(231));
+Vue.component('select-districts', __webpack_require__(294));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -85544,6 +85545,295 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 291 */,
+/* 292 */,
+/* 293 */,
+/* 294 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(4)
+/* script */
+var __vue_script__ = __webpack_require__(295)
+/* template */
+var __vue_template__ = __webpack_require__(296)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/SelectDistricts.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-8dd33624", Component.options)
+  } else {
+    hotAPI.reload("data-v-8dd33624", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 295 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(12);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: [],
+
+    data: function data() {
+        return {
+            'districts': [],
+            'selecteddistricts': [],
+            'districtsearch': ''
+        };
+    },
+    mounted: function mounted() {
+        this.getDistricts();
+    },
+
+
+    computed: {
+        filtereddistricts: function filtereddistricts() {
+            var filteredarray = this.districts;
+            var home = this;
+            if (home.districtsearch != '') {
+                filteredarray = [];
+                this.districts.forEach(function (thisdistrict) {
+                    if (thisdistrict.name.toLowerCase().includes(home.districtsearch.toLowerCase())) {
+                        filteredarray.push(thisdistrict);
+                    }
+                });
+            }
+            return filteredarray;
+        },
+
+        filteredAndSortedDistricts: function filteredAndSortedDistricts() {
+            function compare(a, b) {
+                if (a.name < b.name) {
+                    return -1;
+                }
+                if (a.name > b.name) {
+                    return 1;
+                }
+                return 0;
+            }
+
+            return this.filtereddistricts.sort(compare);
+        }
+    },
+
+    methods: {
+        sortDistricts: function sortDistricts(thisarray) {
+            function compare(a, b) {
+                if (a.title < b.title) {
+                    return -1;
+                }
+                if (a.title > b.title) {
+                    return 1;
+                }
+                return 0;
+            }
+            return thisarray.sort(compare);
+        },
+
+        getDistricts: function getDistricts() {
+            var home = this;
+            axios.get('/api/district').then(function (response) {
+                home.districts = response.data;
+            });
+        },
+
+
+        addDistrictToSelection: function addDistrictToSelection(thisdistrict) {
+            this.selecteddistricts.push(thisdistrict);
+            this.sortDistricts(this.selecteddistricts);
+            this.districts.splice(this.districts.indexOf(thisdistrict), 1);
+            this.filtereddistricts.splice(this.filtereddistricts.indexOf(thisdistrict), 1);
+            this.$forceUpdate();
+            this.districtsearch = '';
+        },
+
+        removeDistrictFromSelection: function removeDistrictFromSelection(thisdistrict) {
+            this.districts.push(thisdistrict);
+            this.filtereddistricts.push(thisdistrict);
+            this.sortDistricts(this.filtereddistricts);
+            this.selecteddistricts.splice(this.selecteddistricts.indexOf(thisdistrict), 1);
+            this.$forceUpdate();
+            this.districtsearch = '';
+        },
+
+        updateDistricts: function updateDistricts() {
+            var numeralDistricts = [];
+            this.selecteddistricts.forEach(function (thisdistrict) {
+                numeralDistricts.push(thisdistrict.id);
+            });
+            console.log(numeralDistricts);
+            axios.post('/nieuwegroupsscan/gemeenten', {
+                test: 'tester blester',
+                numdistricts: numeralDistricts,
+                districts: this.selecteddistricts
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 296 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-12 form-group" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.districtsearch,
+            expression: "districtsearch"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "text", placeholder: "Zoek een gemeente" },
+        domProps: { value: _vm.districtsearch },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.districtsearch = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "col-12 overflow-hidden nowrap pt-3" },
+      _vm._l(_vm.filteredAndSortedDistricts.slice(0, 10), function(district) {
+        return _c(
+          "label",
+          {
+            staticClass:
+              "checkboxlabel btn btn-sm btn-secondary mr-2 clickable",
+            on: {
+              click: function($event) {
+                return _vm.addDistrictToSelection(district)
+              }
+            }
+          },
+          [_vm._v("\n\t\t\t\t" + _vm._s(district.name) + "\n\t\t\t")]
+        )
+      }),
+      0
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "col-12 pt-5" },
+      _vm._l(_vm.selecteddistricts, function(district) {
+        return _c(
+          "label",
+          {
+            staticClass: "checkboxlabel btn btn-sm btn-dark mr-2 clickable",
+            on: {
+              click: function($event) {
+                return _vm.removeDistrictFromSelection(district)
+              }
+            }
+          },
+          [
+            _vm._v("\n\t\t\t\t" + _vm._s(district.name) + " "),
+            _c("i", { staticClass: "material-icons md-18" }, [
+              _vm._v(" close ")
+            ])
+          ]
+        )
+      }),
+      0
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12 p-3" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", on: { click: _vm.updateDistricts } },
+        [_vm._v("Update")]
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-8dd33624", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
