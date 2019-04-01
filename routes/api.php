@@ -24,6 +24,7 @@ Route::resource('scan', 'ApiScanController');
 Route::resource('measure', 'ApiMeasureController');
 Route::resource('followup', 'ApiFollowupController');
 Route::resource('district', 'ApiDistrictController');
+Route::resource('session', 'ApiSessionController');
 
 Route::get('/scan/{scan}/question/{question}/getanswers', 'ApiScanQuestionController@getanswers');
 

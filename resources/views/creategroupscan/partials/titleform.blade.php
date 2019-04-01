@@ -1,7 +1,8 @@
 <!-- Naam Form Input -->
 <div class="form-group">
     <label for="name">Naam</label>
-    <input id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title', request('title') ?? session('createsinglescan.title') ?? null) }}" autofocus>
+
+    <input id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title', request('title') ?? session('creategroupscan.title') ?? null) }}" autofocus>
 
 	@if ($errors->has('title'))
         <span class="invalid-feedback">

@@ -35,17 +35,19 @@ class CreateGroupScanController extends Controller
     public function districts()
     {
         $districts = District::get();
-    	return view('creategroupscan.districts', compact('districts'));
+        $session = session('creategroupscan');
+
+    	return view('creategroupscan.districts', compact('districts', 'session'));
     }
 
     public function storedistricts(Request $request)
     {
-        return $request->all();
         request()->validate([
             'districts' => 'required',
             'districts.*' => 'integer',
         ]);
         $request->session()->put('creategroupscan.districts', $request->districts);
+
 
     	return redirect()->route('creategroupscan.instantie');
     }
@@ -53,7 +55,8 @@ class CreateGroupScanController extends Controller
     public function instantie()
     {
         $instanties = Instantie::get();
-    	return view('creategroupscan.instantie', compact('instanties'));
+        $instantie = Instantie::find(session('creategroupscan.instantie_id'));
+    	return view('creategroupscan.instantie', compact('instanties', 'instantie'));
     }
 
     public function storeinstantie(Request $request)

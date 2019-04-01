@@ -1,10 +1,15 @@
 <!-- Instantie Form Input -->
 <div class="form-group">
     <label for="instantie">Instantie</label> <br/>
+
     <select class="form-control{{ $errors->has('instantie_id') ? ' is-invalid' : '' }}" name="instantie_id">
 	    <option disabled selected value style="display:none;">  </option>
 		@foreach($instanties as $instantie)
-		    <option value="{{ old('instantie', request('instantie') ?? $instantie->id ?? null) }}">  {{ $instantie->title }}  </option>
+			@if (session('creategroupscan.instantie_id') == $instantie->id)
+			    <option value=" {{ $instantie->id }} " selected> {{ $instantie->title }} </option>
+		    @else
+			    <option value=" {{ $instantie->id }} ">  {{ $instantie->title }}  </option>
+			@endif
 		@endforeach
     </select>
 

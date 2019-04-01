@@ -24,7 +24,9 @@
 			</label>
 		</div>
 		<div class="col-12 p-3">
-			<button class="btn btn-primary" @click="updateDistricts">Update</button>
+			<div class="form-group text-right">
+				<button class="btn btn-secondary btn-lg" @click.prevent="updateDistricts">Sla gemeenten op</button>
+			</div>
 		</div>
 	</div>
 </template>
@@ -34,6 +36,7 @@
 
     export default {
         props: [
+        	'session'
         ],
 
         data() {
@@ -46,6 +49,7 @@
 
         mounted() {
         	this.getDistricts();
+        	// this.setSelectedDistricts();
         },
 
         computed: {
@@ -96,7 +100,8 @@
         		var home = this;
         		axios.get('/api/district')
         			.then(function(response) {
-        				home.districts = response.data
+        				home.districts = response.data;
+        				home.setSelectedDistricts();
         			})
         	},
 
@@ -125,10 +130,21 @@
             	});
             	console.log(numeralDistricts);
             	axios.post('/nieuwegroupsscan/gemeenten', {
-            		test: 'tester blester',
-            		numdistricts: numeralDistricts,
-            		districts: this.selecteddistricts,
+            		districts: numeralDistricts,
             	})
+            	.then(function (response) {
+					window.location.href = '/nieuwegroupsscan/instantie'; 
+            	})
+            },
+
+            setSelectedDistricts() {
+            	this.session.districts.forEach( (district_id) => {
+            		this.districts.forEach( (thisdistrict) => {
+            			if(thisdistrict.id == district_id) {
+            				this.addDistrictToSelection(thisdistrict);
+            			}
+            		} )
+            	} )
             },
         }
     }
