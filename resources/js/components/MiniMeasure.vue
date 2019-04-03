@@ -4,7 +4,7 @@
 		<i class="material-icons clickable" @click="toggleMeasure()" v-if="is_manager &&! measure.active" v-b-tooltip.hover :title="title"> check_box_outline_blank </i>
 		<textarea 
             class="form-control" 
-            placeholder="Actie Omschrijving"
+            :placeholder="measure.active ? 'Actie Omschrijving' : ''"
             rows="6"
             v-model="measure.measure" 
             :disabled="! is_manager || ! measure.active"

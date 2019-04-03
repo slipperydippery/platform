@@ -23,7 +23,7 @@ class VerifyOwner
             return redirect()->guest('login');
         }
         if (Auth::id() != $scan->user->id) {
-            if(Auth::id() != $scan->group->owner->user->id) {
+            if(Auth::id() != $scan->group->scan->user->id) {
                 return response('Je hebt geen toegang tot deze sessie', 401);
             }
         }

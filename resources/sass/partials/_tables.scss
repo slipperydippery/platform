@@ -1,0 +1,12 @@
+.table__results {
+	.resultstable--row--average, .resultstable--row--questions {
+		background: rgba($secondary, .15);
+	}
+	.resultstable--row--questions{
+		padding-top: .5rem;
+	}
+	.resultstable--row--average {
+		padding-bottom: .5rem;
+		margin-bottom: .5rem;
+	}
+}

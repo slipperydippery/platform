@@ -2,27 +2,34 @@
 
 @section('content')
 		<div class="row">
-	        <div class="col-md-12">
+	        <div class="col-12">
 	            <div class="page--title">
 	                <h1 class="pagetitle">Kennismaken</h1>
 	                <p>Waarschijnlijk kent niet iedereen elkaar. We starten met een voorstelrondje waarbij iedereen het volgende over zichzelf vertelt:</p>
-	                <ul>
-	                    <li>Wat is je naam?</li>
-	                    <li>Namens welke organisatie zit je hier?</li>
-	                    <li>Wat doet deze organisatie?</li>
-	                    <li>Wat is je rol/functie binnen deze organisatie?</li>
-	                    <li>Wat hoop je dat er uit deze sessie komt (wens of droom)?</li>
-	                </ul>
 	            </div>
+	        </div>
+	    </div>
+	    <div class="row d-flex">
+	        <div class="flex-grow-1">
+                <ul>
+                    <li>Wat is je naam?</li>
+                    <li>Namens welke organisatie zit je hier?</li>
+                    <li>Wat doet deze organisatie?</li>
+                    <li>Wat is je rol/functie binnen deze organisatie?</li>
+                    <li>Wat hoop je dat er uit deze sessie komt (wens of droom)?</li>
+                </ul>
+	        </div>
+	        <div class="align-self-end">
+	            <countdown date="60"></countdown>
 	        </div>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
 				@if ($scan->group_id)
-					<div class="row">
+					<div class="row kennismaken py-3">
 					    <div class="col-sm-2">
-					        <div class="card card__2 card--partner owner {{ $scan->group->user->isOnline() ? '' : 'inactive' }} ">
-					            <div class="card-icons card-header p-0 text-right">
+					        <div class="card shadow owner {{ $scan->group->user->isOnline() ? '' : 'inactive' }} ">
+					            <div class="card-icons card-header py-0 px-2 mt-1 text-right bg-white">
 					                <i class="material-icons clickable"  data-toggle="tooltip" data-placement="top" title="Beheerder"> star </i>
 					                @if($scan->group->user->isOnline())
 					                    <i class="material-icons clickable" data-toggle="tooltip" data-placement="top" title="online"> wifi </i>
@@ -46,8 +53,8 @@
 					        @if($thisscan->instantie->id == $instantie->id)
 					        @if($thisscan->user->id != $scan->group->user->id)
 					             <div class="col-sm-2 d-flex align-items-stretch mb-5">
-					                 <div class="card w-100 card__2 card--partner instantie-{{ $thisscan->instantie->id }} {{ $thisscan->user->isOnline() ? '' : 'inactive' }} ">
-					                     <div class="card-icons card-header py-0 px-2 text-right">
+					                 <div class="card shadow border-secondary w-100 instantie-{{ $thisscan->instantie->id }} {{ $thisscan->user->isOnline() ? '' : 'inactive' }} ">
+					                     <div class="card-icons card-header py-0 px-2 mt-1 text-right text-secondary bg-white">
 					                         @if($thisscan->user->isOnline())
 					                             <i class="material-icons" data-toggle="tooltip" data-placement="top" title="online"> wifi </i>
 					                         @else
@@ -60,10 +67,10 @@
 					                         @endif
 					                     </div>
 					                     <img src="/img/user.svg" alt="">
-					                     <div class="card-body align-bottom">
+					                     <div class="card-body align-bottom text-secondary text-center">
 						                         <h5>{{ $thisscan->user->name }}</h5>
 					                     </div>
-					                         <div class="card-footer py-1">
+					                         <div class="card-footer py-1 text-white bg-secondary">
 						                        {{ $thisscan->instantie->title }}
 				                         </div>
 					                 </div>
@@ -105,7 +112,7 @@
 				@else	
 					<div class="row">
 					    <div class="col-sm-2">
-					        <div class="card card__2 card--partner owner {{ $scan->user->isOnline() ? '' : 'inactive' }} ">
+					        <div class="card owner {{ $scan->user->isOnline() ? '' : 'inactive' }} ">
 					            <div class="card-icons">
 					                @if($scan->user->isOnline())
 					                    <i class="material-icons clickable" data-toggle="tooltip" data-placement="top" title="online"> wifi </i>

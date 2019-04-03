@@ -21,15 +21,11 @@
 			                <h5> {!! $question->question !!} <i class="material-icons clickable" data-toggle="modal" data-target="#justificationModal"> info </i></h5>
 		            	</span>
 
-
-
-						<countdown date="60"></countdown>
                         <scan-slider
 	                        :nvt=" {{ $question->nvt }} "
                         	:answer_id=" {{ $answer->id }} "
                         >
                         </scan-slider>
-                        
                         
                     </div>
                     <div class="card-footer">

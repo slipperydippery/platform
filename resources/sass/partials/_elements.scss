@@ -18,17 +18,30 @@ span.selectable {
 }
 
 span.selectable--active {
-	background: rgba($green, 0.4);
+	background: rgba($secondary, 0.4);
 	margin: .5rem;
 }
 span.selectable--active:hover {
-	background: rgba($green, 0.6);
+	background: rgba($secondary, 0.6);
 }
 
 span.selectable--passive {
-	background: rgba($red, 0.4);
+	background: rgba($gray-500, 0.4);
 	margin: .5rem;
 }
 span.selectable--passive:hover {
-	background: rgba($red, 0.6);
+	background: rgba($gray-500, 0.6);
+}
+
+.position-right {
+	right: 0;
+}
+.position-top {
+	top: 0;
+}
+.position-left {
+	left: 0;
+}
+.position-bottom {
+	bottom: 0;
 }

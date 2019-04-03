@@ -1,6 +1,6 @@
 <template>
-	<div class="rangeslider--container" >
-		<div class="row justify-content-center">
+	<div class="rangeslider--container position-relative" >
+		<div class="row justify-content-center py-5">
 			<div class="rangeslider--directinput">
 				<div class="directinput directinput--minus clickable" @click="subtractValue()">
 					-
@@ -12,6 +12,10 @@
 			    </div>
 			</div>
 		</div>
+        <div class="position-absolute position-right position-top">
+            <countdown date="60"></countdown>
+        </div>
+
 	    <input type="range" 
 	        min="0" max="10"
 	        step="1"

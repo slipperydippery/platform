@@ -80132,7 +80132,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['session'],
+    props: ['session', 'group'],
 
     data: function data() {
         return {
@@ -80219,6 +80219,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
 
         updateDistricts: function updateDistricts() {
+            if (this.group) {
+                this.updateGroupDistricts();
+            } else {
+                this.updateSingleDistricts();
+            }
+        },
+        updateGroupDistricts: function updateGroupDistricts() {
             var numeralDistricts = [];
             this.selecteddistricts.forEach(function (thisdistrict) {
                 numeralDistricts.push(thisdistrict.id);
@@ -80228,6 +80235,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 districts: numeralDistricts
             }).then(function (response) {
                 window.location.href = '/nieuwegroupsscan/instantie';
+            });
+        },
+        updateSingleDistricts: function updateSingleDistricts() {
+            var numeralDistricts = [];
+            this.selecteddistricts.forEach(function (thisdistrict) {
+                numeralDistricts.push(thisdistrict.id);
+            });
+            console.log(numeralDistricts);
+            axios.post('/nieuwesoloscan/gemeenten', {
+                districts: numeralDistricts
+            }).then(function (response) {
+                window.location.href = '/nieuwesoloscan/instantie';
             });
         },
         setSelectedDistricts: function setSelectedDistricts() {
@@ -80909,7 +80928,7 @@ var render = function() {
     [
       _c(
         "div",
-        { staticClass: "row" },
+        { staticClass: "row resultstable--row--questions" },
         [
           _c("div", { staticClass: "col-sm-2" }),
           _vm._v(" "),
@@ -81799,7 +81818,7 @@ var render = function() {
       ],
       staticClass: "form-control",
       attrs: {
-        placeholder: "Actie Omschrijving",
+        placeholder: _vm.measure.active ? "Actie Omschrijving" : "",
         rows: "6",
         disabled: !_vm.is_manager || !_vm.measure.active,
         title: _vm.title
@@ -85348,23 +85367,34 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "countdown" }, [
-    _c(
-      "div",
-      {
-        staticClass: "block",
-        attrs: {
-          title:
-            "Deze klok is handig bij het uitvoeren van de scan in groepsverband."
-        }
-      },
-      [
-        _c("span", { staticClass: "digit" }, [_vm._v(_vm._s(_vm.minutes))]),
-        _vm._v(" : \n\t\t"),
-        _c("span", { staticClass: "digit" }, [_vm._v(_vm._s(_vm.seconds))])
-      ]
-    )
-  ])
+  return _c(
+    "div",
+    { staticClass: "countdown d-flex flex-column text-center" },
+    [
+      _c(
+        "div",
+        {
+          staticClass:
+            "countdown--block align-self-center nowrap px-4 py-2 shadow",
+          attrs: {
+            title:
+              "Deze klok is handig bij het uitvoeren van de scan in groepsverband."
+          }
+        },
+        [
+          _c("span", { staticClass: "digit" }, [_vm._v(_vm._s(_vm.minutes))]),
+          _vm._v(":"),
+          _c("span", { staticClass: "digit" }, [_vm._v(_vm._s(_vm.seconds))])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "countdown--span font-italic text-muted mt-2" },
+        [_vm._v("Probeer dit onderdeel binnen de tijd af te ronden")]
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -85454,6 +85484,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
         props: ['value', 'disabled'],
@@ -85505,66 +85539,77 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "rangeslider--container" }, [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "rangeslider--directinput" }, [
-        _c(
-          "div",
-          {
-            staticClass: "directinput directinput--minus clickable",
-            on: {
-              click: function($event) {
-                return _vm.subtractValue()
+  return _c(
+    "div",
+    { staticClass: "rangeslider--container position-relative" },
+    [
+      _c("div", { staticClass: "row justify-content-center py-5" }, [
+        _c("div", { staticClass: "rangeslider--directinput" }, [
+          _c(
+            "div",
+            {
+              staticClass: "directinput directinput--minus clickable",
+              on: {
+                click: function($event) {
+                  return _vm.subtractValue()
+                }
               }
-            }
-          },
-          [_vm._v("\n\t\t\t\t-\n\t\t\t")]
-        ),
-        _vm._v(" "),
-        _vm.value != null
-          ? _c("div", { staticClass: "question--answer shadow" }, [
-              _vm._v(_vm._s(_vm.value))
-            ])
-          : _c(
-              "div",
-              {
-                staticClass:
-                  "question--answer shadow question--answer__preanswer"
-              },
-              [_vm._v("-")]
-            ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "directinput directinput--plus clickable",
-            on: {
-              click: function($event) {
-                return _vm.addValue()
+            },
+            [_vm._v("\n\t\t\t\t\t-\n\t\t\t\t")]
+          ),
+          _vm._v(" "),
+          _vm.value != null
+            ? _c("div", { staticClass: "question--answer shadow" }, [
+                _vm._v(_vm._s(_vm.value))
+              ])
+            : _c(
+                "div",
+                {
+                  staticClass:
+                    "question--answer shadow question--answer__preanswer"
+                },
+                [_vm._v("-")]
+              ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "directinput directinput--plus clickable",
+              on: {
+                click: function($event) {
+                  return _vm.addValue()
+                }
               }
-            }
-          },
-          [_vm._v("\n\t\t    \t+\n\t\t    ")]
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c("input", {
-      attrs: {
-        type: "range",
-        min: "0",
-        max: "10",
-        step: "1",
-        disabled: _vm.disabled
-      },
-      domProps: { value: _vm.value },
-      on: {
-        change: function($event) {
-          return _vm.onChange($event.target.value)
+            },
+            [_vm._v("\n\t\t\t    \t+\n\t\t\t    ")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "position-absolute position-right position-top" },
+        [_c("countdown", { attrs: { date: "60" } })],
+        1
+      ),
+      _vm._v(" "),
+      _c("input", {
+        attrs: {
+          type: "range",
+          min: "0",
+          max: "10",
+          step: "1",
+          disabled: _vm.disabled
+        },
+        domProps: { value: _vm.value },
+        on: {
+          change: function($event) {
+            return _vm.onChange($event.target.value)
+          }
         }
-      }
-    })
-  ])
+      })
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

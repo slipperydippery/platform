@@ -25,7 +25,26 @@ class CreateSingleScanController extends Controller
             'title' => 'required|min:3|max:255',
         ]);
         $request->session()->put('createsinglescan.title', $request->title);
-    	return redirect()->route('createsinglescan.instantie');
+    	return redirect()->route('createsinglescan.districts');
+    }
+
+    public function districts()
+    {
+        $districts = District::get();
+        $session = session('createsinglescan');
+        return view('createsinglescan.districts', compact('districts', 'session'));
+    }
+
+    public function storedistricts(Request $request)
+    {
+        request()->validate([
+                'districts' => 'required',
+                'districts.*' => 'integer'
+        ]);
+        $request->session()->put('createsinglescan.districts', $request->districts);
+
+        return redirect()->route('createsinglescan.instantie');
+
     }
 
     public function instantie()
@@ -40,29 +59,11 @@ class CreateSingleScanController extends Controller
     		'instantie_id' => 'required|integer',
     	]);
         $request->session()->put('createsinglescan.instantie_id', $request->instantie_id);
-    	return redirect()->route('createsinglescan.districts');
-    }
-
-    public function districts()
-    {
-        $districts = District::get();
-    	return view('createsinglescan.districts', compact('districts'));
-    }
-
-    public function storedistricts(Request $request)
-    {
-        request()->validate([
-                'districts' => 'required',
-                'districts.*' => 'integer'
-        ]);
-        $request->session()->put('createsinglescan.districts', $request->districts);
         $request->session()->put('createsinglescan.isgroup', false);
         $request->session()->put('createsinglescan.scanmodel_id', 1);
 
         $scan = Scan::register(session()->get('createsinglescan'));
-
-        return redirect()->route('createsinglescan.created', $scan);
-
+    	return redirect()->route('createsinglescan.created', $scan);
     }
 
     public function created(Scan $scan)

@@ -11,7 +11,14 @@
 	                		<i class="material-icons clickable muted h1" data-toggle="tooltip" data-placement="top" title=" {{ $theme->info }} "> info </i>
 	                	@endif
 	                </h1>
+	            </div>
+	        </div>
+	        <div class="d-flex">
+	        	<div class="flex-grow-1">
 	                <p>Selecteer de belangrijkste verbeterpunten en licht eventueel toe wat de concrete actiepunten zijn. Deze notities komen verderop in de sessie terug. Alleen de beheerder kan actiepunten aanvinken en notities maken.</p>
+	            </div>
+	            <div class="">
+					<countdown date="300"></countdown>
 	            </div>
 	        </div>
 		</div>
@@ -24,7 +31,7 @@
 					</div>
 					<div class="row">
 						<div class="col-sm-12 table table__results">
-							<div class="row">
+							<div class="row resultstable--row--questions">
 								<div class="col-sm-2"></div>
 								@foreach ($theme->questions as $question)
 									<div class="col-sm-2">
@@ -79,7 +86,6 @@
 									</div>	
 								@endforeach
 							</div>
-							<countdown date="300"></countdown>
 						</div>
 						</div>
 					</div>

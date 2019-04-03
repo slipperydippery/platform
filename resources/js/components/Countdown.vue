@@ -1,9 +1,9 @@
 <template>
-	<div class="countdown">
-		<div class="block" title="Deze klok is handig bij het uitvoeren van de scan in groepsverband.">
-			<span class="digit">{{ minutes }}</span> : 
-			<span class="digit">{{ seconds }}</span>
-		</div>
+	<div class="countdown d-flex flex-column text-center">
+        <div class="countdown--block align-self-center nowrap px-4 py-2 shadow" title="Deze klok is handig bij het uitvoeren van de scan in groepsverband.">
+            <span class="digit">{{ minutes }}</span>:<span class="digit">{{ seconds }}</span>
+        </div> 
+        <div class="countdown--span font-italic text-muted mt-2">Probeer dit onderdeel binnen de tijd af te ronden</div>
 	</div>
 </template>
 

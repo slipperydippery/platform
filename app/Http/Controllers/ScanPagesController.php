@@ -8,6 +8,15 @@ use App\Events\AlgemeenbeeldUpdated;
 
 class ScanPagesController extends Controller
 {
+    /**
+     * Enforce middleware.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('owner');
+    }
+
     public function start(Scan $scan)
     {
         if($scan->group && ! $scan->group->unlocked ) {

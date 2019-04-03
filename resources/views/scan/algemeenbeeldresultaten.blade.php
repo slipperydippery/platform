@@ -5,7 +5,6 @@
 	        <div class="col-md-12">
 	            <div class="page--title">
 	                <h1 class="pagetitle">Algemeen beeld resultaten</h1>
-	                <p>stap 1</p>
 	            </div>
 	        </div>
 		</div>

@@ -11,7 +11,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<iframe scrolling="no" src="https://monitoraoj.nl/arbeidsregio1/#primary" class="iframe--monitor" style="border: 0px none; height: 1000p x; width: 1180px;"></iframe>
+				<iframe scrolling="no" src="https://monitoraoj.nl/arbeidsregio1/#primary" class="iframe--monitor" style="border: 0px none; height: 1000px; width: 1180px;"></iframe>
 			</div>
 		</div>
 @stop

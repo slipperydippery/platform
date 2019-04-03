@@ -28,7 +28,7 @@
                                 $measurecount++;
                             @endphp
 							<div class="section__panel--title">
-								{{ $measure->question->title }}
+								<h3>{!! $measure->question->title !!}</h3>
 							</div>
 							<div class="row">
 								<div class="col-sm-3">

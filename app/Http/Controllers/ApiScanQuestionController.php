@@ -12,11 +12,12 @@ class ApiScanQuestionController extends Controller
     {
         $answers = [];
         foreach($question->answers as $answer){
-            if($answer->scan->group->id == $scan->group->id){
-                $answers[] = $answer;
+            if ($answer->scan->group) {
+                if($answer->scan->group->id == $scan->group->id){
+                    $answers[] = $answer;
+                }
             }
         }
     	return $answers;
-    	
     }
 }

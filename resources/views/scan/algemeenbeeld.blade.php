@@ -17,7 +17,8 @@
 			                <h5>Beoordeel de huidige gezamenlijke aanpak</h5>
 			                <p>Kun je een algemene indruk geven van hoe goed jouw gemeente het volgens jou doet als het gaat om het gezamenlijk voorkomen van schulden.</p>
 		            	</span>
-						<countdown date="60"></countdown>
+
+                        
                         @php
                         	$loggedin = Auth::guest() ? 0 : 1;
                         @endphp

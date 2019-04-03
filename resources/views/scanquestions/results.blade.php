@@ -11,7 +11,14 @@
 	                		<i class="material-icons clickable muted h1" data-toggle="tooltip" data-placement="top" title=" {{ $theme->info }} "> info </i>
 	                	@endif
 	                </h1>
+	            </div>
+	        </div>
+	        <div class="d-flex">
+	            <div class="flex-grow-1">
                     <p>Dit zijn de scores van de deelnemers. Bespreek met elkaar wat er uit springt en/of over welke onderwerpen sterk van mening wordt verschild. In het volgende scherm kunnen de belangrijkste twee of drie verbeterpunten worden benoemd.</p>
+	            </div>
+	            <div class="">
+	            	<countdown date="600"></countdown>
 	            </div>
 	        </div>
 		</div>
@@ -30,9 +37,6 @@
 						>
 						</scan-results>
 					</div>
-
-
-					<countdown date="600"></countdown>
 					
 				</div>
 			</div>

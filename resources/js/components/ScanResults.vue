@@ -1,6 +1,6 @@
 <template>
 	<div class="col-sm-12 table table__results">
-		<div class="row">
+		<div class="row resultstable--row--questions">
 			<div class="col-sm-2"></div>
 				<div class="col-sm-2" v-for="question in theme.questions">
 					<strong>Vraag {{ question.id }} <br></strong>

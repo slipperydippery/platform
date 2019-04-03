@@ -36,7 +36,8 @@
 
     export default {
         props: [
-        	'session'
+        	'session',
+            'group'
         ],
 
         data() {
@@ -124,6 +125,15 @@
             },
 
             updateDistricts() {
+                if(this.group) {
+                    this.updateGroupDistricts();
+                } else {
+                    this.updateSingleDistricts();
+                }
+
+            },
+
+            updateGroupDistricts() {
             	var numeralDistricts = [];
             	this.selecteddistricts.forEach( (thisdistrict) => {
             		numeralDistricts.push(thisdistrict.id);
@@ -135,6 +145,20 @@
             	.then(function (response) {
 					window.location.href = '/nieuwegroupsscan/instantie'; 
             	})
+            },
+
+            updateSingleDistricts() {
+                var numeralDistricts = [];
+                this.selecteddistricts.forEach( (thisdistrict) => {
+                    numeralDistricts.push(thisdistrict.id);
+                });
+                console.log(numeralDistricts);
+                axios.post('/nieuwesoloscan/gemeenten', {
+                    districts: numeralDistricts,
+                })
+                .then(function (response) {
+                    window.location.href = '/nieuwesoloscan/instantie'; 
+                })
             },
 
             setSelectedDistricts() {

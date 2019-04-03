@@ -8,7 +8,7 @@
   <div class="tab-pane fade show active" id="nav-groups" role="tabpanel" aria-labelledby="nav-groups-tab">
     <div class="row">
         <div class="col py-2">
-            <a href=" {{ route('creategroupscan.title') }} " class="btn btn-secondary">Maak nog een groupssessie aan</a>
+            <a href=" {{ route('creategroupscan.title') }} " class="btn btn-secondary">Maak nog een groepssessie aan</a>
         </div>
     </div>
 
@@ -16,10 +16,10 @@
     @foreach (auth()->user()->scans as $scan)
         @if ($scan->group)
             <div class="row py-2 my-5 bg-white text-secondary border shadow">
-                <div class="col-12">
+                <div class="col-12 pt-2">
                     <h4><a href=" {{ route('scan.start', $scan) }} " class="flex-grow-1 mx-2 nowrap">{{ $scan->group->title }}</a> </h4>
-                    <div class="row">
-                        <div class="col">
+                    <div class="d-flex mx-2">
+                        <div class="flex-grow-1">
                             <p>
                                 <em>
                                     Gemeenten: 
@@ -39,7 +39,7 @@
                                 </em>
                             </p>
                         </div>
-                        <div class="col">
+                        <div class="align-self-end pb-3">
                             <a href="#" class="btn btn-outline-secondary btn-outline-secondary--nooutline btn-sm">Bekijk resultaten</a>
                             <a href=" {{ route('scan.start', $scan) }} " class="btn btn-outline-secondary btn-sm">Start sessie</a>
                         </div>

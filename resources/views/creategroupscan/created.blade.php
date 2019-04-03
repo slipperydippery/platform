@@ -18,7 +18,7 @@
 						    </copy-icon>
 						</div>
 
-						<p>Je kunt ook gebruik maken van onze <a href="#">voorbeeld e-mail</a>.</p>
+						<p>Je kunt ook gebruik maken van onze <a href="#" data-toggle="modal" data-target="#voorbeeldmail">voorbeeld e-mail</a>.</p>
 
 						<p>Verder hebben wij een handige tool om te inventariseren wie je het beste uit kunt nodigen. Heb je dit straks allemaal gedaan? Dan kan je vanuit de startpagina je scan beheren en later aan de slag gaan.</p>
 	
@@ -31,6 +31,13 @@
 				
 			</div>
 		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="voorbeeldmail" tabindex="-1" role="dialog" aria-labelledby="voorbeeldmailLabel" aria-hidden="true">
+	    <div class="modal-dialog modal-lg" role="document">
+	        @include('partials.emailmodal')
+	    </div>
 	</div>
 @stop
 

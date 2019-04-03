@@ -1,22 +1,21 @@
 .countdown {
 	display: flex;
-	width: 100%;
+	width: 14rem;
 	flex-flow: row nowrap;
 	justify-content: flex-end;
 
-	.block {
-		border: 1px solid $secondary;
-		float: left;
-		margin: 20px;
-		font-size: 2rem;
-		color: $gray-600;
+	.countdown--block {
+		border: 2px solid $secondary;
+		font-size: 1.6rem;
+		color: $primary;
+		background: white;
 		// border: 2px solid;
 	}
 	.text {
 		text-align: center;
 	}
 	.digit {
-		margin: 10px;
+		margin: 4px;
 	}
 		
 }

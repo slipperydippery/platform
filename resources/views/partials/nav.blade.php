@@ -1,10 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-light px-5">
         <a class="navbar-brand mr-4 d-flex" href="{{ url('/') }}">
             @if(Request::is('/'))
-                <img src="/img/logo_sm.png" height="50" width="auto" class="align-top mr-1 d-none d-xl-block" alt="Logo">
+                <img src="/img/1627logo.svg" height="50" width="auto" class="align-top mr-1 d-none d-xl-block" alt="Logo">
                 <h4 class="align-self-center ml-3 pt-1"><span class="text-primary">Participatie</span><span class="text-secondary">.</span><span class="text-muted">scan</span></h4>
             @else
-                <img src="/img/logo_sm.png" height="50" width="auto" class="align-top mr-1 d-none d-xl-block" alt="Logo">
+                <img src="/img/1627logo.svg" height="50" width="auto" class="align-top mr-1 d-none d-xl-block" alt="Logo">
                 <h4 class="align-self-center ml-3 pt-1"><span class="text-primary">Participatie</span><span class="text-secondary">.</span><span class="text-muted">scan</span></h4>
             @endif
         </a>
