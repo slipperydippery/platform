@@ -126,17 +126,19 @@
                             @endif
                         </div>
                     @endforeach
-                    <div class="progress-element">
-                        @if ( url()->current() == route('scanquestions.followup', $scan) )
-                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Vervolgafspraak plannen">
-                                <img src="/img/simplecircle_secondary_full.svg" alt="">
-                            </span>
-                        @else
-                            <a href=" {{ route('scanquestions.followup', $scan) }} " data-toggle="tooltip" data-placement="top" title="Vervolgafspraak plannen">
-                                <img src="/img/simplecircle_secondary.svg" alt="">
-                            </a>
-                        @endif
-                    </div>
+                    @if ($scan->group)
+                        <div class="progress-element">
+                            @if ( url()->current() == route('scanquestions.followup', $scan) )
+                                <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Vervolgafspraak plannen">
+                                    <img src="/img/simplecircle_secondary_full.svg" alt="">
+                                </span>
+                            @else
+                                <a href=" {{ route('scanquestions.followup', $scan) }} " data-toggle="tooltip" data-placement="top" title="Vervolgafspraak plannen">
+                                    <img src="/img/simplecircle_secondary.svg" alt="">
+                                </a>
+                            @endif
+                        </div>
+                    @endif
                     <div class="progress-element">
                         <a href=" {{ route('scanquestions.complete', $scan) }} " data-toggle="tooltip" data-placement="top" title="Afgerond">
                             <img src="/img/simplecircle_secondary.svg" alt="">

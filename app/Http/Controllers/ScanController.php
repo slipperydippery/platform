@@ -74,7 +74,7 @@ class ScanController extends Controller
      */
     public function show(Scan $scan)
     {
-        //
+        return view('scan.show', compact('scan'));
     }
 
     /**

@@ -20,6 +20,7 @@ class CreateScansTable extends Migration
             $table->string('description')->nullable();
             $table->tinyInteger('finalized')->default(0);
             $table->tinyInteger('complete')->default(0);
+            $table->tinyInteger('sharepermission')->default(1);
             $table->decimal('algemeenbeeld', 3, 1)->nullable();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

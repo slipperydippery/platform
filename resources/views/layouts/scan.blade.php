@@ -65,6 +65,7 @@
         @endif
 
         @include('partials.instructie')
+        @include('partials.profiel')
 
     </div>
     @include('partials.footer')

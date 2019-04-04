@@ -28,7 +28,7 @@
                 <div class="col-4 pt-3">
                     <h3>Organisaties</h3>
                     <br>
-                    <img src="img/partners.png" alt="">
+                    <img src="/img/partners.png" alt="">
                 </div>
                 <div class="col-4 footercol__highlight px-5 py-4 rounded mt-n5">
                     <h3><span class="">Participatie</span><span class="text-secondary">.</span><span class="">scan</span></h3>

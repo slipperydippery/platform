@@ -1,21 +1,21 @@
-@extends('layouts.app', ['title' => 'Nieuwe Scan'])
+@extends('layouts.app', ['title' => 'Nieuwe Scan: Naam'])
 
 @section('content')
 	<div class="container">
-		<div class="row">
-	        <div class="col-md-12">
-	            <div class="page--title">
-	                <h1 class="pagetitle">Geef je scan een naam</h1>
-	                <p>stap 1</p>
-	            </div>
-	        </div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<form action="{{ route('createsinglescan.storetitle') }}" method="post" accept-charset="utf-8">
-				    {{ csrf_field() }}
-					@include('createsinglescan.partials.titleform', ['submittext' => 'sla naam op'])
-				</form>
+		<div class="row justify-content-center">
+			<div class="col-8">
+				<div class="card card--create">
+					<h5 class="card-header bg-primary text-white">Nieuwe groep: Naam</h5>
+					<div class="card-body">
+						<h5 class="card-title">Geef je groep een naam</h5>
+						<form action="{{ route('createsinglescan.storetitle') }}" method="post" accept-charset="utf-8">
+						    {{ csrf_field() }}
+							@include('createsinglescan.partials.titleform', ['submittext' => 'sla naam op'])
+						</form>
+						@include('createsinglescan.partials.createsingleprogress')
+					</div>
+				</div>
+				
 			</div>
 		</div>
 	</div>

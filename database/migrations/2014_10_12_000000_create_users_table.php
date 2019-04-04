@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->datetime('token_2fa_expiry')->nullable();
             $table->string('password');
             $table->tinyInteger('dev')->default(0);
+            $table->tinyInteger('sharepermission')->default(1);
             $table->tinyInteger('verified')->default(0);
             $table->string('email_token')->nullable();
             $table->timestamp('email_verified_at')->nullable();

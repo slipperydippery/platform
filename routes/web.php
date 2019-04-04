@@ -70,5 +70,6 @@ Route::get('/sessie/{scan}/actiepunten', 'ScanPagesController@measures')->name('
 
 
 Route::resource('group', 'GroupController');
+Route::resource('user', 'UserController');
 // Route::resource('inventarisatie', 'InventarisatieController');
 

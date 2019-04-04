@@ -38,6 +38,15 @@
 <body class="d-flex flex-column">
     @include('partials.nav')
 
+    @if ($status = Session::get('status'))
+        <div class="alert alert-primary mb-0" role="alert">
+            {{ $status }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+    @endif
+
     <main class="flex-grow" id="app">
         @yield('content')
 
@@ -52,6 +61,7 @@
     @endif
 
     @include('partials.instructie')
+    @include('partials.profiel')
 
     @include('partials.footer')
 

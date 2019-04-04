@@ -86,6 +86,9 @@ class ScanQuestionController extends Controller
         $next = '/sessie/' . $scan->id . '/thema/' . ($theme->id + 1) . '/actiesuitwerken';
         if($theme->id == Theme::get()->last()->id) {
             $next = '/sessie/' . $scan->id . '/vervolgafspraak';
+            if (! $scan->group) {
+                $next = '/sessie/' . $scan->id . '/afgerond';
+            }
         }
         return view('scanquestions.bigmeasures', compact('scan', 'theme', 'previous', 'next'));
     }
