@@ -20,7 +20,13 @@
                 </ul>
 	        </div>
 	        <div class="align-self-end">
-	            <countdown date="60"></countdown>
+	        	@php
+	        		$time = (1 + $scan->group->scans->count()) * 60;
+	        	@endphp
+	            <countdown 
+	            	date= " {{ $time }} "
+            	>
+            	</countdown>
 	        </div>
 		</div>
 		<div class="row">

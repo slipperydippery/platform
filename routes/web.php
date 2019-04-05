@@ -19,6 +19,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/dashboard', 'PagesController@dashboard')->name('dashboard')->middleware('auth');
 Route::get('/introductiefilm', 'PagesController@introductiefilm')->name('introductiefilm');
+Route::get('/cijfersuitderegio', 'PagesController@cijfersuitderegio')->name('cijfersuitderegio');
 
 Route::get('/nieuwescan/start', 'CreateScanController@start')->name('createscan.start');
 Route::get('/nieuwesoloscan/naam', 'CreateSingleScanController@title')->name('createsinglescan.title');

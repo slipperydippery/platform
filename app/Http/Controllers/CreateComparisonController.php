@@ -48,6 +48,14 @@ class CreateComparisonController extends Controller
 
     public function scans(Scan $scan)
     {
-    	return 'sessies';
+        $scans = [];
+        foreach (Scan::where('instantie_id', session('createcomparison.instantie_id'))->get() as $thisscan) {
+            foreach( $thisscan->districts as $thisdistrict ) {
+                if( in_array($thisdistrict->id, session('createcomparison.districts')) ) {
+                    $scans[] = $thisscan;
+                }
+            }
+        }
+    	return view('createcomparison.scans', compact('scan', 'scans'));
     }
 }

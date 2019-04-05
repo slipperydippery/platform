@@ -31,7 +31,7 @@
 		<h5>Cijfers uit jouw regio</h5>
 		<p>
 			Pellentesque ut neque. Etiam ut purus. <br>
-			<a href="#" class="stretched-link">Bekijk</a>	
+			<a href=" {{ route('cijfersuitderegio') }} " class="stretched-link">Bekijk</a>	
 		</p>
 	</div>
 </div>

@@ -29,4 +29,9 @@ class PagesController extends Controller
     {
     	return view('pages.introductiefilm');
     }
+
+    public function cijfersuitderegio()
+    {
+        return view('pages.cijfersuitderegio');
+    }
 }
