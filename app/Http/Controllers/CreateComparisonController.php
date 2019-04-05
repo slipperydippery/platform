@@ -56,6 +56,13 @@ class CreateComparisonController extends Controller
                 }
             }
         }
-    	return view('createcomparison.scans', compact('scan', 'scans'));
+        $session = session('createcomparison');
+    	return view('createcomparison.scans', compact('scan', 'scans', 'session'));
+    }
+
+    public function storescans(Request $request, Scan $scan)
+    {
+
+        return $request;
     }
 }

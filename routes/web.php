@@ -74,6 +74,7 @@ Route::post('/sessie/{scan}/vergelijking/regios', 'CreateComparisonController@st
 Route::get('/sessie/{scan}/vergelijking/instantie', 'CreateComparisonController@instantie')->name('createcomparison.instantie');
 Route::post('/sessie/{scan}/vergelijking/instantie', 'CreateComparisonController@storeinstantie')->name('createcomparison.storeinstantie');
 Route::get('/sessie/{scan}/vergelijking/sessies', 'CreateComparisonController@scans')->name('createcomparison.scans');
+Route::post('/sessie/{scan}/vergelijking/sessies', 'CreateComparisonController@storescans')->name('createcomparison.storescans');
 
 
 Route::resource('group', 'GroupController');

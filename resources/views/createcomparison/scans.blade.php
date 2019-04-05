@@ -9,6 +9,13 @@
 					<div class="card-body">
 						<h5 class="card-title">Selecteer sessies om mee te vergelijken</h5>
 						hier een lijst
+
+						<form action="{{ route('createcomparison.storescans', $scan) }}" method="post" accept-charset="utf-8">
+						    {{ csrf_field() }}
+							@include('createcomparison.partials.form', ['submittext' => 'Sla scans op'])
+						</form>
+
+
 						@foreach ($scans as $thisscan)
 							<p>{{ $thisscan->title }} </p>
 						@endforeach

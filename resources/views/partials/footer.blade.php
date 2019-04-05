@@ -2,7 +2,7 @@
         <div class="container mt-3">
             <div class="row">
                 <div class="col-2 pt-3">
-                    <h3>Themas</h3>
+                    <h3>Thema's</h3>
                     <br>
                     <ul>
                         <li> > Veiligheid </li>
@@ -31,9 +31,9 @@
                     <img src="/img/partners.png" alt="">
                 </div>
                 <div class="col-4 footercol__highlight px-5 py-4 rounded mt-n5">
-                    <h3><span class="">Participatie</span><span class="text-secondary">.</span><span class="">scan</span></h3>
+                    <h3><span class="">Participatie</span><span class="text-white">.</span><span class="">scan</span></h3>
                     <br>
-                    <span class="">De Participatiescan is ontwikkeld in opdracht van Lecso, Divosa, VNG, MBO Raad, VO Raad, Sectorraad Praktijkonderwijs, Ingrado, UWV, S-BB, MEE NL, VOBC en de ministeries van SZW en OCW door ECORYS en NJi. Concept programmering en uitvoering door EMB AV &copy; </span>
+                    <span class="">De Participatiescan is ontwikkeld in opdracht van NJi, Lecso, Divosa, VNG, MBO Raad, VO Raad, Sectorraad Praktijkonderwijs, Ingrado, UWV, S-BB, MEE NL, VOBC en de ministeries van SZW en OCW door ECORYS. Concept programmering en uitvoering door EMB AV &copy; </span>
                 </div>
             </div>
         </div>

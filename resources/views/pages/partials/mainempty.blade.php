@@ -1,8 +1,7 @@
 <div class="block">
 	<h3 class="block-title">Wat is de Participatiescan?</h3>
-	<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, nisi quis porttitor congue, elit erat euismod orci, ac placerat dolor lectus quis orci. Nunc sed turpis. Nam eget dui. In consectetuer turpis ut velit. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum.</p>
 
-	<p>Integer ante arcu, accumsan a, consectetuer eget, posuere ut, mauris. Pellentesque libero tortor, tincidunt et, tincidunt eget, semper nec, quam. Vivamus consectetuer hendrerit lacus. Praesent turpis. Sed cursus turpis vitae tortor.</p>
+<p>De Participatiescan is een online kennis- en procestool. Viaeen resultaatgerichte analyse- en actiesessie ondersteunt de tool je om te komen tot een heldere Werkagenda. Een lokaal/regionaal actieplan voor effectieve samenwerking voor het naar werk begeleiden van jongeren waarbij de focus ligt op werk en talent, de kwaliteit van begeleiding, effectieve samenwerking en overige randvoorwaarden. Onderzoek toont aan dat dit de belangrijkste succesfactor voor kansvergroting op de arbeidsmarkt is. Met behulp van de Participatiescan wordt tijdens de analyse- en actiesessie door jou en jouw netwerkpartners de huidige aanpak gelegd naast twintig op onderzoek gebaseerde kwaliteitsnormen. Dit mondt automatisch uit in een selectie van concrete actie- en verbeterpunten waar jullie mee aan de slag gaan. Ook biedt de Participatiescan een schat aan informatie over tools, goede praktijkvoorbeelden, cijfers, tips en andere relevante kennis en inzichten om minder-zelfredzame jongeren succesvol te begeleiden naar de arbeidsmarkt.</p>
 </div>
 <div class="text-center pt-3 pb-3">
     <a href=" {{ route('creategroupscan.title') }} " class="btn btn-primary mx-auto bounce-fade-top">START NU JE EIGEN GROEP</a> <br>

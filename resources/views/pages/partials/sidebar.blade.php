@@ -44,7 +44,7 @@
 		<h5>Bekijk films</h5>
 		<p>
 			Pellentesque ut neque. Etiam ut purus. <br>
-			<a class="dropdown-item stretched-link" href="#" data-toggle="modal" data-target="#filmsModal">Bekijk</a>
+			<a class="stretched-link" href="#" data-toggle="modal" data-target="#filmsModal">Bekijk</a>
 		</p>
 	</div>
 </div>

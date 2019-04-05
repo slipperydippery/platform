@@ -96,6 +96,8 @@ Vue.component('set-followup', require('./components/SetFollowup.vue'));
 Vue.component('date-input', require('./components/DateInput.vue'));
 Vue.component('date-picker', require('./components/DatePicker.vue'));
 
+Vue.component('select-compare-scans', require('./components/SelectCompareScans.vue'));
+
 // Utility
 Vue.component('countdown', require('./components/Countdown.vue'));
 

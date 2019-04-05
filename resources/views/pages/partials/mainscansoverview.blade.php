@@ -8,7 +8,7 @@
   <div class="tab-pane fade show active" id="nav-groups" role="tabpanel" aria-labelledby="nav-groups-tab">
     <div class="row">
         <div class="col mt-4">
-            <a href=" {{ route('creategroupscan.title') }} " class="btn btn-secondary">Maak nog een groepssessie aan</a>
+            <a href=" {{ route('creategroupscan.title') }} " class="btn btn-secondary">Maak een groepssessie aan</a>
         </div>
     </div>
 

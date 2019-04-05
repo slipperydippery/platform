@@ -13,6 +13,8 @@
 @import '~bootstrap/scss/bootstrap';
 @import 'node_modules/bootstrap-vue/src/index.scss';
 
+@import "partials/bootstrapoverride";
+
 @import 'node_modules/flatpickr/dist/flatpickr.min';
 
 // Mixins
@@ -52,4 +54,3 @@
 @import "partials/text";
 @import "partials/inputs";
 @import "partials/tables";
-

@@ -30,6 +30,8 @@ Route::get('/scan/{scan}/question/{question}/getanswers', 'ApiScanQuestionContro
 
 Route::get('/group/{group}/scan', 'ApiGroupScanController@index');
 
+// Route::post('/comparison/{comparison}/showscans', 'ApiComparisonScansController');
+
 Route::get('skillz', function () {
 	return['Hello', 'this', 'is', 'an', 'array'];
 })->middleware();

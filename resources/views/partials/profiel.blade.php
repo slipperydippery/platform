@@ -46,7 +46,7 @@
                             <div class="col">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="sharepermission" {{ Auth::user()->sharepermission ? 'checked' : '' }}> {{ __('Andere gebruikers kunnen mijn scans met mij vergelijken') }}
+                                        <input type="checkbox" name="sharepermission" {{ Auth::user()->sharepermission ? 'checked' : '' }}> {{ __('Mijn scans zijn anoniem te vergelijken door andere gebruikers') }}
                                     </label>
                                 </div>
                             </div>

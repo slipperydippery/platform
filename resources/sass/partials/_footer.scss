@@ -2,6 +2,9 @@
 	background: theme-color("primary");
 	color: #eee;
 	margin-top: 5rem;
+	li {
+		list-style: none;
+	}
 }
 
 .footercol__highlight {
