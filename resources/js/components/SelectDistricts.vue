@@ -37,7 +37,9 @@
     export default {
         props: [
         	'session',
-            'group'
+            'group',
+            'scan_id'
+
         ],
 
         data() {
@@ -125,8 +127,10 @@
             },
 
             updateDistricts() {
-                if(this.group) {
+                if(this.group == 1) {
                     this.updateGroupDistricts();
+                } else if(this.group == 2) {
+                    this.updateCompareDistricts();
                 } else {
                     this.updateSingleDistricts();
                 }
@@ -134,17 +138,33 @@
             },
 
             updateGroupDistricts() {
-            	var numeralDistricts = [];
-            	this.selecteddistricts.forEach( (thisdistrict) => {
-            		numeralDistricts.push(thisdistrict.id);
-            	});
-            	console.log(numeralDistricts);
-            	axios.post('/nieuwegroupsscan/gemeenten', {
-            		districts: numeralDistricts,
-            	})
-            	.then(function (response) {
-					window.location.href = '/nieuwegroupsscan/instantie'; 
-            	})
+                var numeralDistricts = [];
+                this.selecteddistricts.forEach( (thisdistrict) => {
+                    numeralDistricts.push(thisdistrict.id);
+                });
+                console.log(numeralDistricts);
+                axios.post('/nieuwegroupsscan/gemeenten', {
+                    districts: numeralDistricts,
+                })
+                .then(function (response) {
+                    window.location.href = '/nieuwegroupsscan/instantie'; 
+                })
+            },
+
+            updateGroupDistricts() {
+                var numeralDistricts = [];
+                var home = this;
+                this.selecteddistricts.forEach( (thisdistrict) => {
+                    numeralDistricts.push(thisdistrict.id);
+                });
+                console.log(numeralDistricts);
+                axios.post('/sessie/' + this.scan_id + '/vergelijking/regios', {
+                    scan: this.scan_id,
+                    districts: numeralDistricts,
+                })
+                .then(function (response) {
+                    window.location.href = '/sessie/' + home.scan_id + '/vergelijking/instantie'; 
+                })
             },
 
             updateSingleDistricts() {

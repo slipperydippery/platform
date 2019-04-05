@@ -68,6 +68,12 @@ Route::get('/sessie/{scan}/markcomplete', 'ScanQuestionController@markcomplete')
 Route::get('/sessie/{scan}/resultaten', 'ScanPagesController@results')->name('scan.results');
 Route::get('/sessie/{scan}/actiepunten', 'ScanPagesController@measures')->name('scan.measures');
 
+Route::get('/sessie/{scan}/vergelijking/regios', 'CreateComparisonController@districts')->name('createcomparison.districts');
+Route::post('/sessie/{scan}/vergelijking/regios', 'CreateComparisonController@storedistricts')->name('createcomparison.storedistricts');
+Route::get('/sessie/{scan}/vergelijking/instantie', 'CreateComparisonController@instantie')->name('createcomparison.instantie');
+Route::post('/sessie/{scan}/vergelijking/instantie', 'CreateComparisonController@storeinstantie')->name('createcomparison.storeinstantie');
+Route::get('/sessie/{scan}/vergelijking/sessies', 'CreateComparisonController@scans')->name('createcomparison.scans');
+
 
 Route::resource('group', 'GroupController');
 Route::resource('user', 'UserController');

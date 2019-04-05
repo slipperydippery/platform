@@ -142,7 +142,7 @@
                             </p>
                         </div>
                         <div class="col">
-                            <a href="#" class="btn btn-outline-secondary btn-outline-secondary--nooutline btn-sm">Bekijk resultaten</a>
+                            <a href=" {{ route('createcompare.districts', $scan) }} " class="btn btn-outline-secondary btn-outline-secondary--nooutline btn-sm">Start vergelijking</a>
                             <a href=" {{ route('scan.start', $scan) }} " class="btn btn-outline-secondary btn-sm">Start sessie</a>
                         </div>
                     </div>

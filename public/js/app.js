@@ -80095,6 +80095,10 @@ module.exports = Component.exports
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(11);
+var _methods;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -80132,7 +80136,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['session', 'group'],
+    props: ['session', 'group', 'scan_id'],
 
     data: function data() {
         return {
@@ -80177,7 +80181,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
 
-    methods: {
+    methods: (_methods = {
         sortDistricts: function sortDistricts(thisarray) {
             function compare(a, b) {
                 if (a.title < b.title) {
@@ -80219,8 +80223,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
 
         updateDistricts: function updateDistricts() {
-            if (this.group) {
+            if (this.group == 1) {
                 this.updateGroupDistricts();
+            } else if (this.group == 2) {
+                this.updateCompareDistricts();
             } else {
                 this.updateSingleDistricts();
             }
@@ -80236,31 +80242,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
                 window.location.href = '/nieuwegroupsscan/instantie';
             });
-        },
-        updateSingleDistricts: function updateSingleDistricts() {
-            var numeralDistricts = [];
-            this.selecteddistricts.forEach(function (thisdistrict) {
-                numeralDistricts.push(thisdistrict.id);
-            });
-            console.log(numeralDistricts);
-            axios.post('/nieuwesoloscan/gemeenten', {
-                districts: numeralDistricts
-            }).then(function (response) {
-                window.location.href = '/nieuwesoloscan/instantie';
-            });
-        },
-        setSelectedDistricts: function setSelectedDistricts() {
-            var _this = this;
-
-            this.session.districts.forEach(function (district_id) {
-                _this.districts.forEach(function (thisdistrict) {
-                    if (thisdistrict.id == district_id) {
-                        _this.addDistrictToSelection(thisdistrict);
-                    }
-                });
-            });
         }
-    }
+    }, _defineProperty(_methods, 'updateGroupDistricts', function updateGroupDistricts() {
+        var numeralDistricts = [];
+        var home = this;
+        this.selecteddistricts.forEach(function (thisdistrict) {
+            numeralDistricts.push(thisdistrict.id);
+        });
+        console.log(numeralDistricts);
+        axios.post('/sessie/' + this.scan_id + '/vergelijking/regios', {
+            scan: this.scan_id,
+            districts: numeralDistricts
+        }).then(function (response) {
+            window.location.href = '/sessie/' + home.scan_id + '/vergelijking/instantie';
+        });
+    }), _defineProperty(_methods, 'updateSingleDistricts', function updateSingleDistricts() {
+        var numeralDistricts = [];
+        this.selecteddistricts.forEach(function (thisdistrict) {
+            numeralDistricts.push(thisdistrict.id);
+        });
+        console.log(numeralDistricts);
+        axios.post('/nieuwesoloscan/gemeenten', {
+            districts: numeralDistricts
+        }).then(function (response) {
+            window.location.href = '/nieuwesoloscan/instantie';
+        });
+    }), _defineProperty(_methods, 'setSelectedDistricts', function setSelectedDistricts() {
+        var _this = this;
+
+        this.session.districts.forEach(function (district_id) {
+            _this.districts.forEach(function (thisdistrict) {
+                if (thisdistrict.id == district_id) {
+                    _this.addDistrictToSelection(thisdistrict);
+                }
+            });
+        });
+    }), _methods)
 });
 
 /***/ }),
