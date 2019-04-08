@@ -64,7 +64,6 @@
 
                                             </div>
                                         </div>
-                                        
                                     @endif
                                 </th>
                             </tr>
@@ -98,11 +97,22 @@
                                                             </form>
                                                             <a class="dropdown-item" href="javascript:{}" onclick="document.getElementById('promootform{{ $thisscan->id }}').submit(); return false;">Promoot tot eigenaar</a>
 
-                                                            <a class="dropdown-item" href="#">Verwijder uit sessie</a>
+                                                            <form action="{{ route('scan.destroy' , $thisscan)}}" method="POST">
+                                                                <input name="_method" type="hidden" value="DELETE">
+                                                                {{ csrf_field() }}
+
+                                                                <button type="submit" class="dropdown-item">Verwijder deze scan</button>
+                                                            </form>
                                                         @endif
                                         
                                                     </div>
                                                 </div>
+                                            @else
+                                                <a href="#" class="btn btn-danger dropdown-toggle__round" data-toggle="modal" data-target="#confirmdelete{{ $thisscan->id }}"> x
+                                                </a>
+                                                @component('components.deleteconfirm', ['thisscan' => $thisscan])
+                                                @endcomponent
+
                                             @endif
                                         </td>
                                     </tr>
@@ -127,7 +137,11 @@
         @if (! $scan->group)
             <div class="row py-2 my-4 bg-white text-secondary border shadow">
                 <div class="col-12">
-                    <h4><a href=" {{ route('scan.start', $scan) }} " class="flex-grow-1 mx-2 nowrap">{{ $scan->title }}</a> </h4>
+                    <h4>
+                        <a href=" {{ route('scan.start', $scan) }} " class="flex-grow-1 mx-2 nowrap">{{ $scan->title }}</a> 
+                        <a href=" {{ route('scan.edit', $scan) }} "><i class="material-icons float-right"> edit </i></a>
+                    </h4>
+
                     <div class="row">
                         <div class="col">
                             <p>

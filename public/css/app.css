@@ -13368,6 +13368,10 @@ span.flatpickr-weekday {
   }
 }
 
+.flatpickr-input[readonly] {
+  display: none;
+}
+
 .card-deck .card-col-xs-1 {
   -webkit-box-flex: 0;
       -ms-flex: 0 0 calc(8.33333333% - 30px);
@@ -14464,7 +14468,7 @@ nav.navbar .nav-link.btn:hover {
   position: absolute;
   top: 0;
   color: white;
-  font-size: 3rem;
+  font-size: 2.5vw;
   margin: 3rem;
   width: 36%;
 }

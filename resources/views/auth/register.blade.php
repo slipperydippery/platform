@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="phone" class="col-sm-4 col-form-label text-md-right">{{ __('Telefoonnummer') }}</label>
+                            <label for="phone" class="col-sm-4 col-form-label text-md-right">{{ __('Telefoon nummer') }}</label>
 
                             <div class="col-md-6">
                                 <input id="phone" type="phone" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required autofocus>
@@ -83,6 +83,22 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('terms') ? ' has-error' : '' }} form-check">
+                            <label>
+                                <input type="checkbox" class="form-check-input" id="voorwaarden" required>
+                                <label class="form-check-label" for="voorwaarden"> Ik accepteer de <a href="#" data-toggle="modal" data-target="#voorwaardenmodal"> algemene voorwaarden</a> </label>
+                                
+                            </label>
+
+                            <div class="col-md-4">
+                                @if ($errors->has('terms'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('terms') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
@@ -96,4 +112,6 @@
         </div>
     </div>
 </div>
+
+@include('partials.voorwaardenmodal')
 @endsection

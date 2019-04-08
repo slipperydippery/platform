@@ -85,7 +85,10 @@ class ScanController extends Controller
      */
     public function edit(Scan $scan)
     {
-        //
+        $isgroup = $scan->group ? true : false;
+        $instanties = Instantie::get();
+        $districts = District::get();
+        return view('scan.edit', compact('scan','isgroup', 'instanties', 'districts'));
     }
 
     /**
@@ -108,6 +111,8 @@ class ScanController extends Controller
      */
     public function destroy(Scan $scan)
     {
-        //
+        $scan->districts()->detach();
+        $scan->delete();
+        return redirect()->route('dashboard');
     }
 }
