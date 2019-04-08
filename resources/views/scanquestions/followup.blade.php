@@ -21,8 +21,10 @@
 				<div class="col-md-12">
 					<div class="section__panel">
 						<div class="section__panel--title">
-							@if($scan->group->followup->datetime)
-								<h5>Wijzig vervolgafspraak</h5>
+							@if ($scan->group->followup)
+								@if($scan->group->followup->datetime)
+									<h5>Wijzig vervolgafspraak</h5>
+								@endif
 							@else
 								<h5>Plan een vervolgafspraak</h5>
 							@endif

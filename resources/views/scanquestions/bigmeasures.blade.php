@@ -5,7 +5,7 @@
 	        <div class="col-md-12">
 	            <div class="page--title">
 	                <h1 class="pagetitle">Actiepunten uitwerken thema {{ $theme->id }}: {{ $theme->name }}  </h1>
-	                <p>Hieronder zie je de verbeterpunten die tijdens de sessie door de deelnemers zijn geselecteerd. Je kunt per verbeterpunt een duidelijk omschrijving maken van de acties die je neemt, en je kunt aangeven wie de trekker is. Alleen de beheerder kan acties omschrijven en een trekker selecteren.</p>
+	                <p>Hieronder zie je de verbeterpunten die tijdens de sessie door de deelnemers zijn geselecteerd. Je kunt per verbeterpunt een duidelijk omschrijving maken van de acties die je neemt en je kunt aangeven wie de trekker is. Alleen de beheerder kan acties omschrijven en een trekker selecteren.</p>
 	            </div>
 	        </div>
 		</div>
