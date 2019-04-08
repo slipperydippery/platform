@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Nieuwe Scan'])
+@extends('layouts.app', ['title' => 'Overzicht sessie'])
 
 @section('content')
 <div class="container">
@@ -8,7 +8,7 @@
                 <h1 class="pagetitle">Afgerond!</h1>
             </div>
             <p>Gefeliciteerd! Je hebt alle vragen beantwoord. Hieronder zie je een aantal links en artikelen die je kunnen helpen bij het uitvoeren van de actiepunten. Je kunt je resultaten ook bekijken en naar jezelf mailen.</p>
-            <a href=" # " class="btn btn-secondary">Bekijk resultaten</a>
+            <a href=" {{ route('scan.results', $scan) }} " class="btn btn-secondary">Bekijk resultaten</a>
             <a href=" # " class="btn btn-secondary">E-mail mij de actiepunten</a>
         </div>
 	</div>

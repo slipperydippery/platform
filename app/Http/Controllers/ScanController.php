@@ -85,7 +85,8 @@ class ScanController extends Controller
      */
     public function edit(Scan $scan)
     {
-        $isgroup = $scan->group ? true : false;
+        // $isgroup = $scan->group ? true : false;
+        $isgroup = false;   // $isgroup = true will allow a scan to select a group to join
         $instanties = Instantie::get();
         $districts = District::get();
         return view('scan.edit', compact('scan','isgroup', 'instanties', 'districts'));

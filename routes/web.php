@@ -30,6 +30,7 @@ Route::get('/nieuwesoloscan/gemeenten', 'CreateSingleScanController@districts')-
 Route::post('/nieuwesoloscan/gemeenten', 'CreateSingleScanController@storedistricts')->name('createsinglescan.storedistricts');
 Route::get('/nieuwesoloscan/{scan}/klaar', 'CreateSingleScanController@created')->name('createsinglescan.created');
 
+
 Route::get('/nieuwegroupsscan/naam', 'CreateGroupScanController@title')->name('creategroupscan.title');
 Route::post('/nieuwegroupsscan/naam', 'CreateGroupScanController@storetitle')->name('creategroupscan.storetitle');
 Route::get('/nieuwegroupsscan/gemeenten', 'CreateGroupScanController@districts')->name('creategroupscan.districts');
@@ -57,6 +58,7 @@ Route::get('/sessie/{scan}/regioincijfers', 'ScanPagesController@regioincijfers'
 Route::get('/sessie/{scan}/algemeenbeeld', 'ScanPagesController@algemeenbeeld')->name('scan.algemeenbeeld');
 Route::get('/sessie/{scan}/algemeenbeeldresultaten', 'ScanPagesController@algemeenbeeldresultaten')->name('scan.algemeenbeeldresultaten');
 Route::get('/sessie/{scan}/sessieintro', 'ScanPagesController@sessieintro')->name('scan.sessieintro');
+Route::get('/sessie/{scan/overzichtresultaten', 'ScanpagesController@results')->name('scan.results');
 Route::get('/sessie/{scan}/thema/{theme}/introductie', 'ScanQuestionController@intro')->name('scanquestions.intro');
 Route::get('/sessie/{scan}/thema/{theme}/vraag/{question}', 'ScanQuestionController@show')->name('scanquestions.show');
 Route::get('/sessie/{scan}/thema/{theme}/resultaten', 'ScanQuestionController@results')->name('scanquestions.results');

@@ -47,7 +47,8 @@ class ApiScanController extends Controller
      */
     public function show(Scan $scan)
     {
-        //
+        $scan = Scan::with('districts')->find($scan->id);
+        return $scan;
     }
 
     /**
@@ -73,6 +74,7 @@ class ApiScanController extends Controller
         $scan->title = $request->scan['title'];
         $scan->description = $request->scan['description'];
         $scan->algemeenbeeld = $request->scan['algemeenbeeld'];
+        $scan->instantie_id = $request->scan['instantie_id'];
         if($scan->group) {
             $scan->group_id = $request->scan['group_id'];
         }
@@ -80,6 +82,7 @@ class ApiScanController extends Controller
         if($scan->group) {
             AlgemeenbeeldUpdated::dispatch($scan->group->id);
         }
+        return $scan;
         return $request;
     }
 

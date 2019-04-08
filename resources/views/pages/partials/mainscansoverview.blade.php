@@ -17,7 +17,12 @@
         @if ($scan->group)
             <div class="row py-2 my-4 bg-white text-secondary border shadow">
                 <div class="col-12 pt-2">
-                    <h4><a href=" {{ route('scan.start', $scan) }} " class="flex-grow-1 mx-2 nowrap">{{ $scan->group->title }}</a> </h4>
+                    <h4>
+                        <a href=" {{ route('scan.start', $scan) }} " class="flex-grow-1 mx-2 nowrap">{{ $scan->group->title }}</a> 
+                        @if ($scan->group->scan->user->id == Auth::user()->id)
+                            <a href=" {{ route('scan.edit', $scan) }} "><i class="material-icons float-right"> edit </i></a>
+                        @endif
+                    </h4>
                     <div class="d-flex mx-2">
                         <div class="flex-grow-1">
                             <p>
@@ -40,7 +45,7 @@
                             </p>
                         </div>
                         <div class="align-self-end pb-3">
-                            <a href="#" class="btn btn-outline-secondary btn-outline-secondary--nooutline btn-sm">Bekijk resultaten</a>
+                            <a href=" {{ route('scanquestions.complete', $scan) }} " class="btn btn-outline-secondary btn-outline-secondary--nooutline btn-sm">Bekijk resultaten</a>
                             <a href=" {{ route('scan.start', $scan) }} " class="btn btn-outline-secondary btn-sm">Start sessie</a>
                         </div>
                     </div>

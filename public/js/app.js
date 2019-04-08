@@ -1761,6 +1761,9 @@ Vue.component('date-picker', __webpack_require__(277));
 
 Vue.component('select-compare-scans', __webpack_require__(282));
 
+Vue.component('edit-scan', __webpack_require__(300));
+Vue.component('edit-districts', __webpack_require__(303));
+
 // Utility
 Vue.component('countdown', __webpack_require__(285));
 
@@ -86022,6 +86025,573 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 297 */,
+/* 298 */,
+/* 299 */,
+/* 300 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(4)
+/* script */
+var __vue_script__ = __webpack_require__(301)
+/* template */
+var __vue_template__ = __webpack_require__(302)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/EditScan.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7c837d92", Component.options)
+  } else {
+    hotAPI.reload("data-v-7c837d92", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 301 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(11);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['instanties', 'districts', 'scan_id'],
+
+    data: function data() {
+        return {
+            'scan': {},
+            'selectedinstantie': {}
+        };
+    },
+    mounted: function mounted() {
+        this.getScan();
+    },
+
+
+    computed: {},
+
+    methods: {
+        getScan: function getScan() {
+            var home = this;
+            axios.get('/api/scan/' + home.scan_id).then(function (response) {
+                home.scan = response.data;
+            });
+        },
+        updateScan: function updateScan() {
+            var home = this;
+            axios.patch('/api/scan/' + home.scan_id, {
+                scan: home.scan
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 302 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-header" }, [
+      _vm._v("\n\t\tBasis gegevens\n\t")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "title" } }, [_vm._v("Naam")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.scan.title,
+              expression: "scan.title"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text" },
+          domProps: { value: _vm.scan.title },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.scan, "title", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "title" } }, [_vm._v("Instantie")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.scan.instantie_id,
+                expression: "scan.instantie_id"
+              }
+            ],
+            staticClass: "form-control",
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.$set(
+                  _vm.scan,
+                  "instantie_id",
+                  $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                )
+              }
+            }
+          },
+          [
+            _c("option", { attrs: { disabled: "", value: "" } }),
+            _vm._v(" "),
+            _vm._l(_vm.instanties, function(instantie) {
+              return _c("option", { domProps: { value: instantie.id } }, [
+                _vm._v(" " + _vm._s(instantie.title) + " ")
+              ])
+            })
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary form-control",
+            on: {
+              click: function($event) {
+                return _vm.updateScan()
+              }
+            }
+          },
+          [_vm._v(" Sla veranderingen op ")]
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7c837d92", module.exports)
+  }
+}
+
+/***/ }),
+/* 303 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(4)
+/* script */
+var __vue_script__ = __webpack_require__(304)
+/* template */
+var __vue_template__ = __webpack_require__(305)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/EditDistricts.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0e21e1e0", Component.options)
+  } else {
+    hotAPI.reload("data-v-0e21e1e0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 304 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(11);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['scan_id'],
+
+    data: function data() {
+        return {
+            'districts': [],
+            'selecteddistricts': [],
+            'districtsearch': ''
+        };
+    },
+    mounted: function mounted() {
+        this.getScan();
+        this.getDistricts();
+        // this.setSelectedDistricts();
+    },
+
+
+    computed: {
+        filtereddistricts: function filtereddistricts() {
+            var filteredarray = this.districts;
+            var home = this;
+            if (home.districtsearch != '') {
+                filteredarray = [];
+                this.districts.forEach(function (thisdistrict) {
+                    if (thisdistrict.name.toLowerCase().includes(home.districtsearch.toLowerCase())) {
+                        filteredarray.push(thisdistrict);
+                    }
+                });
+            }
+            return filteredarray;
+        },
+
+        filteredAndSortedDistricts: function filteredAndSortedDistricts() {
+            function compare(a, b) {
+                if (a.name < b.name) {
+                    return -1;
+                }
+                if (a.name > b.name) {
+                    return 1;
+                }
+                return 0;
+            }
+
+            return this.filtereddistricts.sort(compare);
+        }
+    },
+
+    methods: {
+        getScan: function getScan() {
+            var home = this;
+            axios.get('/api/scan/' + home.scan_id).then(function (response) {
+                home.scan = response.data;
+                response.data.districts.forEach(function (district) {
+                    home.addDistrictToSelection(district);
+                });
+            });
+        },
+
+
+        sortDistricts: function sortDistricts(thisarray) {
+            function compare(a, b) {
+                if (a.title < b.title) {
+                    return -1;
+                }
+                if (a.title > b.title) {
+                    return 1;
+                }
+                return 0;
+            }
+            return thisarray.sort(compare);
+        },
+
+        getDistricts: function getDistricts() {
+            var home = this;
+            axios.get('/api/district').then(function (response) {
+                home.districts = response.data;
+                home.setSelectedDistricts();
+            });
+        },
+
+
+        addDistrictToSelection: function addDistrictToSelection(thisdistrict) {
+            this.selecteddistricts.push(thisdistrict);
+            this.sortDistricts(this.selecteddistricts);
+            this.districts.splice(this.districts.indexOf(thisdistrict), 1);
+            this.filtereddistricts.splice(this.filtereddistricts.indexOf(thisdistrict), 1);
+            this.$forceUpdate();
+            this.districtsearch = '';
+        },
+
+        removeDistrictFromSelection: function removeDistrictFromSelection(thisdistrict) {
+            // this.districts.push(thisdistrict);
+            this.filtereddistricts.push(thisdistrict);
+            this.sortDistricts(this.filtereddistricts);
+            this.selecteddistricts.splice(this.selecteddistricts.indexOf(thisdistrict), 1);
+            this.$forceUpdate();
+            this.districtsearch = '';
+        },
+
+        updateDistricts: function updateDistricts() {
+            var numeralDistricts = [];
+            this.selecteddistricts.forEach(function (thisdistrict) {
+                numeralDistricts.push(thisdistrict.id);
+            });
+            console.log(numeralDistricts);
+            axios.post('/api/scan/' + this.scan_id + '/updatedistricts', {
+                districts: this.selecteddistricts
+            }).then(function (response) {
+                // window.location.href = '/nieuwegroupsscan/instantie'; 
+            });
+        },
+        setSelectedDistricts: function setSelectedDistricts() {
+            var _this = this;
+
+            this.session.districts.forEach(function (district_id) {
+                _this.districts.forEach(function (thisdistrict) {
+                    if (thisdistrict.id == district_id) {
+                        _this.addDistrictToSelection(thisdistrict);
+                    }
+                });
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 305 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card-body" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-12 form-group" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.districtsearch,
+                expression: "districtsearch"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "text", placeholder: "Zoek een gemeente" },
+            domProps: { value: _vm.districtsearch },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.districtsearch = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-12 overflow-hidden nowrap pt-3" },
+          _vm._l(_vm.filteredAndSortedDistricts.slice(0, 10), function(
+            district
+          ) {
+            return _c(
+              "label",
+              {
+                staticClass:
+                  "checkboxlabel btn btn-sm btn-secondary mr-2 clickable",
+                on: {
+                  click: function($event) {
+                    return _vm.addDistrictToSelection(district)
+                  }
+                }
+              },
+              [
+                _vm._v(
+                  "\n    \t\t\t\t" + _vm._s(district.name) + "\n    \t\t\t"
+                )
+              ]
+            )
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-12 pt-5" },
+          _vm._l(_vm.selecteddistricts, function(district) {
+            return _c(
+              "label",
+              {
+                staticClass: "checkboxlabel btn btn-sm btn-dark mr-2 clickable",
+                on: {
+                  click: function($event) {
+                    return _vm.removeDistrictFromSelection(district)
+                  }
+                }
+              },
+              [
+                _vm._v("\n    \t\t\t\t" + _vm._s(district.name) + " "),
+                _c("i", { staticClass: "material-icons md-18" }, [
+                  _vm._v(" close ")
+                ])
+              ]
+            )
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12 p-3" }, [
+          _c("div", { staticClass: "form-group text-right" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-secondary btn-lg",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.updateDistricts($event)
+                  }
+                }
+              },
+              [_vm._v("Sla gemeenten op")]
+            )
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0e21e1e0", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

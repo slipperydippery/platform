@@ -76,4 +76,9 @@ class ScanPagesController extends Controller
         }
     	return view('scan.algemeenbeeldresultaten', compact('scan', 'scanmodel', 'previous', 'next'));
     }
+
+    public function results(Scan $scan)
+    {
+        return view('scan.results', compact('scan'));
+    }
 }

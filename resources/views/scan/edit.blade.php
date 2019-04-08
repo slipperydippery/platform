@@ -10,16 +10,23 @@
 
             </div>
             
-            <form action="{{ route('scan.store', $scan) }}" method="post" accept-charset="utf-8">
-                {{ csrf_field() }}
-            	@include('scan.partials.form', ['submittext' => 'sla scan op'])
-            </form>
+			<edit-scan
+				:scan_id = " {{ $scan->id }} "
+				:instanties = " {{ $instanties }} "
+				:districts = " {{ $districts }} "
+			>
+			</edit-scan>
+			<edit-districts
+			    :scan_id = " {{ $scan->id }} "
+			>
+			</edit-districts>
+            
         </div>
 	</div>
 </div>
 
 @component('components.deleteconfirm', ['thisscan' => $scan])
-                @endcomponent
+@endcomponent
 
 
 
