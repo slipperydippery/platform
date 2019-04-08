@@ -7,7 +7,7 @@
             <div class="page--title">
                 <h1 class="pagetitle">Afgerond!</h1>
             </div>
-            <p>Nullam quis ante. Pellentesque egestas, neque sit amet convallis pulvinar, justo nulla eleifend augue, ac auctor orci leo non est. Suspendisse potenti. In consectetuer turpis ut velit. Vestibulum facilisis, purus nec pulvinar iaculis, ligula mi congue nunc, vitae euismod ligula urna in dolor.</p>
+            <p>Gefeliciteerd! Je hebt alle vragen beantwoord. Hieronder zie je een aantal links en artikelen die je kunnen helpen bij het uitvoeren van de actiepunten. Je kunt je resultaten ook bekijken en naar jezelf mailen.</p>
             <a href=" # " class="btn btn-secondary">Bekijk resultaten</a>
             <a href=" # " class="btn btn-secondary">E-mail mij de actiepunten</a>
         </div>
@@ -15,6 +15,7 @@
 </div>
 <div class="container-fluid bg-secondary shadow py-5 mt-4 mb-5">
 	<div class="container">
+		<h1 class="text-white text-center">Ook interessant voor jou:</h1>
 		<div class="bd-example">
 		  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
 		    <ol class="carousel-indicators">

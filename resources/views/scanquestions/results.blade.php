@@ -13,7 +13,7 @@
 	                </h1>
 	            </div>
 	        </div>
-	        <div class="d-flex">
+	        <div class="col d-flex">
 	            <div class="flex-grow-1">
                     <p>Dit zijn de scores van de deelnemers. Bespreek met elkaar wat er uit springt en/of over welke onderwerpen sterk van mening wordt verschild. In het volgende scherm kunnen de belangrijkste twee of drie verbeterpunten worden benoemd.</p>
 	            </div>
@@ -26,10 +26,10 @@
 			<div class="col-md-12">
 				<div class="section__panel">
 					<div class="section__panel--title">
-						<h5>resultaten</h5>
+						<h5>Resultaten</h5>
 		                <span><em></em></span>
 					</div>
-
+k
 					<div class="row">
 						<scan-results
 							:group_id = " {{ $scan->group->id }} " 

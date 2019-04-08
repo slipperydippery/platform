@@ -5,6 +5,7 @@
 	        <div class="col-md-12">
 	            <div class="page--title">
 	                <h1 class="pagetitle">Regio in cijfers</h1>
+	                <p>Hieronder zie je de NEET-rate en risco's per arbeidsregio. Selecteer een regio om te bekijken wat dit betekent voor dit gebied.</p>
 	            </div>
 	        </div>
 		</div>

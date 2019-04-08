@@ -54,11 +54,10 @@
                         <a class="dropdown-item" href=" # "> Cookieverklaring </a>
                     </div>
                 </li>
-                @guest
-                @else
-                    <li class="nav-item"><a class="nav-link nav-link--main mr-4 align-top" href=" {{ route('dashboard') }} ">Startpagina</a></li>
-                @endguest
                 <li class="nav-item"><a class="nav-link nav-link--main mr-4" href="#" data-toggle="modal" data-target="#instructieModal">Instructie</a></li>
+                @auth
+                    <li class="nav-item"><a class="nav-link nav-link--main mr-4 align-top" href=" {{ route('dashboard') }} ">Startpagina</a></li>
+                @endauth
 
             </ul>
         </div>

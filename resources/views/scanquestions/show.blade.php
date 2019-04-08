@@ -29,7 +29,7 @@
                         
                     </div>
                     <div class="card-footer">
-	                    <p class="text-center">Geef met een cijfer antwoord op de vraag.</p>
+	                    <p class="text-center">Geef met een cijfer antwoord op de vraag of stel de schuif in op de juiste waarde.</p>
                     </div>
 				</div>
 			</div>
