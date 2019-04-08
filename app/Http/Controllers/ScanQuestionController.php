@@ -95,6 +95,9 @@ class ScanQuestionController extends Controller
 
     public function followup(Scan $scan)
     {
+        if (! $scan->group->followup) {
+            $scan->group->followup()->save(new Followup);
+        }
         $previous = '/sessie/' . $scan->id . '/thema/' . Theme::get()->last()->id . '/actiesuitwerken';
         $next = '/sessie/' . $scan->id . '/afgerond';
         return view('scanquestions.followup', compact('scan', 'previous', 'next'));
