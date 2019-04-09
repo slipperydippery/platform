@@ -85,7 +85,7 @@
 
                         <div class="form-group{{ $errors->has('terms') ? ' has-error' : '' }} form-check">
                             <label>
-                                <input type="checkbox" class="form-check-input" id="voorwaarden">
+                                <input type="checkbox" class="form-check-input" id="voorwaarden" required>
                                 <label class="form-check-label" for="voorwaarden"> Ik accepteer de <a href="#" data-toggle="modal" data-target="#voorwaardenmodal"> algemene voorwaarden</a> </label>
                                 
                             </label>
