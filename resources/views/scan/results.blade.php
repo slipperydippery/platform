@@ -30,15 +30,82 @@
 						>
 						</algemeenbeeldresultaten>
 					</div>
-					@foreach ($scan->scanmodel->themes as $theme)
-						<div class="tab-pane fade" id="theme{{ $theme->order }}" role="tabpanel" aria-labelledby="theme{{ $theme->order }}-tab">
-							<scan-results
-								:group_id = " {{ $scan->group->id }} " 
-								:theme_id = " {{ $theme->id }} "
-							>
-							</scan-results>
-						</div>
-					@endforeach
+					@if ($scan->group)
+						@foreach ($scan->scanmodel->themes as $theme)
+							<div class="tab-pane fade" id="theme{{ $theme->order }}" role="tabpanel" aria-labelledby="theme{{ $theme->order }}-tab">
+								<scan-results
+									:group_id = " {{ $scan->group->id }} " 
+									:theme_id = " {{ $theme->id }} "
+								>
+								</scan-results>
+							</div>
+						@endforeach
+					@else
+						@foreach ($scan->scanmodel->themes as $theme)
+							<div class="tab-pane fade" id="theme{{ $theme->order }}" role="tabpanel" aria-labelledby="theme{{ $theme->order }}-tab">
+								<div class="row">
+									<div class="col-sm-12 table table__results">
+										<div class="row resultstable--row--questions">
+											<div class="col-sm-2"></div>
+											@foreach ($theme->questions as $question)
+												<div class="col-sm-2">
+													<strong>Vraag {{ $question->id }} <br></strong>
+													<span data-toggle="tooltip" data-placement="top" title=" {{ $question->question }} ">{!! $question->title !!}</span>
+												</div>
+											@endforeach
+										</div>
+										<div class="row resultstable--row--average">
+												<div class="col-sm-2 average">Gemiddeld</div>
+											@foreach ($theme->questions as $question)
+												<div class="col-sm-2">
+													@if ($scan->group)
+														<average-slider
+															:scan_id=" {{ $scan->id }} "
+															:group_id=" {{ $scan->group->id }} "
+															:question_id=" {{ $question->id }} "
+														>
+														</average-slider>
+													@else	
+														@php
+															$thisvalue = $scan->answers->where('question_id', $question->id)->first()->answer ? $scan->answers->where('question_id', $question->id)->first()->answer : "null";
+														@endphp
+														<result-slider
+															:value=" {{ $thisvalue }} "
+														>
+														</result-slider>										
+													@endif
+
+
+												</div>
+											@endforeach
+										</div>
+										
+										<div class="row">
+											<div class="col-sm-2"> Actiepunten - <em>steekwoorden</em></div>
+											@foreach ($theme->questions as $question)
+												<div class="col-sm-2">
+													@if ($scan->group)
+														<mini-measure
+															:measure_id=" {{ $question->measures->where('scan_id', $scan->group->scan->id)->first()->id }} "
+															:is_manager=" {{ $is_manager = $scan->group->scan->id == $scan->id ? 1 : 0 }} "
+														>
+														</mini-measure>
+													@else
+														<mini-measure
+															:measure_id=" {{ $question->measures->where('scan_id', $scan->id)->first()->id }} "
+															:is_manager=" 1 "
+														>
+														</mini-measure>
+													@endif
+												</div>	
+											@endforeach
+										</div>
+									</div>
+								</div>
+							</div>
+						@endforeach
+					@endif
+					
 				</div>
 			</div>
 		</div>
