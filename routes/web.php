@@ -15,7 +15,7 @@ Route::get('2fa', 'TwoFactorController@showTwoFactorForm');
 Route::post('2fa', 'TwoFactorController@verifyTwoFactor');
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/dashboard', 'PagesController@dashboard')->name('dashboard')->middleware('auth');
 Route::get('/introductiefilm', 'PagesController@introductiefilm')->name('introductiefilm');

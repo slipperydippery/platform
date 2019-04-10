@@ -85,6 +85,23 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        foreach ($user->scans as $scan) {
+            if($scan->group){
+                if ($scan->group->scan->id == $scan->id) {
+                    foreach ($scan->group->scans as $thisscan) {
+                        if ($thisscan->id != $scan->id) {
+                            if ($thisscan->districts->count()) {
+                                $thisscan->districts()->detach();
+                            }
+                            $thisscan->delete();
+                        }
+                    }
+                }
+            }
+            $scan->districts()->detach();
+            $scan->delete();
+        }
+        $user->delete();
+        return redirect()->route('home');
     }
 }

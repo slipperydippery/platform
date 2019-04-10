@@ -65,7 +65,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="#" class="btn btn-danger mr-auto">Verwijder mijn account</a>
+                    <form action="{{ route('user.destroy' , Auth::user())}}" method="POST">
+                        <input name="_method" type="hidden" value="DELETE">
+                        {{ csrf_field() }}
+
+                        <button type="submit" class="btn btn-danger mr-auto">Verwijder mijn account</button>
+                    </form>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluit</button>
                 </div>
             </div>
