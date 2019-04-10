@@ -19,7 +19,7 @@ class JoinGroupScanController extends Controller
     public function addscan(Group $group, $code)
     {
         foreach (Auth::user()->scans as $thisscan) {
-            if ($thisscan->group->id === $group->id) {
+            if ($thisscan->group && $thisscan->group->id === $group->id) {
                 session()->flash('status', 'Je doet al mee aan deze scan');
                 return redirect()->route('scan.start', $thisscan);
             }
