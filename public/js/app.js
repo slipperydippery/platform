@@ -80305,7 +80305,122 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function(){},staticRenderFns:[]}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-12 form-group" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.districtsearch,
+            expression: "districtsearch"
+          }
+        ],
+        staticClass: "form-control",
+        attrs: { type: "text", placeholder: "Zoek een gemeente" },
+        domProps: { value: _vm.districtsearch },
+        on: {
+          keydown: function($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
+            }
+            $event.preventDefault()
+            return _vm.addDistrictWithEnter()
+          },
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.districtsearch = $event.target.value
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "col-12 overflow-hidden nowrap pt-3" },
+      _vm._l(_vm.filteredAndSortedDistricts.slice(0, 10), function(district) {
+        return _c("label", {
+          staticClass: "checkboxlabel btn btn-sm btn-secondary mr-2 clickable",
+          domProps: { innerHTML: _vm._s(district.name) },
+          on: {
+            click: function($event) {
+              return _vm.addDistrictToSelection(district)
+            }
+          }
+        })
+      }),
+      0
+    ),
+    _vm._v(" "),
+    _vm.districtsearch.length && _vm.filteredAndSortedDistricts.length
+      ? _c("div", { staticClass: "col-12 pt-1" }, [
+          _c("em", [
+            _vm._v(
+              "Klik op een gemeente om deze toe te voegen aan je selectie. Je kunt meerdere gemeenten selecteren. "
+            )
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "col-12 pt-5" },
+      _vm._l(_vm.selecteddistricts, function(district) {
+        return _c(
+          "label",
+          {
+            staticClass: "checkboxlabel btn btn-sm btn-dark mr-2 clickable",
+            domProps: { innerHTML: _vm._s(district.name) },
+            on: {
+              click: function($event) {
+                return _vm.removeDistrictFromSelection(district)
+              }
+            }
+          },
+          [
+            _vm._v("\n\t\t\t\t" + _vm._s(district.name) + " "),
+            _c("i", { staticClass: "material-icons md-18" }, [
+              _vm._v(" close ")
+            ])
+          ]
+        )
+      }),
+      0
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12 p-3" }, [
+      _vm.selecteddistricts.length
+        ? _c("div", { staticClass: "form-group text-right" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-secondary btn-lg",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.updateDistricts($event)
+                  }
+                }
+              },
+              [_vm._v("Sla gemeenten op")]
+            )
+          ])
+        : _vm._e()
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {

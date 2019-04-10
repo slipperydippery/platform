@@ -26,7 +26,7 @@
                 v-for="district in selecteddistricts"
                 @click="removeDistrictFromSelection(district)"
                 class="checkboxlabel btn btn-sm btn-dark mr-2 clickable"   
-                v-html="district.name x"
+                v-html="district.name"
 			>
 				{{ district.name }} <i class="material-icons md-18"> close </i>
 			</label>
