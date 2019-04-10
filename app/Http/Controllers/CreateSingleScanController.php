@@ -63,6 +63,8 @@ class CreateSingleScanController extends Controller
         $request->session()->put('createsinglescan.scanmodel_id', 1);
 
         $scan = Scan::register(session()->get('createsinglescan'));
+
+        $request->session()->forget('createsinglescan');
     	return redirect()->route('createsinglescan.created', $scan);
     }
 
