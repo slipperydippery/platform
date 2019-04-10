@@ -80,6 +80,8 @@ class CreateGroupScanController extends Controller
             'datetime' => 'required',
         ]);
 
+        if($this->sessionIsComplete());
+
         $request->session()->put('creategroupscan.isgroup', false);
     	
         $scan = Scan::register(session('creategroupscan'));
@@ -96,5 +98,11 @@ class CreateGroupScanController extends Controller
     {
     	$group = $scan->group;
         return view('creategroupscan.created', compact('scan', 'group'));
+    }
+
+    public function sessionIsComplete()
+    {
+        
+        return true;
     }
 }
