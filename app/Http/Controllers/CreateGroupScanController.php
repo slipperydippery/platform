@@ -87,6 +87,7 @@ class CreateGroupScanController extends Controller
         $group = Group::register( $scan );
         $group->datetime = $request->input('datetime');
         $group->save();
+        $request->session()->forget('creategroupscan');
 
     	return redirect()->route('creategroupscan.created', $scan);
     }
