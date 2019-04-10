@@ -14,8 +14,8 @@
 				class="checkboxlabel btn btn-sm btn-secondary mr-2 clickable" 
 				v-for="district in filteredAndSortedDistricts.slice(0,10)"
                 @click="addDistrictToSelection(district)"
+                v-html="district.name"
 			>
-				{{ district.name }}
 			</label>
 		</div>
         <div class="col-12 pt-1" v-if="districtsearch.length && filteredAndSortedDistricts.length ">
@@ -26,7 +26,7 @@
                 v-for="district in selecteddistricts"
                 @click="removeDistrictFromSelection(district)"
                 class="checkboxlabel btn btn-sm btn-dark mr-2 clickable"   
-
+                v-html="district.name x"
 			>
 				{{ district.name }} <i class="material-icons md-18"> close </i>
 			</label>
