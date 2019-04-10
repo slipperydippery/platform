@@ -29,7 +29,7 @@
                                 <em>
                                     Gemeenten: 
                                     @foreach ($scan->districts as $district)
-                                        {{ $district->name }}@if(! $loop->last),@endif
+                                        {!! $district->name !!}@if(! $loop->last),@endif
                                     @endforeach
                                     <br>
                                     Datum sessie: {{ date('d-m-Y', strtotime($scan->group->datetime)) }} om {{ date('H:m', strtotime($scan->group->datetime)) }}
@@ -153,7 +153,7 @@
                                 <em>
                                     Gemeenten: 
                                     @foreach ($scan->districts as $district)
-                                        {{ $district->name }}@if(! $loop->last),@endif
+                                        {!! $district->name !!}@if(! $loop->last),@endif
                                     @endforeach
                                     <br>
                                     Datum sessie: {{ date('d-m-Y', strtotime($scan->datetime)) }} om {{ date('H:m', strtotime($scan->datetime)) }}

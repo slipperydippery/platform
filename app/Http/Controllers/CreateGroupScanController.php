@@ -27,7 +27,6 @@ class CreateGroupScanController extends Controller
             'title' => 'required|min:3|max:255',
         ]);
         $request->session()->put('creategroupscan.title', $request->title);
-        $request->session()->put('creategroupscan.isgroup', false);
     	return redirect()->route('creategroupscan.districts');
 
     }
@@ -80,6 +79,8 @@ class CreateGroupScanController extends Controller
         request()->validate([
             'datetime' => 'required',
         ]);
+
+        $request->session()->put('creategroupscan.isgroup', false);
     	
         $scan = Scan::register(session('creategroupscan'));
 
