@@ -16,7 +16,7 @@ class QuestionTableSeeder extends Seeder
         $questions = [
             [
                 'title'           => 'Deskundigheid omgaan met werkgevers',
-                'question'        => 'Hebben gemeenten en scholen deskundigheid ten aanzien van omgaan met werkgevers? Met als doel om jongeren werkervaring daar te laten opdoen en de arbeidstoeleiding van jongeren in een kwetsbare positie te verbeteren.',
+                'question'        => 'Hebben gemeenten en scholen deskundigheid ten aanzien van omgaan met werkgevers? Met als doel om jongeren werkervaring daar te laten opdoen en de arbeidstoeleiding van jongeren in een kwetsbare positie te verbeteren?',
                 'successfactor'   => 'Professionele aanpak in de relatie met werkgevers, met kennis van context, belangen en taal van bedrijven.',
                 'riskfactor'      => 'Er is weinig contact met werkgevers in de regio, waardoor gemeenten en scholen niet goed weten om te gaan met werkgevers.',
                 'justification'   => '<p> De kwaliteit en de effectiviteit van de dienstverlening aan werkgevers moet beter. Hetzelfde geldt voor de bekendheid met deze dienstverlening bij werkgevers. Belangrijke randvoorwaarde voor een verbetering van de kwaliteit van de werkgeversdienstverlening is een adequate werkwijze jegens cli&euml;nten. Gelet op de signalen hierover van werkgevers is ook op dit terrein een kwaliteitsslag noodzakelijk. Zo kan een sluitende dienstverlening (voor- en nazorg) rond de plaatsing van cli&euml;nten mislukte plaatsingen en teleurstelling bij de werkgever voorkomen. </p>
