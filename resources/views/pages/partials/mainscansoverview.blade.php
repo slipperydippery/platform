@@ -34,6 +34,8 @@
                                     <br>
                                     Datum sessie: {{ date('d-m-Y', strtotime($scan->group->datetime)) }} om {{ date('H:m', strtotime($scan->group->datetime)) }}
                                     <br>
+                                    Gebruik onderstaande link om meer mensen uit te nodigen:
+                                    <br>
                                     <span class="text-nowrap">
                                         <span id="groupcode">{{ Request::root() }}/groep/{{ $scan->group->id }}/sluitaan/{{ $scan->group->code }}</span> 
                                         <copy-icon
