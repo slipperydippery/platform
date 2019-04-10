@@ -1,3 +1,8 @@
 .carousel-control-prev, .carousel-control-next {
 	background: none;
 }
+
+.dropdown-toggle:empty::after {
+	position: relative;
+	top: -2px;
+}

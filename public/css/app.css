@@ -12532,6 +12532,11 @@ table.b-table.b-table-selectable > tbody > tr {
   background: none;
 }
 
+.dropdown-toggle:empty::after {
+  position: relative;
+  top: -2px;
+}
+
 .flatpickr-calendar {
   background: transparent;
   opacity: 0;

@@ -61,7 +61,7 @@
                                 <th scope="col"> {{ $scan->group->scan->answercount() }} / {{ $scan->scanmodel->questioncount() }} </th>
                                 <th scope="col">
                                     @if (Auth::user()->id != $scan->group->user->id)
-                                        <div class="dropdown">
+                                        <div class="dropdown float-right">
                                             <button class="btn btn-secondary dropdown-toggle dropdown-toggle__round" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 
                                             </button>
@@ -85,7 +85,7 @@
                                         <td> {{ $thisscan->answercount() }} / {{ $scan->scanmodel->questioncount() }} </td>
                                         <td>
                                             @if ($thisscan->user->id != Auth::user()->id)
-                                                <div class="dropdown">
+                                                <div class="dropdown float-right">
                                                     <button class="btn btn-secondary dropdown-toggle dropdown-toggle__round" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         
                                                     </button>
@@ -115,8 +115,9 @@
                                                     </div>
                                                 </div>
                                             @else
-                                                <a href="#" class="btn btn-danger dropdown-toggle__round" data-toggle="modal" data-target="#confirmdelete{{ $thisscan->id }}"> x
-                                                </a>
+                                                <button type="button" class="close mr-2" aria-label="Close" data-toggle="modal" data-target="#confirmdelete{{ $thisscan->id }}">
+                                                      <span aria-hidden="true">&times;</span>
+                                                </button>
                                                 @component('components.deleteconfirm', ['thisscan' => $thisscan])
                                                 @endcomponent
 
