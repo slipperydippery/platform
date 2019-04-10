@@ -6,6 +6,7 @@ use Auth;
 use App\Scan;
 use App\Group;
 use App\District;
+use App\Followup;
 use App\Instantie;
 use Illuminate\Http\Request;
 
@@ -92,6 +93,7 @@ class CreateGroupScanController extends Controller
         $group->datetime = $request->input('datetime');
         $group->save();
         $request->session()->forget('creategroupscan');
+        $group->followup()->save(new Followup);
 
     	return redirect()->route('creategroupscan.created', $scan);
     }

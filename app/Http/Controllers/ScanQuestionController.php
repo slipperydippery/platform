@@ -98,9 +98,10 @@ class ScanQuestionController extends Controller
         if (! $scan->group->followup) {
             $scan->group->followup()->save(new Followup);
         }
+        $followup = $scan->group->followup;
         $previous = '/sessie/' . $scan->id . '/thema/' . Theme::get()->last()->id . '/actiesuitwerken';
         $next = '/sessie/' . $scan->id . '/afgerond';
-        return view('scanquestions.followup', compact('scan', 'previous', 'next'));
+        return view('scanquestions.followup', compact('scan', 'previous', 'next', 'followup'));
     }
 
     public function commitdatetime(Request $request, Scan $scan)
