@@ -1,18 +1,26 @@
 <template>
 	<div class="row">
 		<div class="col-12 form-group">
-			<input type="text" class="form-control" placeholder="Zoek een gemeente" v-model="districtsearch">
+			<input 
+                type="text" 
+                class="form-control" 
+                placeholder="Zoek een gemeente" 
+                v-model="districtsearch"
+                @keydown.enter.prevent="addDistrictWithEnter()"
+            >
 		</div>
 		<div class="col-12 overflow-hidden nowrap pt-3">
 			<label 
 				class="checkboxlabel btn btn-sm btn-secondary mr-2 clickable" 
 				v-for="district in filteredAndSortedDistricts.slice(0,10)"
                 @click="addDistrictToSelection(district)"
-
 			>
 				{{ district.name }}
 			</label>
 		</div>
+        <div class="col-12 pt-1" v-if="districtsearch.length && filteredAndSortedDistricts.length ">
+            <em>Klik op een gemeente om deze toe te voegen aan je selectie. Je kunt meerdere gemeenten selecteren. </em>
+        </div>
 		<div class="col-12 pt-5">
 			<label 
                 v-for="district in selecteddistricts"
@@ -24,7 +32,7 @@
 			</label>
 		</div>
 		<div class="col-12 p-3">
-			<div class="form-group text-right">
+			<div class="form-group text-right" v-if="selecteddistricts.length">
 				<button class="btn btn-secondary btn-lg" @click.prevent="updateDistricts">Sla gemeenten op</button>
 			</div>
 		</div>
@@ -107,6 +115,12 @@
         				home.setSelectedDistricts();
         			})
         	},
+
+            addDistrictWithEnter () {
+                if (this.districtsearch.length && this.filteredAndSortedDistricts.length) {
+                    this.addDistrictToSelection(this.filteredAndSortedDistricts[0]);
+                }
+            },
 
             addDistrictToSelection: function(thisdistrict) {
                 this.selecteddistricts.push(thisdistrict);

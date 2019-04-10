@@ -60,6 +60,9 @@
         		axios.patch('/api/scan/' + home.scan_id, {
         			scan: home.scan
         		})
+                .then(function (response) {
+                    window.location.href = '/'; 
+                })
         	}
         }
     }

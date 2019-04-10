@@ -80133,6 +80133,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -80202,6 +80210,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 home.districts = response.data;
                 home.setSelectedDistricts();
             });
+        },
+        addDistrictWithEnter: function addDistrictWithEnter() {
+            if (this.districtsearch.length && this.filteredAndSortedDistricts.length) {
+                this.addDistrictToSelection(this.filteredAndSortedDistricts[0]);
+            }
         },
 
 
@@ -80311,6 +80324,16 @@ var render = function() {
         attrs: { type: "text", placeholder: "Zoek een gemeente" },
         domProps: { value: _vm.districtsearch },
         on: {
+          keydown: function($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
+            }
+            $event.preventDefault()
+            return _vm.addDistrictWithEnter()
+          },
           input: function($event) {
             if ($event.target.composing) {
               return
@@ -80342,6 +80365,16 @@ var render = function() {
       0
     ),
     _vm._v(" "),
+    _vm.districtsearch.length && _vm.filteredAndSortedDistricts.length
+      ? _c("div", { staticClass: "col-12 pt-1" }, [
+          _c("em", [
+            _vm._v(
+              "Klik op een gemeente om deze toe te voegen aan je selectie. Je kunt meerdere gemeenten selecteren. "
+            )
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "col-12 pt-5" },
@@ -80368,21 +80401,23 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("div", { staticClass: "col-12 p-3" }, [
-      _c("div", { staticClass: "form-group text-right" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-secondary btn-lg",
-            on: {
-              click: function($event) {
-                $event.preventDefault()
-                return _vm.updateDistricts($event)
-              }
-            }
-          },
-          [_vm._v("Sla gemeenten op")]
-        )
-      ])
+      _vm.selecteddistricts.length
+        ? _c("div", { staticClass: "form-group text-right" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-secondary btn-lg",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.updateDistricts($event)
+                  }
+                }
+              },
+              [_vm._v("Sla gemeenten op")]
+            )
+          ])
+        : _vm._e()
     ])
   ])
 }
@@ -85478,6 +85513,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var home = this;
             axios.patch('/api/scan/' + home.scan_id, {
                 scan: home.scan
+            }).then(function (response) {
+                window.location.href = '/';
             });
         }
     }
@@ -85799,7 +85836,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/api/scan/' + this.scan_id + '/updatedistricts', {
                 districts: this.selecteddistricts
             }).then(function (response) {
-                // window.location.href = '/nieuwegroupsscan/instantie'; 
+                window.location.href = '/';
             });
         },
         setSelectedDistricts: function setSelectedDistricts() {

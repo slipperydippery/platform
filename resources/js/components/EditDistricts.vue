@@ -152,7 +152,7 @@
                     districts: this.selecteddistricts,
                 })
                 .then(function (response) {
-                    // window.location.href = '/nieuwegroupsscan/instantie'; 
+                    window.location.href = '/'; 
                 })
             },
 
