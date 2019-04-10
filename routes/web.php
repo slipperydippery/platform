@@ -43,7 +43,7 @@ Route::get('/nieuwegroupsscan/{scan}/klaar', 'CreateGroupScanController@created'
 
 Route::get('/groep/{group}/sluitaan/{code}', 'JoinGroupScanController@addscan')->name('joingroupscan.addscan');	
 Route::post('/groep/{group}/sluitaan/{code}', 'JoinGroupScanController@storescan')->name('joingroupscan.storescan');	
-Route::get('/groep/{group}/aangesloten', 'JoinGroupScanController@created')->name('joingroupscan.created');	
+Route::get('/groep/{scan}/aangesloten', 'JoinGroupScanController@created')->name('joingroupscan.created');	
 
 Route::post('/groep/{group}/promoot', 'ManageGroupScanController@promoteuser')->name('managegroupscan.promoteuser');
 Route::get('/groep/{group}/ontgrendel', 'ManageGroupScanController@unlock')->name('managegroupscan.unlock');
