@@ -73,4 +73,9 @@ class CreateSingleScanController extends Controller
     	session()->forget('createsinglescan');
     	return view('createsinglescan.created', compact('scan'));
     }
+
+    public function sessionIsIncomplete()
+    {
+        return false;
+    }
 }
