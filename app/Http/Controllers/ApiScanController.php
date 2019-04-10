@@ -77,6 +77,11 @@ class ApiScanController extends Controller
         $scan->instantie_id = $request->scan['instantie_id'];
         if($scan->group) {
             $scan->group_id = $request->scan['group_id'];
+            foreach ($scan->group->scans as $scan) {
+                $scan->title = $request->scan['title'];
+                $scan->description = $request->scan['description'];
+                $scan->save();
+            }
         }
         $scan->save();
         if($scan->group) {
