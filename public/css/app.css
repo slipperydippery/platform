@@ -50,6 +50,11 @@
   font-size: 4.5rem;
 }
 
+.md-36-24 {
+  position: relative;
+  top: 5px;
+}
+
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
@@ -14932,6 +14937,64 @@ input[type=range]:disabled::-moz-range-thumb {
   background: rgba(203, 83, 147, 0.08);
 }
 
+.instantietype-5.active,
+.instantietype-5 .card-footer {
+  background: #D33F49;
+  border-width: 2px 0;
+  color: white;
+}
+
+.instantietype-5.inactive .card-footer {
+  background: #cbadaf;
+  border-width: 2px 0;
+  color: white;
+}
+
+.instantietype-5 {
+  background: none;
+  border: 2px solid #D33F49;
+  color: #D33F49;
+}
+
+.instantietype-5.inactive {
+  background: none;
+  border: 2px solid #cbadaf;
+  color: #cbadaf;
+}
+
+.instantietype-5.title {
+  background: rgba(211, 63, 73, 0.08);
+}
+
+.instantietype-6.active,
+.instantietype-6 .card-footer {
+  background: #98C1D9;
+  border-width: 2px 0;
+  color: white;
+}
+
+.instantietype-6.inactive .card-footer {
+  background: #eaeced;
+  border-width: 2px 0;
+  color: white;
+}
+
+.instantietype-6 {
+  background: none;
+  border: 2px solid #98C1D9;
+  color: #98C1D9;
+}
+
+.instantietype-6.inactive {
+  background: none;
+  border: 2px solid #eaeced;
+  color: #eaeced;
+}
+
+.instantietype-6.title {
+  background: rgba(152, 193, 217, 0.08);
+}
+
 .selected.active,
 .selected .card-footer {
   background: #dee2e6;
@@ -14959,6 +15022,14 @@ input[type=range]:disabled::-moz-range-thumb {
 
 .instantietype-4-leftborder {
   border-left: 5px solid rgba(203, 83, 147, 0.4);
+}
+
+.instantietype-5-leftborder {
+  border-left: 5px solid rgba(211, 63, 73, 0.4);
+}
+
+.instantietype-6-leftborder {
+  border-left: 5px solid rgba(152, 193, 217, 0.4);
 }
 
 .owner-leftborder {

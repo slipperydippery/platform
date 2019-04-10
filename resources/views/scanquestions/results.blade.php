@@ -29,7 +29,6 @@
 						<h5>Resultaten</h5>
 		                <span><em></em></span>
 					</div>
-k
 					<div class="row">
 						<scan-results
 							:group_id = " {{ $scan->group->id }} " 

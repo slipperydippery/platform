@@ -18,7 +18,7 @@
                         <h5 class="card-title">Vraag {{ $question->id }}/20 </h5>
 
                         <span class="card-text card-text__question"> 
-			                <h5> {!! $question->question !!} <i class="material-icons clickable" data-toggle="modal" data-target="#justificationModal"> info </i></h5>
+			                <h5> {!! $question->question !!} <i class="material-icons clickable md-36 md-36-24" data-toggle="modal" data-target="#justificationModal"> info </i></h5>
 		            	</span>
 
                         <scan-slider

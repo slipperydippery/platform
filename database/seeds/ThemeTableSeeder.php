@@ -32,7 +32,7 @@ class ThemeTableSeeder extends Seeder
             ],
             [
                 'id' => '3',
-                'title' => 'Overige randvoorwaarden voor goede begeleiding',
+                'title' => 'Randvoorwaarden voor goede begeleiding',
                 'short' => '',
                 'body' => '',
                 'scanmodel_id' => '1',

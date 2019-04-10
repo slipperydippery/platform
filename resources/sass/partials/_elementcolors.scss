@@ -108,6 +108,54 @@
 	background: rgba($instantietype-4, 0.08);
 }
 
+.instantietype-5.active, .instantietype-5 .card-footer {
+	background: $instantietype-5;
+	border-width: 2px 0;
+	color: white;
+}
+.instantietype-5.inactive .card-footer {
+	background: lighten(desaturate($instantietype-5, 40), 20);
+	border-width: 2px 0;
+	color: white;
+}
+.instantietype-5 {
+	background: none;
+	border: 2px solid $instantietype-5;
+	color: $instantietype-5;
+}
+.instantietype-5.inactive {
+	background: none;
+	border: 2px solid lighten(desaturate($instantietype-5, 40), 20);
+	color: lighten(desaturate($instantietype-5, 40), 20);
+}
+.instantietype-5.title {
+	background: rgba($instantietype-5, 0.08);
+}
+
+.instantietype-6.active, .instantietype-6 .card-footer {
+	background: $instantietype-6;
+	border-width: 2px 0;
+	color: white;
+}
+.instantietype-6.inactive .card-footer {
+	background: lighten(desaturate($instantietype-6, 40), 20);
+	border-width: 2px 0;
+	color: white;
+}
+.instantietype-6 {
+	background: none;
+	border: 2px solid $instantietype-6;
+	color: $instantietype-6;
+}
+.instantietype-6.inactive {
+	background: none;
+	border: 2px solid lighten(desaturate($instantietype-6, 40), 20);
+	color: lighten(desaturate($instantietype-6, 40), 20);
+}
+.instantietype-6.title {
+	background: rgba($instantietype-6, 0.08);
+}
+
 .selected.active, .selected .card-footer {
 	background: $gray-300;
 	border-width: 2px 0;
@@ -133,6 +181,12 @@
 
 .instantietype-4-leftborder {
 	border-left: 5px solid rgba($instantietype-4, 0.4);
+}
+.instantietype-5-leftborder {
+	border-left: 5px solid rgba($instantietype-5, 0.4);
+}
+.instantietype-6-leftborder {
+	border-left: 5px solid rgba($instantietype-6, 0.4);
 }
 
 .owner-leftborder {

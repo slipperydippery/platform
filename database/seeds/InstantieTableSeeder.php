@@ -40,6 +40,11 @@ class InstantieTableSeeder extends Seeder
                 'scanmodel_id' => '1'
             ],
             [
+                'title' => 'Overheid',
+                'description' => 'Overheid',
+                'scanmodel_id' => '1'
+            ],
+            [
                 'title' => 'Overig',
                 'description' => 'Overig (bijv UWV of een specifieke regionale organisatie)',
                 'scanmodel_id' => '1'

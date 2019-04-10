@@ -15,15 +15,6 @@ class QuestionTableSeeder extends Seeder
 
         $questions = [
             [
-                'title'           => 'Re&euml;le werkervaring',
-                'question'        => 'Staat de opleiding al volop in het teken van het opdoen van re&euml;le werkervaring?',
-                'successfactor'   => 'School werkt volgens het principe Learning by doing. Zo realistisch mogelijk, werkend  leren staat centraal.',
-                'riskfactor'      => 'Er wordt te lang gewacht met echte werkervaring bij bedrijven laten opdoen, waardoor het lastiger wordt voor jongeren in een kwetsbare positie om een baan te vinden. ',
-                'justification'   => '<p>In het opleidingsdeel van het traject ligt al vroeg de aandacht op arbeidstoeleiding en leren in de praktijk. Geen te schoolse, zorgende of theoretische benadering. Een tweede reden om jongeren in de opleiding al vroeg in aanraking te brengen met re&euml;le arbeidsomgevingen, is dat ze dan eerder en beter zicht krijgen op hun voorkeuren, sterktes en zwaktes. Ze ontwikkelen een re&euml;el zelfbeeld. Van belang is om in het onderwijs te investeren in betekenisvolle werkplekken &ndash; in plaats van werken met theorie en simulaties &ndash; en stages op maat te leveren, waardoor de motivatie van leerlingen voor werk zal toenemen en ze makkelijker de overstap kunnen maken naar de arbeidsmarkt.</p>',
-                'theme_id' => 1,
-                'order' => 1,
-            ],
-            [
                 'title'           => 'Deskundigheid omgaan met werkgevers',
                 'question'        => 'Hebben gemeenten en scholen deskundigheid ten aanzien van omgaan met werkgevers? Met als doel om jongeren werkervaring daar te laten opdoen en de arbeidstoeleiding van jongeren in een kwetsbare positie te verbeteren.',
                 'successfactor'   => 'Professionele aanpak in de relatie met werkgevers, met kennis van context, belangen en taal van bedrijven.',
@@ -39,6 +30,15 @@ class QuestionTableSeeder extends Seeder
                 </ul>',
                 'theme_id' => 1,
                 'order' => 2,
+            ],
+            [
+                'title'           => 'Re&euml;le werkervaring',
+                'question'        => 'Staat de opleiding al volop in het teken van het opdoen van re&euml;le werkervaring?',
+                'successfactor'   => 'School werkt volgens het principe Learning by doing. Zo realistisch mogelijk, werkend  leren staat centraal.',
+                'riskfactor'      => 'Er wordt te lang gewacht met echte werkervaring bij bedrijven laten opdoen, waardoor het lastiger wordt voor jongeren in een kwetsbare positie om een baan te vinden. ',
+                'justification'   => '<p>In het opleidingsdeel van het traject ligt al vroeg de aandacht op arbeidstoeleiding en leren in de praktijk. Geen te schoolse, zorgende of theoretische benadering. Een tweede reden om jongeren in de opleiding al vroeg in aanraking te brengen met re&euml;le arbeidsomgevingen, is dat ze dan eerder en beter zicht krijgen op hun voorkeuren, sterktes en zwaktes. Ze ontwikkelen een re&euml;el zelfbeeld. Van belang is om in het onderwijs te investeren in betekenisvolle werkplekken &ndash; in plaats van werken met theorie en simulaties &ndash; en stages op maat te leveren, waardoor de motivatie van leerlingen voor werk zal toenemen en ze makkelijker de overstap kunnen maken naar de arbeidsmarkt.</p>',
+                'theme_id' => 1,
+                'order' => 1,
             ],
             [
                 'title'           => 'Samenwerking met werkgevers',
@@ -111,7 +111,7 @@ class QuestionTableSeeder extends Seeder
             ],
             [
                 'title'           => 'Vroegtijdige begeleiding en overdracht',
-                'question'        => 'Wordt de begeleiding van jongeren al opgestart voordat ze vroegtijdig de schoolverlaten en wordt de kennis over de jongere van de school nog steeds benut in de periode dat de jongere niet meer op school zit? ',
+                'question'        => 'Wordt de begeleiding van jongeren al opgestart voordat ze vroegtijdig de school verlaten en wordt de kennis over de jongere van de school nog steeds benut in de periode dat de jongere niet meer op school zit? ',
                 'successfactor'   => 'Er is sprake van een vroegtijdige warme overdracht van scholen naar gemeenten zodra het moment dat de jongere school verlaat dichterbij komt en daarna. ‘Het estafettestokje mag niet vallen.’ ',
                 'riskfactor'      => 'Gemeenten zijn onvoldoende preventief bezig, hebben geen zicht op het aantal jongeren dat school gaat verlaten, kennis bij de school wordt onvoldoende benut bij de arbeidstoeleiding, waardoor jongeren onnodig werkloos worden of uit beeld kunnen verdwijnen.',
                 'justification'   => '<p>Om ervoor te zorgen dat gemeenten zicht hebben op het aantal jongeren dat binnenkort school gaat verlaten, moet er sprake zijn van een goed functionerend netwerk en moeten er afspraken zijn gemaakt over overgang school naar werk. Dit betreft concrete afspraken over het &ndash;collectief- doorspreken van leerlingen die de school gaan verlaten en individuele leerlingbesprekingen. Ook moet er sprake zijn van een gestroomlijnde informatieoverdracht tussen scholen, UWV en gemeenten. Voor scholen is het goed laten verlopen van de overdracht een uitdaging door de complexe netwerken die zij moeten onderhouden met verschillende gemeenten die ook vaak nog eens eigen beleid en procedures hebben.</p>',
@@ -131,7 +131,7 @@ class QuestionTableSeeder extends Seeder
             ],
             [
                 'title'           => 'Soepele overgang boven 18',
-                'question'        => 'Is er, indien nodig, ondersteuning mogelijk na 18 jaar en zijn de overgangen van de jeugdwet naar voorzieningen uit de WMO, ZVW of WLZ soepel geregeld?',
+                'question'        => 'Is er, indien nodig, ondersteuning mogelijk na 18 jaar en zijn de overgangen van de jeugdwet naar voorzieningen uit de Wmo, Zvw of Wlz soepel geregeld?',
                 'successfactor'   => 'De jongere merkt zo min mogelijk van de overgang naar een ander wettelijk kader en kan hulp blijven ontvangen na de 18e verjaardag.',
                 'riskfactor'      => 'Zodra de jongere 18 wordt stopt de hulp en staat hij/zij er alleen voor.',
                 'justification'   => '<p>Indien de jeugdhulp en de zorg na de 18e verjaardag niet bij dezelfde aanbieder ingekocht zijn moet de jongere overstappen naar een andere hulpverlener. Een andere organisatie, locatie of nieuwe gezichten kan voor de jongere reden zijn om af te haken. Daarbij komt dat jongeren de overgang naar volwassenheid ook ervaren als een nieuw verworven vrijheid en zelfstandigheid. De jongeren willen het graag zelf proberen en mogen dat nu ook. Dit motivatieprobleem speelt met name bij jongeren met een licht verstandelijke beperking (LVB). Deze jongeren hebben vaak een beperkt zelfinzicht en zijn daardoor onvoldoende overtuigd van de noodzaak van een gecontinueerde zorg of begeleiding. Gevolg is dat de jongeren niet de zorg krijgen die zij nodig hebben. Het is dus belangrijk dat betrokken partijen ervoor zorgen dat die overgang van zorgverleners soepel verloopt.  </p>',
@@ -207,7 +207,7 @@ In de uitvoeringspraktijk is sprake van twee scholen. De ene school is van menin
             ],
             [
                 'title'           => 'Eenduidige afspraken',
-                'question'        => 'Werken de betrokken scholen (met name VSO, PrO en Entree) scholen in de regio zodanig samen dat er eenduidige afspraken met gemeenten kunnen worden gemaakt?',
+                'question'        => 'Werken de betrokken scholen (VSO, PrO en mbo) in de regio zodanig samen dat er eenduidige afspraken met gemeenten kunnen worden gemaakt?',
                 'successfactor'   => 'De scholen werken zodanig samen dat er een goede samenwerking met gemeenten mogelijk is.',
                 'riskfactor'      => 'Er is geen sprake van zodanige afstemming en samenwerking tussen de betreffende scholen, dat het voor gemeenten helder is hoe zij het beste de scholen op een eenduidige en efficiente wijze kunnen ondersteunen bij het betreden van de arbeidsmarkt door de leerlingen.',
                 'justification'   => '<p>Scholen en gemeenten hebben hun eigen perspectieven en mogelijkheden. In de aansluiting onderwijs-arbeidsmarkt is het maken van heldere, eenduidige afspraken over rollen, preventieve acties, nazorg et cetera bij de arbeidstoeleiding van leerlingen erg belangrijk. Samenwerking in plaats van twee werelden die elkaar niet kennen en benutten. Daarvoor hebben de scholen onderling ook te zorgen voor goede afstemming, omdat het anders voor de gemeenten lastig wordt om met een diffuus onderwijsveld goed te werken.</p>',
