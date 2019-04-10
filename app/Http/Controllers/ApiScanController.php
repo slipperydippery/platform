@@ -75,7 +75,8 @@ class ApiScanController extends Controller
         $scan->description = $request->scan['description'];
         $scan->algemeenbeeld = $request->scan['algemeenbeeld'];
         $scan->instantie_id = $request->scan['instantie_id'];
-        if($scan->group) {
+        $scan->save();
+        if($scan->group && $scan->group->scan->id == $scan->id) {
             $scan->group_id = $request->scan['group_id'];
             $scan->group->title = $request->scan['title'];
             $scan->group->save();
@@ -86,6 +87,7 @@ class ApiScanController extends Controller
             }
         }
         $scan->save();
+        return $scan->updated_at;
         if($scan->group) {
             AlgemeenbeeldUpdated::dispatch($scan->group->id);
         }

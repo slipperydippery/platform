@@ -17,7 +17,7 @@ class Scan extends Model
 {
     use GeneratesUuid;
 
-	protected $fillable = ['title', 'instantie_id', 'scanmodel_id', 'group_id'];
+	protected $fillable = ['title', 'instantie_id', 'scanmodel_id', 'group_id', 'algemeenbeeld'];
 
     public function user()
     {
