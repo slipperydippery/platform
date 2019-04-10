@@ -112,6 +112,18 @@ class ScanController extends Controller
      */
     public function destroy(Scan $scan)
     {
+        if($scan->group){
+            if ($scan->group->scan->id == $scan->id) {
+                foreach ($scan->group->scans as $thisscan) {
+                    if ($thisscan->id != $scan->id) {
+                        if ($thisscan->districts->count()) {
+                            $thisscan->districts()->detach();
+                        }
+                        $thisscan->delete();
+                    }
+                }
+            }
+        }
         $scan->districts()->detach();
         $scan->delete();
         return redirect()->route('dashboard');

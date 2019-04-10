@@ -10,6 +10,12 @@
             <div class="modal-body">
                 <p>Je staat op het punt om de sessie {{ $thisscan->title }} te verwijderen. Weet je zeker dat je dit wilt doen? </p>
 
+                @if ($thisscan->group && $thisscan->group->scan->id == $thisscan->id)
+                    <div class="alert alert-danger" role="alert">
+                        Dit is een groupssessie, door deze te verwijderen worden ook alle aangesloten sessies met gegevens verwijderd!
+                    </div>
+                @endif
+
                 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Sluit</button>
