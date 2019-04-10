@@ -80,7 +80,9 @@ class CreateGroupScanController extends Controller
             'datetime' => 'required',
         ]);
 
-        if($this->sessionIsComplete());
+        if($missing = $this->sessionIsIncomplete()){
+            return redirect()->route($missing);
+        }
 
         $request->session()->put('creategroupscan.isgroup', false);
     	
@@ -100,9 +102,15 @@ class CreateGroupScanController extends Controller
         return view('creategroupscan.created', compact('scan', 'group'));
     }
 
-    public function sessionIsComplete()
+    public function sessionIsIncomplete()
     {
-        
-        return true;
+        if (! session('creategroupscan.title')) {
+            return 'creategroupscan.title';
+        } else if (! session('creategroupscan.districts')) {
+            return 'creategroupscan.districts';
+        } else if (! session('creategroupscan.instantie_id')) {
+            return 'creategroupscan.instantie';
+        } 
+        return false;
     }
 }
