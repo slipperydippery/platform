@@ -32,7 +32,7 @@
                                         {!! $district->name !!}@if(! $loop->last),@endif
                                     @endforeach
                                     <br>
-                                    Datum sessie: {{ date('d-m-Y', strtotime($scan->group->datetime)) }} om {{ date('H:m', strtotime($scan->group->datetime)) }}
+                                    Datum sessie: {{ date('d-m-Y', strtotime($scan->group->datetime)) }} om {{ date('H:i', strtotime($scan->group->datetime)) }}
                                     <br>
                                     Gebruik onderstaande link om meer mensen uit te nodigen:
                                     <br>
@@ -43,6 +43,8 @@
                                         >
                                         </copy-icon>
                                     </span>
+                                    <br>
+                                    <a href="#"  data-toggle="modal" data-target="#voorbeeldmail">Bekijk voorbeeld email</a>
                                 </em>
                             </p>
                         </div>

@@ -8,7 +8,7 @@
 	                <p>Je hebt alle vragen al beantwoord. We adviseren om nu alvast een vervolgafspraak te maken om de uitgevoerde actiepunten om te zetten naar een werkagenda. De beheerder kan op de kalender een datum prikken zodat deze afspraak naar alle deelnemers van de groep kan worden gemaild.</p>
 	                @if ($scan->group->followup)
 						@if($scan->group->followup->datetime)
-						    <p  class="scandate page-highlight page-highlight-secondary">Er is een vervolgsessie gepland op: {{ date('d-m-Y', strtotime($scan->group->followup->datetime)) }} om {{ date('H:m', strtotime($scan->group->followup->datetime)) }}</p>
+						    <p  class="scandate page-highlight page-highlight-secondary">Er is een vervolgsessie gepland op: {{ date('d-m-Y', strtotime($scan->group->followup->datetime)) }} om {{ date('H:i', strtotime($scan->group->followup->datetime)) }}</p>
 		                @endif
 					@else
 					    <p  class="scandate page-highlight page-highlight-secondary">Er is nog geen vervolgafspraak gepland</p>

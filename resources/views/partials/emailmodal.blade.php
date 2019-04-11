@@ -16,7 +16,7 @@
 
         <p>Klik op deze link om aan deze scan mee te doen: <a href="{{ Request::root() }}/groep/{{ $group->id }}/sluitaan/{{ $group->code }}">{{ Request::root() }}/groep/{{ $group->id }}/sluitaan/{{ $group->code }}</a></p>
 
-        <p>De sessie staat gepland op: {{ date('d-m-Y', strtotime($scan->group->datetime)) }} om {{ date('H:m', strtotime($scan->group->datetime)) }}</p>
+        <p>De sessie staat gepland op: {{ date('d-m-Y', strtotime($scan->group->datetime)) }} om {{ date('H:i', strtotime($scan->group->datetime)) }}</p>
 
         <p>Ik neem binnenkort contact op voor een afspraak zodat we de scan gezamenlijk kunnen uitvoeren.</p>
 
