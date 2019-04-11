@@ -50,7 +50,7 @@
     <main class="flex-grow" id="app">
         @yield('content')
 
-        <portal-target name="modals"></portal-target>
+        <portal-target name="modals" multiple></portal-target>
     </main>
     
     @hasSection('prevnext')
@@ -62,6 +62,7 @@
 
     @include('partials.instructie')
     @include('partials.profiel')
+
 
     @include('partials.footer')
 

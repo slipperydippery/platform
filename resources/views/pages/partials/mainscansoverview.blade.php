@@ -108,12 +108,11 @@
                                                             </form>
                                                             <a class="dropdown-item" href="javascript:{}" onclick="document.getElementById('promootform{{ $thisscan->id }}').submit(); return false;">Promoot tot eigenaar</a>
 
-                                                            <form action="{{ route('scan.destroy' , $thisscan)}}" method="POST">
-                                                                <input name="_method" type="hidden" value="DELETE">
-                                                                {{ csrf_field() }}
-
-                                                                <button type="submit" class="dropdown-item">Verwijder deze scan</button>
-                                                            </form>
+                                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#confirmdelete{{ $thisscan->id }}">Verwijder deze scan</a>
+                                                            <portal to="modals">
+                                                                @component('components.deleteconfirm', ['thisscan' => $thisscan])
+                                                                @endcomponent
+                                                            </portal>
                                                         @endif
                                         
                                                     </div>
