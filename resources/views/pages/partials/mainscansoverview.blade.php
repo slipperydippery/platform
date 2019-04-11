@@ -44,7 +44,9 @@
                                         </copy-icon>
                                     </span>
                                     <br>
-                                    <a href="#"  data-toggle="modal" data-target="#voorbeeldmail">Bekijk voorbeeld email</a>
+                                    <a href="#"  data-toggle="modal" data-target="#voorbeeldmail{{ $scan->group->id }}">Bekijk voorbeeld email</a>
+                                    @component('components.emailcomponent', ['thisgroup' => $scan->group])
+                                    @endcomponent
                                 </em>
                             </p>
                         </div>
