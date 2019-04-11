@@ -4,7 +4,7 @@
 			<div class="col-sm-2"></div>
 				<div class="col-sm-2" v-for="question in theme.questions">
 					<strong>Vraag {{ question.id }} <br></strong>
-					<span v-b-tooltip.hover :title="question.question" html="true" v-html="question.title"></span>
+					<span v-b-tooltip.html :title="question.question" html="true" v-html="question.title"></span>
 				</div>
 		</div>
 		<div class="row resultstable--row--average">

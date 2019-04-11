@@ -81000,8 +81000,8 @@ var render = function() {
                 directives: [
                   {
                     name: "b-tooltip",
-                    rawName: "v-b-tooltip.hover",
-                    modifiers: { hover: true }
+                    rawName: "v-b-tooltip.html",
+                    modifiers: { html: true }
                   }
                 ],
                 attrs: { title: question.question, html: "true" },
