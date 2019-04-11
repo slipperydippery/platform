@@ -152,8 +152,33 @@
 	border: 2px solid lighten(desaturate($instantietype-6, 40), 20);
 	color: lighten(desaturate($instantietype-6, 40), 20);
 }
+
 .instantietype-6.title {
 	background: rgba($instantietype-6, 0.08);
+}
+
+.instantietype-7.active, .instantietype-7 .card-footer {
+	background: $instantietype-7;
+	border-width: 2px 0;
+	color: white;
+}
+.instantietype-7.inactive .card-footer {
+	background: lighten(desaturate($instantietype-7, 40), 20);
+	border-width: 2px 0;
+	color: white;
+}
+.instantietype-7 {
+	background: none;
+	border: 2px solid $instantietype-7;
+	color: $instantietype-7;
+}
+.instantietype-7.inactive {
+	background: none;
+	border: 2px solid lighten(desaturate($instantietype-7, 40), 20);
+	color: lighten(desaturate($instantietype-7, 40), 20);
+}
+.instantietype-7.title {
+	background: rgba($instantietype-7, 0.08);
 }
 
 .selected.active, .selected .card-footer {
@@ -186,6 +211,9 @@
 	border-left: 5px solid rgba($instantietype-5, 0.4);
 }
 .instantietype-6-leftborder {
+	border-left: 5px solid rgba($instantietype-6, 0.4);
+}
+.instantietype-7-leftborder {
 	border-left: 5px solid rgba($instantietype-6, 0.4);
 }
 
