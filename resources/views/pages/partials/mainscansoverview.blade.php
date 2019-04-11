@@ -147,14 +147,14 @@
     @foreach (auth()->user()->scans as $scan)
         @if (! $scan->group)
             <div class="row py-2 my-4 bg-white text-secondary border shadow">
-                <div class="col-12">
+                <div class="col-12 pt-2">
                     <h4>
                         <a href=" {{ route('scan.start', $scan) }} " class="flex-grow-1 mx-2 nowrap">{{ $scan->title }}</a> 
                         <a href=" {{ route('scan.edit', $scan) }} "><i class="material-icons float-right"> edit </i></a>
                     </h4>
 
-                    <div class="row">
-                        <div class="col">
+                    <div class="d-flex mx-2">
+                        <div class="flex-grow-1">
                             <p>
                                 <em>
                                     Gemeenten: 
@@ -166,7 +166,7 @@
                                 </em>
                             </p>
                         </div>
-                        <div class="col">
+                        <div class="align-self-end pb-3">
                             <a href=" {{ route('createcomparison.districts', $scan) }} " class="btn btn-outline-secondary btn-outline-secondary--nooutline btn-sm">Start vergelijking</a>
                             <a href=" {{ route('scan.start', $scan) }} " class="btn btn-outline-secondary btn-sm">Start sessie</a>
                         </div>

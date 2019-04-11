@@ -156,7 +156,6 @@
                 this.selecteddistricts.forEach( (thisdistrict) => {
                     numeralDistricts.push(thisdistrict.id);
                 });
-                console.log(numeralDistricts);
                 axios.post('/nieuwegroupsscan/gemeenten', {
                     districts: numeralDistricts,
                 })
@@ -165,22 +164,19 @@
                 })
             },
 
-            // updateGroupDistricts() {
-            //     var numeralDistricts = [];
-            //     var home = this;
-            //     this.selecteddistricts.forEach( (thisdistrict) => {
-            //         numeralDistricts.push(thisdistrict.id);
-            //     });
-            //     console.log(numeralDistricts);
-            //     axios.post('/sessie/' + this.scan_id + '/vergelijking/regios', {
-            //         scan: this.scan_id,
-            //         districts: numeralDistricts,
-            //     })
-            //     .then(function (response) {
-            //         window.location.href = '/sessie/' + home.scan_id + '/vergelijking/instantie'; 
-            //     })
-            // },
-
+            updateCompareDistricts() {
+                var numeralDistricts = [];
+                var home = this;
+                this.selecteddistricts.forEach( (thisdistrict) => {
+                    numeralDistricts.push(thisdistrict.id);
+                });
+                axios.post('/sessie/' + home.scan_id + '/vergelijking/regios', {
+                    districts: numeralDistricts,
+                })
+                .then(function (response) {
+                    window.location.href = '/sessie/' + home.scan_id + '/vergelijking/instantie'; 
+                })
+            },
             updateSingleDistricts() {
                 var numeralDistricts = [];
                 this.selecteddistricts.forEach( (thisdistrict) => {
