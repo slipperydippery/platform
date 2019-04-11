@@ -12,7 +12,7 @@
 
                 @if ($thisscan->group && $thisscan->group->scan->id == $thisscan->id)
                     <div class="alert alert-danger" role="alert">
-                        Dit is een groupssessie, door deze te verwijderen worden ook alle aangesloten sessies met gegevens verwijderd!
+                        Dit is een groepssessie, door deze te verwijderen worden ook alle aangesloten sessies met gegevens verwijderd!
                     </div>
                 @endif
 
