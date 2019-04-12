@@ -16,6 +16,7 @@ Route::post('2fa', 'TwoFactorController@verifyTwoFactor');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/cookies', 'PagesController@cookies')->name('cookies');
 
 Route::get('/dashboard', 'PagesController@dashboard')->name('dashboard')->middleware('auth');
 Route::get('/introductiefilm', 'PagesController@introductiefilm')->name('introductiefilm');
