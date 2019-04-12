@@ -48,7 +48,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="phone_number" class="col-sm-4 col-form-label text-md-right">{{ __('Telefoon nummer') }}</label>
+                            <label for="phone_number" class="col-sm-4 col-form-label text-md-right">{{ __('Mobiel telefoon nummer') }}</label>
 
                             <div class="col-md-6">
                                 <input id="phone_number" type="phone_number" class="form-control{{ $errors->has('phone_number') ? ' is-invalid' : '' }}" name="phone_number" value="{{ old('phone_number') }}" required autofocus>
