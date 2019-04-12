@@ -40,7 +40,7 @@
             <div class="py-2 my-4 bg-white text-secondary border shadow">
                 <div class="col-12 pt-2">
                     <h4>
-                        <a href=" {{ route('scan.start', $scan) }} " class="flex-grow-1 mx-2 nowrap">{{ $scan->group->title }}</a> 
+                        <a href=" {{ route('scan.start', $scan) }} " class="flex-grow-1 mx-2 nowrap text-uppercase">{{ $scan->group->title }}</a> 
                         @if ($scan->group->scan->user->id == Auth::user()->id)
                             <a href=" {{ route('scan.edit', $scan) }} "><i class="material-icons float-right"> edit </i></a>
                         @endif
@@ -171,7 +171,7 @@
             <div class="py-2 my-4 bg-white text-secondary border shadow">
                 <div class="col-12 pt-2">
                     <h4>
-                        <a href=" {{ route('scan.start', $scan) }} " class="flex-grow-1 mx-2 nowrap">{{ $scan->title }}</a> 
+                        <a href=" {{ route('scan.start', $scan) }} " class="flex-grow-1 mx-2 nowrap text-uppercase">{{ $scan->title }}</a> 
                         <a href=" {{ route('scan.edit', $scan) }} "><i class="material-icons float-right"> edit </i></a>
                     </h4>
 

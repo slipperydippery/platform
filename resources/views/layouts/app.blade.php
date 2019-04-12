@@ -64,6 +64,7 @@
     @include('partials.profiel')
 
 
+    @include('cookieConsent::index')
     @include('partials.footer')
 
 

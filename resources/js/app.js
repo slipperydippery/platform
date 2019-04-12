@@ -11,6 +11,10 @@ $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 })
 
+import 'lazysizes';
+// import a plugin Note: the *.min.js files are not included in the npm package.
+// import 'lazysizes/parent-fit/ls.parent-fit';
+
 window.Vue = require('vue');
 import BootstrapVue from 'bootstrap-vue'
 import PortalVue from 'portal-vue'
