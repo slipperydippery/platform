@@ -5,7 +5,13 @@
 		<div class="row">
 	        <div class="col-md-12">
 	            <div class="page--title">
-	                <h3 class="pagetitle">Thema {{ $theme->order }}: </h3>
+	                <em>Thema {{ $theme->order }}: </em>
+                    <h1 class="pagetitle">
+                        {{ $theme->title }}
+                        @if ($theme->info)
+                            <i class="material-icons clickable muted display-1" data-toggle="tooltip" data-placement="top" title=" {{ $theme->info }} "> info </i>
+                        @endif
+                    </h1>
 	                <p></p>
 	            </div>
 	        </div>
@@ -14,12 +20,7 @@
 			<div class="col-md-12">
 
                 <div class="themeintro">
-                	<h1 class="display-1">
-                		{{ $theme->title }}
-                		@if ($theme->info)
-                			<i class="material-icons clickable muted display-1" data-toggle="tooltip" data-placement="top" title=" {{ $theme->info }} "> info </i>
-                		@endif
-                	</h1>
+                	
                 </div>
 
 			</div>

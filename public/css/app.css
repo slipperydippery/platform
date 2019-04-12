@@ -15159,6 +15159,19 @@ span.selectable--passive:hover {
   border: 0px;
 }
 
+.card--block {
+  background: #def6f8;
+  color: primary;
+  border: none;
+}
+
+.card--block .card-body,
+.card--block .card-header,
+.card--block .block-title {
+  background: #def6f8;
+  color: #1C154B;
+}
+
 #welcomedeck .card-deck {
   display: grid;
 }

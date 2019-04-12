@@ -1,3 +1,25 @@
+<div class="accordion mb-4" id="accordionExample">
+    <div class="card card--block">
+        <div class="card-header position-relative" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <a href="#" class="stretched-link text-decoration-none">
+                <h3 class="mb-0 block-title">
+                        Wat is de Participatiescan?
+                        <i class="material-icons float-right">
+                            keyboard_arrow_down
+                        </i>
+                </h3>
+            </a>
+        </div>
+
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+                <p>De Participatiescan is een online kennis- en procestool. Via een resultaatgerichte analyse- en actiesessie ondersteunt de tool je om te komen tot een heldere Werkagenda. Een lokaal/regionaal actieplan voor effectieve samenwerking voor het naar werk begeleiden van jongeren waarbij de focus ligt op werk en talent, de kwaliteit van begeleiding, effectieve samenwerking en overige randvoorwaarden. Onderzoek toont aan dat dit de belangrijkste succesfactor voor kansvergroting op de arbeidsmarkt is. Met behulp van de Participatiescan wordt tijdens de analyse- en actiesessie door jou en jouw netwerkpartners de huidige aanpak gelegd naast twintig op onderzoek gebaseerde kwaliteitsnormen. Dit mondt automatisch uit in een selectie van concrete actie- en verbeterpunten waar jullie mee aan de slag gaan. Ook biedt de Participatiescan een schat aan informatie over tools, goede praktijkvoorbeelden, cijfers, tips en andere relevante kennis en inzichten om minder-zelfredzame jongeren succesvol te begeleiden naar de arbeidsmarkt.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <a class="nav-item nav-link active" id="nav-groups-tab" data-toggle="tab" href="#nav-groups" role="tab" aria-controls="nav-groups" aria-selected="true">Dit zijn je groepssessies</a>
@@ -6,8 +28,8 @@
 </nav>
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-groups" role="tabpanel" aria-labelledby="nav-groups-tab">
-    <div class="row">
-        <div class="col mt-4">
+    <div class="">
+        <div class="col mt-4 d-flex justify-content-end">
             <a href=" {{ route('creategroupscan.title') }} " class="btn btn-secondary">Maak een groepssessie aan</a>
         </div>
     </div>
@@ -15,7 +37,7 @@
 
     @foreach (auth()->user()->scans as $scan)
         @if ($scan->group)
-            <div class="row py-2 my-4 bg-white text-secondary border shadow">
+            <div class="py-2 my-4 bg-white text-secondary border shadow">
                 <div class="col-12 pt-2">
                     <h4>
                         <a href=" {{ route('scan.start', $scan) }} " class="flex-grow-1 mx-2 nowrap">{{ $scan->group->title }}</a> 
@@ -139,14 +161,14 @@
       
   </div>
   <div class="tab-pane fade" id="nav-individual" role="tabpanel" aria-labelledby="nav-individual-tab">
-    <div class="row">
-        <div class="col mt-4">
+    <div class="">
+        <div class="col mt-4 d-flex justify-content-end">
             <a href=" {{ route('createsinglescan.title') }} " class="btn btn-secondary">Maak een individuele scan aan</a>
         </div>
     </div>
     @foreach (auth()->user()->scans as $scan)
         @if (! $scan->group)
-            <div class="row py-2 my-4 bg-white text-secondary border shadow">
+            <div class="py-2 my-4 bg-white text-secondary border shadow">
                 <div class="col-12 pt-2">
                     <h4>
                         <a href=" {{ route('scan.start', $scan) }} " class="flex-grow-1 mx-2 nowrap">{{ $scan->title }}</a> 

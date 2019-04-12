@@ -1,0 +1,10 @@
+.card--block {
+	background: #def6f8;
+	color: primary;
+	border: none;
+	.card-body, .card-header, .block-title {
+		background: #def6f8;
+		color: $primary;
+
+	}
+}
