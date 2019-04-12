@@ -5,7 +5,7 @@
 	        <div class="col-12">
 	            <div class="page--title">
 	                <h1 class="pagetitle">Kennismaken</h1>
-	                <p>Waarschijnlijk kent niet iedereen elkaar. We starten met een voorstelrondje waarbij iedereen het volgende over zichzelf vertelt:</p>
+	                <p>Waarschijnlijk kent niet iedereen elkaar. We starten met een voorstelrondje waarbij iedereen in ongeveer een minuut het volgende over zichzelf vertelt:</p>
 	            </div>
 	        </div>
 	    </div>

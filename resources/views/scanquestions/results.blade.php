@@ -15,7 +15,7 @@
 	        </div>
 	        <div class="col d-flex">
 	            <div class="flex-grow-1">
-                    <p>Dit zijn de scores van de deelnemers. Bespreek met elkaar wat er uit springt en/of over welke onderwerpen sterk van mening wordt verschild. In het volgende scherm kunnen de belangrijkste twee of drie verbeterpunten worden benoemd.</p>
+                    <p>Dit zijn de scores van de deelnemers. Bespreek met elkaar wat er uit springt en/of over welke onderwerpen sterk van mening wordt verschild. In het volgende scherm kunnen aantekening worden gemaakt om de belangrijkste twee of drie verbeterpunten later uit te werken.</p>
 	            </div>
 	            <div class="">
 	            	<countdown date="600"></countdown>

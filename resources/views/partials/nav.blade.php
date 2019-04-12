@@ -48,8 +48,7 @@
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href=" # "> Contact </a>
-                        <a class="dropdown-item" href="/pdf/Handleiding digitale gesprekshulp.pdf" target="blank"> Handleiding </a>
-                        <a class="dropdown-item" href="/pdf/Literatuurlijst digitale gesprekshulp.pdf" target="blank"> Literatuurlijst </a>
+                        <a class="dropdown-item" href="#" target="blank"> Handleiding </a>
                         <a class="dropdown-item" href="#"> Privacyverklaring </a>
                         <a class="dropdown-item" href=" # "> Cookieverklaring </a>
                     </div>

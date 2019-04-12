@@ -10,7 +10,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				Hier een overzicht van de resultaten.
+				Hier een overzicht van de resultaten. Bespreek kort met elkaar wat jouw opvalt. 
 
                 <algemeenbeeldresultaten
                     :workscan=" {{ $scan }} "
