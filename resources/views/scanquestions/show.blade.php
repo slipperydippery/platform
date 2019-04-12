@@ -77,7 +77,6 @@
 						<strong>Succesfactor:</strong> {!! $question->successfactor !!}
 	                </div>
 	                <a href="/img/Tips voor het gesprek.jpg" target="_blank">
-	                <a href="/pdf/Handleiding digitale gesprekshulp.pdf" class="btn"> Lees de handleiding</a>
 	            </div>
 	            <div class="modal-footer">
 	                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluit</button>
