@@ -27,9 +27,9 @@
                             
                             @endif
 
-                            <p>Ben je al erg benieuwd hoe de sessie er uit komt te zien? Dan kun je al wel een losse scan aanmaken en die doorlopen. De resultaten hiervan kan je ook meteen vergelijken met andere scans om te zien waar jij staat.</p>
+                            <p>Ben je al erg benieuwd hoe de sessie er uit komt te zien? Dan kun je al wel een individuele scan aanmaken en die doorlopen. De resultaten hiervan kan je ook meteen vergelijken met andere scans om te zien waar jij staat.</p>
 
-                            <a href=" {{ route('createsinglescan.title') }} " class="btn btn-secondary">Maak een losse scan aan</a>
+                            <a href=" {{ route('createsinglescan.title') }} " class="btn btn-secondary">Maak een individuele scan aan</a>
                             <a href=" {{ route('dashboard') }} " class="btn  btn-outline-primary btn-outline-primary--nooutline">Ga terug naar de startpagina</a>
                             <br >
                         </div>
