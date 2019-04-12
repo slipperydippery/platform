@@ -17,7 +17,7 @@
                                 <p class="text-center">
                                     <a href=" {{ route('managegroupscan.unlock', $scan->group) }} ">
                                         <i class="material-icons md-48"> lock </i> <br>
-                                        <span class="btn btn-primary">Ontgrendel de groep</span>
+                                        <span class="btn btn-primary bounce-fade-top">Ontgrendel de groep</span>
                                     </a>
                                 </p>
                             @else

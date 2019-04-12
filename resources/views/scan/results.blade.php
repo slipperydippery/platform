@@ -6,6 +6,7 @@
 	            <div class="page--title">
 	                <h1 class="pagetitle">Overzicht resultaten van {{ $scan->title }} </h1>
 	                <p>Hieronder kun je de resultaten van de sessie nogmaals bekijken. Klik op de tabbladen om door de thema's heen te schakelen.</p>
+	                <a href=" {{ route('scan.show', $scan) }} " class="btn btn-primary"> Terug overzicht scan </a>
 	                <a href=" {{ route('dashboard') }} " class="btn btn-primary"> Terug naar de startpagina </a>
 	            </div>
 	        </div>
