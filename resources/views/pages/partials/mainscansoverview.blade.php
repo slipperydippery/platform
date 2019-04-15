@@ -62,9 +62,9 @@
                     <br>
                     <strong>Datum sessie:</strong> {{ date('d-m-Y', strtotime($scan->group->datetime)) }} om {{ date('H:i', strtotime($scan->group->datetime)) }}
                     <br>
-                    Gebruik onderstaande link om jouw netwerkpartners voor deze sessie uit te nodigen:
+                    <span class="pt-2 d-inline-block small">Gebruik onderstaande link om jouw netwerkpartners voor deze sessie uit te nodigen:</span>
                     <br>
-                    <span class="text-nowrap">
+                    <span class="text-nowrap small">
                         <span class="" id="groupcode">{{ Request::root() }}/groep/{{ $scan->group->id }}/sluitaan/{{ $scan->group->code }}</span> 
                         <copy-icon
                             copy_content=" {{ Request::root() }}/groep/{{ $scan->group->id }}/sluitaan/{{ $scan->group->code }} "
@@ -73,7 +73,7 @@
                     </span>
                     <br>
                 <div class="col-12 my-2 d-flex justify-content-end">
-                    <a href="#"  class="btn btn-outline-secondary btn-outline-secondary--nooutline btn-sm" data-toggle="modal" data-target="#voorbeeldmail{{ $scan->group->id }}">Voorbeeld email</a>
+                    <a href="#"  class="btn btn-outline-secondary btn-outline-secondary--nooutline btn-sm" data-toggle="modal" data-target="#voorbeeldmail{{ $scan->group->id }}">Voorbeeld e-mail</a>
                     @component('components.emailcomponent', ['thisgroup' => $scan->group])
                     @endcomponent
                     <a href=" {{ route('scanquestions.complete', $scan) }} " class="btn btn-outline-secondary btn-outline-secondary--nooutline btn-sm">Bekijk resultaten</a>
@@ -103,6 +103,7 @@
                                 </th>
                             </tr>
                         </thead>
+
                         @foreach ($scan->group->scans as $thisscan)
                             @if ($thisscan->id !== $scan->group->scan->id)
                                 <tbody>

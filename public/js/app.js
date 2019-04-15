@@ -87134,6 +87134,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_clipboard2___default.a);
@@ -87306,7 +87307,7 @@ var render = function() {
             }
           ],
           ref: "copyicon",
-          staticClass: "material-icons clickable",
+          staticClass: "material-icons clickable md-18",
           attrs: { id: "copy-icon" }
         },
         [_vm._v(" file_copy ")]

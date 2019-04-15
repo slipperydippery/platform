@@ -5,44 +5,44 @@
                 <div class="progressbar  d-flex justify-content-between">
                     <div class="progress-element">
                         @if ( url()->current() == route('creategroupscan.title') )
-                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Nieuwe group: Naam">
+                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Nieuwe groep: Naam">
                                 <img src="/img/simplecircle_secondary_full.svg" alt="">
                             </span>
                         @else
-                            <a href="#" class="" data-toggle="tooltip" data-placement="top" title="Nieuwe group: Naam">
+                            <a href="#" class="" data-toggle="tooltip" data-placement="top" title="Nieuwe groep: Naam">
                                 <img src="/img/simplecircle_secondary.svg" alt="">
                             </a>
                         @endif
                     </div>
                     <div class="progress-element">
                         @if ( url()->current() == route('creategroupscan.districts') )
-                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Nieuwe group: Gemeenten">
+                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Nieuwe groep: Gemeenten">
                                 <img src="/img/simplecircle_secondary_full.svg" alt="">
                             </span>
                         @else
-                            <a href="#" class="" data-toggle="tooltip" data-placement="top" title="Nieuwe group: Gemeenten">
+                            <a href="#" class="" data-toggle="tooltip" data-placement="top" title="Nieuwe groep: Gemeenten">
                                 <img src="/img/simplecircle_secondary.svg" alt="">
                             </a>
                         @endif
                     </div>
                     <div class="progress-element">
                         @if ( url()->current() == route('creategroupscan.instantie') )
-                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Nieuwe group: Instantie">
+                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Nieuwe groep: Instantie">
                                 <img src="/img/simplecircle_secondary_full.svg" alt="">
                             </span>
                         @else
-                            <a href="#" class="" data-toggle="tooltip" data-placement="top" title="Nieuwe group: Instantie">
+                            <a href="#" class="" data-toggle="tooltip" data-placement="top" title="Nieuwe groep: Instantie">
                                 <img src="/img/simplecircle_secondary.svg" alt="">
                             </a>
                         @endif
                     </div>
                     <div class="progress-element">
                         @if ( url()->current() == route('creategroupscan.datetime') )
-                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Nieuwe group: Datum">
+                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Nieuwe groep: Datum">
                                 <img src="/img/simplecircle_secondary_full.svg" alt="">
                             </span>
                         @else
-                            <a href="#" class="" data-toggle="tooltip" data-placement="top" title="Nieuwe group: Datum">
+                            <a href="#" class="" data-toggle="tooltip" data-placement="top" title="Nieuwe groep: Datum">
                                 <img src="/img/simplecircle_secondary.svg" alt="">
                             </a>
                         @endif
