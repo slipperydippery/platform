@@ -1,7 +1,7 @@
 <template>
 	<div class="card">
 		<div class="card-header">
-			Basis gegevens
+			Basisgegevens
 		</div>
 		<div class="card-body">
 			<div class="form-group">

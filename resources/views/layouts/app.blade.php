@@ -36,6 +36,7 @@
 </head>
 
 <body class="d-flex flex-column">
+    @include('cookieConsent::index')
     @include('partials.nav')
 
     @if ($status = Session::get('status'))
@@ -64,7 +65,6 @@
     @include('partials.profiel')
 
 
-    @include('cookieConsent::index')
     @include('partials.footer')
 
 

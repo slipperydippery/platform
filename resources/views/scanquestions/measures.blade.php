@@ -15,7 +15,7 @@
 	        </div>
 	        <div class="d-flex">
 	        	<div class="flex-grow-1">
-	                <p>Selecteer de belangrijkste verbeterpunten en licht eventueel toe wat de concrete actiepunten zijn. Deze notities komen verderop in de sessie terug. Alleen de beheerder kan actiepunten aanvinken en notities maken.</p>
+	                <p>Selecteer de belangrijkste verbeterpunten en licht eventueel toe wat de concrete verbeterpunten zijn. Deze notities komen verderop in de sessie terug. Alleen de beheerder kan verbeterpunten aanvinken en notities maken.</p>
 	            </div>
 	            <div class="">
 					<countdown date="300"></countdown>
@@ -67,7 +67,8 @@
 							</div>
 							
 							<div class="row">
-								<div class="col-sm-2"> Actiepunten - <em>steekwoorden</em></div>
+
+								<div class="col-sm-2"> Verbeterpunten - <em>steekwoorden</em></div>
 								@foreach ($theme->questions as $question)
 									<div class="col-sm-2">
 										@if ($scan->group)

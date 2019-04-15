@@ -81132,7 +81132,7 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("Sla gemeenten op")]
+              [_vm._v("Sla gemeente(n) op")]
             )
           ])
         : _vm._e()
@@ -86248,7 +86248,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
     _c("div", { staticClass: "card-header" }, [
-      _vm._v("\n\t\tBasis gegevens\n\t")
+      _vm._v("\n\t\tBasisgegevens\n\t")
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [

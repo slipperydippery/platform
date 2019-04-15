@@ -83,7 +83,7 @@
 										</div>
 										
 										<div class="row">
-											<div class="col-sm-2"> Actiepunten - <em>steekwoorden</em></div>
+											<div class="col-sm-2"> Verbeterpunten - <em>steekwoorden</em></div>
 											@foreach ($theme->questions as $question)
 												<div class="col-sm-2">
 													@if ($scan->group)

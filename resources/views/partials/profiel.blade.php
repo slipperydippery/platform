@@ -43,11 +43,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-sm-4 my-2">
+                            <div class="col my-2">
                                 <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="sharepermission" {{ Auth::user()->sharepermission ? 'checked' : '' }}> {{ __('Mijn scans zijn anoniem te vergelijken door andere gebruikers') }}
-                                </label>
+                                    <label>
+                                        <input type="checkbox" name="sharepermission" {{ Auth::user()->sharepermission ? 'checked' : '' }}> {{ __('Mijn scans zijn anoniem te vergelijken door andere gebruikers') }}
+                                    </label>
                                 </div>
                             </div>
                         </div>

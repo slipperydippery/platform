@@ -9,7 +9,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Hier komt een tekst over hoe de Participatie.scan werkt, en een link naar de handleiding.</p>
+                    <p>Hier komt een tekst over hoe de Participatie.scan werkt en een link naar de handleiding.</p>
                     
                     <a href="#" class="btn"> Lees de handleiding</a>
                 </div>

@@ -34,7 +34,7 @@
 		</div>
 		<div class="col-12 p-3">
 			<div class="form-group text-right" v-if="selecteddistricts.length">
-				<button class="btn btn-secondary btn-lg" @click.prevent="updateDistricts">Sla gemeenten op</button>
+				<button class="btn btn-secondary btn-lg" @click.prevent="updateDistricts">Sla gemeente(n) op</button>
 			</div>
 		</div>
 	</div>
