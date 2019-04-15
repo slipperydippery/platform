@@ -11,7 +11,7 @@ use Dyrynda\Database\Support\GeneratesUuid;
 class Group extends Model
 {
     use GeneratesUuid;
-	protected $fillable = ['title', 'code', 'user_id', 'scan_id'];
+	protected $fillable = ['title', 'code', 'user_id', 'scan_id', 'unlocked'];
 
     public function scan()
     {

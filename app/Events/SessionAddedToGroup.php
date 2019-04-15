@@ -13,7 +13,6 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 class SessionAddedToGroup implements ShouldBroadcast
 {
     public $group_id;
-    public $scan_id;
 
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -22,11 +21,10 @@ class SessionAddedToGroup implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($group_id, $scan_id)
+    public function __construct($group_id)
     {
         //
         $this->group_id = $group_id;
-        $this->scan_id = $scan_id;
     }
 
     /**
@@ -36,6 +34,6 @@ class SessionAddedToGroup implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('sessionsadded.' . $this->group_id . '.' . $this->scan_id);
+        return new PrivateChannel('sessionsadded.' . $this->group_id);
     }
 }

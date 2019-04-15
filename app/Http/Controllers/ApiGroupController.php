@@ -46,7 +46,7 @@ class ApiGroupController extends Controller
      */
     public function show(Group $group)
     {
-        return Group::with('scans.user', 'scans.answers', 'scans.instantie', 'user')->where('id', $group->id)->get()->first();
+        return Group::with('scan.user', 'scan.districts', 'scans.user', 'scans.answers', 'scans.instantie', 'user')->where('id', $group->id)->get()->first();
     }
 
     /**
@@ -69,7 +69,13 @@ class ApiGroupController extends Controller
      */
     public function update(Request $request, Group $group)
     {
-        //
+        $group->title = $request['group']['title'];
+        $group->scan_id = $request['group']['scan_id'];
+        $group->datetime = $request['group']['datetime'];
+        $group->unlocked = $request['group']['unlocked'];
+
+        $group->save();
+        return $group;
     }
 
     /**

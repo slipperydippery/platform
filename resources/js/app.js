@@ -105,6 +105,8 @@ Vue.component('select-compare-scans', require('./components/SelectCompareScans.v
 Vue.component('edit-scan', require('./components/EditScan.vue'));
 Vue.component('edit-districts', require('./components/EditDistricts'));
 
+Vue.component('scan-overview', require('./components/ScanOverview.vue'));
+
 // Utility
 Vue.component('countdown', require('./components/Countdown.vue'));
 

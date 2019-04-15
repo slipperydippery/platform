@@ -36,7 +36,7 @@ class JoinGroupScanController extends Controller
     	$attributes['group_id'] = $group->id;
     	$attributes['scanmodel_id'] = $group->scan->scanmodel->id;
     	$scan = Scan::register($attributes);
-        SessionAddedToGroup::dispatch($group->id, $scan->id);
+        SessionAddedToGroup::dispatch($group->id);
     	return redirect()->route('joingroupscan.created', $scan);
     }
 
