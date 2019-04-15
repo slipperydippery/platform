@@ -9,6 +9,8 @@ Route::get('/', function () {
 });
 
 Auth::routes(['verify' => true]);
+Route::get('/wijzigwachtwoord','Auth\ChangePasswordController@show')->name('changepassword.show');
+Route::post('/wijzigwachtwoord','Auth\ChangePasswordController@update')->name('changepassword.update');
 
 // Two Factor Authentication
 Route::get('2fa', 'TwoFactorController@showTwoFactorForm');

@@ -55,7 +55,7 @@
 	                    <th scope="col">#</th>
 	                    <th scope="col"> {{ group.user.name }} </th>
 	                    <th scope="col">Beheerder</th>
-	                    <th scope="col"> 0 / 20 </th>
+	                    <th scope="col"> {{ answercount(group.scan) }} / 20 </th>
 	                    <th scope="col">
 	                        <div class="dropdown float-right" v-if="! isAdmin">
 	                            <button class="btn btn-secondary dropdown-toggle dropdown-toggle__round" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -122,6 +122,9 @@
         	window.Echo.private('sessionsadded.' + this.group_id).listen('SessionAddedToGroup', e => {
         	    this.getGroup(this.group_id);
         	});
+        	window.Echo.private('groupscores.' + this.group_id).listen('GroupscoresUpdated', e => {
+        	    this.getGroup(this.group_id);
+        	});
         },
 
         computed: {
@@ -175,6 +178,14 @@
         	toggleLock() {
         		this.group.unlocked = ! this.group.unlocked;
         		this.updateGroup(this.group_id);
+        	},
+
+        	answercount(thisscan){
+        		var answercount = 0;
+        		thisscan.answers.forEach( (thisanswer) => {
+        			thisanswer.answer ? answercount++ : '';
+        		} )
+        		return answercount;
         	},
         },
     }

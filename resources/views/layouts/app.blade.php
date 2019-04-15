@@ -63,6 +63,8 @@
 
     @include('partials.instructie')
     @include('partials.profiel')
+    @component('components.deleteaccountconfirm')
+    @endcomponent
 
 
     @include('partials.footer')

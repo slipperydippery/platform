@@ -13,5 +13,5 @@
 
 <!-- Add Submit Field -->
 <div class="form-group text-right">
-    <input type="submit" value=" {{ $submittext }} " class="btn btn-secondary btn-lg" />
+    <input type="submit" value=" {{ $submittext }} " class="btn btn-primary form-control" />
 </div>

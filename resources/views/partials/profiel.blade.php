@@ -60,15 +60,10 @@
                 </div>
                 <div class="modal-footer py-q">  
                     <div class="col d-flex justify-content-end my-0">
-                        <a class="btn btn-link clearfix float-right" href="{{ route('password.request') }}">
+                        <a class="btn btn-link clearfix float-right" href="{{ route('changepassword.show') }}">
                             {{ __('Wijzig wachtwoord') }}
                         </a>
-                        <form action="{{ route('user.destroy' , Auth::user())}}" method="POST">
-                            <input name="_method" type="hidden" value="DELETE">
-                            {{ csrf_field() }}
-
-                            <button type="submit" class="btn btn-link text-danger float-right">Verwijder mijn account</button>
-                        </form>
+                        <a class="btn btn-link text-danger float-right" href="#" data-toggle="modal" data-target="#confirmdeleteaccount">Verwijder mijn account</a>
                     </div>
                 </div>
             </div>

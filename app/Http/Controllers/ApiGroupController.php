@@ -46,7 +46,7 @@ class ApiGroupController extends Controller
      */
     public function show(Group $group)
     {
-        return Group::with('scan.user', 'scan.districts', 'scans.user', 'scans.answers', 'scans.instantie', 'user')->where('id', $group->id)->get()->first();
+        return Group::with('scan.user', 'scan.answers', 'scan.districts', 'scans.user', 'scans.answers', 'scans.instantie', 'user')->where('id', $group->id)->get()->first();
     }
 
     /**

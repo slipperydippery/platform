@@ -81126,7 +81126,7 @@ var render = function() {
             _c(
               "button",
               {
-                staticClass: "btn btn-secondary btn-lg",
+                staticClass: "btn btn-primary form-control",
                 on: {
                   click: function($event) {
                     $event.preventDefault()
@@ -87526,6 +87526,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               window.Echo.private('sessionsadded.' + this.group_id).listen('SessionAddedToGroup', function (e) {
                      _this.getGroup(_this.group_id);
               });
+              window.Echo.private('groupscores.' + this.group_id).listen('GroupscoresUpdated', function (e) {
+                     _this.getGroup(_this.group_id);
+              });
        },
 
 
@@ -87572,6 +87575,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               toggleLock: function toggleLock() {
                      this.group.unlocked = !this.group.unlocked;
                      this.updateGroup(this.group_id);
+              },
+              answercount: function answercount(thisscan) {
+                     var answercount = 0;
+                     thisscan.answers.forEach(function (thisanswer) {
+                            thisanswer.answer ? answercount++ : '';
+                     });
+                     return answercount;
               }
        }
 });
@@ -87742,7 +87752,11 @@ var render = function() {
                   _vm._v(" "),
                   _c("th", { attrs: { scope: "col" } }, [_vm._v("Beheerder")]),
                   _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v(" 0 / 20 ")]),
+                  _c("th", { attrs: { scope: "col" } }, [
+                    _vm._v(
+                      " " + _vm._s(_vm.answercount(_vm.group.scan)) + " / 20 "
+                    )
+                  ]),
                   _vm._v(" "),
                   _c("th", { attrs: { scope: "col" } }, [
                     !_vm.isAdmin
