@@ -55,7 +55,7 @@
 	                    <th scope="col">#</th>
 	                    <th scope="col"> {{ group.user.name }} </th>
 	                    <th scope="col">Beheerder</th>
-	                    <th scope="col"> {{ answercount(group.scan) }} / 20 </th>
+	                    <th scope="col"> {{ answercount(group.scan) }} / {{ questioncount(group.scan) }} </th>
 	                    <th scope="col">
 	                        <div class="dropdown float-right" v-if="! isAdmin">
 	                            <button class="btn btn-secondary dropdown-toggle dropdown-toggle__round" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -75,7 +75,7 @@
 	            		<th scope="row">1</th>
 	            		<td> {{ scan.user.name }} </td>
 	            		<td> {{ scan.instantie.title }} </td>
-	            		<td> 0 </td>
+	            		<td> {{ answercount(scan) }} / {{ questioncount(scan) }} </td>
 	            		<td>
 	            			<div class="dropdown float-right" v-if="scan.user.id !== user_id ">
 	            			    <button class="btn btn-secondary dropdown-toggle dropdown-toggle__round" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -186,6 +186,10 @@
         			thisanswer.answer ? answercount++ : '';
         		} )
         		return answercount;
+        	},
+
+        	questioncount(thisscan){
+        		return thisscan.answers.length;
         	},
         },
     }

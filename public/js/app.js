@@ -87582,6 +87582,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             thisanswer.answer ? answercount++ : '';
                      });
                      return answercount;
+              },
+              questioncount: function questioncount(thisscan) {
+                     return thisscan.answers.length;
               }
        }
 });
@@ -87754,7 +87757,11 @@ var render = function() {
                   _vm._v(" "),
                   _c("th", { attrs: { scope: "col" } }, [
                     _vm._v(
-                      " " + _vm._s(_vm.answercount(_vm.group.scan)) + " / 20 "
+                      " " +
+                        _vm._s(_vm.answercount(_vm.group.scan)) +
+                        " / " +
+                        _vm._s(_vm.questioncount(_vm.group.scan)) +
+                        " "
                     )
                   ]),
                   _vm._v(" "),
@@ -87793,7 +87800,15 @@ var render = function() {
                           _vm._v(" " + _vm._s(scan.instantie.title) + " ")
                         ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(" 0 ")]),
+                        _c("td", [
+                          _vm._v(
+                            " " +
+                              _vm._s(_vm.answercount(scan)) +
+                              " / " +
+                              _vm._s(_vm.questioncount(scan)) +
+                              " "
+                          )
+                        ]),
                         _vm._v(" "),
                         _c("td", [
                           scan.user.id !== _vm.user_id
