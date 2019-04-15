@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use App\User;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -19,9 +20,10 @@ class PagesController extends Controller
         // $this->middleware('two_factor');
     }
     
-    public function dashboard()
+    public function dashboard(User $user)
     {
-        $user = Auth::user();
+        session()->flash('newsinglesessionflash', session('newsinglesession'));
+        session()->forget('newsinglesession');
     	return view('pages.dashboard', compact('user'));
     }
 

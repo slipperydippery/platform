@@ -15256,5 +15256,25 @@ span.selectable--passive:hover {
   text-align: center;
 }
 
+.popover {
+  padding: 0.7rem;
+  background: #def6f8;
+}
+
+.popover .popover-header {
+  font-size: 1.2rem;
+  background: none;
+  border: none;
+}
+
+.popover .popover-body {
+  color: #1C154B;
+}
+
+.bs-popover-top .arrow::after,
+.bs-popover-auto[x-placement^="top"] .arrow::after {
+  border-top-color: #def6f8;
+}
+
 
 /*# sourceMappingURL=app.css.map*/

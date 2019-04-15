@@ -7,6 +7,7 @@ use App\Scan;
 use App\Group;
 use App\Instantie;
 use Illuminate\Http\Request;
+use App\Events\SessionAddedToGroup;
 
 class JoinGroupScanController extends Controller
 {
@@ -35,6 +36,7 @@ class JoinGroupScanController extends Controller
     	$attributes['group_id'] = $group->id;
     	$attributes['scanmodel_id'] = $group->scan->scanmodel->id;
     	$scan = Scan::register($attributes);
+        SessionAddedToGroup::dispatch($group->id, $scan->id);
     	return redirect()->route('joingroupscan.created', $scan);
     }
 

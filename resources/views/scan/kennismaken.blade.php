@@ -33,7 +33,7 @@
 			<div class="col-md-12">
 				@if ($scan->group_id)
 					<div class="row kennismaken py-3">
-					    <div class="col-sm-2">
+					    <div class="col-sm-2 d-flex align-items-stretch mb-5">
 					        <div class="card shadow owner {{ $scan->group->user->isOnline() ? '' : 'inactive' }} ">
 					            <div class="card-icons card-header py-0 px-2 mt-1 text-right bg-white">
 					                <i class="material-icons clickable"  data-toggle="tooltip" data-placement="top" title="Beheerder"> star </i>

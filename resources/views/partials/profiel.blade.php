@@ -43,35 +43,33 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col">
+                            <div class="col-sm-4 my-2">
                                 <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="sharepermission" {{ Auth::user()->sharepermission ? 'checked' : '' }}> {{ __('Mijn scans zijn anoniem te vergelijken door andere gebruikers') }}
-                                    </label>
+                                <label>
+                                    <input type="checkbox" name="sharepermission" {{ Auth::user()->sharepermission ? 'checked' : '' }}> {{ __('Mijn scans zijn anoniem te vergelijken door andere gebruikers') }}
+                                </label>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary float-right">
-                            {{ __('Sla op') }}
-                        </button>
-                    </form>
-
-                    <div class="form-group row">
-                        <div class="col">
-                            <a class="btn btn-link clearfix float-right" href="{{ route('password.request') }}">
-                                {{ __('Wijzig wachtwoord') }}
-                            </a>
+                        <div class="col-12 d-flex justify-content-end my-3">
+                            <button type="submit" class="btn btn-primary float-right">
+                                {{ __('Sla op') }}
+                            </button>
                         </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <form action="{{ route('user.destroy' , Auth::user())}}" method="POST">
-                        <input name="_method" type="hidden" value="DELETE">
-                        {{ csrf_field() }}
-
-                        <button type="submit" class="btn btn-danger mr-auto">Verwijder mijn account</button>
                     </form>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluit</button>
+                </div>
+                <div class="modal-footer py-q">  
+                    <div class="col d-flex justify-content-end my-0">
+                        <a class="btn btn-link clearfix float-right" href="{{ route('password.request') }}">
+                            {{ __('Wijzig wachtwoord') }}
+                        </a>
+                        <form action="{{ route('user.destroy' , Auth::user())}}" method="POST">
+                            <input name="_method" type="hidden" value="DELETE">
+                            {{ csrf_field() }}
+
+                            <button type="submit" class="btn btn-link text-danger float-right">Verwijder mijn account</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

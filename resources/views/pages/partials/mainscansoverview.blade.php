@@ -19,11 +19,19 @@
     </div>
 </div>
 
-
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <a class="nav-item nav-link active" id="nav-groups-tab" data-toggle="tab" href="#nav-groups" role="tab" aria-controls="nav-groups" aria-selected="true">Dit zijn je groepssessies</a>
-        <a class="nav-item nav-link" id="nav-individual-tab" data-toggle="tab" href="#nav-individual" role="tab" aria-controls="nav-individual" aria-selected="false">Dit zijn je individuele scans</a>
+
+        <a class="nav-item nav-link" id="nav-individual-tab" data-toggle="tab" href="#nav-individual" role="tab" aria-controls="nav-individual" aria-selected="false">
+            @if ($thisgroup = Session::get('newsinglesessionflash'))
+                <span  id="singlescan" data-toggle="popover" data-placement="top" title="Nieuwe sessie is gemaakt!" data-content="Je individuele sessie ({{ $thisgroup->title }}) kun je vinden in dit tabblad!">
+                    Dit zijn je individuele scans
+                </span>
+            @else
+                Dit zijn je individuele scans
+            @endif
+        </a>
     </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
@@ -35,48 +43,42 @@
     </div>
 
 
-    @foreach (auth()->user()->scans as $scan)
+    @foreach (auth()->user()->scans->sortByDesc('updated_at') as $scan)
         @if ($scan->group)
             <div class="py-2 my-4 bg-white text-secondary border shadow">
                 <div class="col-12 pt-2">
                     <h4>
-                        <a href=" {{ route('scan.start', $scan) }} " class="flex-grow-1 mx-2 nowrap text-uppercase">{{ $scan->group->title }}</a> 
+                        <a href=" {{ route('scan.start', $scan) }} " class="flex-grow-1 nowrap text-uppercase">{{ $scan->group->title }}</a> 
                         @if ($scan->group->scan->user->id == Auth::user()->id)
                             <a href=" {{ route('scan.edit', $scan) }} "><i class="material-icons float-right"> edit </i></a>
                         @endif
                     </h4>
-                    <div class="d-flex mx-2">
-                        <div class="flex-grow-1">
-                            <p>
-                                <em>
-                                    Gemeenten: 
-                                    @foreach ($scan->districts as $district)
-                                        {!! $district->name !!}@if(! $loop->last),@endif
-                                    @endforeach
-                                    <br>
-                                    Datum sessie: {{ date('d-m-Y', strtotime($scan->group->datetime)) }} om {{ date('H:i', strtotime($scan->group->datetime)) }}
-                                    <br>
-                                    Gebruik onderstaande link om jouw netwerkpartners voor deze sessie uit te nodigen:
-                                    <br>
-                                    <span class="text-nowrap">
-                                        <span id="groupcode">{{ Request::root() }}/groep/{{ $scan->group->id }}/sluitaan/{{ $scan->group->code }}</span> 
-                                        <copy-icon
-                                            copy_content=" {{ Request::root() }}/groep/{{ $scan->group->id }}/sluitaan/{{ $scan->group->code }} "
-                                        >
-                                        </copy-icon>
-                                    </span>
-                                    <br>
-                                    <a href="#"  data-toggle="modal" data-target="#voorbeeldmail{{ $scan->group->id }}">Voorbeeld email</a>
-                                    @component('components.emailcomponent', ['thisgroup' => $scan->group])
-                                    @endcomponent
-                                </em>
-                            </p>
-                        </div>
-                        <div class="align-self-end pb-3">
-                            <a href=" {{ route('scanquestions.complete', $scan) }} " class="btn btn-outline-secondary btn-outline-secondary--nooutline btn-sm">Bekijk resultaten</a>
-                            <a href=" {{ route('scan.start', $scan) }} " class="btn btn-outline-secondary btn-sm">Start sessie</a>
-                        </div>
-                    </div>
+                </div>
+                <div class="col-12">
+                    <strong>Gemeenten: </strong>
+                    @foreach ($scan->districts as $district)
+                        <em>{!! $district->name !!}@if(! $loop->last),@endif</em>
+                    @endforeach
+                    <br>
+                    <strong>Datum sessie:</strong> {{ date('d-m-Y', strtotime($scan->group->datetime)) }} om {{ date('H:i', strtotime($scan->group->datetime)) }}
+                    <br>
+                    Gebruik onderstaande link om jouw netwerkpartners voor deze sessie uit te nodigen:
+                    <br>
+                    <span class="text-nowrap">
+                        <span class="" id="groupcode">{{ Request::root() }}/groep/{{ $scan->group->id }}/sluitaan/{{ $scan->group->code }}</span> 
+                        <copy-icon
+                            copy_content=" {{ Request::root() }}/groep/{{ $scan->group->id }}/sluitaan/{{ $scan->group->code }} "
+                        >
+                        </copy-icon>
+                    </span>
+                    <br>
+                <div class="col-12 my-2 d-flex justify-content-end">
+                    <a href="#"  class="btn btn-outline-secondary btn-outline-secondary--nooutline btn-sm" data-toggle="modal" data-target="#voorbeeldmail{{ $scan->group->id }}">Voorbeeld email</a>
+                    @component('components.emailcomponent', ['thisgroup' => $scan->group])
+                    @endcomponent
+                    <a href=" {{ route('scanquestions.complete', $scan) }} " class="btn btn-outline-secondary btn-outline-secondary--nooutline btn-sm">Bekijk resultaten</a>
+                    <a href=" {{ route('scan.start', $scan) }} " class="btn btn-outline-secondary btn-sm">Start sessie</a>
+                </div>
 
                     <table class="table table-sm">
                         <thead class="thead-dark">
@@ -166,7 +168,7 @@
             <a href=" {{ route('createsinglescan.title') }} " class="btn btn-secondary">Maak een individuele scan aan</a>
         </div>
     </div>
-    @foreach (auth()->user()->scans as $scan)
+    @foreach (auth()->user()->scans->sortByDesc('updated_at') as $scan)
         @if (! $scan->group)
             <div class="py-2 my-4 bg-white text-secondary border shadow">
                 <div class="col-12 pt-2">

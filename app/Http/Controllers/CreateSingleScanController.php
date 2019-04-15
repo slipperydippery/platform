@@ -71,6 +71,7 @@ class CreateSingleScanController extends Controller
     public function created(Scan $scan)
     {
     	session()->forget('createsinglescan');
+        session()->put('newsinglesession', $scan);
     	return view('createsinglescan.created', compact('scan'));
     }
 

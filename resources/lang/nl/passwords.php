@@ -17,4 +17,5 @@ return [
     'sent'     => 'We hebben een e-mail verstuurd met instructies om een nieuw wachtwoord in te stellen.',
     'token'    => 'Dit wachtwoordhersteltoken is niet geldig.',
     'user'     => 'Geen gebruiker bekend met het e-mailadres.',
+    'telefoonnummer' => 'Het telefoonnummer moet 10 cijfers zijn en beginnen met: 06',
 ];

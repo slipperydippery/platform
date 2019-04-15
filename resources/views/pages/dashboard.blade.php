@@ -31,4 +31,16 @@
 @endsection
 
 @section('additional-scripts')
+    <script>
+        $('.popover-dismiss').popover({
+          trigger: 'focus'
+        })
+        $(document).ready( () => {
+            $('#singlescan').popover('show')
+        } )
+        $(document).click( () => {
+            $('#singlescan').popover('hide');
+            $('#singlescan').popover('disable');
+        } )
+    </script>
 @endsection

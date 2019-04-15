@@ -127,8 +127,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'phone_number' => [
+            'regex'  => 'Het telefoonnummer moet 10 cijfers zijn zonder spaties en beginnen met: 06',
         ],
     ],
 
@@ -175,5 +175,6 @@ return [
         'title'                 => 'titel',
         'username'              => 'gebruikersnaam',
         'year'                  => 'jaar',
+        'phone_number'          => 'telefoonnummer',
     ],
 ];

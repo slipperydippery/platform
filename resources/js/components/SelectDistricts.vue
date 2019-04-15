@@ -7,6 +7,7 @@
                 placeholder="Zoek een gemeente" 
                 v-model="districtsearch"
                 @keydown.enter.prevent="addDistrictWithEnter()"
+                focus
             >
 		</div>
 		<div class="col-12 overflow-hidden nowrap pt-3">
@@ -67,14 +68,15 @@
         	filtereddistricts: function () {
         	    var filteredarray = this.districts;
         	    var home = this;
-        	    if(home.districtsearch != ''){
-	        	    filteredarray = [];
-        	        this.districts.forEach(function(thisdistrict){
-        	            if(thisdistrict.name.toLowerCase().includes(home.districtsearch.toLowerCase())) {
-        	                filteredarray.push(thisdistrict);
-        	            } 
-        	        })
-        	    }
+                if(home.districtsearch == '') {
+                    return []
+                }
+        	    filteredarray = [];
+    	        this.districts.forEach(function(thisdistrict){
+    	            if(thisdistrict.name.toLowerCase().includes(home.districtsearch.toLowerCase())) {
+    	                filteredarray.push(thisdistrict);
+    	            } 
+    	        })
         	    return filteredarray;
         	},
 

@@ -15,7 +15,7 @@
     </title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Styles -->
@@ -69,12 +69,18 @@
 
 
     <!-- Additional Scripts -->
-    @yield('additional-scripts')
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script>
+        $(function () {
+          $('[data-toggle="popover"]').popover()
+        })
+    </script>
 {{--     <script>
         $(document).ready(function(){
             $('[data-toggle="tooltip"]').tooltip()
         });
     </script> --}}
+    @yield('additional-scripts')
 
 </body>
 </html>

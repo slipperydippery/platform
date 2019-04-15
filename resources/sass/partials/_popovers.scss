@@ -1,0 +1,17 @@
+.popover {
+	padding: 0.7rem;
+	background: $secondary-light;
+	.popover-header {
+		font-size: 1.2rem;
+		background: none;
+		border: none;
+	}
+	.popover-body {
+		color: $primary;
+	}
+}
+.bs-popover-top {
+	.arrow::after {
+		border-top-color: $secondary-light;
+	}
+}

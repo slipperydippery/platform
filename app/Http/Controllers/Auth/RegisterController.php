@@ -60,6 +60,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        // $input = array_map('trim', $data('phone_number'));
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -82,5 +83,12 @@ class RegisterController extends Controller
             'phone_number' => $data['phone_number'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function messages()
+    {
+        return [
+            'phone_number.regex'  => 'Het telefoonnummer moet 10 cijfers zijn en beginnen met: 06',
+        ];
     }
 }

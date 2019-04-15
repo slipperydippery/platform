@@ -80867,6 +80867,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -80890,14 +80891,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         filtereddistricts: function filtereddistricts() {
             var filteredarray = this.districts;
             var home = this;
-            if (home.districtsearch != '') {
-                filteredarray = [];
-                this.districts.forEach(function (thisdistrict) {
-                    if (thisdistrict.name.toLowerCase().includes(home.districtsearch.toLowerCase())) {
-                        filteredarray.push(thisdistrict);
-                    }
-                });
+            if (home.districtsearch == '') {
+                return [];
             }
+            filteredarray = [];
+            this.districts.forEach(function (thisdistrict) {
+                if (thisdistrict.name.toLowerCase().includes(home.districtsearch.toLowerCase())) {
+                    filteredarray.push(thisdistrict);
+                }
+            });
             return filteredarray;
         },
 
@@ -81040,7 +81042,7 @@ var render = function() {
           }
         ],
         staticClass: "form-control",
-        attrs: { type: "text", placeholder: "Zoek een gemeente" },
+        attrs: { type: "text", placeholder: "Zoek een gemeente", focus: "" },
         domProps: { value: _vm.districtsearch },
         on: {
           keydown: function($event) {
