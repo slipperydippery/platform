@@ -62,9 +62,11 @@
     @endif
 
     @include('partials.instructie')
-    @include('partials.profiel')
-    @component('components.deleteaccountconfirm')
-    @endcomponent
+    @auth
+        @include('partials.profiel')
+        @component('components.deleteaccountconfirm')
+        @endcomponent
+    @endauth
 
 
     @include('partials.footer')
