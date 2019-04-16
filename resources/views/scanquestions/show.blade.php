@@ -76,7 +76,6 @@
 	                <div class="alert alert-success alert--scanfactor" role="alert">
 						<strong>Succesfactor:</strong> {!! $question->successfactor !!}
 	                </div>
-	                <a href="/img/Tips voor het gesprek.jpg" target="_blank">
 	            </div>
 	            <div class="modal-footer">
 	                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluit</button>
