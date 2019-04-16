@@ -87507,6 +87507,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -87612,6 +87620,26 @@ var render = function() {
                 },
                 [_vm._v(" " + _vm._s(_vm.group.title) + " ")]
               ),
+              _vm._v(" "),
+              _c("a", { attrs: { href: "/scan/" + _vm.scan_id + "/edit" } }, [
+                _vm.isAdmin
+                  ? _c(
+                      "i",
+                      {
+                        directives: [
+                          {
+                            name: "b-tooltip",
+                            rawName: "v-b-tooltip.hover",
+                            modifiers: { hover: true }
+                          }
+                        ],
+                        staticClass: "material-icons float-right clickable",
+                        attrs: { title: "Bewerk sessie" }
+                      },
+                      [_vm._v("\n\t            \t\tedit\n\t\t            ")]
+                    )
+                  : _vm._e()
+              ]),
               _vm._v(" "),
               !_vm.group.unlocked
                 ? _c(
