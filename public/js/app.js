@@ -86855,6 +86855,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -87037,10 +87038,15 @@ var render = function() {
             [
               _c("strong", [_vm._v("Gemeenten: ")]),
               _vm._v(" "),
-              _vm._l(_vm.group.scan.districts, function(district) {
-                return _c("em", {
-                  domProps: { innerHTML: _vm._s(district.name) }
-                })
+              _vm._l(_vm.group.scan.districts, function(district, index) {
+                return _c("em", [
+                  _c("span", {
+                    domProps: { innerHTML: _vm._s(district.name) }
+                  }),
+                  index !== _vm.group.scan.districts.length - 1
+                    ? _c("span", [_vm._v(", ")])
+                    : _vm._e()
+                ])
               }),
               _vm._v(" "),
               _c("br"),

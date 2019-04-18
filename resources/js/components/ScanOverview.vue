@@ -33,7 +33,7 @@
         </div>
         <div class="col-12">
             <strong>Gemeenten: </strong>
-            <em v-for="district in group.scan.districts" v-html="district.name"> </em>
+            <em v-for="(district, index) in group.scan.districts"><span v-html="district.name"></span><span v-if="index !== group.scan.districts.length - 1">, </span></em>
             <br>
             <strong>Datum sessie:</strong> {{ group.datetime }}
             <br>
@@ -91,6 +91,7 @@
 	            			    </button>
 	            			    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 	            			        <a class="dropdown-item" href="#">Stuur bericht</a>
+	            			        
 	            			        <a class="dropdown-item" href="#" data-toggle="modal" :data-target="'#confirmpromote' + scan.id " v-if="isAdmin">Promoot tot eigenaar</a>
 	            			        <a class="dropdown-item" href="#" data-toggle="modal" :data-target="'#confirmdelete' + scan.id " v-if="isAdmin">Verwijder uit groep</a>
 	            			    </div>
