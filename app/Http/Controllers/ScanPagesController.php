@@ -15,6 +15,7 @@ class ScanPagesController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('owner');
+        $this->middleware('unlocked', ['except' => 'start']);
     }
 
     public function start(Scan $scan)

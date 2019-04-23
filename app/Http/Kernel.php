@@ -69,6 +69,7 @@ class Kernel extends HttpKernel
         'two_factor' => \App\Http\Middleware\TwoFactorVerify::class,
         'owner' => \App\Http\Middleware\VerifyOwner::class,
         'manager' => \App\Http\Middleware\VerifyManager::class,
+        'unlocked' => \App\Http\Middleware\CheckUnlocked::class,
     ];
 
     /**

@@ -185,8 +185,10 @@
         	},
 
         	toggleLock() {
-        		this.group.unlocked = ! this.group.unlocked;
-        		this.updateGroup(this.group_id);
+                if (this.isAdmin) {
+            		this.group.unlocked = ! this.group.unlocked;
+            		this.updateGroup(this.group_id);
+                }
         	},
 
         	answercount(thisscan){

@@ -16,6 +16,7 @@ class ScanQuestionController extends Controller
     public function __construct()
     {
         $this->middleware('owner');
+        $this->middleware('unlocked', ['except' => 'complete']);
     }
 
     public function intro(Scan $scan, Theme $theme)

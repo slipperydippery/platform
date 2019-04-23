@@ -55,7 +55,7 @@
                 <portal to="modals">
                     @component('components.emailcomponent', ['thisgroup' => $scan->group])
                     @endcomponent
-                    @component('components.deleteconfirm', ['thisscan' => $thisscan])
+                    @component('components.confirmremovefromgroup', ['thisscan' => $thisscan])
                     @endcomponent
                     @component('components.promoteconfirm', ['thisscan' => $thisscan])
                     @endcomponent

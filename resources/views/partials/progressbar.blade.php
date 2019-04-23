@@ -83,7 +83,11 @@
                                     </span>
                                 @else
                                     <a href=" {{ route('scanquestions.show', [$scan, $theme, $question]) }} " class="" data-toggle="tooltip" data-placement="top" title="Vraag {{ $question->id }}">
-                                        <img src="/img/simplecircle_secondary.svg" alt="">
+                                        @if ( ($question->answers->where('scan_id', $scan->id)->first)->answer )
+                                            <img src="/img/simplecircle_secondary_full.svg" alt="">
+                                        @else
+                                            <img src="/img/simplecircle_secondary.svg" alt="">
+                                        @endif
                                     </a>
                                 @endif
                             </div>

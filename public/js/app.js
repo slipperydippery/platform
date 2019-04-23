@@ -86860,82 +86860,84 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-       props: ['scan_id', 'group_id', 'user_id'],
+    props: ['scan_id', 'group_id', 'user_id'],
 
-       data: function data() {
-              return {
-                     'scan': {},
-                     'group': {}
-              };
-       },
-       mounted: function mounted() {
-              var _this = this;
+    data: function data() {
+        return {
+            'scan': {},
+            'group': {}
+        };
+    },
+    mounted: function mounted() {
+        var _this = this;
 
-              this.getGroup(this.group_id);
-              window.Echo.private('sessionsadded.' + this.group_id).listen('SessionAddedToGroup', function (e) {
-                     _this.getGroup(_this.group_id);
-              });
-              window.Echo.private('groupscores.' + this.group_id).listen('GroupscoresUpdated', function (e) {
-                     _this.getGroup(_this.group_id);
-              });
-       },
+        this.getGroup(this.group_id);
+        window.Echo.private('sessionsadded.' + this.group_id).listen('SessionAddedToGroup', function (e) {
+            _this.getGroup(_this.group_id);
+        });
+        window.Echo.private('groupscores.' + this.group_id).listen('GroupscoresUpdated', function (e) {
+            _this.getGroup(_this.group_id);
+        });
+    },
 
 
-       computed: {
-              isAdmin: function isAdmin() {
-                     if (this.group.user) {
-                            return this.group.scan.user.id === this.user_id;
-                     }
-                     return false;
-              },
-              joinLink: function joinLink() {
-                     return window.location.protocol + '//' + window.location.hostname + '/groep/' + this.group_id + '/sluitaan/' + this.group.code;
-              },
-              resultsLink: function resultsLink() {
-                     return window.location.protocol + '//' + window.location.hostname + '/sessie/' + this.scan_id + '/afgerond/';
-              },
-              startLink: function startLink() {
-                     return window.location.protocol + '//' + window.location.hostname + '/scan/' + this.scan_id + '/start';
-              }
-       },
+    computed: {
+        isAdmin: function isAdmin() {
+            if (this.group.user) {
+                return this.group.scan.user.id === this.user_id;
+            }
+            return false;
+        },
+        joinLink: function joinLink() {
+            return window.location.protocol + '//' + window.location.hostname + '/groep/' + this.group_id + '/sluitaan/' + this.group.code;
+        },
+        resultsLink: function resultsLink() {
+            return window.location.protocol + '//' + window.location.hostname + '/sessie/' + this.scan_id + '/afgerond/';
+        },
+        startLink: function startLink() {
+            return window.location.protocol + '//' + window.location.hostname + '/scan/' + this.scan_id + '/start';
+        }
+    },
 
-       methods: {
-              getGroup: function getGroup(group_id) {
-                     var home = this;
-                     console.log(group_id);
-                     axios.get('api/group/' + group_id).then(function (response) {
-                            home.group = response.data;
-                     });
-              },
-              updateGroup: function updateGroup(group_id) {
-                     var home = this;
-                     axios.patch('api/group/' + group_id, {
-                            'group': home.group
-                     });
-              },
-              getScan: function getScan() {
-                     var home = this;
-                     axios.get('/api/scan/' + home.scan_id).then(function (response) {
-                            console.log(response);
-                            home.scan = response.data;
-                            home.getGroup(home.scan.group_id);
-                     });
-              },
-              toggleLock: function toggleLock() {
-                     this.group.unlocked = !this.group.unlocked;
-                     this.updateGroup(this.group_id);
-              },
-              answercount: function answercount(thisscan) {
-                     var answercount = 0;
-                     thisscan.answers.forEach(function (thisanswer) {
-                            thisanswer.answer ? answercount++ : '';
-                     });
-                     return answercount;
-              },
-              questioncount: function questioncount(thisscan) {
-                     return thisscan.answers.length;
-              }
-       }
+    methods: {
+        getGroup: function getGroup(group_id) {
+            var home = this;
+            console.log(group_id);
+            axios.get('api/group/' + group_id).then(function (response) {
+                home.group = response.data;
+            });
+        },
+        updateGroup: function updateGroup(group_id) {
+            var home = this;
+            axios.patch('api/group/' + group_id, {
+                'group': home.group
+            });
+        },
+        getScan: function getScan() {
+            var home = this;
+            axios.get('/api/scan/' + home.scan_id).then(function (response) {
+                console.log(response);
+                home.scan = response.data;
+                home.getGroup(home.scan.group_id);
+            });
+        },
+        toggleLock: function toggleLock() {
+            if (this.isAdmin) {
+                this.group.unlocked = !this.group.unlocked;
+                this.updateGroup(this.group_id);
+            }
+        },
+        answercount: function answercount(thisscan) {
+            var answercount = 0;
+            thisscan.answers.forEach(function (thisanswer) {
+                thisanswer.answer ? answercount++ : '';
+            });
+            return answercount;
+        },
+        questioncount: function questioncount(thisscan) {
+            return thisscan.answers.length;
+        }
+    }
 });
 
 /***/ }),
