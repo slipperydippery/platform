@@ -47,7 +47,7 @@ class ApiScanController extends Controller
      */
     public function show(Scan $scan)
     {
-        $scan = Scan::with('districts')->find($scan->id);
+        $scan = Scan::with('user', 'answers', 'districts', 'answers', 'instantie')->find($scan->id);
         return $scan;
     }
 

@@ -123,13 +123,14 @@
             return {
             	'scan' : {},
             	'group' : {},
+                'toastCount': 0,
             }
         },
 
         mounted() {
         	this.getGroup( this.group_id );
         	window.Echo.private('sessionsadded.' + this.group_id).listen('SessionAddedToGroup', e => {
-        	    this.getGroup(this.group_id);
+                this.getScan( e.scan_id );
         	});
         	window.Echo.private('groupscores.' + this.group_id).listen('GroupscoresUpdated', e => {
         	    this.getGroup(this.group_id);
@@ -158,9 +159,25 @@
         },
 
         methods: {
+            getScan(scan_id) {
+                var home = this;
+                axios.get('api/scan/' + scan_id)
+                    .then( (response) => {
+                        home.group.scans.push(response.data);
+                        home.makeToast(response.data.user.name);
+                    })
+            },
+
+            makeToast(username) {
+                this.$bvToast.toast(`${username} heeft zich aangemeld voor de groepssessie ${this.group.title}`, {
+                    title: 'Nieuwe aanmelding',
+                    autoHideDelay: 5000,
+                    appendToast: false
+                })
+            },
+
         	getGroup(group_id) {
         		var home = this;
-        		console.log(group_id);
         		axios.get('api/group/' + group_id)
         			.then( (response) => {
         				home.group = response.data;
@@ -172,16 +189,6 @@
         		axios.patch('api/group/' + group_id, {
         			'group' : home.group
         		})
-        	},
-
-        	getScan() {
-	        	var home = this;
-        		axios.get('/api/scan/' + home.scan_id)
-	    			.then( (response) => {
-	    				console.log(response);
-        				home.scan = response.data;
-        				home.getGroup(home.scan.group_id)
-    			})
         	},
 
         	toggleLock() {
