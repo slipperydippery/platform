@@ -16,6 +16,7 @@ import 'lazysizes';
 // import 'lazysizes/parent-fit/ls.parent-fit';
 
 window.Vue = require('vue');
+import 'babel-polyfill'
 import BootstrapVue from 'bootstrap-vue'
 import PortalVue from 'portal-vue'
 Vue.use(BootstrapVue);

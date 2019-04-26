@@ -38,6 +38,7 @@
   <div class="tab-pane fade show active" id="nav-groups" role="tabpanel" aria-labelledby="nav-groups-tab">
     <div class="">
         <div class="col mt-4 d-flex justify-content-end">
+            <a href=" {{ route('creategroupscan.title') }} " class="btn btn-outline-secondary btn-outline-secondary--nooutline">Sluit aan bij een sessie</a>
             <a href=" {{ route('creategroupscan.title') }} " class="btn btn-secondary">Maak een groepssessie aan</a>
         </div>
     </div>

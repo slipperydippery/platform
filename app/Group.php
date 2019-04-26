@@ -51,21 +51,29 @@ class Group extends Model
 
     public static function register(Scan $scan)
     {
+        $unique = Group::generateUniqueCode();
     	$group = new Group([
     	    'title' => $scan->title,
-    	    'code' => str_random(10),
+    	    'code' => $unique,
     	    'scan_id' => $scan->id,
     	]);
-
 
     	auth()->user()->groups()->save($group);
 
     	$group->scans()->save($scan);
     	$group->scan()->associate($scan);
 
-
     	return $group;
+    }
 
+    public static function generateUniqueCode()
+    {
+        $unique = false;
+        while ($unique == false) {
+            $testcode = strtoupper(str_random(4));
+            $unique = Group::where('code', $testcode)->get()->count() == 0 ? $testcode : false;
+        }
+        return $unique;
     }
 
 }
