@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Scan;
+use App\Events\GroupUpdated;
 use Illuminate\Http\Request;
 use App\Events\AlgemeenbeeldUpdated;
 
@@ -106,6 +107,8 @@ class ApiScanController extends Controller
         $group = $scan->group;
         $scan->districts()->detach();
         $scan->delete();
+        $event = 'sessionremovedfromgroup';
+        GroupUpdated::dispatch($scan->group->id, $event);
         return $group;
     }
 }

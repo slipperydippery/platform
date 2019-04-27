@@ -1,5 +1,5 @@
 <template>
-	<div class="py-2 my-4 bg-white text-secondary border shadow"  v-if="group.user">
+	<div class="py-2 my-4 bg-white text-secondary border shadow"  v-if="group.user && isInGroup">
         <div class="col-12 pt-2">
             <h4>
                 <a href=" #scanstart " class="flex-grow-1 nowrap text-uppercase"> {{ group.title }} </a> 
@@ -90,11 +90,12 @@
 	            			        
 	            			    </button>
 	            			    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
                                     <message-user-dropdown-modal
                                         :scan = scan
                                     >
                                     </message-user-dropdown-modal>
-	            			        <a class="dropdown-item" href="#">Stuur bericht</a>
+
                                     <promote-user-dropdown-modal
                                         :scan = scan
                                         :isAdmin = isAdmin
@@ -105,15 +106,23 @@
                                     <remove-user-dropdown-modal
                                         :scan = scan
                                         :isAdmin = isAdmin
+                                        isSelf = " scan.user.id == user_id "
                                         @removeParticipant = "removeParticipant"
                                     >
                                     </remove-user-dropdown-modal>
+
 	            			    </div>
 	            			</div>
 
-            			    <button type="button" class="close mr-2" aria-label="Close" data-toggle="modal" :data-target="'#confirmdelete' + scan.id " v-else>
-            			          <span aria-hidden="true">&times;</span>
-            			    </button>
+                            <remove-user-dropdown-modal
+                                :scan = scan
+                                :isAdmin = isAdmin
+                                isSelf = " scan.user.id == user_id "
+                                v-if = " scan.user.id == user_id "
+                                @removeParticipant = "removeParticipant"
+                            >
+                            </remove-user-dropdown-modal>
+
 	            		</td>
 	            	</tr>
 	            </tbody>
@@ -138,6 +147,7 @@
             	'scan' : {},
             	'group' : {},
                 'toastCount': 0,
+                'isInGroup': true,
             }
         },
 
@@ -152,6 +162,9 @@
                         this.getGroup(this.group_id);
                         break;
                     case 'groupadminupdated':
+                        this.getGroup(this.group_id);
+                        break;
+                    case 'sessionremovedfromgroup':
                         this.getGroup(this.group_id);
                         break;
                 }
@@ -214,7 +227,14 @@
 
             removeParticipant(scan) {
                 this.group.scans.splice(this.group.scans.indexOf(scan), 1);
-                axios.delete('api/scan/' + scan.id);
+                var home = this;
+                var isSelf = (scan.user.id == this.user_id);
+                axios.delete('api/scan/' + scan.id)
+                    .then( (responsel => {
+                        if ( isSelf ) {
+                            home.isInGroup = false;
+                        }
+                    }) );
             },
 
             promoteParticipant(scan) {

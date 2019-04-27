@@ -102988,6 +102988,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -102998,7 +103007,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             'scan': {},
             'group': {},
-            'toastCount': 0
+            'toastCount': 0,
+            'isInGroup': true
         };
     },
     mounted: function mounted() {
@@ -103014,6 +103024,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     _this.getGroup(_this.group_id);
                     break;
                 case 'groupadminupdated':
+                    _this.getGroup(_this.group_id);
+                    break;
+                case 'sessionremovedfromgroup':
                     _this.getGroup(_this.group_id);
                     break;
             }
@@ -103068,7 +103081,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         removeParticipant: function removeParticipant(scan) {
             this.group.scans.splice(this.group.scans.indexOf(scan), 1);
-            axios.delete('api/scan/' + scan.id);
+            var home = this;
+            var isSelf = scan.user.id == this.user_id;
+            axios.delete('api/scan/' + scan.id).then(function (responsel) {
+                if (isSelf) {
+                    home.isInGroup = false;
+                }
+            });
         },
         promoteParticipant: function promoteParticipant(scan) {
             var home = this;
@@ -103106,7 +103125,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.group.user
+  return _vm.group.user && _vm.isInGroup
     ? _c(
         "div",
         { staticClass: "py-2 my-4 bg-white text-secondary border shadow" },
@@ -103344,92 +103363,84 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
-                        _c("td", [
-                          scan.user.id !== _vm.user_id
-                            ? _c(
-                                "div",
-                                { staticClass: "dropdown float-right" },
-                                [
-                                  _c("button", {
-                                    staticClass:
-                                      "btn btn-secondary dropdown-toggle dropdown-toggle__round",
-                                    attrs: {
-                                      type: "button",
-                                      id: "dropdownMenuButton",
-                                      "data-toggle": "dropdown",
-                                      "aria-haspopup": "true",
-                                      "aria-expanded": "false"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass: "dropdown-menu",
+                        _c(
+                          "td",
+                          [
+                            scan.user.id !== _vm.user_id
+                              ? _c(
+                                  "div",
+                                  { staticClass: "dropdown float-right" },
+                                  [
+                                    _c("button", {
+                                      staticClass:
+                                        "btn btn-secondary dropdown-toggle dropdown-toggle__round",
                                       attrs: {
-                                        "aria-labelledby": "dropdownMenuButton"
+                                        type: "button",
+                                        id: "dropdownMenuButton",
+                                        "data-toggle": "dropdown",
+                                        "aria-haspopup": "true",
+                                        "aria-expanded": "false"
                                       }
-                                    },
-                                    [
-                                      _c("message-user-dropdown-modal", {
-                                        attrs: { scan: scan }
-                                      }),
-                                      _vm._v(" "),
-                                      _c(
-                                        "a",
-                                        {
-                                          staticClass: "dropdown-item",
-                                          attrs: { href: "#" }
-                                        },
-                                        [_vm._v("Stuur bericht")]
-                                      ),
-                                      _vm._v(" "),
-                                      _c("promote-user-dropdown-modal", {
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "dropdown-menu",
                                         attrs: {
-                                          scan: scan,
-                                          isAdmin: _vm.isAdmin
-                                        },
-                                        on: {
-                                          promoteParticipant:
-                                            _vm.promoteParticipant
+                                          "aria-labelledby":
+                                            "dropdownMenuButton"
                                         }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("remove-user-dropdown-modal", {
-                                        attrs: {
-                                          scan: scan,
-                                          isAdmin: _vm.isAdmin
-                                        },
-                                        on: {
-                                          removeParticipant:
-                                            _vm.removeParticipant
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
-                                ]
-                              )
-                            : _c(
-                                "button",
-                                {
-                                  staticClass: "close mr-2",
+                                      },
+                                      [
+                                        _c("message-user-dropdown-modal", {
+                                          attrs: { scan: scan }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("promote-user-dropdown-modal", {
+                                          attrs: {
+                                            scan: scan,
+                                            isAdmin: _vm.isAdmin
+                                          },
+                                          on: {
+                                            promoteParticipant:
+                                              _vm.promoteParticipant
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("remove-user-dropdown-modal", {
+                                          attrs: {
+                                            scan: scan,
+                                            isAdmin: _vm.isAdmin,
+                                            isSelf: " scan.user.id == user_id "
+                                          },
+                                          on: {
+                                            removeParticipant:
+                                              _vm.removeParticipant
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            scan.user.id == _vm.user_id
+                              ? _c("remove-user-dropdown-modal", {
                                   attrs: {
-                                    type: "button",
-                                    "aria-label": "Close",
-                                    "data-toggle": "modal",
-                                    "data-target": "#confirmdelete" + scan.id
+                                    scan: scan,
+                                    isAdmin: _vm.isAdmin,
+                                    isSelf: " scan.user.id == user_id "
+                                  },
+                                  on: {
+                                    removeParticipant: _vm.removeParticipant
                                   }
-                                },
-                                [
-                                  _c(
-                                    "span",
-                                    { attrs: { "aria-hidden": "true" } },
-                                    [_vm._v("×")]
-                                  )
-                                ]
-                              )
-                        ])
+                                })
+                              : _vm._e()
+                          ],
+                          1
+                        )
                       ])
                     : _vm._e()
                 }),
@@ -104365,11 +104376,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['scan', 'isAdmin'],
+    props: ['scan', 'isAdmin', 'isSelf'],
 
     data: function data() {
         return {};
@@ -104398,7 +104422,54 @@ var render = function() {
     "div",
     {},
     [
-      _vm.isAdmin
+      _vm.isSelf
+        ? _c(
+            "button",
+            {
+              staticClass: "close mr-2",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  return _vm.$bvModal.show("deletemodal" + _vm.scan.id)
+                }
+              }
+            },
+            [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.isSelf
+        ? _c(
+            "portal",
+            { attrs: { to: "modals" } },
+            [
+              _c(
+                "b-modal",
+                {
+                  attrs: {
+                    id: "deletemodal" + _vm.scan.id,
+                    title: "Weet je zeker dat je de groepssessie wilt verlaten?"
+                  },
+                  on: {
+                    ok: function($event) {
+                      return _vm.removeParticipant(_vm.scan)
+                    }
+                  }
+                },
+                [
+                  _c("p", { staticClass: "my-4" }, [
+                    _vm._v(
+                      "Je staat op het punt om de groepssessie te verlaten. Hierdoor worden al je opgeslagen resultaten gerelateerd aan deze groepssessie ook verwijderd. Weet je zeker dat je dit wilt doen? "
+                    )
+                  ])
+                ]
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.isAdmin && !_vm.isSelf
         ? _c(
             "a",
             {
@@ -104413,39 +104484,41 @@ var render = function() {
           )
         : _vm._e(),
       _vm._v(" "),
-      _c(
-        "portal",
-        { attrs: { to: "modals" } },
-        [
-          _c(
-            "b-modal",
-            {
-              attrs: {
-                id: "deletemodal" + _vm.scan.id,
-                title:
-                  "Weet je zeker dat je " +
-                  _vm.scan.user.name +
-                  " wilt verwijderen?"
-              },
-              on: {
-                ok: function($event) {
-                  return _vm.removeParticipant(_vm.scan)
-                }
-              }
-            },
+      !_vm.isSelf
+        ? _c(
+            "portal",
+            { attrs: { to: "modals" } },
             [
-              _c("p", { staticClass: "my-4" }, [
-                _vm._v("Je staat op het punt om "),
-                _c("strong", [_vm._v(_vm._s(_vm.scan.user.name))]),
-                _vm._v(
-                  " uit de groepssessie te verwijderen. Weet je zeker dat je dit wilt doen? "
-                )
-              ])
-            ]
+              _c(
+                "b-modal",
+                {
+                  attrs: {
+                    id: "deletemodal" + _vm.scan.id,
+                    title:
+                      "Weet je zeker dat je " +
+                      _vm.scan.user.name +
+                      " wilt verwijderen?"
+                  },
+                  on: {
+                    ok: function($event) {
+                      return _vm.removeParticipant(_vm.scan)
+                    }
+                  }
+                },
+                [
+                  _c("p", { staticClass: "my-4" }, [
+                    _vm._v("Je staat op het punt om "),
+                    _c("strong", [_vm._v(_vm._s(_vm.scan.user.name))]),
+                    _vm._v(
+                      " uit de groepssessie te verwijderen. Weet je zeker dat je dit wilt doen? "
+                    )
+                  ])
+                ]
+              )
+            ],
+            1
           )
-        ],
-        1
-      )
+        : _vm._e()
     ],
     1
   )
