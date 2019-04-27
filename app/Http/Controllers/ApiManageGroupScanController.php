@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Scan;
 use App\Group;
+use App\Events\GroupUpdated;
 use Illuminate\Http\Request;
 use App\Events\GroupAdminUpdated;
 
@@ -18,6 +19,8 @@ class ApiManageGroupScanController extends Controller
     	$thisgroup->user()->associate($scan->user);
     	$thisgroup->save();
     	GroupAdminUpdated::dispatch($group->id);
+    	$event = 'groupadminupdated';
+    	GroupUpdated::dispatch($group->id, $event);
     	return $thisgroup;
     }
 }

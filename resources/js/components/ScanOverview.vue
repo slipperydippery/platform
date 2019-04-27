@@ -153,14 +153,18 @@
 
         mounted() {
         	this.getGroup( this.group_id );
-        	window.Echo.private('sessionsadded.' + this.group_id).listen('SessionAddedToGroup', e => {
-                this.getScan( e.scan_id );
-        	});
-            window.Echo.private('groupscores.' + this.group_id).listen('GroupscoresUpdated', e => {
-                this.getGroup(this.group_id);
-            });
-            window.Echo.private('groupadminupdated.' + this.group_id).listen('GroupAdminUpdated', e => {
-                this.getGroup(this.group_id);
+            window.Echo.private('groupupdated.' + this.group_id).listen('GroupUpdated', e => {
+                switch( e.event ) {
+                    case 'sessionaddedtogroup':
+                        this.getScan( e.scan_id );
+                        break;
+                    case 'groupscoresupdated':
+                        this.getGroup(this.group_id);
+                        break;
+                    case 'groupadminupdated':
+                        this.getGroup(this.group_id);
+                        break;
+                }
             });
         },
 

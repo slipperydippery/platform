@@ -103013,14 +103013,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         this.getGroup(this.group_id);
-        window.Echo.private('sessionsadded.' + this.group_id).listen('SessionAddedToGroup', function (e) {
-            _this.getScan(e.scan_id);
-        });
-        window.Echo.private('groupscores.' + this.group_id).listen('GroupscoresUpdated', function (e) {
-            _this.getGroup(_this.group_id);
-        });
-        window.Echo.private('groupadminupdated.' + this.group_id).listen('GroupAdminUpdated', function (e) {
-            _this.getGroup(_this.group_id);
+        window.Echo.private('groupupdated.' + this.group_id).listen('GroupUpdated', function (e) {
+            switch (e.event) {
+                case 'sessionaddedtogroup':
+                    _this.getScan(e.scan_id);
+                    break;
+                case 'groupscoresupdated':
+                    _this.getGroup(_this.group_id);
+                    break;
+                case 'groupadminupdated':
+                    _this.getGroup(_this.group_id);
+                    break;
+            }
         });
     },
 

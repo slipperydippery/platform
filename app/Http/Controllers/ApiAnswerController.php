@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Answer;
 use Carbon\Carbon;
+use App\Events\GroupUpdated;
 use Illuminate\Http\Request;
 use App\Events\GroupscoresUpdated;
 
@@ -75,6 +76,8 @@ class ApiAnswerController extends Controller
         $answer->updated_at = Carbon::now();
         $answer->save();
         if($answer->scan->group) {
+            $event = 'groupscoresupdated';
+            GroupUpdated::dispatch($answer->scan->group->id, $event);
             GroupscoresUpdated::dispatch($answer->scan->group->id);
         }
         
