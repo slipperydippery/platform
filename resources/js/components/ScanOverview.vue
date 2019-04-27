@@ -90,34 +90,24 @@
 	            			        
 	            			    </button>
 	            			    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <message-user-dropdown-modal
+                                        :scan = scan
+                                    >
+                                    </message-user-dropdown-modal>
 	            			        <a class="dropdown-item" href="#">Stuur bericht</a>
                                     <promote-user-dropdown-modal
-                                        scan = scan
-
+                                        :scan = scan
+                                        :isAdmin = isAdmin
+                                        @promoteParticipant = "promoteParticipant"
                                     >
                                     </promote-user-dropdown-modal>
 
-	            			        
-                                    <a class="dropdown-item" @click="$bvModal.show('promotemodal' + scan.id)" v-if="isAdmin">Promoot tot beheerder</a>
-                                    <portal to="modals">
-                                        <b-modal
-                                            :id="'promotemodal' + scan.id"
-                                            :title=" 'Weet je zeker dat je ' + scan.user.name + ' tot beheerder wilt promoten?' "
-                                            @ok="promoteParticipant(scan)"
-                                        >
-                                            <p>Je staat op het punt om de <strong>{{ scan.user.name }}</strong> tot eigenaar van dese groepssessie te promoten. Dat kan handig zijn als je het beheer graag wilt overdragen. Let er wel op dat je deze actie zelf niet ongedaan moet maken (alleen <strong>{{ scan.user.name }}</strong> kan jou hierna weer tot eigenaar promoten) </p>
-                                        </b-modal>
-                                    </portal>
-                                    <a class="dropdown-item" @click="$bvModal.show('deletemodal' + scan.id)" v-if="isAdmin">Verwijder uit groep</a>
-                                    <portal to="modals">
-                                        <b-modal 
-                                            :id="'deletemodal' + scan.id" 
-                                            :title="'Weet je zeker dat je ' + scan.user.name + ' wilt verwijderen?' " 
-                                            @ok="removeParticipant(scan)"
-                                        >
-                                            <p class="my-4">Je staat op het punt om <strong>{{ scan.user.name }}</strong> uit de groepssessie te verwijderen. Weet je zeker dat je dit wilt doen? </p>
-                                        </b-modal>
-                                    </portal>
+                                    <remove-user-dropdown-modal
+                                        :scan = scan
+                                        :isAdmin = isAdmin
+                                        @removeParticipant = "removeParticipant"
+                                    >
+                                    </remove-user-dropdown-modal>
 	            			    </div>
 	            			</div>
 
@@ -156,7 +146,7 @@
             window.Echo.private('groupupdated.' + this.group_id).listen('GroupUpdated', e => {
                 switch( e.event ) {
                     case 'sessionaddedtogroup':
-                        this.getScan( e.scan_id );
+                        this.addScanToGroup( e.scan_id );
                         break;
                     case 'groupscoresupdated':
                         this.getGroup(this.group_id);
@@ -190,7 +180,7 @@
         },
 
         methods: {
-            getScan(scan_id) {
+            addScanToGroup(scan_id) {
                 var home = this;
                 axios.get('api/scan/' + scan_id)
                     .then( (response) => {

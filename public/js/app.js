@@ -1756,6 +1756,8 @@ Vue.component('countdown', __webpack_require__(728));
 Vue.component('slider-input', __webpack_require__(731));
 Vue.component('copy-icon', __webpack_require__(734));
 Vue.component('promote-user-dropdown-modal', __webpack_require__(743));
+Vue.component('remove-user-dropdown-modal', __webpack_require__(746));
+Vue.component('message-user-dropdown-modal', __webpack_require__(749));
 
 var app = new Vue({
 	el: '#app'
@@ -102986,16 +102988,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -103016,7 +103008,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         window.Echo.private('groupupdated.' + this.group_id).listen('GroupUpdated', function (e) {
             switch (e.event) {
                 case 'sessionaddedtogroup':
-                    _this.getScan(e.scan_id);
+                    _this.addScanToGroup(e.scan_id);
                     break;
                 case 'groupscoresupdated':
                     _this.getGroup(_this.group_id);
@@ -103048,7 +103040,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        getScan: function getScan(scan_id) {
+        addScanToGroup: function addScanToGroup(scan_id) {
             var home = this;
             axios.get('api/scan/' + scan_id).then(function (response) {
                 home.group.scans.push(response.data);
@@ -103379,6 +103371,10 @@ var render = function() {
                                       }
                                     },
                                     [
+                                      _c("message-user-dropdown-modal", {
+                                        attrs: { scan: scan }
+                                      }),
+                                      _vm._v(" "),
                                       _c(
                                         "a",
                                         {
@@ -103389,128 +103385,26 @@ var render = function() {
                                       ),
                                       _vm._v(" "),
                                       _c("promote-user-dropdown-modal", {
-                                        attrs: { scan: "scan" }
+                                        attrs: {
+                                          scan: scan,
+                                          isAdmin: _vm.isAdmin
+                                        },
+                                        on: {
+                                          promoteParticipant:
+                                            _vm.promoteParticipant
+                                        }
                                       }),
                                       _vm._v(" "),
-                                      _vm.isAdmin
-                                        ? _c(
-                                            "a",
-                                            {
-                                              staticClass: "dropdown-item",
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.$bvModal.show(
-                                                    "promotemodal" + scan.id
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [_vm._v("Promoot tot beheerder")]
-                                          )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      _c(
-                                        "portal",
-                                        { attrs: { to: "modals" } },
-                                        [
-                                          _c(
-                                            "b-modal",
-                                            {
-                                              attrs: {
-                                                id: "promotemodal" + scan.id,
-                                                title:
-                                                  "Weet je zeker dat je " +
-                                                  scan.user.name +
-                                                  " tot beheerder wilt promoten?"
-                                              },
-                                              on: {
-                                                ok: function($event) {
-                                                  return _vm.promoteParticipant(
-                                                    scan
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("p", [
-                                                _vm._v(
-                                                  "Je staat op het punt om de "
-                                                ),
-                                                _c("strong", [
-                                                  _vm._v(_vm._s(scan.user.name))
-                                                ]),
-                                                _vm._v(
-                                                  " tot eigenaar van dese groepssessie te promoten. Dat kan handig zijn als je het beheer graag wilt overdragen. Let er wel op dat je deze actie zelf niet ongedaan moet maken (alleen "
-                                                ),
-                                                _c("strong", [
-                                                  _vm._v(_vm._s(scan.user.name))
-                                                ]),
-                                                _vm._v(
-                                                  " kan jou hierna weer tot eigenaar promoten) "
-                                                )
-                                              ])
-                                            ]
-                                          )
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _vm.isAdmin
-                                        ? _c(
-                                            "a",
-                                            {
-                                              staticClass: "dropdown-item",
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.$bvModal.show(
-                                                    "deletemodal" + scan.id
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [_vm._v("Verwijder uit groep")]
-                                          )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      _c(
-                                        "portal",
-                                        { attrs: { to: "modals" } },
-                                        [
-                                          _c(
-                                            "b-modal",
-                                            {
-                                              attrs: {
-                                                id: "deletemodal" + scan.id,
-                                                title:
-                                                  "Weet je zeker dat je " +
-                                                  scan.user.name +
-                                                  " wilt verwijderen?"
-                                              },
-                                              on: {
-                                                ok: function($event) {
-                                                  return _vm.removeParticipant(
-                                                    scan
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("p", { staticClass: "my-4" }, [
-                                                _vm._v(
-                                                  "Je staat op het punt om "
-                                                ),
-                                                _c("strong", [
-                                                  _vm._v(_vm._s(scan.user.name))
-                                                ]),
-                                                _vm._v(
-                                                  " uit de groepssessie te verwijderen. Weet je zeker dat je dit wilt doen? "
-                                                )
-                                              ])
-                                            ]
-                                          )
-                                        ],
-                                        1
-                                      )
+                                      _c("remove-user-dropdown-modal", {
+                                        attrs: {
+                                          scan: scan,
+                                          isAdmin: _vm.isAdmin
+                                        },
+                                        on: {
+                                          removeParticipant:
+                                            _vm.removeParticipant
+                                        }
+                                      })
                                     ],
                                     1
                                   )
@@ -104295,11 +104189,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['scan'],
+    props: ['scan', 'isAdmin'],
 
     data: function data() {
         return {};
@@ -104309,7 +104212,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     computed: {},
 
-    methods: {}
+    methods: {
+        promoteParticipant: function promoteParticipant(scan) {
+            this.$emit('promoteParticipant', scan);
+        }
+    }
 });
 
 /***/ }),
@@ -104320,7 +104227,63 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {}, [_vm._v("\n\t" + _vm._s(_vm.scan.title) + "\n")])
+  return _c(
+    "div",
+    {},
+    [
+      _vm.isAdmin
+        ? _c(
+            "a",
+            {
+              staticClass: "dropdown-item",
+              on: {
+                click: function($event) {
+                  return _vm.$bvModal.show("promotemodal" + _vm.scan.id)
+                }
+              }
+            },
+            [_vm._v("Promoot tot beheerder")]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "portal",
+        { attrs: { to: "modals" } },
+        [
+          _c(
+            "b-modal",
+            {
+              attrs: {
+                id: "promotemodal" + _vm.scan.id,
+                title:
+                  "Weet je zeker dat je " +
+                  _vm.scan.user.name +
+                  " tot beheerder wilt promoten?"
+              },
+              on: {
+                ok: function($event) {
+                  return _vm.promoteParticipant(_vm.scan)
+                }
+              }
+            },
+            [
+              _c("p", [
+                _vm._v("Je staat op het punt om de "),
+                _c("strong", [_vm._v(_vm._s(_vm.scan.user.name))]),
+                _vm._v(
+                  " tot eigenaar van dese groepssessie te promoten. Dat kan handig zijn als je het beheer graag wilt overdragen. Let er wel op dat je deze actie zelf niet ongedaan moet maken (alleen "
+                ),
+                _c("strong", [_vm._v(_vm._s(_vm.scan.user.name))]),
+                _vm._v(" kan jou hierna weer tot eigenaar promoten) ")
+              ])
+            ]
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -104329,6 +104292,426 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-4333a61c", module.exports)
+  }
+}
+
+/***/ }),
+/* 746 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(13)
+/* script */
+var __vue_script__ = __webpack_require__(747)
+/* template */
+var __vue_template__ = __webpack_require__(748)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/RemoveUserDropdownModal.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2c513fd2", Component.options)
+  } else {
+    hotAPI.reload("data-v-2c513fd2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 747 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(24);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['scan', 'isAdmin'],
+
+    data: function data() {
+        return {};
+    },
+    mounted: function mounted() {},
+
+
+    computed: {},
+
+    methods: {
+        removeParticipant: function removeParticipant(scan) {
+            this.$emit('removeParticipant', scan);
+        }
+    }
+});
+
+/***/ }),
+/* 748 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {},
+    [
+      _vm.isAdmin
+        ? _c(
+            "a",
+            {
+              staticClass: "dropdown-item",
+              on: {
+                click: function($event) {
+                  return _vm.$bvModal.show("deletemodal" + _vm.scan.id)
+                }
+              }
+            },
+            [_vm._v("Verwijder uit groep")]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "portal",
+        { attrs: { to: "modals" } },
+        [
+          _c(
+            "b-modal",
+            {
+              attrs: {
+                id: "deletemodal" + _vm.scan.id,
+                title:
+                  "Weet je zeker dat je " +
+                  _vm.scan.user.name +
+                  " wilt verwijderen?"
+              },
+              on: {
+                ok: function($event) {
+                  return _vm.removeParticipant(_vm.scan)
+                }
+              }
+            },
+            [
+              _c("p", { staticClass: "my-4" }, [
+                _vm._v("Je staat op het punt om "),
+                _c("strong", [_vm._v(_vm._s(_vm.scan.user.name))]),
+                _vm._v(
+                  " uit de groepssessie te verwijderen. Weet je zeker dat je dit wilt doen? "
+                )
+              ])
+            ]
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2c513fd2", module.exports)
+  }
+}
+
+/***/ }),
+/* 749 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(13)
+/* script */
+var __vue_script__ = __webpack_require__(750)
+/* template */
+var __vue_template__ = __webpack_require__(751)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/MessageUserDropdownModal.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1b8f3835", Component.options)
+  } else {
+    hotAPI.reload("data-v-1b8f3835", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 750 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(24);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['scan'],
+
+	data: function data() {
+		return {
+			message: '',
+			messageState: null
+		};
+	},
+	mounted: function mounted() {},
+
+
+	computed: {},
+
+	methods: {
+		resetModal: function resetModal() {
+			this.message = '';
+			this.messageState = null;
+		},
+		handleOk: function handleOk(bvModalEvt) {
+			// Prevent modal from closing
+			bvModalEvt.preventDefault();
+			// Trigger submit handler
+			this.handleSubmit();
+		},
+		handleSubmit: function handleSubmit() {
+			var _this = this;
+
+			// Exit when the form isn't valid
+			if (!this.checkFormValidity()) {
+				return;
+			}
+			// Push the name to submitted names
+			// this.submittedNames.push(this.name)
+			this.sendMessage();
+			// Hide the modal manually
+			this.$nextTick(function () {
+				_this.$refs.modal.hide();
+			});
+		},
+		sendMessage: function sendMessage() {
+			var home = this;
+			axios.post('api/sendmessage', {
+				message: home.message,
+				scan: home.scan
+			});
+		},
+		checkFormValidity: function checkFormValidity() {
+			var valid = this.$refs.form.checkValidity();
+			this.messageState = valid ? 'valid' : 'invalid';
+			return valid;
+		}
+	}
+});
+
+/***/ }),
+/* 751 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {},
+    [
+      _c(
+        "a",
+        {
+          staticClass: "dropdown-item",
+          on: {
+            click: function($event) {
+              return _vm.$bvModal.show("messagemodal" + _vm.scan.id)
+            }
+          }
+        },
+        [_vm._v("Stuur bericht")]
+      ),
+      _vm._v(" "),
+      _c(
+        "portal",
+        { attrs: { to: "modals" } },
+        [
+          _c(
+            "b-modal",
+            {
+              ref: "modal",
+              attrs: {
+                id: "messagemodal" + _vm.scan.id,
+                title: "Stuur een bericht naar " + _vm.scan.user.name
+              },
+              on: {
+                show: _vm.resetModal,
+                hidden: _vm.resetModal,
+                ok: _vm.handleOk
+              }
+            },
+            [
+              _c(
+                "form",
+                {
+                  ref: "form",
+                  on: {
+                    submit: function($event) {
+                      $event.stopPropagation()
+                      $event.preventDefault()
+                      return _vm.handleSubmit($event)
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "b-form-group",
+                    {
+                      attrs: {
+                        state: _vm.messageState,
+                        label: "Name",
+                        "label-for": "message-input",
+                        "invalid-feedback": "het bericht mag niet leeg zijn"
+                      }
+                    },
+                    [
+                      _c("b-form-textarea", {
+                        attrs: {
+                          id: "message-input",
+                          state: _vm.messageState,
+                          required: "",
+                          rows: "3",
+                          "max-rows": "6"
+                        },
+                        model: {
+                          value: _vm.message,
+                          callback: function($$v) {
+                            _vm.message = $$v
+                          },
+                          expression: "message"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ]
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1b8f3835", module.exports)
   }
 }
 

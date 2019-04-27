@@ -5,6 +5,7 @@
 </div>
 <div class="text-center pt-3 pb-3">
     <a href=" {{ route('creategroupscan.title') }} " class="btn btn-primary mx-auto bounce-fade-top">START NU JE EIGEN GROEP</a> <br>
+    <a href=" {{ route('joingroupscan.entercode') }} " class="btn btn-outline-secondary btn-outline-secondary--nooutline mx-auto my-2">Sluit aan met code</a> <br>
     <a href=" {{ route('createsinglescan.title') }} ">
         <span class="fineprint fineprint--welcome fade-in-fwd"> > Of maak een individuele scan</span>
     </a>

@@ -34,4 +34,6 @@ Route::post('/scan/{scan}/updatedistricts', 'ApiScanDistrictController@update');
 
 Route::post('/group/{group}/promote', 'ApiManageGroupScanController@promoteuser');
 
+Route::post('/sendmessage', 'ApiSendMessageController@send');
+
 // Route::post('/comparison/{comparison}/showscans', 'ApiComparisonScansController');

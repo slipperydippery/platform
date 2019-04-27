@@ -115,6 +115,8 @@ Vue.component('countdown', require('./components/Countdown.vue'));
 Vue.component('slider-input', require('./components/SliderInput.vue'));
 Vue.component('copy-icon', require('./components/CopyIcon.vue'));
 Vue.component('promote-user-dropdown-modal', require('./components/PromoteUserDropdownModal.vue'));
+Vue.component('remove-user-dropdown-modal', require('./components/RemoveUserDropdownModal.vue'));
+Vue.component('message-user-dropdown-modal', require('./components/MessageUserDropdownModal.vue'));
 
 const app = new Vue({
     el: '#app',
