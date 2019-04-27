@@ -103,6 +103,9 @@ class ApiScanController extends Controller
      */
     public function destroy(Scan $scan)
     {
-        //
+        $group = $scan->group;
+        $scan->districts()->detach();
+        $scan->delete();
+        return $group;
     }
 }

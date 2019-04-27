@@ -44,4 +44,18 @@ class JoinGroupScanController extends Controller
     {
     	return view('joingroupscan.created', compact('scan'));
     }
+
+    public function entercode()
+    {
+        return view('joingroupscan.entercode');
+    }
+
+    public function storecode(Request $request)
+    {
+        $code = strtoupper($request->code);
+        if($group = Group::where('code', $code)->first()) {
+            return redirect()->route('joingroupscan.addscan', [$group, $code]);
+        }
+        return redirect()->route('dashboard');
+    }
 }

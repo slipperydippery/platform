@@ -114,6 +114,7 @@ Vue.component('countdown', require('./components/Countdown.vue'));
 // Controlled Components
 Vue.component('slider-input', require('./components/SliderInput.vue'));
 Vue.component('copy-icon', require('./components/CopyIcon.vue'));
+Vue.component('promote-user-dropdown-modal', require('./components/PromoteUserDropdownModal.vue'));
 
 const app = new Vue({
     el: '#app',

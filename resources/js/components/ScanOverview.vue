@@ -91,9 +91,33 @@
 	            			    </button>
 	            			    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 	            			        <a class="dropdown-item" href="#">Stuur bericht</a>
+                                    <promote-user-dropdown-modal
+                                        scan = scan
+
+                                    >
+                                    </promote-user-dropdown-modal>
+
 	            			        
-	            			        <a class="dropdown-item" href="#" data-toggle="modal" :data-target="'#confirmpromote' + scan.id " v-if="isAdmin">Promoot tot eigenaar</a>
-	            			        <a class="dropdown-item" href="#" data-toggle="modal" :data-target="'#confirmdelete' + scan.id " v-if="isAdmin">Verwijder uit groep</a>
+                                    <a class="dropdown-item" @click="$bvModal.show('promotemodal' + scan.id)" v-if="isAdmin">Promoot tot beheerder</a>
+                                    <portal to="modals">
+                                        <b-modal
+                                            :id="'promotemodal' + scan.id"
+                                            :title=" 'Weet je zeker dat je ' + scan.user.name + ' tot beheerder wilt promoten?' "
+                                            @ok="promoteParticipant(scan)"
+                                        >
+                                            <p>Je staat op het punt om de <strong>{{ scan.user.name }}</strong> tot eigenaar van dese groepssessie te promoten. Dat kan handig zijn als je het beheer graag wilt overdragen. Let er wel op dat je deze actie zelf niet ongedaan moet maken (alleen <strong>{{ scan.user.name }}</strong> kan jou hierna weer tot eigenaar promoten) </p>
+                                        </b-modal>
+                                    </portal>
+                                    <a class="dropdown-item" @click="$bvModal.show('deletemodal' + scan.id)" v-if="isAdmin">Verwijder uit groep</a>
+                                    <portal to="modals">
+                                        <b-modal 
+                                            :id="'deletemodal' + scan.id" 
+                                            :title="'Weet je zeker dat je ' + scan.user.name + ' wilt verwijderen?' " 
+                                            @ok="removeParticipant(scan)"
+                                        >
+                                            <p class="my-4">Je staat op het punt om <strong>{{ scan.user.name }}</strong> uit de groepssessie te verwijderen. Weet je zeker dat je dit wilt doen? </p>
+                                        </b-modal>
+                                    </portal>
 	            			    </div>
 	            			</div>
 
@@ -132,9 +156,12 @@
         	window.Echo.private('sessionsadded.' + this.group_id).listen('SessionAddedToGroup', e => {
                 this.getScan( e.scan_id );
         	});
-        	window.Echo.private('groupscores.' + this.group_id).listen('GroupscoresUpdated', e => {
-        	    this.getGroup(this.group_id);
-        	});
+            window.Echo.private('groupscores.' + this.group_id).listen('GroupscoresUpdated', e => {
+                this.getGroup(this.group_id);
+            });
+            window.Echo.private('groupadminupdated.' + this.group_id).listen('GroupAdminUpdated', e => {
+                this.getGroup(this.group_id);
+            });
         },
 
         computed: {
@@ -190,6 +217,22 @@
         			'group' : home.group
         		})
         	},
+
+            removeParticipant(scan) {
+                this.group.scans.splice(this.group.scans.indexOf(scan), 1);
+                axios.delete('api/scan/' + scan.id);
+            },
+
+            promoteParticipant(scan) {
+                var home = this;
+                axios.post('api/group/' + this.group.id + '/promote', {
+                        'scan' : scan
+                    })
+                    .then( (response) => {
+                        // home.group = response.data;
+                        home.getGroup( home.group.id );
+                    })
+            },
 
         	toggleLock() {
                 if (this.isAdmin) {

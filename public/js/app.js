@@ -1755,6 +1755,7 @@ Vue.component('countdown', __webpack_require__(728));
 // Controlled Components
 Vue.component('slider-input', __webpack_require__(731));
 Vue.component('copy-icon', __webpack_require__(734));
+Vue.component('promote-user-dropdown-modal', __webpack_require__(743));
 
 var app = new Vue({
 	el: '#app'
@@ -102971,6 +102972,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -102992,6 +103017,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             _this.getScan(e.scan_id);
         });
         window.Echo.private('groupscores.' + this.group_id).listen('GroupscoresUpdated', function (e) {
+            _this.getGroup(_this.group_id);
+        });
+        window.Echo.private('groupadminupdated.' + this.group_id).listen('GroupAdminUpdated', function (e) {
             _this.getGroup(_this.group_id);
         });
     },
@@ -103040,6 +103068,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var home = this;
             axios.patch('api/group/' + group_id, {
                 'group': home.group
+            });
+        },
+        removeParticipant: function removeParticipant(scan) {
+            this.group.scans.splice(this.group.scans.indexOf(scan), 1);
+            axios.delete('api/scan/' + scan.id);
+        },
+        promoteParticipant: function promoteParticipant(scan) {
+            var home = this;
+            axios.post('api/group/' + this.group.id + '/promote', {
+                'scan': scan
+            }).then(function (response) {
+                // home.group = response.data;
+                home.getGroup(home.group.id);
             });
         },
         toggleLock: function toggleLock() {
@@ -103343,38 +103384,131 @@ var render = function() {
                                         [_vm._v("Stuur bericht")]
                                       ),
                                       _vm._v(" "),
-                                      _vm.isAdmin
-                                        ? _c(
-                                            "a",
-                                            {
-                                              staticClass: "dropdown-item",
-                                              attrs: {
-                                                href: "#",
-                                                "data-toggle": "modal",
-                                                "data-target":
-                                                  "#confirmpromote" + scan.id
-                                              }
-                                            },
-                                            [_vm._v("Promoot tot eigenaar")]
-                                          )
-                                        : _vm._e(),
+                                      _c("promote-user-dropdown-modal", {
+                                        attrs: { scan: "scan" }
+                                      }),
                                       _vm._v(" "),
                                       _vm.isAdmin
                                         ? _c(
                                             "a",
                                             {
                                               staticClass: "dropdown-item",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.$bvModal.show(
+                                                    "promotemodal" + scan.id
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("Promoot tot beheerder")]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _c(
+                                        "portal",
+                                        { attrs: { to: "modals" } },
+                                        [
+                                          _c(
+                                            "b-modal",
+                                            {
                                               attrs: {
-                                                href: "#",
-                                                "data-toggle": "modal",
-                                                "data-target":
-                                                  "#confirmdelete" + scan.id
+                                                id: "promotemodal" + scan.id,
+                                                title:
+                                                  "Weet je zeker dat je " +
+                                                  scan.user.name +
+                                                  " tot beheerder wilt promoten?"
+                                              },
+                                              on: {
+                                                ok: function($event) {
+                                                  return _vm.promoteParticipant(
+                                                    scan
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("p", [
+                                                _vm._v(
+                                                  "Je staat op het punt om de "
+                                                ),
+                                                _c("strong", [
+                                                  _vm._v(_vm._s(scan.user.name))
+                                                ]),
+                                                _vm._v(
+                                                  " tot eigenaar van dese groepssessie te promoten. Dat kan handig zijn als je het beheer graag wilt overdragen. Let er wel op dat je deze actie zelf niet ongedaan moet maken (alleen "
+                                                ),
+                                                _c("strong", [
+                                                  _vm._v(_vm._s(scan.user.name))
+                                                ]),
+                                                _vm._v(
+                                                  " kan jou hierna weer tot eigenaar promoten) "
+                                                )
+                                              ])
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _vm.isAdmin
+                                        ? _c(
+                                            "a",
+                                            {
+                                              staticClass: "dropdown-item",
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.$bvModal.show(
+                                                    "deletemodal" + scan.id
+                                                  )
+                                                }
                                               }
                                             },
                                             [_vm._v("Verwijder uit groep")]
                                           )
-                                        : _vm._e()
-                                    ]
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _c(
+                                        "portal",
+                                        { attrs: { to: "modals" } },
+                                        [
+                                          _c(
+                                            "b-modal",
+                                            {
+                                              attrs: {
+                                                id: "deletemodal" + scan.id,
+                                                title:
+                                                  "Weet je zeker dat je " +
+                                                  scan.user.name +
+                                                  " wilt verwijderen?"
+                                              },
+                                              on: {
+                                                ok: function($event) {
+                                                  return _vm.removeParticipant(
+                                                    scan
+                                                  )
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _c("p", { staticClass: "my-4" }, [
+                                                _vm._v(
+                                                  "Je staat op het punt om "
+                                                ),
+                                                _c("strong", [
+                                                  _vm._v(_vm._s(scan.user.name))
+                                                ]),
+                                                _vm._v(
+                                                  " uit de groepssessie te verwijderen. Weet je zeker dat je dit wilt doen? "
+                                                )
+                                              ])
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
                                   )
                                 ]
                               )
@@ -104093,6 +104227,106 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 740 */,
+/* 741 */,
+/* 742 */,
+/* 743 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(13)
+/* script */
+var __vue_script__ = __webpack_require__(744)
+/* template */
+var __vue_template__ = __webpack_require__(745)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/PromoteUserDropdownModal.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4333a61c", Component.options)
+  } else {
+    hotAPI.reload("data-v-4333a61c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 744 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(24);
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['scan'],
+
+    data: function data() {
+        return {};
+    },
+    mounted: function mounted() {},
+
+
+    computed: {},
+
+    methods: {}
+});
+
+/***/ }),
+/* 745 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", {}, [_vm._v("\n\t" + _vm._s(_vm.scan.title) + "\n")])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4333a61c", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

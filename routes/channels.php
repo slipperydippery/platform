@@ -42,6 +42,17 @@ Broadcast::channel('groupscores.{group}', function($user, Group $group) {
 	return $canAccess;
 });
 
+Broadcast::channel('groupadminupdated.{group}', function($user, Group $group) {
+	return true;
+	$canAccess = false;
+	foreach($group->scans as $thisscan) {
+	    if( (int) $thisscan->user->id === (int) $user->id) {
+	        $canAccess = true;
+	    }
+	}
+	return $canAccess;
+});
+
 Broadcast::channel('sessionsadded.{group}', function($user, Group $group) {
 	$canAccess = false;
 	foreach($group->scans as $thisscan) {
