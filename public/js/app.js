@@ -102997,9 +102997,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -103415,25 +103412,13 @@ var render = function() {
                                           attrs: {
                                             scan: scan,
                                             isAdmin: _vm.isAdmin,
-                                            isSelf: " scan.user.id == user_id "
+                                            isSelf: scan.user.id == _vm.user_id
                                           },
                                           on: {
                                             removeParticipant:
                                               _vm.removeParticipant
                                           }
-                                        }),
-                                        _vm._v(
-                                          "\n                                    " +
-                                            _vm._s(scan.user.id) +
-                                            " "
-                                        ),
-                                        _c("br"),
-                                        _vm._v(
-                                          "\n                                    " +
-                                            _vm._s(_vm.user_id) +
-                                            " "
-                                        ),
-                                        _c("br")
+                                        })
                                       ],
                                       1
                                     )
@@ -103446,7 +103431,7 @@ var render = function() {
                                   attrs: {
                                     scan: scan,
                                     isAdmin: _vm.isAdmin,
-                                    isSelf: " scan.user.id == user_id "
+                                    isSelf: scan.user.id == _vm.user_id
                                   },
                                   on: {
                                     removeParticipant: _vm.removeParticipant

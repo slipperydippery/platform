@@ -13,7 +13,7 @@
 		    </b-modal>
 		</portal>
 
-		<a class="dropdown-item" @click="$bvModal.show('deletemodal' + scan.id)" v-if="isAdmin && ! isSelf">Verwijder uit groep</a>
+		<a class="dropdown-item" @click="$bvModal.show('deletemodal' + scan.id)" v-if="isAdmin && (! isSelf)">Verwijder uit groep</a>
 		<portal to="modals" v-if="! isSelf">
 		    <b-modal 
 		        :id="'deletemodal' + scan.id" 

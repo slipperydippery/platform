@@ -106,13 +106,10 @@
                                     <remove-user-dropdown-modal
                                         :scan = scan
                                         :isAdmin = isAdmin
-                                        isSelf = " scan.user.id == user_id "
+                                        :isSelf = " scan.user.id == user_id "
                                         @removeParticipant = "removeParticipant"
                                     >
                                     </remove-user-dropdown-modal>
-                                    {{ scan.user.id }} <br>
-                                    {{ user_id }} <br>
-                                    
 
 	            			    </div>
 	            			</div>
@@ -120,7 +117,7 @@
                             <remove-user-dropdown-modal
                                 :scan = scan
                                 :isAdmin = isAdmin
-                                isSelf = " scan.user.id == user_id "
+                                :isSelf = " scan.user.id == user_id "
                                 v-if = " scan.user.id == user_id "
                                 @removeParticipant = "removeParticipant"
                             >
