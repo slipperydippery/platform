@@ -110,6 +110,9 @@
                                         @removeParticipant = "removeParticipant"
                                     >
                                     </remove-user-dropdown-modal>
+                                    {{ scan.user.id }} <br>
+                                    {{ user_id }} <br>
+                                    
 
 	            			    </div>
 	            			</div>

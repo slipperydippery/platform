@@ -52,17 +52,6 @@
                 :user_id = " {{ Auth::user()->id }} "
             >
             </scan-overview>
-            @foreach ($scan->group->scans as $thisscan)
-                <portal to="modals">
-                    @component('components.emailcomponent', ['thisgroup' => $scan->group])
-                    @endcomponent
-                    @component('components.confirmremovefromgroup', ['thisscan' => $thisscan])
-                    @endcomponent
-                    @component('components.promoteconfirm', ['thisscan' => $thisscan])
-                    @endcomponent
-                </portal>
-            @endforeach
-
         @endif
     @endforeach
       
