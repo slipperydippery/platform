@@ -102214,9 +102214,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -102270,12 +102267,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "selectscans" }, [
-    _vm._v("\n        blession: "),
-    _c("br"),
-    _vm._v("\n\t\t" + _vm._s(_vm.session) + " "),
-    _c("br"),
-    _vm._v("\n        session "),
-    _c("br"),
     _vm._v("\n        " + _vm._s(_vm.session.districts) + " "),
     _c("br"),
     _vm._v("\n        " + _vm._s(_vm.session.instantie_id) + " "),
