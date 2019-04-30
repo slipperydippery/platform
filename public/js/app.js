@@ -102214,15 +102214,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['session'],
+    props: ['session', 'scan', 'districts', 'instanties'],
 
     data: function data() {
         return {
-            'scans': []
+            'scans': [],
+            'selectedScans': []
         };
     },
     mounted: function mounted() {
@@ -102235,15 +102261,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             return this.scans.filter(function (thisscan) {
-                if (!thisscan.group_id && thisscan.instantie_id == _this.session.instantie_id) {
-                    var districtmatch = false;
-                    thisscan.districts.forEach(function (thisdistrict) {
-                        if (_this.session.districts.includes(thisdistrict.id)) {
-                            districtmatch = true;
-                        }
-                    });
-                    return districtmatch ? thisscan : '';
-                }
+                if (thisscan.group_id) return '';
+                if (thisscan.instantie_id != _this.session.instantie_id) return '';
+                var districtmatch = false;
+                thisscan.districts.forEach(function (thisdistrict) {
+                    if (_this.session.districts.includes(thisdistrict.id)) {
+                        districtmatch = true;
+                    }
+                });
+                return districtmatch ? thisscan : '';
+            });
+        },
+        selectedFilterScans: function selectedFilterScans() {
+            var _this2 = this;
+
+            return this.filteredScans.filter(function (thisscan) {
+                var match = false;
+                _this2.selectedScans.forEach(function (selectedScan) {
+                    if (thisscan.id == selectedScan.id) {
+                        match = true;
+                    }
+                });
+                return match ? thisscan : '';
+            });
+        },
+        unSelectedFilterScans: function unSelectedFilterScans() {
+            var _this3 = this;
+
+            return this.filteredScans.filter(function (thisscan) {
+                var match = false;
+                _this3.selectedScans.forEach(function (selectedScan) {
+                    if (thisscan.id == selectedScan.id) {
+                        match = true;
+                    }
+                });
+                return match ? '' : thisscan;
             });
         }
     },
@@ -102254,6 +102306,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get('/api/scan').then(function (response) {
                 home.scans = response.data;
             });
+        },
+        addToSelection: function addToSelection(scan) {
+            this.selectedScans.push(scan);
+        },
+        removeFromSelection: function removeFromSelection(scan) {
+            this.selectedScans.splice(this.selectedScans.indexOf(scan), 1);
+        },
+        districtName: function districtName(district_id) {
+            var districtName = '';
+            this.districts.forEach(function (district) {
+                if (district.id == district_id) {
+                    districtName = district.name;
+                }
+            });
+            return districtName;
+        },
+        instantieName: function instantieName(instantie_id) {
+            var instantieName = '';
+            this.instanties.forEach(function (instantie) {
+                if (instantie.id == instantie_id) {
+                    instantieName = instantie.title;
+                }
+            });
+            return instantieName;
+        },
+        answercount: function answercount(thisscan) {
+            var answercount = 0;
+            thisscan.answers.forEach(function (thisanswer) {
+                thisanswer.answer ? answercount++ : '';
+            });
+            return answercount;
+        },
+        questioncount: function questioncount(thisscan) {
+            return thisscan.answers.length;
         }
     }
 });
@@ -102266,37 +102352,205 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "selectscans" }, [
-    _vm._v("\n        " + _vm._s(_vm.session.districts) + " "),
-    _c("br"),
-    _vm._v("\n        " + _vm._s(_vm.session.instantie_id) + " "),
-    _c("br"),
-    _vm._v("\n        " + _vm._s(_vm.session.scanmodel_id) + " "),
-    _c("br"),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "allscans" },
-      _vm._l(_vm.filteredScans, function(scan) {
-        return _c("div", { staticClass: "scan" }, [
-          _vm._v(
-            "\n                " +
-              _vm._s(scan.title) +
-              " " +
-              _vm._s(scan.instantie_id) +
-              " " +
-              _vm._s(scan.districts) +
-              " "
-          ),
-          _c("br")
+  return _c(
+    "div",
+    { staticClass: "selectscans" },
+    [
+      _vm._v("\n        Jouw gekozen gemeenten: "),
+      _vm._l(_vm.session.districts, function(district) {
+        return _c("span", [
+          _c("span", {
+            domProps: { innerHTML: _vm._s(_vm.districtName(district)) }
+          })
         ])
       }),
-      0
-    ),
-    _vm._v("\n        ----------\n\t")
-  ])
+      _vm._v(" "),
+      _c("br"),
+      _vm._v("\n        Jouw gekozen instantie: "),
+      _c("span", {
+        domProps: {
+          innerHTML: _vm._s(_vm.instantieName(_vm.session.instantie_id))
+        }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "allscans" }, [
+        _c("table", { staticClass: "table table-sm" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            [
+              _c("tr", { staticClass: "table-primary" }, [
+                _c("th", { attrs: { scope: "col" } }, [
+                  _vm._v(" " + _vm._s(_vm.scan.user.name) + " ")
+                ]),
+                _vm._v(" "),
+                _c("th", { attrs: { scope: "col" } }, [
+                  _vm._v(
+                    " " +
+                      _vm._s(_vm.instantieName(_vm.session.instantie_id)) +
+                      " "
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "th",
+                  { attrs: { scope: "col" } },
+                  _vm._l(_vm.scan.districts, function(district, index) {
+                    return _c("span", [
+                      _c("span", {
+                        domProps: {
+                          innerHTML: _vm._s(_vm.districtName(district.id))
+                        }
+                      }),
+                      index !== _vm.scan.districts.length - 1
+                        ? _c("span", [_vm._v(", ")])
+                        : _vm._e()
+                    ])
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c("th", { attrs: { scope: "col" } }, [
+                  _vm._v(
+                    " " +
+                      _vm._s(_vm.answercount(_vm.scan)) +
+                      " / " +
+                      _vm._s(_vm.questioncount(_vm.scan)) +
+                      " "
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.selectedFilterScans, function(thisscan, index) {
+                return _c(
+                  "tr",
+                  {
+                    key: index,
+                    staticClass: "table-success",
+                    on: {
+                      click: function($event) {
+                        return _vm.removeFromSelection(thisscan)
+                      }
+                    }
+                  },
+                  [
+                    _c("th", { attrs: { scope: "row" } }, [
+                      _vm._v(" " + _vm._s(thisscan.title) + " ")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(" " + _vm._s(thisscan.instantie.title) + " ")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      _vm._l(thisscan.districts, function(district, index) {
+                        return _c("span", [
+                          _c("span", {
+                            domProps: {
+                              innerHTML: _vm._s(_vm.districtName(district.id))
+                            }
+                          }),
+                          index !== thisscan.districts.length - 1
+                            ? _c("span", [_vm._v(", ")])
+                            : _vm._e()
+                        ])
+                      }),
+                      0
+                    ),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        " " +
+                          _vm._s(_vm.answercount(thisscan)) +
+                          " / " +
+                          _vm._s(_vm.questioncount(thisscan)) +
+                          " "
+                      )
+                    ])
+                  ]
+                )
+              }),
+              _vm._v(" "),
+              _vm._l(_vm.unSelectedFilterScans, function(thisscan, index) {
+                return _c(
+                  "tr",
+                  {
+                    key: index,
+                    on: {
+                      click: function($event) {
+                        return _vm.addToSelection(thisscan)
+                      }
+                    }
+                  },
+                  [
+                    _c("th", { attrs: { scope: "row" } }, [
+                      _vm._v(" " + _vm._s(thisscan.title) + " ")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(" " + _vm._s(thisscan.instantie.title) + " ")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      _vm._l(thisscan.districts, function(district, index) {
+                        return _c("span", [
+                          _c("span", {
+                            domProps: {
+                              innerHTML: _vm._s(_vm.districtName(district.id))
+                            }
+                          }),
+                          index !== thisscan.districts.length - 1
+                            ? _c("span", [_vm._v(", ")])
+                            : _vm._e()
+                        ])
+                      }),
+                      0
+                    ),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        " " +
+                          _vm._s(_vm.answercount(thisscan)) +
+                          " / " +
+                          _vm._s(_vm.questioncount(thisscan)) +
+                          " "
+                      )
+                    ])
+                  ]
+                )
+              })
+            ],
+            2
+          )
+        ])
+      ])
+    ],
+    2
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v(" Naam sessie ")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v(" Instantie ")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "45%" }, attrs: { scope: "col" } }, [
+          _vm._v(" Gemeente(n) ")
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v(" vragen ")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

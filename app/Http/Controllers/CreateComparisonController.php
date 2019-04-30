@@ -57,7 +57,10 @@ class CreateComparisonController extends Controller
             }
         }
         $session = session('createcomparison');
-    	return view('createcomparison.scans', compact('scan', 'scans', 'session'));
+        $districts = District::get();
+        $instanties = Instantie::get();
+        $scan = Scan::with('user', 'answers', 'instantie', 'districts')->find($scan->id);
+    	return view('createcomparison.scans', compact('scan', 'scans', 'session', 'districts', 'instanties'));
     }
 
     public function storescans(Request $request, Scan $scan)
