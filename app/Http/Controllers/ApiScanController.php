@@ -16,7 +16,7 @@ class ApiScanController extends Controller
      */
     public function index()
     {
-        //
+        return Scan::with('user', 'answers', 'districts', 'instantie')->get();
     }
 
     /**
@@ -48,7 +48,7 @@ class ApiScanController extends Controller
      */
     public function show(Scan $scan)
     {
-        $scan = Scan::with('user', 'answers', 'districts', 'answers', 'instantie')->find($scan->id);
+        $scan = Scan::with('user', 'answers', 'districts', 'instantie')->find($scan->id);
         return $scan;
     }
 
@@ -106,9 +106,10 @@ class ApiScanController extends Controller
     {
         $group = $scan->group;
         $scan->districts()->detach();
+        $scan_id = $scan->id;
         $scan->delete();
         $event = 'sessionremovedfromgroup';
-        GroupUpdated::dispatch($scan->group->id, $event);
+        GroupUpdated::dispatch($scan->group->id, $event, $scan_id);
         return $group;
     }
 }

@@ -29,6 +29,7 @@ Route::resource('session', 'ApiSessionController');
 Route::get('/scan/{scan}/question/{question}/getanswers', 'ApiScanQuestionController@getanswers');
 
 Route::get('/group/{group}/scan', 'ApiGroupScanController@index');
+Route::post('/joingroup/', 'ApiJoinGroupController@joinwithcode');
 
 Route::post('/scan/{scan}/updatedistricts', 'ApiScanDistrictController@update');
 

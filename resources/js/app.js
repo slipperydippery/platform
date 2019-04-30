@@ -111,6 +111,9 @@ Vue.component('scan-overview', require('./components/ScanOverview.vue'));
 // Utility
 Vue.component('countdown', require('./components/Countdown.vue'));
 
+Vue.component('join-with-code', require('./components/JoinWithCode.vue'));
+
+
 // Controlled Components
 Vue.component('slider-input', require('./components/SliderInput.vue'));
 Vue.component('copy-icon', require('./components/CopyIcon.vue'));

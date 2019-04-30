@@ -165,6 +165,7 @@
                         this.getGroup(this.group_id);
                         break;
                     case 'sessionremovedfromgroup':
+                        this.notifyRemoved(e.scan_id);
                         this.getGroup(this.group_id);
                         break;
                 }
@@ -198,16 +199,46 @@
                 axios.get('api/scan/' + scan_id)
                     .then( (response) => {
                         home.group.scans.push(response.data);
-                        home.makeToast(response.data.user.name);
+                        home.notifyJoined(response.data.user.name);
                     })
             },
 
-            makeToast(username) {
+            notifyJoined(username) {
                 this.$bvToast.toast(`${username} heeft zich aangemeld voor de groepssessie ${this.group.title}`, {
                     title: 'Nieuwe aanmelding',
                     autoHideDelay: 5000,
-                    appendToast: false
+                    appendToast: false,
+                    solid: true,
+                    variant: 'primary',
+                    toaster: 'b-toaster-top-full',
                 })
+            },
+
+            notifyRemoved(scan_id) {
+                if(scan_id == this.scan_id) {
+                    this.isInGroup = false;
+                    this.$bvToast.toast(`Jij bent verwijderd uit groep ${this.group.title}`, {
+                        title: 'Verwijderd uit groep',
+                        autoHideDelay: 5000,
+                        appendToast: false,
+                        solid: true,
+                        variant: 'danger',
+                        toaster: 'b-toaster-top-full',
+                    });
+                } else {
+                    this.group.scans.forEach( (thisscan) => {
+                        if( thisscan.id == scan_id ) {
+                            this.$bvToast.toast(`${thisscan.user.name} is verwijderd uit groep ${this.group.title}`, {
+                                title: 'Verwijderd uit groep',
+                                autoHideDelay: 5000,
+                                appendToast: false,
+                                solid: true,
+                                variant: 'danger',
+                                toaster: 'b-toaster-top-full',
+                            });
+                        }
+                    });
+                }
             },
 
         	getGroup(group_id) {
@@ -231,9 +262,6 @@
                 var isSelf = (scan.user.id == this.user_id);
                 axios.delete('api/scan/' + scan.id)
                     .then( (responsel => {
-                        if ( isSelf ) {
-                            home.isInGroup = false;
-                        }
                     }) );
             },
 
