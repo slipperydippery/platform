@@ -8,17 +8,15 @@
 					<h5 class="card-header bg-primary text-white">Nieuwe groep: Selecteer sessies</h5>
 					<div class="card-body">
 						<h5 class="card-title">Selecteer sessies om mee te vergelijken</h5>
-						hier een lijst
 
-						<form action="{{ route('createcomparison.storescans', $scan) }}" method="post" accept-charset="utf-8">
-						    {{ csrf_field() }}
-							@include('createcomparison.partials.form', ['submittext' => 'Sla scans op'])
-						</form>
+						<select-compare-scans
+							:scan=" {{ json_encode($scan) }} "
+							:districts=" {{ json_encode($districts) }} "
+							:instanties=" {{ json_encode($instanties) }} "
+							:session=" {{ json_encode($session) }} "
+						>
+						</select-compare-scans>
 
-
-						@foreach ($scans as $thisscan)
-							<p>{{ $thisscan->title }} </p>
-						@endforeach
 						@include('creategroupscan.partials.creategroupprogress')
 					</div>
 				</div>

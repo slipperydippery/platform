@@ -2,38 +2,37 @@
 	<div class="selectscans">
         Jouw gekozen gemeenten: <span v-for="district in session.districts"><span v-html="districtName(district)"></span> </span> <br>
         Jouw gekozen instantie: <span v-html="instantieName(session.instantie_id)"></span>
-        <div class="allscans">
-            <table class="table table-sm">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col"> Naam sessie </th>
-                        <th scope="col"> Instantie </th>    
-                        <th scope="col" style="width: 45%"> Gemeente(n) </th>    
-                        <th scope="col"> vragen </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="table-primary">
-                        <th scope="col"> {{ scan.user.name }} </th>
-                        <th scope="col"> {{ instantieName(session.instantie_id) }} </th>
-                        <th scope="col"> <span v-for="(district, index) in scan.districts"><span v-html="districtName(district.id)"></span><span v-if="index !== scan.districts.length - 1">, </span></span></th>
-                        <th scope="col"> {{ answercount(scan) }} / {{ questioncount(scan) }} </th>
-                    </tr>
-                    <tr v-for="(thisscan, index) in selectedFilterScans" :key="index" class="table-success" @click="removeFromSelection(thisscan)">
-                        <th scope="row"> {{ thisscan.title }} </th>
-                        <td> {{ thisscan.instantie.title }} </td>
-                        <td> <span v-for="(district, index) in thisscan.districts"><span v-html="districtName(district.id)"></span><span v-if="index !== thisscan.districts.length - 1">, </span></span></td>
-                        <td> {{ answercount(thisscan) }} / {{ questioncount(thisscan) }} </td>
-                    </tr>
-                    <tr v-for="(thisscan, index) in unSelectedFilterScans" :key="index" @click="addToSelection(thisscan)">
-                        <th scope="row"> {{ thisscan.title }} </th>
-                        <td> {{ thisscan.instantie.title }} </td>
-                        <td> <span v-for="(district, index) in thisscan.districts"><span v-html="districtName(district.id)"></span><span v-if="index !== thisscan.districts.length - 1">, </span></span></td>
-                        <td> {{ answercount(thisscan) }} / {{ questioncount(thisscan) }} </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <table class="table table-sm table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col"> Naam sessie </th>
+                    <th scope="col"> Instantie </th>    
+                    <th scope="col" style="width: 45%"> Gemeente(n) </th>    
+                    <th scope="col"> vragen </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="table-primary">
+                    <th scope="col"> {{ scan.user.name }} </th>
+                    <th scope="col"> {{ instantieName(session.instantie_id) }} </th>
+                    <th scope="col"> <span v-for="(district, index) in scan.districts"><span v-html="districtName(district.id)"></span><span v-if="index !== scan.districts.length - 1">, </span></span></th>
+                    <th scope="col"> {{ answercount(scan) }} / {{ questioncount(scan) }} </th>
+                </tr>
+                <tr v-for="(thisscan, index) in selectedFilterScans" :key="index" class="table-success clickable" @click="removeFromSelection(thisscan)">
+                    <th scope="row"> {{ thisscan.title }} </th>
+                    <td> {{ thisscan.instantie.title }} </td>
+                    <td> <span v-for="(district, index) in thisscan.districts"><span v-html="districtName(district.id)"></span><span v-if="index !== thisscan.districts.length - 1">, </span></span></td>
+                    <td> {{ answercount(thisscan) }} / {{ questioncount(thisscan) }} </td>
+                </tr>
+                <tr v-for="(thisscan, index) in unSelectedFilterScans" :key="index" class="clickable" @click="addToSelection(thisscan)">
+                    <th scope="row"> {{ thisscan.title }} </th>
+                    <td> {{ thisscan.instantie.title }} </td>
+                    <td> <span v-for="(district, index) in thisscan.districts"><span v-html="districtName(district.id)"></span><span v-if="index !== thisscan.districts.length - 1">, </span></span></td>
+                    <td> {{ answercount(thisscan) }} / {{ questioncount(thisscan) }} </td>
+                </tr>
+            </tbody>
+        </table>
+        <input type="submit" value="Bevestig vergelijking" class="btn btn-primary form-control" @click="saveComparison" />
 	</div>
 </template>
 

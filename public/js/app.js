@@ -102238,7 +102238,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -102373,160 +102372,165 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("div", { staticClass: "allscans" }, [
-        _c("table", { staticClass: "table table-sm" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "tbody",
-            [
-              _c("tr", { staticClass: "table-primary" }, [
-                _c("th", { attrs: { scope: "col" } }, [
-                  _vm._v(" " + _vm._s(_vm.scan.user.name) + " ")
-                ]),
-                _vm._v(" "),
-                _c("th", { attrs: { scope: "col" } }, [
-                  _vm._v(
-                    " " +
-                      _vm._s(_vm.instantieName(_vm.session.instantie_id)) +
-                      " "
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "th",
-                  { attrs: { scope: "col" } },
-                  _vm._l(_vm.scan.districts, function(district, index) {
-                    return _c("span", [
-                      _c("span", {
-                        domProps: {
-                          innerHTML: _vm._s(_vm.districtName(district.id))
-                        }
-                      }),
-                      index !== _vm.scan.districts.length - 1
-                        ? _c("span", [_vm._v(", ")])
-                        : _vm._e()
-                    ])
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c("th", { attrs: { scope: "col" } }, [
-                  _vm._v(
-                    " " +
-                      _vm._s(_vm.answercount(_vm.scan)) +
-                      " / " +
-                      _vm._s(_vm.questioncount(_vm.scan)) +
-                      " "
-                  )
-                ])
+      _c("table", { staticClass: "table table-sm table-hover" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          [
+            _c("tr", { staticClass: "table-primary" }, [
+              _c("th", { attrs: { scope: "col" } }, [
+                _vm._v(" " + _vm._s(_vm.scan.user.name) + " ")
               ]),
               _vm._v(" "),
-              _vm._l(_vm.selectedFilterScans, function(thisscan, index) {
-                return _c(
-                  "tr",
-                  {
-                    key: index,
-                    staticClass: "table-success",
-                    on: {
-                      click: function($event) {
-                        return _vm.removeFromSelection(thisscan)
-                      }
-                    }
-                  },
-                  [
-                    _c("th", { attrs: { scope: "row" } }, [
-                      _vm._v(" " + _vm._s(thisscan.title) + " ")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v(" " + _vm._s(thisscan.instantie.title) + " ")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      _vm._l(thisscan.districts, function(district, index) {
-                        return _c("span", [
-                          _c("span", {
-                            domProps: {
-                              innerHTML: _vm._s(_vm.districtName(district.id))
-                            }
-                          }),
-                          index !== thisscan.districts.length - 1
-                            ? _c("span", [_vm._v(", ")])
-                            : _vm._e()
-                        ])
-                      }),
-                      0
-                    ),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v(
-                        " " +
-                          _vm._s(_vm.answercount(thisscan)) +
-                          " / " +
-                          _vm._s(_vm.questioncount(thisscan)) +
-                          " "
-                      )
-                    ])
-                  ]
+              _c("th", { attrs: { scope: "col" } }, [
+                _vm._v(
+                  " " +
+                    _vm._s(_vm.instantieName(_vm.session.instantie_id)) +
+                    " "
                 )
-              }),
+              ]),
               _vm._v(" "),
-              _vm._l(_vm.unSelectedFilterScans, function(thisscan, index) {
-                return _c(
-                  "tr",
-                  {
-                    key: index,
-                    on: {
-                      click: function($event) {
-                        return _vm.addToSelection(thisscan)
+              _c(
+                "th",
+                { attrs: { scope: "col" } },
+                _vm._l(_vm.scan.districts, function(district, index) {
+                  return _c("span", [
+                    _c("span", {
+                      domProps: {
+                        innerHTML: _vm._s(_vm.districtName(district.id))
                       }
-                    }
-                  },
-                  [
-                    _c("th", { attrs: { scope: "row" } }, [
-                      _vm._v(" " + _vm._s(thisscan.title) + " ")
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v(" " + _vm._s(thisscan.instantie.title) + " ")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      _vm._l(thisscan.districts, function(district, index) {
-                        return _c("span", [
-                          _c("span", {
-                            domProps: {
-                              innerHTML: _vm._s(_vm.districtName(district.id))
-                            }
-                          }),
-                          index !== thisscan.districts.length - 1
-                            ? _c("span", [_vm._v(", ")])
-                            : _vm._e()
-                        ])
-                      }),
-                      0
-                    ),
-                    _vm._v(" "),
-                    _c("td", [
-                      _vm._v(
-                        " " +
-                          _vm._s(_vm.answercount(thisscan)) +
-                          " / " +
-                          _vm._s(_vm.questioncount(thisscan)) +
-                          " "
-                      )
-                    ])
-                  ]
+                    }),
+                    index !== _vm.scan.districts.length - 1
+                      ? _c("span", [_vm._v(", ")])
+                      : _vm._e()
+                  ])
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _c("th", { attrs: { scope: "col" } }, [
+                _vm._v(
+                  " " +
+                    _vm._s(_vm.answercount(_vm.scan)) +
+                    " / " +
+                    _vm._s(_vm.questioncount(_vm.scan)) +
+                    " "
                 )
-              })
-            ],
-            2
-          )
-        ])
-      ])
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.selectedFilterScans, function(thisscan, index) {
+              return _c(
+                "tr",
+                {
+                  key: index,
+                  staticClass: "table-success clickable",
+                  on: {
+                    click: function($event) {
+                      return _vm.removeFromSelection(thisscan)
+                    }
+                  }
+                },
+                [
+                  _c("th", { attrs: { scope: "row" } }, [
+                    _vm._v(" " + _vm._s(thisscan.title) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(" " + _vm._s(thisscan.instantie.title) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    _vm._l(thisscan.districts, function(district, index) {
+                      return _c("span", [
+                        _c("span", {
+                          domProps: {
+                            innerHTML: _vm._s(_vm.districtName(district.id))
+                          }
+                        }),
+                        index !== thisscan.districts.length - 1
+                          ? _c("span", [_vm._v(", ")])
+                          : _vm._e()
+                      ])
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      " " +
+                        _vm._s(_vm.answercount(thisscan)) +
+                        " / " +
+                        _vm._s(_vm.questioncount(thisscan)) +
+                        " "
+                    )
+                  ])
+                ]
+              )
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.unSelectedFilterScans, function(thisscan, index) {
+              return _c(
+                "tr",
+                {
+                  key: index,
+                  staticClass: "clickable",
+                  on: {
+                    click: function($event) {
+                      return _vm.addToSelection(thisscan)
+                    }
+                  }
+                },
+                [
+                  _c("th", { attrs: { scope: "row" } }, [
+                    _vm._v(" " + _vm._s(thisscan.title) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(" " + _vm._s(thisscan.instantie.title) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    _vm._l(thisscan.districts, function(district, index) {
+                      return _c("span", [
+                        _c("span", {
+                          domProps: {
+                            innerHTML: _vm._s(_vm.districtName(district.id))
+                          }
+                        }),
+                        index !== thisscan.districts.length - 1
+                          ? _c("span", [_vm._v(", ")])
+                          : _vm._e()
+                      ])
+                    }),
+                    0
+                  ),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(
+                      " " +
+                        _vm._s(_vm.answercount(thisscan)) +
+                        " / " +
+                        _vm._s(_vm.questioncount(thisscan)) +
+                        " "
+                    )
+                  ])
+                ]
+              )
+            })
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "btn btn-primary form-control",
+        attrs: { type: "submit", value: "Bevestig vergelijking" },
+        on: { click: _vm.saveComparison }
+      })
     ],
     2
   )
