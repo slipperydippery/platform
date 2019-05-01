@@ -104127,6 +104127,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -104204,40 +104217,60 @@ var render = function() {
       : _vm._e(),
     _vm._v(" "),
     _vm.active
-      ? _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.code,
-              expression: "code"
-            }
-          ],
-          ref: "input",
-          staticClass: "m-1",
-          attrs: { type: "text", placeholder: "Voer code in" },
-          domProps: { value: _vm.code },
-          on: {
-            keyup: function($event) {
-              _vm.code = _vm.code.toUpperCase()
-            },
-            keydown: function($event) {
-              if (
-                !$event.type.indexOf("key") &&
-                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-              ) {
-                return null
+      ? _c("div", { staticClass: "input-group pr-2" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.code,
+                expression: "code"
               }
-              return _vm.submitCode($event)
+            ],
+            ref: "input",
+            staticClass: "form-control",
+            class: { uppercase: _vm.code.length },
+            attrs: {
+              type: "text",
+              placeholder: "Voer code in",
+              size: "12",
+              maxlength: "4"
             },
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+            domProps: { value: _vm.code },
+            on: {
+              keyup: function($event) {
+                _vm.code = _vm.code.toUpperCase()
+              },
+              keydown: function($event) {
+                if (
+                  !$event.type.indexOf("key") &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                ) {
+                  return null
+                }
+                return _vm.submitCode($event)
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.code = $event.target.value
               }
-              _vm.code = $event.target.value
             }
-          }
-        })
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group-append" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-secondary",
+                attrs: { type: "button" },
+                on: { click: _vm.submitCode }
+              },
+              [_vm._v("\n                    ok\n                ")]
+            )
+          ])
+        ])
       : _vm._e()
   ])
 }

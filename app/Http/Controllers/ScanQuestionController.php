@@ -128,6 +128,15 @@ class ScanQuestionController extends Controller
 
     public function complete(Scan $scan)
     {
+        if ( $scan->group && $scan->group->scan->id == $scan->id) {
+            $incompletescans = [];
+            foreach ($scan->group->scans as $scan) {
+                if(! $scan->isComplete()) $incompletescans[] = $scan ;
+            }
+            $previous = '/sessie/' . $scan->id . '/vervolgafspraak';
+            $next = '/scan/' . $scan->id;
+            return view('scanquestions.groupincomplete', compact('scan', 'previous', 'next', 'incompletescans'));
+        }
         if( ! $scan->isComplete() ) {
             $previous = '/sessie/' . $scan->id . '/vervolgafspraak';
             return view('scanquestions.incomplete', compact('scan', 'previous'));

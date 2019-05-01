@@ -7,16 +7,29 @@
 		>
 			Sluit aan met code
 		</button>
-		<input 
-			type="text" 
-			class="m-1"
-			@keyup="code = code.toUpperCase()"
-			@keydown.enter="submitCode"
-			v-if="active"
-			placeholder="Voer code in" 
-			v-model="code"
-            ref="input"
-		>
+        <div class="input-group pr-2" v-if="active">
+            <input 
+                type="text" 
+                class="form-control"
+                :class="{ uppercase : code.length }"
+                @keyup="code = code.toUpperCase()"
+                @keydown.enter="submitCode"
+                placeholder="Voer code in" 
+                v-model="code"
+                size="12"
+                maxlength="4" 
+                ref="input"
+            >
+            <div class="input-group-append">
+                <button 
+                    class="btn btn-outline-secondary" 
+                    type="button" 
+                    @click="submitCode"
+                >
+                    ok
+                </button>
+            </div>
+        </div>
 	</div>
 </template>
 
