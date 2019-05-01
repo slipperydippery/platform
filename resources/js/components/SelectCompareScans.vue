@@ -18,13 +18,13 @@
                     <th scope="col"> <span v-for="(district, index) in scan.districts"><span v-html="districtName(district.id)"></span><span v-if="index !== scan.districts.length - 1">, </span></span></th>
                     <th scope="col"> {{ answercount(scan) }} / {{ questioncount(scan) }} </th>
                 </tr>
-                <tr v-for="(thisscan, index) in selectedFilterScans" :key="index" class="table-success clickable" @click="removeFromSelection(thisscan)">
+                <tr v-for="(thisscan, index) in selectedFilterScans" class="table-success clickable" @click="removeFromSelection(thisscan)">
                     <th scope="row"> {{ thisscan.title }} </th>
                     <td> {{ thisscan.instantie.title }} </td>
                     <td> <span v-for="(district, index) in thisscan.districts"><span v-html="districtName(district.id)"></span><span v-if="index !== thisscan.districts.length - 1">, </span></span></td>
                     <td> {{ answercount(thisscan) }} / {{ questioncount(thisscan) }} </td>
                 </tr>
-                <tr v-for="(thisscan, index) in unSelectedFilterScans" :key="index" class="clickable" @click="addToSelection(thisscan)">
+                <tr v-for="(thisscan, index) in unSelectedFilterScans" class="clickable" @click="addToSelection(thisscan)">
                     <th scope="row"> {{ thisscan.title }} </th>
                     <td> {{ thisscan.instantie.title }} </td>
                     <td> <span v-for="(district, index) in thisscan.districts"><span v-html="districtName(district.id)"></span><span v-if="index !== thisscan.districts.length - 1">, </span></span></td>
@@ -32,7 +32,7 @@
                 </tr>
             </tbody>
         </table>
-        <input type="submit" value="Bevestig vergelijking" class="btn btn-primary form-control" @click="saveComparison" />
+        <input type="submit" value="Bevestig vergelijking" class="btn btn-primary form-control" @click="saveComparison()" />
 	</div>
 </template>
 
@@ -62,6 +62,7 @@
             filteredScans() {
                 return this.scans.filter( thisscan => {
                     if (thisscan.group_id) return ''
+                    if (thisscan.id == this.scan.id) return ''
                     if (thisscan.instantie_id != this.session.instantie_id) return '';
                     var districtmatch = false;
                     thisscan.districts.forEach( thisdistrict => {
@@ -145,6 +146,22 @@
 
             questioncount(thisscan){
                 return thisscan.answers.length;
+            },
+
+            saveComparison() {
+                var home = this;
+                console.log('sending');
+                axios.post('/api/comparison', {
+                    scan: home.scan,
+                    scanmodel_id: home.session.scanmodel_id,
+                    instantie_id: home.session.instantie_id,
+                    districts: home.session.districts,
+                    scans: home.selectedScans,
+                })
+                .then( response => {
+                    window.location.href = '/comparison/' + response.data.id;
+                })
+
             },
         }
     }

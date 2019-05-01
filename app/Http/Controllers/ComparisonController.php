@@ -46,7 +46,7 @@ class ComparisonController extends Controller
      */
     public function show(Comparison $comparison)
     {
-        //
+        return view('comparison.show', compact('comparison'));
     }
 
     /**

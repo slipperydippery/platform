@@ -18,6 +18,7 @@ class CheckUnlocked
     public function handle($request, Closure $next)
     {
         $scan = Scan::findOrFail( $request->route('scan')->id );
+        if(! $scan->group) return $next($request);
         $group = Group::findOrFail( $scan->group->id );
         if(! $group->unlocked) {
             return redirect()->route('scan.start', $scan);

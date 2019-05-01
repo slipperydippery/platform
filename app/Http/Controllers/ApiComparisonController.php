@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Scan;
+use App\District;
+use App\Comparison;
 use Illuminate\Http\Request;
 
 class ApiComparisonController extends Controller
@@ -34,27 +37,39 @@ class ApiComparisonController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+        $comparison = Comparison::create([
+            'scan_id' => $request->scan['id'],
+            'scanmodel_id' => $request->scanmodel_id,
+            'instantie_id' => $request->instantie_id,
+        ]);
+        $comparison->save();
+        foreach ($request->districts as $district) {
+            $comparison->districts()->attach(District::find($district));
+        }
+        foreach ($request->scans as $scan) {
+            $comparison->scans()->attach(Scan::find($scan['id']));
+        }
+        return $comparison;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  Comparison $comparison
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Comparison $comparison)
     {
-        //
+        return Comparison::with('scan.user', 'scan.answers', 'scan.districts', 'scans.user', 'scans.answers', 'scans.instantie')->find($comparison->id);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  Comparison $comparison
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Comparison $comparison)
     {
         //
     }
@@ -63,10 +78,10 @@ class ApiComparisonController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  Comparison $comparison
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Comparison $comparison)
     {
         //
     }
@@ -74,10 +89,10 @@ class ApiComparisonController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  Comparison $comparison
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Comparison $comparison)
     {
         //
     }

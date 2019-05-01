@@ -102,6 +102,7 @@ Vue.component('date-input', require('./components/DateInput.vue'));
 Vue.component('date-picker', require('./components/DatePicker.vue'));
 
 Vue.component('select-compare-scans', require('./components/SelectCompareScans.vue'));
+Vue.component('compare-theme-results', require('./components/CompareThemeResults.vue'));
 
 Vue.component('edit-scan', require('./components/EditScan.vue'));
 Vue.component('edit-districts', require('./components/EditDistricts'));

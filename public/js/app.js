@@ -1522,6 +1522,7 @@ Vue.component('date-input', __webpack_require__(708));
 Vue.component('date-picker', __webpack_require__(711));
 
 Vue.component('select-compare-scans', __webpack_require__(716));
+Vue.component('compare-theme-results', __webpack_require__(755));
 
 Vue.component('edit-scan', __webpack_require__(719));
 Vue.component('edit-districts', __webpack_require__(722));
@@ -102261,6 +102262,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             return this.scans.filter(function (thisscan) {
                 if (thisscan.group_id) return '';
+                if (thisscan.id == _this.scan.id) return '';
                 if (thisscan.instantie_id != _this.session.instantie_id) return '';
                 var districtmatch = false;
                 thisscan.districts.forEach(function (thisdistrict) {
@@ -102339,6 +102341,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         questioncount: function questioncount(thisscan) {
             return thisscan.answers.length;
+        },
+        saveComparison: function saveComparison() {
+            var home = this;
+            console.log('sending');
+            axios.post('/api/comparison', {
+                scan: home.scan,
+                scanmodel_id: home.session.scanmodel_id,
+                instantie_id: home.session.instantie_id,
+                districts: home.session.districts,
+                scans: home.selectedScans
+            }).then(function (response) {
+                window.location.href = '/comparison/' + response.data.id;
+            });
         }
     }
 });
@@ -102424,7 +102439,6 @@ var render = function() {
               return _c(
                 "tr",
                 {
-                  key: index,
                   staticClass: "table-success clickable",
                   on: {
                     click: function($event) {
@@ -102475,7 +102489,6 @@ var render = function() {
               return _c(
                 "tr",
                 {
-                  key: index,
                   staticClass: "clickable",
                   on: {
                     click: function($event) {
@@ -102529,7 +102542,11 @@ var render = function() {
       _c("input", {
         staticClass: "btn btn-primary form-control",
         attrs: { type: "submit", value: "Bevestig vergelijking" },
-        on: { click: _vm.saveComparison }
+        on: {
+          click: function($event) {
+            return _vm.saveComparison()
+          }
+        }
       })
     ],
     2
@@ -103318,6 +103335,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -103337,11 +103362,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         this.getGroup(this.group_id);
         window.Echo.private('groupupdated.' + this.group_id).listen('GroupUpdated', function (e) {
+            console.log(e.event);
             switch (e.event) {
                 case 'sessionaddedtogroup':
                     _this.addScanToGroup(e.scan_id);
                     break;
                 case 'groupscoresupdated':
+                    _this.getGroup(_this.group_id);
+                    break;
+                case 'grouplockupdated':
                     _this.getGroup(_this.group_id);
                     break;
                 case 'groupadminupdated':
@@ -103583,6 +103612,10 @@ var render = function() {
               _vm._v(" " + _vm._s(_vm.group.datetime) + "\n            "),
               _c("br"),
               _vm._v(" "),
+              _c("strong", [_vm._v("Aansluitcode:")]),
+              _vm._v(" " + _vm._s(_vm.group.code) + "\n            "),
+              _c("br"),
+              _vm._v(" "),
               _c("span", { staticClass: "pt-2 d-inline-block small" }, [
                 _vm._v(
                   "Gebruik onderstaande link om jouw netwerkpartners voor deze sessie uit te nodigen:"
@@ -103647,153 +103680,164 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "col-12" }, [
             _c("table", { staticClass: "table table-sm" }, [
-              _c("thead", { staticClass: "thead-dark" }, [
-                _c("tr", [
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [
-                    _vm._v(" " + _vm._s(_vm.group.user.name) + " ")
-                  ]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [_vm._v("Beheerder")]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [
-                    _vm._v(
-                      " " +
-                        _vm._s(_vm.answercount(_vm.group.scan)) +
-                        " / " +
-                        _vm._s(_vm.questioncount(_vm.group.scan)) +
-                        " "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [
-                    !_vm.isAdmin
-                      ? _c("div", { staticClass: "dropdown float-right" }, [
-                          _c("button", {
-                            staticClass:
-                              "btn btn-secondary dropdown-toggle dropdown-toggle__round",
-                            attrs: {
-                              type: "button",
-                              id: "dropdownMenuButton",
-                              "data-toggle": "dropdown",
-                              "aria-haspopup": "true",
-                              "aria-expanded": "false"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _vm._m(0)
-                        ])
-                      : _vm._e()
-                  ])
-                ])
-              ]),
+              _vm._m(0),
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.group.scans, function(scan) {
-                  return scan.id !== _vm.group.scan.id
-                    ? _c("tr", [
-                        _c("th", { attrs: { scope: "row" } }, [_vm._v("1")]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(" " + _vm._s(scan.user.name) + " ")]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(" " + _vm._s(scan.instantie.title) + " ")
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            " " +
-                              _vm._s(_vm.answercount(scan)) +
-                              " / " +
-                              _vm._s(_vm.questioncount(scan)) +
-                              " "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          [
-                            scan.user.id !== _vm.user_id
-                              ? _c(
-                                  "div",
-                                  { staticClass: "dropdown float-right" },
-                                  [
-                                    _c("button", {
-                                      staticClass:
-                                        "btn btn-secondary dropdown-toggle dropdown-toggle__round",
-                                      attrs: {
-                                        type: "button",
-                                        id: "dropdownMenuButton",
-                                        "data-toggle": "dropdown",
-                                        "aria-haspopup": "true",
-                                        "aria-expanded": "false"
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass: "dropdown-menu",
-                                        attrs: {
-                                          "aria-labelledby":
-                                            "dropdownMenuButton"
-                                        }
-                                      },
-                                      [
-                                        _c("message-user-dropdown-modal", {
-                                          attrs: { scan: scan }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("promote-user-dropdown-modal", {
-                                          attrs: {
-                                            scan: scan,
-                                            isAdmin: _vm.isAdmin
-                                          },
-                                          on: {
-                                            promoteParticipant:
-                                              _vm.promoteParticipant
-                                          }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("remove-user-dropdown-modal", {
-                                          attrs: {
-                                            scan: scan,
-                                            isAdmin: _vm.isAdmin,
-                                            isSelf: scan.user.id == _vm.user_id
-                                          },
-                                          on: {
-                                            removeParticipant:
-                                              _vm.removeParticipant
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  ]
-                                )
-                              : _vm._e(),
+                [
+                  _c("tr", { class: { "table-primary": _vm.isAdmin } }, [
+                    _c("th", { attrs: { scope: "col" } }, [
+                      _vm._v(" " + _vm._s(_vm.group.user.name) + " ")
+                    ]),
+                    _vm._v(" "),
+                    _c("th", { attrs: { scope: "col" } }, [
+                      _vm._v("Beheerder")
+                    ]),
+                    _vm._v(" "),
+                    _c("th", { attrs: { scope: "col" } }, [
+                      _vm._v(
+                        " " +
+                          _vm._s(_vm.answercount(_vm.group.scan)) +
+                          " / " +
+                          _vm._s(_vm.questioncount(_vm.group.scan)) +
+                          " "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("th", { attrs: { scope: "col" } }, [
+                      !_vm.isAdmin
+                        ? _c("div", { staticClass: "dropdown float-right" }, [
+                            _c("button", {
+                              staticClass:
+                                "btn btn-secondary dropdown-toggle dropdown-toggle__round",
+                              attrs: {
+                                type: "button",
+                                id: "dropdownMenuButton",
+                                "data-toggle": "dropdown",
+                                "aria-haspopup": "true",
+                                "aria-expanded": "false"
+                              }
+                            }),
                             _vm._v(" "),
-                            scan.user.id == _vm.user_id
-                              ? _c("remove-user-dropdown-modal", {
-                                  attrs: {
-                                    scan: scan,
-                                    isAdmin: _vm.isAdmin,
-                                    isSelf: scan.user.id == _vm.user_id
-                                  },
-                                  on: {
-                                    removeParticipant: _vm.removeParticipant
-                                  }
-                                })
-                              : _vm._e()
-                          ],
-                          1
+                            _vm._m(1)
+                          ])
+                        : _vm._e()
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.group.scans, function(scan) {
+                    return scan.id !== _vm.group.scan.id
+                      ? _c(
+                          "tr",
+                          {
+                            class: {
+                              "table-primary": scan.user.id == _vm.user_id
+                            }
+                          },
+                          [
+                            _c("td", [
+                              _vm._v(" " + _vm._s(scan.user.name) + " ")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(" " + _vm._s(scan.instantie.title) + " ")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                " " +
+                                  _vm._s(_vm.answercount(scan)) +
+                                  " / " +
+                                  _vm._s(_vm.questioncount(scan)) +
+                                  " "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              [
+                                scan.user.id !== _vm.user_id
+                                  ? _c(
+                                      "div",
+                                      { staticClass: "dropdown float-right" },
+                                      [
+                                        _c("button", {
+                                          staticClass:
+                                            "btn btn-secondary dropdown-toggle dropdown-toggle__round",
+                                          attrs: {
+                                            type: "button",
+                                            id: "dropdownMenuButton",
+                                            "data-toggle": "dropdown",
+                                            "aria-haspopup": "true",
+                                            "aria-expanded": "false"
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          {
+                                            staticClass: "dropdown-menu",
+                                            attrs: {
+                                              "aria-labelledby":
+                                                "dropdownMenuButton"
+                                            }
+                                          },
+                                          [
+                                            _c("message-user-dropdown-modal", {
+                                              attrs: { scan: scan }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("promote-user-dropdown-modal", {
+                                              attrs: {
+                                                scan: scan,
+                                                isAdmin: _vm.isAdmin
+                                              },
+                                              on: {
+                                                promoteParticipant:
+                                                  _vm.promoteParticipant
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("remove-user-dropdown-modal", {
+                                              attrs: {
+                                                scan: scan,
+                                                isAdmin: _vm.isAdmin,
+                                                isSelf:
+                                                  scan.user.id == _vm.user_id
+                                              },
+                                              on: {
+                                                removeParticipant:
+                                                  _vm.removeParticipant
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                scan.user.id == _vm.user_id
+                                  ? _c("remove-user-dropdown-modal", {
+                                      attrs: {
+                                        scan: scan,
+                                        isAdmin: _vm.isAdmin,
+                                        isSelf: scan.user.id == _vm.user_id
+                                      },
+                                      on: {
+                                        removeParticipant: _vm.removeParticipant
+                                      }
+                                    })
+                                  : _vm._e()
+                              ],
+                              1
+                            )
+                          ]
                         )
-                      ])
-                    : _vm._e()
-                }),
-                0
+                      : _vm._e()
+                  })
+                ],
+                2
               )
             ])
           ])
@@ -103802,6 +103846,24 @@ var render = function() {
     : _vm._e()
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v(" Naam ")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v(" Instantie ")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v(" Antwoorden ")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [
+          _vm._v("\n                            Menu\n                        ")
+        ])
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -105333,6 +105395,293 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 752 */,
+/* 753 */,
+/* 754 */,
+/* 755 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(10)
+/* script */
+var __vue_script__ = __webpack_require__(756)
+/* template */
+var __vue_template__ = __webpack_require__(757)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/CompareThemeResults.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-54449f52", Component.options)
+  } else {
+    hotAPI.reload("data-v-54449f52", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 756 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['comparison_id', 'theme_id'],
+
+    data: function data() {
+        return {
+            'theme': {},
+            'comparison': {
+                'id': null
+            }
+        };
+    },
+    mounted: function mounted() {
+        this.getTheme();
+        this.getComparison();
+    },
+
+
+    computed: {},
+
+    filters: {
+        answerOfQuestion: function answerOfQuestion(value, question_id) {
+            var questionanswer = null;
+            value.forEach(function (answer) {
+                if (answer.question_id === question_id) {
+                    questionanswer = answer.answer;
+                }
+            });
+            return questionanswer;
+        }
+    },
+
+    methods: {
+        getTheme: function getTheme() {
+            var home = this;
+            axios.get('/api/theme/' + this.theme_id).then(function (response) {
+                home.theme = response.data;
+            });
+        },
+        getComparison: function getComparison() {
+            var home = this;
+            axios.get('/api/comparison/' + this.comparison_id).then(function (response) {
+                home.comparison = response.data;
+            });
+        },
+        average: function average(question) {
+            if (!this.comparison.id) {
+                return null;
+            }
+            return 0;
+            var scantotal = 0;
+            var scancount = 0;
+            this.comparison.scans.forEach(function (scan) {
+                scan.answers.forEach(function (answer) {
+                    if (answer.question_id === question.id && answer.answer) {
+                        scantotal += parseFloat(answer.answer);
+                        scancount++;
+                    }
+                });
+            });
+            return scantotal / scancount;
+        }
+    }
+});
+
+/***/ }),
+/* 757 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.comparison.id
+    ? _c(
+        "div",
+        { staticClass: "col-sm-12 table table__results" },
+        [
+          _c(
+            "div",
+            { staticClass: "row resultstable--row--questions" },
+            [
+              _c("div", { staticClass: "col-sm-2" }),
+              _vm._v(" "),
+              _vm._l(_vm.theme.questions, function(question) {
+                return _c("div", { staticClass: "col-sm-2" }, [
+                  _c("strong", [
+                    _vm._v("Vraag " + _vm._s(question.id) + " "),
+                    _c("br")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", {
+                    directives: [
+                      {
+                        name: "b-tooltip",
+                        rawName: "v-b-tooltip.html",
+                        modifiers: { html: true }
+                      }
+                    ],
+                    attrs: { title: question.question, html: "true" },
+                    domProps: { innerHTML: _vm._s(question.title) }
+                  })
+                ])
+              })
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "row resultstable--row--average" },
+            [
+              _c("div", { staticClass: "col-sm-2 average" }, [
+                _vm._v(" " + _vm._s(_vm.comparison.scan.title) + " ")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.theme.questions, function(question) {
+                return _vm.comparison.id !== null
+                  ? _c(
+                      "div",
+                      { staticClass: "col-sm-2" },
+                      [
+                        _c("result-slider", {
+                          attrs: {
+                            value: _vm._f("answerOfQuestion")(
+                              _vm.comparison.scan.answers,
+                              question.id
+                            )
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  : _vm._e()
+              })
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _vm._l(_vm.comparison.scans, function(scan) {
+            return _c(
+              "div",
+              { staticClass: "row" },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "col-sm-2 nowrap",
+                    class: [
+                      "instantietype-" + scan.instantie.id + "-leftborder",
+                      scan.id == _vm.comparison.scan.user.id
+                        ? "owner-leftborder"
+                        : ""
+                    ]
+                  },
+                  [_vm._v(" \n\t\t\t\t" + _vm._s(scan.title) + " \n\t\t\t")]
+                ),
+                _vm._v(" "),
+                _vm._l(_vm.theme.questions, function(question) {
+                  return _c(
+                    "div",
+                    { staticClass: "col-sm-2" },
+                    [
+                      _c("result-slider", {
+                        attrs: {
+                          value: _vm._f("answerOfQuestion")(
+                            scan.answers,
+                            question.id
+                          )
+                        }
+                      })
+                    ],
+                    1
+                  )
+                })
+              ],
+              2
+            )
+          })
+        ],
+        2
+      )
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-54449f52", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

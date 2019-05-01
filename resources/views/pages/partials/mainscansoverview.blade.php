@@ -67,33 +67,24 @@
             <div class="py-2 my-4 bg-white text-secondary border shadow">
                 <div class="col-12 pt-2">
                     <h4>
-                        <a href=" {{ route('scan.start', $scan) }} " class="flex-grow-1 mx-2 nowrap text-uppercase">{{ $scan->title }}</a> 
+                        <a href=" {{ route('scan.start', $scan) }} " class="flex-grow-1 nowrap text-uppercase">{{ $scan->title }}</a> 
                         <a href=" {{ route('scan.edit', $scan) }} "><i class="material-icons float-right"> edit </i></a>
                     </h4>
-
-                    <div class="d-flex mx-2">
-                        <div class="flex-grow-1">
-                            <p>
-                                <em>
-                                    Gemeenten: 
-                                    @foreach ($scan->districts as $district)
-                                        {!! $district->name !!}@if(! $loop->last),@endif
-                                    @endforeach
-                                    <br>
-                                    Datum sessie: {{ date('d-m-Y', strtotime($scan->datetime)) }} om {{ date('H:m', strtotime($scan->datetime)) }}
-                                </em>
-                            </p>
-                        </div>
-                        <div class="align-self-end pb-3">
-                            <a href=" {{ route('createcomparison.districts', $scan) }} " class="btn btn-outline-secondary btn-outline-secondary--nooutline btn-sm">Start vergelijking</a>
-                            <a href=" {{ route('scan.start', $scan) }} " class="btn btn-outline-secondary btn-sm">Start sessie</a>
-                        </div>
-                    </div>
-
+                </div>
+                <div class="col-12">
+                    <strong>Gemeenten: </strong>
+                    @foreach ($scan->districts as $district)
+                        {!! $district->name !!}@if(! $loop->last),@endif
+                    @endforeach
+                </div>
+                <div class="col-12 my-2 d-flex justify-content-end">
+                    <a href=" {{ route('createcomparison.districts', $scan) }} " class="btn btn-outline-secondary btn-outline-secondary--nooutline btn-sm">Start vergelijking</a>
+                    <a href=" {{ route('scan.start', $scan) }} " class="btn btn-outline-secondary btn-sm">Start sessie</a>
+                </div>
+                <div class="col-12">
                     <table class="table table-sm">
                         <tbody>
                             <tr>
-                                <td scope="col">1</td>
                                 <td scope="col"> {{ $scan->user->name }} </td>
                                 <td scope="col"> {{ $scan->instantie->title }} </td>
                                 <td scope="col"> {{ $scan->answercount() }} / {{ $scan->scanmodel->questioncount() }} </td>
@@ -101,6 +92,21 @@
                         </tbody>
                     </table>
                 </div>
+                @if ($scan->comparisons)
+                    <div class="col-12">
+                        <h4>Vergelijkingen:</h4>
+                        @foreach ($scan->comparisons as $comparison)
+                            <a href=" {{ route('comparison.show', $comparison) }} "> 
+                                @if ($comparison->title)
+                                    {{ $comparison->title }}
+                                @else
+                                    Nieuwe vergelijking met {{ $comparison->scan->title }}
+                                @endif
+                            </a> <br>
+                        @endforeach
+
+                    </div>
+                @endif
             </div>
         @endif
     @endforeach      

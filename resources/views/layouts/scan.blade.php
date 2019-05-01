@@ -67,8 +67,8 @@
         @include('partials.instructie')
         @include('partials.profiel')
 
+        @include('partials.footer')
     </div>
-    @include('partials.footer')
 
     <!-- Additional Scripts -->
     @yield('additional-scripts')

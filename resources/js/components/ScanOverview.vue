@@ -37,6 +37,8 @@
             <br>
             <strong>Datum sessie:</strong> {{ group.datetime }}
             <br>
+            <strong>Aansluitcode:</strong> {{ group.code }}
+            <br>
             <span class="pt-2 d-inline-block small">Gebruik onderstaande link om jouw netwerkpartners voor deze sessie uit te nodigen:</span>
             <br>
             <span class="text-nowrap small">
@@ -58,29 +60,35 @@
 
         <div class="col-12">
 	        <table class="table table-sm">
-	            <thead class="thead-dark">
-	                <tr>
-	                    <th scope="col">#</th>
-	                    <th scope="col"> {{ group.user.name }} </th>
-	                    <th scope="col">Beheerder</th>
-	                    <th scope="col"> {{ answercount(group.scan) }} / {{ questioncount(group.scan) }} </th>
-	                    <th scope="col">
-	                        <div class="dropdown float-right" v-if="! isAdmin">
-	                            <button class="btn btn-secondary dropdown-toggle dropdown-toggle__round" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	                                
-	                            </button>
-	                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-	                                <a class="dropdown-item" href="#">Stuur bericht</a>
-
-	                            </div>
-	                        </div>
-	                    </th>
-	                </tr>
-	            </thead>
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col"> Naam </th>
+                        <th scope="col"> Instantie </th>
+                        <th scope="col"> Antwoorden </th>
+                        <th scope="col">
+                            Menu
+                        </th>
+                    </tr>
+                </thead>
 	            <tbody>
-	            	<tr v-for="scan in group.scans" v-if=" scan.id !== group.scan.id ">
-	            		<th scope="row">1</th>
+                    <tr :class="{'table-primary' : isAdmin}">
+                        <th scope="col"> {{ group.user.name }} </th>
+                        <th scope="col">Beheerder</th>
+                        <th scope="col"> {{ answercount(group.scan) }} / {{ questioncount(group.scan) }} </th>
+                        <th scope="col">
+                            <div class="dropdown float-right" v-if="! isAdmin">
+                                <button class="btn btn-secondary dropdown-toggle dropdown-toggle__round" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                                    <a class="dropdown-item" href="#">Stuur bericht</a>
+
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+	            	<tr v-for="scan in group.scans" v-if=" scan.id !== group.scan.id " :class="{'table-primary' : scan.user.id == user_id}">
 	            		<td> {{ scan.user.name }} </td>
 	            		<td> {{ scan.instantie.title }} </td>
 	            		<td> {{ answercount(scan) }} / {{ questioncount(scan) }} </td>
@@ -154,11 +162,15 @@
         mounted() {
         	this.getGroup( this.group_id );
             window.Echo.private('groupupdated.' + this.group_id).listen('GroupUpdated', e => {
+                console.log(e.event);
                 switch( e.event ) {
                     case 'sessionaddedtogroup':
                         this.addScanToGroup( e.scan_id );
                         break;
                     case 'groupscoresupdated':
+                        this.getGroup(this.group_id);
+                        break;
+                    case 'grouplockupdated':
                         this.getGroup(this.group_id);
                         break;
                     case 'groupadminupdated':

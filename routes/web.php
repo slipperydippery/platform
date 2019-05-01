@@ -86,5 +86,6 @@ Route::post('/sessie/{scan}/vergelijking/sessies', 'CreateComparisonController@s
 
 Route::resource('group', 'GroupController');
 Route::resource('user', 'UserController');
+Route::resource('comparison', 'ComparisonController');
 // Route::resource('inventarisatie', 'InventarisatieController');
 

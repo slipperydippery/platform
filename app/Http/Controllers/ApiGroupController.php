@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\Events\GroupUpdated;
 use Illuminate\Http\Request;
 
 class ApiGroupController extends Controller
@@ -75,6 +76,8 @@ class ApiGroupController extends Controller
         $group->unlocked = $request['group']['unlocked'];
 
         $group->save();
+        $event = 'grouplockupdated';
+        GroupUpdated::dispatch($group->id, $event);
         return $group;
     }
 

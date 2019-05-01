@@ -10,6 +10,7 @@ use App\District;
 use App\Question;
 use App\Instantie;
 use App\Scanmodel;
+use App\Comparison;
 use Illuminate\Database\Eloquent\Model;
 use Dyrynda\Database\Support\GeneratesUuid;
 
@@ -57,6 +58,11 @@ class Scan extends Model
     public function districts()
     {
     	return $this->belongsToMany(District::class);
+    }
+
+    public function comparisons()
+    {
+        return $this->hasMany(Comparison::class);
     }
 
     public function isowner()
