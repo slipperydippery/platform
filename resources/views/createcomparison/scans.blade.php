@@ -1,11 +1,11 @@
-@extends('layouts.app', ['title' => 'Nieuwe Scan: Instantie'])
+@extends('layouts.app', ['title' => 'Nieuwe Vergelijking: Selecteer Scans'])
 
 @section('content')
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-8">
 				<div class="card card--create">
-					<h5 class="card-header bg-primary text-white">Nieuwe groep: Selecteer sessies</h5>
+					<h5 class="card-header bg-primary text-white">Nieuwe vergelijking: Selecteer sessies</h5>
 					<div class="card-body">
 						<h5 class="card-title">Selecteer sessies om mee te vergelijken</h5>
 

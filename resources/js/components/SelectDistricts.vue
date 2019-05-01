@@ -33,7 +33,7 @@
 			</label>
 		</div>
 		<div class="col-12 p-3">
-			<div class="form-group text-right" v-if="selecteddistricts.length">
+			<div class="form-group text-right" v-if="selecteddistricts.length || group == 2">
 				<button class="btn btn-primary form-control" @click.prevent="updateDistricts">Sla gemeente(n) op</button>
 			</div>
 		</div>

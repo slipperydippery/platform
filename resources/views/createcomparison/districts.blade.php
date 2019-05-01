@@ -1,18 +1,22 @@
-@extends('layouts.app', ['title' => 'Nieuwe Scan: Gemeenten'])
+@extends('layouts.app', ['title' => 'Nieuwe Vergelijking: Gemeenten'])
 
 @section('content')
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-8">
 				<div class="card card--create">
-					<h5 class="card-header bg-primary text-white">Nieuwe groep: Gemeenten</h5>
+					<h5 class="card-header bg-primary text-white">Nieuwe vergelijking: Gemeenten</h5>
 					<div class="card-body">
 						<h5 class="card-title">Met welke gemeente(n) wil je je sessie vergelijken?</h5>
-						<form action="{{ route('createcomparison.storedistricts', $scan) }}" method="post" accept-charset="utf-8">
-						    {{ csrf_field() }}
-							@include('createcomparison.partials.districtsform', ['submittext' => 'Sla gemeenten op'])
-						</form>
-						@include('createcomparison.partials.createcomparisonprogress')
+						<span class="subtitle">Als je geen gemeente kiest worden scans met alle gemeenten getoond</span>
+						<label for="filter">Gemeente</label>
+
+						<select-districts
+							:session = " {{ json_encode($session) }} "
+							:group = 2
+							:scan_id = " {{ $scan->id }} "
+						>
+						</select-districts>
 					</div>
 				</div>
 				

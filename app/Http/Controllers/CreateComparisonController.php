@@ -19,7 +19,6 @@ class CreateComparisonController extends Controller
     public function storedistricts(Request $request, Scan $scan)
     {
         request()->validate([
-            'districts' => 'required',
             'districts.*' => 'integer',
         ]);
         $request->session()->put('createcomparison.districts', $request->districts);

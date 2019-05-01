@@ -64,7 +64,7 @@
                     if (thisscan.group_id) return ''
                     if (thisscan.id == this.scan.id) return ''
                     if (thisscan.instantie_id != this.session.instantie_id) return '';
-                    var districtmatch = false;
+                    var districtmatch = ! this.session.districts.length;
                     thisscan.districts.forEach( thisdistrict => {
                         if (this.session.districts.includes(thisdistrict.id)) {
                             districtmatch = true;

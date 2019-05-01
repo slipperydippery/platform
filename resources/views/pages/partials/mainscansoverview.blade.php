@@ -94,13 +94,13 @@
                 </div>
                 @if ($scan->comparisons)
                     <div class="col-12">
-                        <h4>Vergelijkingen:</h4>
+                        <h4>Gemaakte vergelijkingen:</h4>
                         @foreach ($scan->comparisons as $comparison)
                             <a href=" {{ route('comparison.show', $comparison) }} "> 
                                 @if ($comparison->title)
                                     {{ $comparison->title }}
                                 @else
-                                    Nieuwe vergelijking met {{ $comparison->scan->title }}
+                                Nieuwe vergelijking met {{ $comparison->scan->title }}
                                 @endif
                             </a> <br>
                         @endforeach

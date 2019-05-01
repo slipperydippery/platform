@@ -97242,7 +97242,7 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("div", { staticClass: "col-12 p-3" }, [
-      _vm.selecteddistricts.length
+      _vm.selecteddistricts.length || _vm.group == 2
         ? _c("div", { staticClass: "form-group text-right" }, [
             _c(
               "button",
@@ -102264,7 +102264,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (thisscan.group_id) return '';
                 if (thisscan.id == _this.scan.id) return '';
                 if (thisscan.instantie_id != _this.session.instantie_id) return '';
-                var districtmatch = false;
+                var districtmatch = !_this.session.districts.length;
                 thisscan.districts.forEach(function (thisdistrict) {
                     if (_this.session.districts.includes(thisdistrict.id)) {
                         districtmatch = true;
