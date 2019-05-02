@@ -10,7 +10,7 @@
 						<h5 class="card-title">Wanneer gaat de groepssessie plaatsvinden?</h5>
 						<form action="{{ route('creategroupscan.storedatetime') }}" method="post" accept-charset="utf-8">
 						    {{ csrf_field() }}
-							@include('creategroupscan.partials.datetimeform', ['submittext' => 'Sla datum op'])
+							@include('creategroupscan.partials.datetimeform', ['submittext' => 'Sla datum en tijd op'])
 						</form>
 						@include('creategroupscan.partials.creategroupprogress')
 					</div>

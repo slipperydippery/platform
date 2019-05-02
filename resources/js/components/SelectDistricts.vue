@@ -7,6 +7,7 @@
                 placeholder="Zoek een gemeente" 
                 v-model="districtsearch"
                 @keydown.enter.prevent="addDistrictWithEnter()"
+                ref="input"
                 focus
             >
 		</div>
@@ -22,7 +23,10 @@
         <div class="col-12 pt-1" v-if="districtsearch.length && filteredAndSortedDistricts.length ">
             <em>Klik op een gemeente om deze toe te voegen aan je selectie. Je kunt meerdere gemeenten selecteren. </em>
         </div>
-		<div class="col-12 pt-5">
+		<div class="col-12 pt-3">
+            <span v-if="selecteddistricts.length">
+                Je geselecteerde gemeente<span v-if="selecteddistricts.length > 1">n</span>:<br>
+            </span>
 			<label 
                 v-for="district in selecteddistricts"
                 @click="removeDistrictFromSelection(district)"
@@ -60,6 +64,7 @@
         },
 
         mounted() {
+            this.$nextTick(() => this.$refs.input.focus());
         	this.getDistricts();
         	// this.setSelectedDistricts();
         },
@@ -129,17 +134,18 @@
                 this.sortDistricts(this.selecteddistricts);
                 this.districts.splice(this.districts.indexOf(thisdistrict), 1);
                 this.filtereddistricts.splice(this.filtereddistricts.indexOf(thisdistrict), 1);
-                this.$forceUpdate();
+                // this.$forceUpdate();
                 this.districtsearch = '';
+                this.$nextTick(() => this.$refs.input.focus());
             },
 
             removeDistrictFromSelection: function(thisdistrict) {
                 this.districts.push(thisdistrict);
-                this.filtereddistricts.push(thisdistrict);
                 this.sortDistricts(this.filtereddistricts); 
                 this.selecteddistricts.splice(this.selecteddistricts.indexOf(thisdistrict), 1);
-                this.$forceUpdate();
+                // this.$forceUpdate();
                 this.districtsearch = '';
+                this.$nextTick(() => this.$refs.input.focus());
             },
 
             updateDistricts() {

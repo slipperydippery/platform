@@ -81,9 +81,10 @@
                                     
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-                                    <a class="dropdown-item" href="#">Stuur bericht</a>
-
+                                    <message-user-dropdown-modal
+                                        :scan = group.scan
+                                    >
+                                    </message-user-dropdown-modal>
                                 </div>
                             </div>
                         </th>
