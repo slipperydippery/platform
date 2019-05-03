@@ -129,6 +129,7 @@ input[type=range]:focus::-ms-fill-upper {
 	margin-top: .4rem;
 	&.average {
 		background: rgba(255, 0, 0, 0.42);
+		margin-top: 0;
 	}
 	.resultslider--result {
 		height: 100%;

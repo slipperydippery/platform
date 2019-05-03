@@ -1,22 +1,24 @@
 <template>
 	<div class="col-sm-12 table table__results">
-		<div class="row resultstable--row--questions">
+		<div class="row resultstable--row--questions pt-2 pb-1">
 			<div class="col-sm-2"></div>
 				<div class="col-sm-2" v-for="question in theme.questions">
 					<strong>Vraag {{ question.id }} <br></strong>
 					<span v-b-tooltip.html :title="question.question" html="true" v-html="question.title"></span>
 				</div>
 		</div>
-		<div class="row resultstable--row--average">
-			<div class="col-sm-2 average">Gemiddeld</div>
-			<div class="col-sm-2" v-for="question in theme.questions" v-if="group.id !== null">
-				<result-slider-average
-					:value = "average(question)"
-				>
-				</result-slider-average>
-			</div>
-		</div>
-		<div class="row" v-for="scan in group.scans">
+        <div class="row resultstable--row--average">
+            <div class="col-sm-2 average d-flex flex-column justify-content-center">Gemiddeld</div>
+            <div class="col-sm-2 text-center" v-for="question in theme.questions" v-if="group.id !== null">
+                <strong >{{ average(question) }}</strong>
+                <result-slider-average
+                    :value = "average(question)"
+                    :average = 1
+                >
+                </result-slider-average>
+            </div>
+        </div>
+		<div class="row pt-1" v-for="scan in group.scans">
 			<div 
 				class="col-sm-2 nowrap" 
 				:class="['instantietype-' + scan.instantie.id + '-leftborder', (scan.id == group.user.id) ? 'owner-leftborder' : '' ]"

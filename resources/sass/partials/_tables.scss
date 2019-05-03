@@ -3,10 +3,11 @@
 		background: rgba($secondary, .15);
 	}
 	.resultstable--row--questions{
-		padding-top: .5rem;
 	}
 	.resultstable--row--average {
-		padding-bottom: .5rem;
+		padding-top: .2rem;
+		padding-bottom: .7rem;
 		margin-bottom: .5rem;
+		border-top: 1px solid rgba($primary, .3);
 	}
 }

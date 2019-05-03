@@ -1,5 +1,5 @@
 <template>
-	<div class="resultslider average">
+	<div class="resultslider" :class=" { average : average } ">
 		<div class="resultslider--result"
 			:style="{ width: cssPercent(value), background: nullColor(value) }"
 		>
@@ -10,9 +10,13 @@
 <script>
 
     export default {
-        props: [
-        	'value',
-        ],
+        props: {
+        	'value' : Number,
+            average: {
+                type: Number,
+                default: 0
+            },
+        },
 
         data() {
             return {
