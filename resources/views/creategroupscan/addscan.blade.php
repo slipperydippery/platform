@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Nieuwe Scan: Instantie'])
+	@extends('layouts.app', ['title' => 'Nieuwe Scan: Instantie'])
 
 @section('content')
 	<div class="container">

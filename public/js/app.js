@@ -1529,6 +1529,8 @@ Vue.component('edit-districts', __webpack_require__(725));
 
 Vue.component('scan-overview', __webpack_require__(728));
 
+Vue.component('manage-articletypes', __webpack_require__(758));
+
 // Utility
 Vue.component('countdown', __webpack_require__(731));
 
@@ -104904,7 +104906,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_clipboard2___default.a);
@@ -105763,6 +105764,598 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 755 */,
+/* 756 */,
+/* 757 */,
+/* 758 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(10)
+/* script */
+var __vue_script__ = __webpack_require__(759)
+/* template */
+var __vue_template__ = __webpack_require__(760)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/ManageArticletypes.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-8815861a", Component.options)
+  } else {
+    hotAPI.reload("data-v-8815861a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 759 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(19);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['workarticletypes'],
+
+    data: function data() {
+        return {
+            'articletypes': [],
+            'addingArticletype': false,
+            'newArticletype': {
+                'title': '',
+                'description': ''
+            }
+        };
+    },
+    mounted: function mounted() {
+        this.articletypes = this.workarticletypes;
+    },
+
+
+    computed: {
+        orderedArticletypes: function orderedArticletypes() {
+            function compare(a, b) {
+                if (a.order < b.order) return -1;
+                if (a.order > b.order) return 1;
+                return 0;
+            }
+
+            return this.articletypes.sort(compare);
+        }
+    },
+
+    methods: {
+        addArticletype: function addArticletype() {
+            this.addingArticletype = true;
+        },
+        getArticletypes: function getArticletypes() {
+            var home = this;
+            axios.get('/api/articletype').then(function (response) {
+                home.articletypes = response.data;
+            });
+        },
+        saveArticletype: function saveArticletype() {
+            var _this = this;
+
+            var home = this;
+            axios.post('/api/articletype', {
+                'articletype': home.newArticletype
+            }).then(function (response) {
+                _this.articletypes.push(response.data);
+                _this.newArticletype = {
+                    'title': '',
+                    'description': ''
+                };
+                _this.addingArticletype = false;
+            });
+        },
+        updateArticletype: function updateArticletype(articletype) {
+            var home = this;
+            axios.patch('/api/articletype/' + articletype.id, {
+                'articletype': articletype
+            }).then(function (response) {
+                articletype.editable = false;
+                home.$forceUpdate();
+            });
+        },
+        cancelEditarticletype: function cancelEditarticletype(articletype) {
+            articletype.editable = false;
+            this.$forceUpdate();
+        },
+        setEditable: function setEditable(article) {
+            article.editable = true;
+            this.$forceUpdate();
+        },
+        moveUp: function moveUp(articletype, index) {
+            var otherarticletype = this.articletypes[index - 1];
+            var otherorder = otherarticletype.order;
+            otherarticletype.order = articletype.order;
+            articletype.order = otherorder;
+            this.updateArticletype(articletype);
+            this.updateArticletype(otherarticletype);
+        },
+        moveDown: function moveDown(articletype, index) {
+            var otherarticletype = this.articletypes[index + 1];
+            var otherorder = otherarticletype.order;
+            otherarticletype.order = articletype.order;
+            articletype.order = otherorder;
+            this.updateArticletype(articletype);
+            this.updateArticletype(otherarticletype);
+        }
+    }
+});
+
+/***/ }),
+/* 760 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-12" }, [
+      _c("table", { staticClass: "table table-sm" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          [
+            _vm._l(_vm.orderedArticletypes, function(articletype, index) {
+              return _c("tr", [
+                _c("td", [
+                  articletype.editable != true
+                    ? _c("span", {
+                        domProps: { innerHTML: _vm._s(articletype.title) }
+                      })
+                    : _c("div", { staticClass: "form-group" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: articletype.title,
+                              expression: "articletype.title"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            id: "inputTitle",
+                            placeholder: "Naam"
+                          },
+                          domProps: { value: articletype.title },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                articletype,
+                                "title",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  articletype.editable != true
+                    ? _c("span", {
+                        domProps: { innerHTML: _vm._s(articletype.description) }
+                      })
+                    : _c("div", { staticClass: "form-group" }, [
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: articletype.description,
+                              expression: "articletype.description"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            id: "exampleFormControlTextarea1",
+                            rows: "3",
+                            placeholder: "Omschrijving"
+                          },
+                          domProps: { value: articletype.description },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                articletype,
+                                "description",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  articletype.editable != true
+                    ? _c("div", { staticClass: "float-right" }, [
+                        index > 0
+                          ? _c(
+                              "i",
+                              {
+                                directives: [
+                                  {
+                                    name: "b-tooltip",
+                                    rawName: "v-b-tooltip.hover",
+                                    modifiers: { hover: true }
+                                  }
+                                ],
+                                staticClass: "material-icons clickable",
+                                attrs: { title: "Verplaats naar boven" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.moveUp(articletype, index)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n\t            \t\t\t\tkeyboard_arrow_up\n            \t\t\t\t"
+                                )
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c(
+                          "i",
+                          {
+                            directives: [
+                              {
+                                name: "b-tooltip",
+                                rawName: "v-b-tooltip.hover",
+                                modifiers: { hover: true }
+                              }
+                            ],
+                            staticClass: "material-icons clickable",
+                            attrs: { title: "Bewerk" },
+                            on: {
+                              click: function($event) {
+                                return _vm.setEditable(articletype)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n\t            \t\t\t\tedit\n            \t\t\t\t"
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        index < _vm.articletypes.length - 1
+                          ? _c(
+                              "i",
+                              {
+                                directives: [
+                                  {
+                                    name: "b-tooltip",
+                                    rawName: "v-b-tooltip.hover",
+                                    modifiers: { hover: true }
+                                  }
+                                ],
+                                staticClass: "material-icons clickable",
+                                attrs: { title: "Verplaats naar beneden" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.moveDown(articletype, index)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n\t            \t\t\t\tkeyboard_arrow_down\n            \t\t\t\t"
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ])
+                    : _c("div", {}, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "close",
+                            attrs: { type: "button", "aria-label": "Check" },
+                            on: {
+                              click: function($event) {
+                                return _vm.updateArticletype(articletype)
+                              }
+                            }
+                          },
+                          [
+                            _c("span", { attrs: { "aria-hidden": "true" } }, [
+                              _vm._v("✔")
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "close",
+                            attrs: { type: "button", "aria-label": "Check" },
+                            on: {
+                              click: function($event) {
+                                return _vm.cancelEditarticletype(articletype)
+                              }
+                            }
+                          },
+                          [
+                            _c("span", { attrs: { "aria-hidden": "true" } }, [
+                              _vm._v("×")
+                            ])
+                          ]
+                        )
+                      ])
+                ])
+              ])
+            }),
+            _vm._v(" "),
+            _vm.addingArticletype
+              ? _c("tr", [
+                  _c("td", [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.newArticletype.title,
+                            expression: "newArticletype.title"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          id: "inputTitle",
+                          placeholder: "Naam"
+                        },
+                        domProps: { value: _vm.newArticletype.title },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.newArticletype,
+                              "title",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.newArticletype.description,
+                            expression: "newArticletype.description"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "exampleFormControlTextarea1",
+                          rows: "3",
+                          placeholder: "Omschrijving"
+                        },
+                        domProps: { value: _vm.newArticletype.description },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.newArticletype,
+                              "description",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "check",
+                        attrs: { type: "button", "aria-label": "Check" },
+                        on: {
+                          click: function($event) {
+                            return _vm.saveArticletype()
+                          }
+                        }
+                      },
+                      [
+                        _c("span", { attrs: { "aria-hidden": "true" } }, [
+                          _vm._v("✔")
+                        ])
+                      ]
+                    )
+                  ])
+                ])
+              : _vm._e()
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      !_vm.addingArticletype
+        ? _c("div", { staticClass: "form-group text-right" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary form-control",
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.addArticletype($event)
+                  }
+                }
+              },
+              [_vm._v("Voeg nog een kennisbank thema toe")]
+            )
+          ])
+        : _vm._e()
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { staticStyle: { width: "30%" }, attrs: { scope: "col" } }, [
+          _vm._v(" Naam ")
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v(" Omschrijving ")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "7%" } }, [_vm._v(" opties ")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-8815861a", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

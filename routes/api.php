@@ -26,6 +26,7 @@ Route::resource('followup', 'ApiFollowupController');
 Route::resource('district', 'ApiDistrictController');
 Route::resource('session', 'ApiSessionController');
 Route::resource('comparison', 'ApiComparisonController');
+Route::resource('articletype', 'ApiArticletypeController');
 
 Route::get('/scan/{scan}/question/{question}/getanswers', 'ApiScanQuestionController@getanswers');
 

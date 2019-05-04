@@ -20,7 +20,7 @@ class ApiSendMessageController extends Controller
     		'message' => $request->message,
     	]);
     	$message->save();
-    	$recipient->notify(new MessageReceived($message));
+    	$recipient->notify(new MessageReceived($message.));
     	return $request->all();
     }
 }

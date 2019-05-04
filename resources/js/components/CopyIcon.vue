@@ -5,7 +5,6 @@
 			v-clipboard:copy="copy_content"
 	    	v-clipboard:success="onCopy"
             ref="copyicon"
-
 		> file_copy </i> 
 
 		<b-tooltip ref="tooltip" :target="() => $refs.copyicon" class="clickable">
