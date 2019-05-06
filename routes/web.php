@@ -75,6 +75,7 @@ Route::get('/sessie/{scan}/afgerond', 'ScanQuestionController@complete')->name('
 Route::get('/sessie/{scan}/markcomplete', 'ScanQuestionController@markcomplete')->name('scanquestions.markcomplete');
 Route::get('/sessie/{scan}/resultaten', 'ScanPagesController@results')->name('scan.results');
 Route::get('/sessie/{scan}/verbeterpunten', 'ScanPagesController@measures')->name('scan.measures');
+Route::get('/sessie/{scan}/mailverbeterpunten', 'ScanPagesController@mailmeasures')->name('scan.mailmeasures');
 
 Route::get('/sessie/{scan}/vergelijking/regios', 'CreateComparisonController@districts')->name('createcomparison.districts');
 Route::post('/sessie/{scan}/vergelijking/regios', 'CreateComparisonController@storedistricts')->name('createcomparison.storedistricts');

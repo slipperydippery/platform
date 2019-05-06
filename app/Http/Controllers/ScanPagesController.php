@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Scan;
 use Illuminate\Http\Request;
 use App\Events\AlgemeenbeeldUpdated;
+use App\Notifications\ResultsRequested;
 
 class ScanPagesController extends Controller
 {
@@ -81,5 +83,10 @@ class ScanPagesController extends Controller
     public function results(Scan $scan)
     {
         return view('scan.results', compact('scan'));
+    }
+
+    public function mailmeasures(Scan $scan)
+    {
+        Auth::user()->notify(new ResultsRequested($scan));
     }
 }

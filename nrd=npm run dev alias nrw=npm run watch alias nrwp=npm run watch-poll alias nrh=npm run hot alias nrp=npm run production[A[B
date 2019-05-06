@@ -1,0 +1,143 @@
+* [33m374d907[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m compare scans complte
+* [33m7fe8ff5[m compare scans now with zero or multiple instanties
+* [33m9ea29a3[m beginning of input for kennisbank
+* [33mfa4cac1[m working create and edit articletypes
+* [33mc419fb1[m safety backup
+* [33m2c7a90d[m fixes scan results layout
+* [33m5eb8c83[m some small fixes
+*   [33m32c9147[m merge
+[32m|[m[33m\[m  
+[32m|[m * [33m46bba86[m update  kernel, remove throttle
+* [33m|[m [33m30b371d[m fixing compare scans to allow for no input on districts (done) and instanties (to do)
+* [33m|[m [33m4f2583e[m beautiful join with code element
+* [33m|[m [33m4621f74[m scan comparisson is created
+* [33m|[m [33m14ebc31[m next create a comparison model and link scans to that
+* [33m|[m [33md6acf16[m finished the vue component for selecting scans to compare
+* [33m|[m [33ma6685b3[m working on comparescans
+* [33m|[m [33mb9f2507[m working on comparescans
+* [33m|[m [33me647f17[m return error with wrong code
+* [33m|[m [33m451cf5c[m sends email with message
+* [33m|[m [33m9ddbee1[m further refactored scanoverview in vue components
+* [33m|[m [33mda9a2b1[m further refactored scanoverview in vue components
+* [33m|[m [33m7adf6cd[m refactored pusher event in scanoverview
+* [33m|[m [33m50fbeb2[m vueify the scan overview, now refactoring pusher events
+* [33m|[m [33m3cd1f76[m shortcode, working on join session with code
+* [33m|[m [33mf837039[m toast alert for added group
+* [33m|[m [33m8bac392[m improves remove person, unlock from dashboard, progressbar
+* [33m|[m [33m3ab77d2[m fixes districts
+* [33m|[m [33me2b0e9e[m throttle
+* [33m|[m [33mb9e4dff[m removes dead link at justification that messes up layout
+[33m|[m[33m/[m  
+* [33m86e2515[m fix
+* [33m73ae84c[m fix
+* [33mfaae5f7[m updates before user test
+* [33m0ed6c58[m updates before user test
+* [33m9301ae7[m vueify scan overview
+* [33m1549284[m updates before user test
+* [33m3ffc8d8[m updates before user test
+* [33m98d7cc8[m updates before user test
+* [33m6513a15[m format cookie consent
+* [33m1e842ff[m stuff
+* [33mf294b48[m stuff
+* [33md92e663[m stuff
+* [33mbdfadbe[m scan results overview
+* [33m9eec589[m hallo
+* [33m26d7f86[m hallo
+* [33m76e8bb3[m sentence
+* [33m320d911[m sentence
+* [33mbe7b13e[m pre check test
+* [33maf3ec05[m push before test
+* [33m9dc9a51[m te
+* [33mb14ae3d[m working on comparisons
+* [33m7be84cf[m warning before removing person from scan
+* [33m70ada63[m change group to groep
+* [33mf8ebe10[m adds voorbeeldemail to dashboard
+* [33mdb85547[m fixes timestamps
+* [33ma119a54[m v-b-tooltip.html for unescaped html in tooltip
+* [33md414ae0[m adds instantietype-7 css markup
+* [33mdac3d0a[m change timezone
+* [33m41712a9[m change timezone
+* [33mb438f37[m makes followup during scan creation
+* [33me9b5c3d[m redo
+* [33mf6f05e1[m allows deleting of users themselves
+* [33maf47cb5[m small layout changes on dashboard
+* [33me440ff5[m updates paulina v1
+* [33m6e88aca[m updates paulina v1
+* [33m672048f[m updates paulina v1
+* [33ma44fec6[m fixes join group if you already have a single scan
+* [33mcab7ba5[m fixes algemeenbeeld breakage
+* [33m4345624[m enables deleting of groupscans
+* [33m400b076[m adds button to go back
+* [33m8b587cd[m fixes typo give group a name on slingle scan
+* [33m29894ea[m fixes link when joined groupscan
+* [33m1d4af61[m fixes no input on creategroupscan
+* [33m57b7823[m fixes link on homepage removing data-toggle
+* [33m7245655[m forget session for single scan
+* [33mcdffbba[m forget session after saving
+* [33md423413[m html district name
+* [33m0a30e55[m fixes unique phone number
+* [33m0064dec[m improves select district setup
+* [33mf12e407[m improves select district setup
+* [33m124113f[m improves select district setup
+* [33me1ad8e6[m improves select district setup
+* [33m4947c81[m changes updating name of group scan to resolve for all scans of that group and group itself
+* [33m2e4382a[m changes updating name of group scan to resolve for all scans of that group
+* [33m6083290[m remove terms required
+* [33m0d5d408[m remove terms required
+* [33mf00c33d[m updates results for single
+* [33m6e2635f[m updated two more things
+* [33m0478fb2[m updated two more things
+* [33m5e5b254[m some updates
+* [33m5cc03cb[m some updates
+* [33mce0438f[m some updates
+* [33m713e0d1[m some updates
+* [33m256cf8c[m some updates
+* [33m321439e[m fixes updategroupdistricts error
+* [33m8ac0842[m runtrough upload
+* [33me6026ef[m runtrough upload
+* [33mf1b4391[m runtrough upload
+* [33maea1978[m begin working day
+* [33m35742bb[m loading tests
+* [33mebd24dc[m loading test
+* [33mc45d501[m runtrough of scan
+* [33m0cb4878[m fixed create group scan
+* [33m40e9cb3[m start work day
+* [33m238edd6[m upload layout
+* [33mcde74fb[m updates question titles
+* [33m5733221[m final before testversion
+* [33mf41c21d[m updates mail from sender
+* [33m9a88b24[m working on loggin in with an invitation
+* [33mfbb6882[m mostly working scan and login. Next layout and new functionality
+* [33m2bcacf9[m work work work
+* [33m1d208a5[m working on dashboard
+* [33m3c202d2[m working on dashboard
+* [33mfb6a540[m working on dashboard
+* [33m43dae2d[m basic create scan done
+* [33m2e7259d[m working on dashboard
+* [33me9ad422[m start of workday commit
+* [33mf00b072[m working on scan pages
+* [33m0765a09[m working on base layout and structure for pages
+* [33m42881a2[m working on base layout for pages
+* [33m1cba2c9[m begin 2fa and some layout work on homepage
+* [33m5ec6b79[m end of day commit
+*   [33m98967cd[m merge commit
+[34m|[m[35m\[m  
+[34m|[m * [33m3c58e16[m begin adding verified middleware
+[34m|[m *   [33mf754eb7[m Merge branch 'master' of github.com:slipperydippery/platform
+[34m|[m [36m|[m[1;31m\[m  
+[34m|[m * [1;31m|[m [33mc22bf31[m pre merge commit
+* [1;31m|[m [1;31m|[m [33m2268088[m working on create new scan tech
+[1;31m|[m [1;31m|[m[1;31m/[m  
+[1;31m|[m[1;31m/[m[1;31m|[m   
+* [1;31m|[m [33mb18518e[m working on create scan
+* [1;31m|[m [33mdcb3f73[m working on create scan
+[1;31m|[m[1;31m/[m  
+* [33mb07e5a8[m working on dashboard
+* [33md7dadc8[m beginning of dashboard
+* [33m4ce86bd[m Setting up Welcome
+* [33m4cd033c[m Setting up Welcome
+* [33md6280c3[m Setting up Welcome
+* [33me1c0771[m Setting up Welcome
+* [33m7fe0fa4[m Setting up welcome
+* [33m2dae4b1[m Setting up welcome
+* [33mb2a095c[m first commit
