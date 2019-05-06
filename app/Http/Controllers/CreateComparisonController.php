@@ -31,18 +31,14 @@ class CreateComparisonController extends Controller
     {
         $instanties = Instantie::get();
         $instantie = Instantie::find(session('createcomparison.instantie_id'));
-    	return view('createcomparison.instantie', compact('instanties', 'instantie', 'scan'));
+        $session = session('createcomparison');
+    	return view('createcomparison.instantie', compact('instanties', 'instantie', 'scan', 'session'));
     }
 
     public function storeinstantie(Request $request, Scan $scan)
     {
-        request()->validate([
-            'instantie_id' => 'required|integer',
-        ]);
-        $request->session()->put('createcomparison.instantie_id', $request->instantie_id);
-        $request->session()->put('createcomparison.scanmodel_id', 1);
-
-    	return redirect()->route('createcomparison.scans', $scan);
+        $request->session()->put('createcomparison.instanties', $request->instanties);
+        return $request->all();
     }
 
     public function scans(Scan $scan)

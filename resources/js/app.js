@@ -70,6 +70,7 @@ export let store = {
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('district-decoration', require('./components/DistrictDecoration.vue'));
 Vue.component('select-districts', require('./components/SelectDistricts'));
+Vue.component('select-instanties', require('./components/SelectInstanties'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

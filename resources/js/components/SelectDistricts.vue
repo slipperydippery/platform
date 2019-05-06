@@ -52,7 +52,6 @@
         	'session',
             'group',
             'scan_id'
-
         ],
 
         data() {
@@ -200,7 +199,7 @@
             },
 
             setSelectedDistricts() {
-                var intersection = this.districts.filter(value => this.session.districts.includes(value.id));
+                var intersection = this.districts.filter( district => this.session.districts.includes( district.id ) );
                 intersection.forEach( thisdistrict => {
                     this.addDistrictToSelection(thisdistrict);
                 } )

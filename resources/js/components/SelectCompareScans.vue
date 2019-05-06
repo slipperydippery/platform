@@ -1,8 +1,12 @@
 <template>
 	<div class="selectscans">
-        Jouw gekozen gemeenten: <span v-for="district in session.districts"><span v-html="districtName(district)"></span> </span> <br>
-        Jouw gekozen instantie: <span v-html="instantieName(session.instantie_id)"></span>
-        <table class="table table-sm table-hover">
+        <strong>Jouw gekozen gemeenten:</strong> 
+            <span v-for="district in session.districts"><span v-html="districtName(district)"></span>, </span> 
+            <em v-if="! session.districts.length"> Alle gemeenten </em> <br>
+        <strong>Jouw gekozen instanties:</strong> 
+            <span v-for="instantie in session.instanties" v-html="instantie.title"></span> 
+            <em v-if="! session.instanties.length"> Alle instanties </em> <br>
+        <table class="table table-sm table-hover my-3">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col"> Naam sessie </th>
@@ -63,7 +67,7 @@
                 return this.scans.filter( thisscan => {
                     if (thisscan.group_id) return ''
                     if (thisscan.id == this.scan.id) return ''
-                    if (thisscan.instantie_id != this.session.instantie_id) return '';
+                    if (this.session.instanties.length && ! this.session.instanties.map( instantie => instantie.id ).includes( thisscan.instantie_id )) return ''
                     var districtmatch = ! this.session.districts.length;
                     thisscan.districts.forEach( thisdistrict => {
                         if (this.session.districts.includes(thisdistrict.id)) {

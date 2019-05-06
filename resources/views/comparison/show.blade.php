@@ -4,9 +4,9 @@
 		<div class="row">
 	        <div class="col-md-12">
 	            <div class="page--title">
-	                <h1 class="pagetitle">Vergelijking scan met {{ $comparison->scan->title }} </h1>
+	                <h1 class="pagetitle"> Resultaat vergelijking van jouw scan </h1>
 	                <p>Hieronder kun je de resultaten bekijken van de sessies waarmee je vergelijkt. Klik op de tabbladen om de resultaten van de verschillende thema's te bekijken.</p>
-	                <a href=" {{ route('dashboard') }} " class="btn btn-primary"> Terug naar de startpagina </a>
+	                <a href=" {{ route('dashboard') }} " class="btn btn-primary mb-4"> Terug naar de startpagina </a>
 	            </div>
 	        </div>
 		</div>
