@@ -37,10 +37,13 @@ class ApiComparisonController extends Controller
      */
     public function store(Request $request)
     {
+        $scan = Scan::find($request->scan['id']);
+        $title = 'Vergelijking met ' . $scan->title . ' #' . ($scan->comparisons->count() + 1);
         $comparison = Comparison::create([
             'scan_id' => $request->scan['id'],
             'scanmodel_id' => $request->scanmodel_id,
             'instantie_id' => $request->instantie_id,
+            'title' => $title,
         ]);
         $comparison->save();
         foreach ($request->districts as $district) {

@@ -15633,6 +15633,11 @@ input.uppercase {
   border-top-color: #def6f8;
 }
 
+.bs-popover-bottom .arrow::after,
+.bs-popover-auto[x-placement^="bottom"] .arrow::after {
+  border-bottom-color: #def6f8;
+}
+
 .b-toaster-top-right {
   margin: 2rem;
 }

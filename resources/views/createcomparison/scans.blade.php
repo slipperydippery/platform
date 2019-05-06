@@ -8,6 +8,7 @@
 					<h5 class="card-header bg-primary text-white">Nieuwe vergelijking: Selecteer sessies</h5>
 					<div class="card-body">
 						<h5 class="card-title">Selecteer sessies om mee te vergelijken</h5>
+						<p>Hieronder zie je jouw scan, gevolgd door scans die voldoen aan de selecties die je hebt gemaakt. Klik op een scan die je interessant lijkt om hem toe te voegen aan je vergelijking. Ben je blij met je selectie? Klik dan op "Bevestig vergelijking" om scans met elkaar te vergelijken.</p>
 
 						<select-compare-scans
 							:scan=" {{ json_encode($scan) }} "

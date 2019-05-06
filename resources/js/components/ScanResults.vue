@@ -10,7 +10,8 @@
         <div class="row resultstable--row--average">
             <div class="col-sm-2 average d-flex flex-column justify-content-center">Gemiddeld</div>
             <div class="col-sm-2 text-center" v-for="question in theme.questions" v-if="group.id !== null">
-                <strong >{{ average(question) }}</strong>
+                <strong v-if="average(question)">{{ average(question) }}</strong>
+                <strong v-else> - </strong>
                 <result-slider-average
                     :value = "average(question)"
                     :average = 1

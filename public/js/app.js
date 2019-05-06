@@ -97792,6 +97792,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -97923,7 +97924,9 @@ var render = function() {
                   "div",
                   { staticClass: "col-sm-2 text-center" },
                   [
-                    _c("strong", [_vm._v(_vm._s(_vm.average(question)))]),
+                    _vm.average(question)
+                      ? _c("strong", [_vm._v(_vm._s(_vm.average(question)))])
+                      : _c("strong", [_vm._v(" - ")]),
                     _vm._v(" "),
                     _c("result-slider-average", {
                       attrs: { value: _vm.average(question), average: 1 }

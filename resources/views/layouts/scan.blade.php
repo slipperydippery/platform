@@ -15,7 +15,6 @@
     </title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Styles -->
@@ -71,9 +70,9 @@
     </div>
 
     <!-- Additional Scripts -->
+    
+    <script src="{{ asset('js/app.js') }}"></script>
     @yield('additional-scripts')
-    <script>
-    </script>
 
 </body>
 </html>

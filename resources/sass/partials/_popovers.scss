@@ -15,3 +15,8 @@
 		border-top-color: $secondary-light;
 	}
 }
+.bs-popover-bottom {
+	.arrow::after {
+		border-bottom-color: $secondary-light;
+	}
+}
