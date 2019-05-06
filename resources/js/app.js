@@ -110,6 +110,7 @@ Vue.component('edit-districts', require('./components/EditDistricts'));
 Vue.component('scan-overview', require('./components/ScanOverview.vue'));
 
 Vue.component('manage-articletypes', require('./components/ManageArticletypes.vue'));
+Vue.component('manage-articles', require('./components/ManageArticles.vue'));
 
 // Utility
 Vue.component('countdown', require('./components/Countdown.vue'));

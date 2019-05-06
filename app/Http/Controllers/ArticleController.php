@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Scanmodel;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -14,7 +15,9 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::orderBy('updated_at')->get();
+        $scanmodel = Scanmodel::with('themes', 'articletypes')->find(1);
+        return view('article.index', compact('articles', 'scanmodel'));
     }
 
     /**

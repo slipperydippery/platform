@@ -18,6 +18,8 @@ class CreateArticletypesTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->integer('order')->unsigned();
+            $table->integer('scanmodel_id')->unsigned();
+            $table->foreign('scanmodel_id')->references('id')->on('scanmodels')->onDelete('cascade');
             $table->timestamps();
         });
     }

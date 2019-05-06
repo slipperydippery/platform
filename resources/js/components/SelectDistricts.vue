@@ -70,7 +70,7 @@
         },
 
         computed: {
-        	filtereddistricts: function () {
+        	filtereddistricts () {
         	    var filteredarray = this.districts;
         	    var home = this;
                 if(home.districtsearch == '') {
@@ -85,7 +85,7 @@
         	    return filteredarray;
         	},
 
-        	filteredAndSortedDistricts: function() {
+        	filteredAndSortedDistricts() {
         	    function compare(a, b) {
         	        if (a.name < b.name){
         	            return -1;
@@ -200,13 +200,10 @@
             },
 
             setSelectedDistricts() {
-            	this.session.districts.forEach( (district_id) => {
-            		this.districts.forEach( (thisdistrict) => {
-            			if(thisdistrict.id == district_id) {
-            				this.addDistrictToSelection(thisdistrict);
-            			}
-            		} )
-            	} )
+                var intersection = this.districts.filter(value => this.session.districts.includes(value.id));
+                intersection.forEach( thisdistrict => {
+                    this.addDistrictToSelection(thisdistrict);
+                } )
             },
         }
     }

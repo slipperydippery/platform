@@ -35,13 +35,13 @@
 		            				keyboard_arrow_down
 	            				</i> 
 	            			</div>
-	            			<div class="" v-else>
-		            			<button type="button" class="close" aria-label="Check" @click="updateArticletype(articletype)">
-		            				<span aria-hidden="true">&#10004;</span>
-		            			</button> <br>
-			            			<button type="button" class="close" aria-label="Check" @click="cancelEditarticletype(articletype)">
-		            				<span aria-hidden="true">&times;</span>
-		            			</button>
+	            			<div class="float-right" v-else>
+	            				<i class="material-icons clickable" v-b-tooltip.hover title="Sla veranderingen op" v-if="(index > 0)" @click="updateArticletype(articletype)">
+		            				check
+	            				</i> <br>
+	            				<i class="material-icons clickable" v-b-tooltip.hover title="Annuleer" v-if="(index > 0)" @click="cancelEditarticletype(articletype)">
+		            				close
+	            				</i>
 	            			</div>
 	            		</td>
 	            	</tr>
@@ -57,9 +57,14 @@
 	            			</div>
 	            		</td>
 	            		<td>
-	            			<button type="button" class="check" aria-label="Check" @click="saveArticletype()">
-	            				<span aria-hidden="true">&#10004;</span>
-	            			</button>
+	            			<div class="float-right">
+	            				<i class="material-icons clickable" v-b-tooltip.hover title="Sla veranderingen op" @click="saveArticletype()">
+		            				check
+	            				</i>  <br>
+	            				<i class="material-icons clickable" v-b-tooltip.hover title="Annuleer" @click="cancelNewArticletype()">
+		            				close
+	            				</i>
+	            			</div>
 	            		</td>
 	            	</tr>
 
@@ -88,7 +93,8 @@
             	'newArticletype': {
             		'title': '',
             		'description': ''
-            	}
+            	},
+            	'saving': false,
             }
         },
 
@@ -97,7 +103,7 @@
         },
 
         computed: {
-			orderedArticletypes: function() {
+			orderedArticletypes() {
 				function compare(a, b) {
 					if (a.order < b.order)
 					return -1;
@@ -105,7 +111,6 @@
 					return 1;
 				return 0;
 				}
-
 			    return this.articletypes.sort(compare);
 			}
         },
@@ -124,6 +129,8 @@
         	},
 
         	saveArticletype() {
+        		if(this.saving == true) return '';
+        		this.saving = true;
         		var home = this;
         		axios.post('/api/articletype', {
         			'articletype': home.newArticletype,
@@ -135,7 +142,16 @@
 		            		'description': ''
 		            	}
 	        		this.addingArticletype = false;
+	        		this.saving = false;
         		} )
+        	},
+
+        	cancelNewArticletype() {
+        			this.newArticletype = {
+		            		'title': '',
+		            		'description': ''
+		            	}
+	        		this.addingArticletype = false;
         	},
 
         	updateArticletype(articletype) {
@@ -160,6 +176,7 @@
         	},
 
         	moveUp(articletype, index) {
+        		this.sequentializeOrder();
         		var otherarticletype = this.articletypes[index - 1];
         		var otherorder = otherarticletype.order;
         		otherarticletype.order = articletype.order;
@@ -169,12 +186,19 @@
         	},
 
         	moveDown(articletype, index) {
+        		this.sequentializeOrder();
         		var otherarticletype = this.articletypes[index + 1];
         		var otherorder = otherarticletype.order;
         		otherarticletype.order = articletype.order;
         		articletype.order = otherorder;
         		this.updateArticletype(articletype);
         		this.updateArticletype(otherarticletype);
+        	},
+
+        	sequentializeOrder() {
+        		this.articletypes.forEach( (articletype, index) => {
+        			articletype.order = (index + 1);
+        		})
         	},
         }
     }

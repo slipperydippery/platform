@@ -1,4 +1,4 @@
-@extends('layouts.scan', ['title' => 'Nieuwe Scan'])
+@extends('layouts.scan', ['title' => 'Bewerk Kennisbank themas'])
 
 @section('content')
 		<div class="row">
@@ -10,7 +10,8 @@
 	        </div>
 		</div>
 		<div class="row">
-			<div class="col-md-8 offset-md-2">
+			<div class="col-md-10 offset-md-1">
+                <a href=" {{ route('article.index') }} " class="btn btn-primary mb-4"> Bewerk kennisbank artikelen </a> 
 				<manage-articletypes
 					:workarticletypes = " {{ $articletypes }} "
 				>

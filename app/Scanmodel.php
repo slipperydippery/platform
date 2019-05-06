@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Theme;
+use App\Articletype;
 use Illuminate\Database\Eloquent\Model;
 
 class Scanmodel extends Model
@@ -24,5 +25,10 @@ class Scanmodel extends Model
     public function instanties()
     {
     	return $this->hasMany(Instantie::class);
+    }
+
+    public function articletypes()
+    {
+        return $this->hasMany(Articletype::class);
     }
 }

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Articletype;
 use Illuminate\Http\Request;
 
-class ApiArticletypeController extends Controller
+class ApiArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,7 @@ class ApiArticletypeController extends Controller
      */
     public function index()
     {
-        return Articletype::orderBy('order')->get();
+        //
     }
 
     /**
@@ -35,23 +34,16 @@ class ApiArticletypeController extends Controller
      */
     public function store(Request $request)
     {
-        $articletype = new Articletype([
-            'title' => $request->articletype['title'],
-            'description' => $request->articletype['description'],
-            'order' => (Articletype::get()->count() + 1),
-            'scanmodel_id' => 1,
-        ]);
-        $articletype->save();
-        return $articletype;
+        return $request->all();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  Articletype $articletype
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Articletype $articletype)
+    public function show($id)
     {
         //
     }
@@ -59,10 +51,10 @@ class ApiArticletypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  Articletype $articletype
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Articletype $articletype)
+    public function edit($id)
     {
         //
     }
@@ -71,26 +63,21 @@ class ApiArticletypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  Articletype $articletype
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Articletype $articletype)
+    public function update(Request $request, $id)
     {
-        $articletype->title = $request->articletype['title'];
-        $articletype->description = $request->articletype['description'];
-        $articletype->order = $request->articletype['order'];
-
-        $articletype->save();
-        return $articletype;
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  Articletype $articletype
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Articletype $articletype)
+    public function destroy($id)
     {
         //
     }

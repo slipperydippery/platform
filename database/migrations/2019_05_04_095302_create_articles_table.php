@@ -18,6 +18,8 @@ class CreateArticlesTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('link');
+            $table->integer('jaar')->unsigned()->nullable();
+            $table->string('organisatie')->nullable();
             $table->integer('articletype_id')->unsigned()->nullable();
             $table->foreign('articletype_id')->references('id')->on('articletypes')->onDelete('cascade');
             $table->timestamps();
