@@ -19,12 +19,16 @@ Hieronder is een overzicht van de actiepunten van de sessie {{ $mainscan->title 
 @if ($mainscan->measures->where('question_id', $question->id)->first()->active)
 ---
 
-## {{ $question->title }}
+## {!! $question->title !!}
 
 {{ $mainscan->measures->where('question_id', $question->id)->first()->measure }}
 
 **trekker:**
+@if ($mainscan->measures->where('question_id', $question->id)->first()->frontrunner)
 {{ $mainscan->measures->where('question_id', $question->id)->first()->frontrunner->user->name }}
+@else
+Geen
+@endif
 
 @endif
 @endforeach

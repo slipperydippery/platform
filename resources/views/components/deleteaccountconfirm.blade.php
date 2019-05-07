@@ -8,12 +8,14 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Je staat op het punt om jouw account te verwijderen. Hiermee worden ook al je individuele scans en groepscans verwijderd. Ben je eigenaar van een groepssessie? Dan wordt de sessie inclusief alle scans van deelnemers ook verwijderd </p>
+                <p>Je staat op het punt om jouw account te verwijderen. Hiermee worden ook al je individuele scans en groepscans verwijderd. Ben je eigenaar van een groepssessie? Dan wordt de sessie inclusief alle scans van deelnemers ook verwijderd. </p>
 
                 @foreach (Auth::user()->scans->where('group_id') as $scan)
                     @if ($scan->group->scan->id == $scan->id)
                         <div class="alert alert-danger" role="alert">
-                            Je bent eigenaar van groepssessie <strong>{{ $scan->group->title }}</strong>. Als je niet eerst een deelnemer tot eigenaar van dese sessie promoot zullen alle gegevens van deze groepssessie worden verwijderd!
+                            Je bent eigenaar van groepssessie <strong>{{ $scan->group->title }}</strong>. Als je niet eerst een deelnemer tot eigenaar van dese sessie promoot zullen alle gegevens van deze groepssessie worden verwijderd! <br>
+                            Alle deelnemers krijgen hiervan per e-mail een bericht. 
+
                         </div>
                     @endif
                 @endforeach
