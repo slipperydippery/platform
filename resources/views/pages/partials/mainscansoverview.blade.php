@@ -92,7 +92,7 @@
                         </tbody>
                     </table>
                 </div>
-                @if ($scan->comparisons)
+                @if ($scan->comparisons->count())
                     <div class="col-12">
                         <h4>Gemaakte vergelijkingen:</h4>
                         @foreach ($scan->comparisons as $key=>$comparison)

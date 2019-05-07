@@ -21,7 +21,7 @@ class ScanQuestionController extends Controller
 
     public function intro(Scan $scan, Theme $theme)
     {
-    	$previous = '/sessie/' . $scan->id . '/theme/' . ($theme->id - 1) . '/measures';
+    	$previous = '/sessie/' . $scan->id . '/thema/' . ($theme->id - 1) . '/measures';
     	if($theme->id == Theme::get()->first()->id){
     		$previous = '/sessie/' . $scan->id . '/algemeenbeeldresultaten';
             if( ! $scan->group) {
