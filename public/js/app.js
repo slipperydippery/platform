@@ -98861,6 +98861,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -98887,6 +98898,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        onOpen: function onOpen() {
+            this.$refs.tooltip.$emit('open');
+        },
         getMeasure: function getMeasure() {
             var home = this;
             axios.get('/api/measure/' + this.measure_id).then(function (response) {
@@ -98913,88 +98927,130 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "form-group" }, [
-    _vm.is_manager && _vm.measure.active
-      ? _c(
-          "i",
+  return _c(
+    "div",
+    { staticClass: "form-group" },
+    [
+      _vm.is_manager && _vm.measure.active
+        ? _c(
+            "i",
+            {
+              directives: [
+                {
+                  name: "b-tooltip",
+                  rawName: "v-b-tooltip.hover",
+                  modifiers: { hover: true }
+                }
+              ],
+              staticClass: "material-icons clickable",
+              attrs: { title: "Klik om te deselecteren" },
+              on: {
+                click: function($event) {
+                  return _vm.toggleMeasure()
+                }
+              }
+            },
+            [_vm._v(" check_box ")]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.is_manager && !_vm.measure.active
+        ? _c(
+            "i",
+            {
+              directives: [
+                {
+                  name: "b-tooltip",
+                  rawName: "v-b-tooltip.hover",
+                  modifiers: { hover: true }
+                }
+              ],
+              staticClass: "material-icons clickable",
+              attrs: { title: "Klik om te selecteren" },
+              on: {
+                click: function($event) {
+                  return _vm.toggleMeasure()
+                }
+              }
+            },
+            [_vm._v(" check_box_outline_blank ")]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c("textarea", {
+        directives: [
           {
-            directives: [
-              {
-                name: "b-tooltip",
-                rawName: "v-b-tooltip.hover",
-                modifiers: { hover: true }
-              }
-            ],
-            staticClass: "material-icons clickable",
-            attrs: { title: _vm.title },
-            on: {
-              click: function($event) {
-                return _vm.toggleMeasure()
-              }
-            }
-          },
-          [_vm._v(" check_box ")]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.is_manager && !_vm.measure.active
-      ? _c(
-          "i",
-          {
-            directives: [
-              {
-                name: "b-tooltip",
-                rawName: "v-b-tooltip.hover",
-                modifiers: { hover: true }
-              }
-            ],
-            staticClass: "material-icons clickable",
-            attrs: { title: _vm.title },
-            on: {
-              click: function($event) {
-                return _vm.toggleMeasure()
-              }
-            }
-          },
-          [_vm._v(" check_box_outline_blank ")]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _c("textarea", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.measure.measure,
-          expression: "measure.measure"
-        },
-        {
-          name: "b-tooltip",
-          rawName: "v-b-tooltip.hover",
-          modifiers: { hover: true }
-        }
-      ],
-      staticClass: "form-control",
-      attrs: {
-        placeholder: _vm.measure.active ? "Actie Omschrijving" : "",
-        rows: "6",
-        disabled: !_vm.is_manager || !_vm.measure.active,
-        title: _vm.title
-      },
-      domProps: { value: _vm.measure.measure },
-      on: {
-        blur: function($event) {
-          return _vm.updateMeasure()
-        },
-        input: function($event) {
-          if ($event.target.composing) {
-            return
+            name: "model",
+            rawName: "v-model",
+            value: _vm.measure.measure,
+            expression: "measure.measure"
           }
-          _vm.$set(_vm.measure, "measure", $event.target.value)
+        ],
+        ref: "measureinput",
+        staticClass: "form-control",
+        attrs: {
+          placeholder: _vm.measure.active
+            ? "Omschrijving van de verbetering"
+            : "",
+          rows: "6",
+          disabled: !_vm.is_manager || !_vm.measure.active
+        },
+        domProps: { value: _vm.measure.measure },
+        on: {
+          blur: function($event) {
+            return _vm.updateMeasure()
+          },
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.measure, "measure", $event.target.value)
+          }
         }
-      }
-    })
-  ])
+      }),
+      _vm._v(" "),
+      _c(
+        "b-tooltip",
+        {
+          ref: "tooltip",
+          attrs: {
+            target: function() {
+              return _vm.$refs["measureinput"]
+            }
+          }
+        },
+        [
+          _c("span", { staticClass: "left" }, [
+            _vm._v("Formuleer je verbeterpunten "),
+            _c("strong", [_vm._v("SMART:")])
+          ]),
+          _vm._v(" "),
+          _c("ul", [
+            _c("li", [_vm._v("Specifiek")]),
+            _vm._v(" "),
+            _c("li", [_vm._v("Meetbaar")]),
+            _vm._v(" "),
+            _c("li", [_vm._v("Aanwijsbaar")]),
+            _vm._v(" "),
+            _c("li", [_vm._v("Realistisch")]),
+            _vm._v(" "),
+            _c("li", [_vm._v("Tijd georiënteerd")])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "b-button",
+        {
+          staticClass: "px-1",
+          staticStyle: { display: "none" },
+          on: { click: _vm.onOpen }
+        },
+        [_vm._v("Open")]
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

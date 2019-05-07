@@ -17,7 +17,7 @@
 	<div class="col-6 px-0 position-static">
 		<h5>Doe een individuele scan</h5>
 		<p>
-			Pellentesque ut neque. Etiam ut purus. <br>
+			Je kunt online ook een eigen scan maken. <br>
 			<a href=" {{ route('createsinglescan.title') }} " class="stretched-link">Bekijk</a>	
 		</p>
 	</div>
@@ -30,7 +30,7 @@
 	<div class="col-6 px-0 position-static">
 		<h5>Cijfers uit jouw regio</h5>
 		<p>
-			Pellentesque ut neque. Etiam ut purus. <br>
+			Bekijk hier hoe jouw regio presteert. <br>
 			<a href=" {{ route('cijfersuitderegio') }} " class="stretched-link">Bekijk</a>	
 		</p>
 	</div>
@@ -43,7 +43,7 @@
 	<div class="col-6 px-0 position-static">
 		<h5>Bekijk films</h5>
 		<p>
-			Pellentesque ut neque. Etiam ut purus. <br>
+			Wil je meer weten over de thema's van de scan? <br>
 			<a class="stretched-link" href="#" data-toggle="modal" data-target="#filmsModal">Bekijk</a>
 		</p>
 	</div>

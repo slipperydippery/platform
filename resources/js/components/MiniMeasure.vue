@@ -1,17 +1,28 @@
 <template>
 	<div class="form-group">
-		<i class="material-icons clickable" @click="toggleMeasure()" v-if="is_manager && measure.active" v-b-tooltip.hover :title="title"> check_box </i>
-		<i class="material-icons clickable" @click="toggleMeasure()" v-if="is_manager &&! measure.active" v-b-tooltip.hover :title="title"> check_box_outline_blank </i>
+		<i class="material-icons clickable" @click="toggleMeasure()" v-if="is_manager && measure.active" v-b-tooltip.hover title="Klik om te deselecteren"> check_box </i>
+		<i class="material-icons clickable" @click="toggleMeasure()" v-if="is_manager &&! measure.active" v-b-tooltip.hover title="Klik om te selecteren"> check_box_outline_blank </i>
 		<textarea 
             class="form-control" 
-            :placeholder="measure.active ? 'Actie Omschrijving' : ''"
+            ref="measureinput"
+            :placeholder="measure.active ? 'Omschrijving van de verbetering' : ''"
             rows="6"
             v-model="measure.measure" 
             :disabled="! is_manager || ! measure.active"
-            v-b-tooltip.hover
-            :title="title"
             @blur="updateMeasure()"
         ></textarea>
+        <b-tooltip ref="tooltip" :target="() => $refs['measureinput']"> 
+            <span class="left">Formuleer je verbeterpunten <strong>SMART:</strong></span>
+            <ul>
+                <li>Specifiek</li>
+                <li>Meetbaar</li>
+                <li>Aanwijsbaar</li>
+                <li>Realistisch</li>
+                <li>Tijd georiënteerd</li>
+            </ul>
+        </b-tooltip>
+
+        <b-button class="px-1" @click="onOpen" style="display: none">Open</b-button>
 	</div>
 </template>
 
@@ -44,6 +55,10 @@
         },
 
         methods: {
+            onOpen() {
+                this.$refs.tooltip.$emit('open')
+            },
+            
         	getMeasure() {
         		var home = this;
         		axios.get('/api/measure/' + this.measure_id)

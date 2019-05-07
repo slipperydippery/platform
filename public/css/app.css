@@ -15635,5 +15635,13 @@ input.uppercase {
   margin: 2rem;
 }
 
+.tooltip .left {
+  float: left;
+}
+
+.tooltip ul {
+  text-align: left;
+}
+
 
 /*# sourceMappingURL=app.css.map*/

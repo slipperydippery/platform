@@ -15,7 +15,7 @@
 
                         <span class="card-text card-text__question"> 
 			                <h5>Beoordeel de huidige gezamenlijke aanpak</h5>
-			                <p>Kun je een algemene indruk geven van hoe goed jouw gemeente het volgens jou doet als het gaat om het gezamenlijk voorkomen van schulden.</p>
+			                <p>Kunt u een algemene indruk geven van hoe goed uw regio het volgens u doet als het gaat om het gezamenlijk goed begeleiden van jongeren in een kwetsbare positie van school naar werk. Nul is ‘heel slecht’ en tien is ‘perfect’. </p>
 		            	</span>
 
                         

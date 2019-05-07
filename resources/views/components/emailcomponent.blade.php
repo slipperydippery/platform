@@ -16,11 +16,11 @@
 
         <p>Daarmee kunnen we met meerdere partijen in de regio in gesprek gaan over het vergroten van kansen op de arbeidsmarkt voor jongeren in een kwetsbare positie.</p>
 
-        <p>Klik op deze link om aan deze scan mee te doen: <a href="{{ Request::root() }}/groep/{{ $thisgroup->id }}/sluitaan/{{ $thisgroup->code }}">{{ Request::root() }}/groep/{{ $thisgroup->id }}/sluitaan/{{ $thisgroup->code }}</a></p>
-
         <p>De sessie staat gepland op: {{ date('d-m-Y', strtotime($thisgroup->datetime)) }} om {{ date('H:i', strtotime($thisgroup->datetime)) }}</p>
 
-        <p>Ik neem binnenkort contact op voor een afspraak zodat we de scan gezamenlijk kunnen uitvoeren.</p>
+        <p>Voor deze sessie heeft u een laptop of iPad nodig. Het is verstandig om ter voorbereiding van de sessie alvast in te loggen en je voor de sessie aan te melden.</p>
+        
+        <p>Klik op deze link om aan deze scan mee te doen: <a href="{{ Request::root() }}/groep/{{ $thisgroup->id }}/sluitaan/{{ $thisgroup->code }}">{{ Request::root() }}/groep/{{ $thisgroup->id }}/sluitaan/{{ $thisgroup->code }}</a></p>
 
         <p>Met vriendelijke groeten,</p>
         <p>(Afzender)</p>
