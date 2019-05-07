@@ -41,7 +41,7 @@ class ApiComparisonController extends Controller
         $title = 'Vergelijking met ' . $scan->title . ' #' . ($scan->comparisons->count() + 1);
         $comparison = Comparison::create([
             'scan_id' => $request->scan['id'],
-            'scanmodel_id' => $request->scanmodel_id,
+            // 'scanmodel_id' => $request->scanmodel_id,
             'instantie_id' => $request->instantie_id,
             'title' => $title,
         ]);
