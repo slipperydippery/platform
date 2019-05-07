@@ -4,45 +4,34 @@
             <div class="col-sm-12">
                 <div class="progressbar  d-flex justify-content-between">
                     <div class="progress-element">
-                        @if ( url()->current() == route('creategroupscan.title') )
-                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Nieuwe group: Naam">
+                        @if ( url()->current() == route('createcomparison.districts', $scan) )
+                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Nieuwe vergelijking: Gemeenten">
                                 <img src="/img/simplecircle_secondary_full.svg" alt="">
                             </span>
                         @else
-                            <a href="#" class="" data-toggle="tooltip" data-placement="top" title="Nieuwe group: Naam">
+                            <a href=" {{ route('createcomparison.districts', $scan) }} " class="" data-toggle="tooltip" data-placement="top" title="Nieuwe vergelijking: Gemeenten">
                                 <img src="/img/simplecircle_secondary.svg" alt="">
                             </a>
                         @endif
                     </div>
                     <div class="progress-element">
-                        @if ( url()->current() == route('creategroupscan.districts') )
-                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Nieuwe group: Gemeenten">
+                        @if ( url()->current() == route('createcomparison.instantie', $scan) )
+                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Nieuwe vergelijking: Instanties">
                                 <img src="/img/simplecircle_secondary_full.svg" alt="">
                             </span>
                         @else
-                            <a href="#" class="" data-toggle="tooltip" data-placement="top" title="Nieuwe group: Gemeenten">
+                            <a href=" {{ route('createcomparison.instantie', $scan) }} " class="" data-toggle="tooltip" data-placement="top" title="Nieuwe vergelijking: Instanties">
                                 <img src="/img/simplecircle_secondary.svg" alt="">
                             </a>
                         @endif
                     </div>
                     <div class="progress-element">
-                        @if ( url()->current() == route('creategroupscan.instantie') )
-                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Nieuwe group: Instantie">
+                        @if ( url()->current() == route('createcomparison.scans', $scan) )
+                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Nieuwe vergelijking: Selecteer sessies">
                                 <img src="/img/simplecircle_secondary_full.svg" alt="">
                             </span>
                         @else
-                            <a href="#" class="" data-toggle="tooltip" data-placement="top" title="Nieuwe group: Instantie">
-                                <img src="/img/simplecircle_secondary.svg" alt="">
-                            </a>
-                        @endif
-                    </div>
-                    <div class="progress-element">
-                        @if ( url()->current() == route('creategroupscan.datetime') )
-                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Nieuwe group: Datum">
-                                <img src="/img/simplecircle_secondary_full.svg" alt="">
-                            </span>
-                        @else
-                            <a href="#" class="" data-toggle="tooltip" data-placement="top" title="Nieuwe group: Datum">
+                            <a href=" {{ route('createcomparison.scans', $scan) }} " class="" data-toggle="tooltip" data-placement="top" title="Nieuwe vergelijking: Selecteer sessies">
                                 <img src="/img/simplecircle_secondary.svg" alt="">
                             </a>
                         @endif

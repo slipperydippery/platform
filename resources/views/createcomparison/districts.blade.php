@@ -17,6 +17,8 @@
 							:scan_id = " {{ $scan->id }} "
 						>
 						</select-districts>
+
+						@include('createcomparison.partials.createcomparisonprogress')
 					</div>
 				</div>
 				

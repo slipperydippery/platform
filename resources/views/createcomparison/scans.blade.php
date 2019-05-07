@@ -18,7 +18,7 @@
 						>
 						</select-compare-scans>
 
-						@include('creategroupscan.partials.creategroupprogress')
+						@include('createcomparison.partials.createcomparisonprogress')
 					</div>
 				</div>
 				

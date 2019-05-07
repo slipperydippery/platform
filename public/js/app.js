@@ -1751,7 +1751,7 @@ exports.hasPointerEventSupport = hasPointerEventSupport;
 
 var getEnv = function getEnv(key) {
   var fallback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  var env = typeof process !== 'undefined' && process ? Object({"MIX_PUSHER_APP_CLUSTER":"eu","MIX_PUSHER_APP_KEY":"559fa39d5197e7807663","NODE_ENV":"development"}) || {} : {};
+  var env = typeof process !== 'undefined' && process ? Object({"MIX_PUSHER_APP_KEY":"559fa39d5197e7807663","MIX_PUSHER_APP_CLUSTER":"eu","NODE_ENV":"development"}) || {} : {};
 
   if (!key) {
     /* istanbul ignore next */
@@ -11237,7 +11237,7 @@ exports.EVENT_FILTER = EVENT_FILTER;
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * jQuery JavaScript Library v3.4.1
+ * jQuery JavaScript Library v3.4.0
  * https://jquery.com/
  *
  * Includes Sizzle.js
@@ -11247,7 +11247,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2019-05-01T21:04Z
+ * Date: 2019-04-10T19:48Z
  */
 ( function( global, factory ) {
 
@@ -11380,7 +11380,7 @@ function toType( obj ) {
 
 
 var
-	version = "3.4.1",
+	version = "3.4.0",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -15736,12 +15736,8 @@ var documentElement = document.documentElement;
 		},
 		composed = { composed: true };
 
-	// Support: IE 9 - 11+, Edge 12 - 18+, iOS 10.0 - 10.2 only
 	// Check attachment across shadow DOM boundaries when possible (gh-3504)
-	// Support: iOS 10.0-10.2 only
-	// Early iOS 10 versions support `attachShadow` but not `getRootNode`,
-	// leading to errors. We need to check for `getRootNode`.
-	if ( documentElement.getRootNode ) {
+	if ( documentElement.attachShadow ) {
 		isAttached = function( elem ) {
 			return jQuery.contains( elem.ownerDocument, elem ) ||
 				elem.getRootNode( composed ) === elem.ownerDocument;
@@ -16601,7 +16597,8 @@ jQuery.event = {
 
 				// Claim the first handler
 				if ( rcheckableType.test( el.type ) &&
-					el.click && nodeName( el, "input" ) ) {
+					el.click && nodeName( el, "input" ) &&
+					dataPriv.get( el, "click" ) === undefined ) {
 
 					// dataPriv.set( el, "click", ... )
 					leverageNative( el, "click", returnTrue );
@@ -16618,7 +16615,8 @@ jQuery.event = {
 
 				// Force setup before triggering a click
 				if ( rcheckableType.test( el.type ) &&
-					el.click && nodeName( el, "input" ) ) {
+					el.click && nodeName( el, "input" ) &&
+					dataPriv.get( el, "click" ) === undefined ) {
 
 					leverageNative( el, "click" );
 				}
@@ -16659,9 +16657,7 @@ function leverageNative( el, type, expectSync ) {
 
 	// Missing expectSync indicates a trigger call, which must force setup through jQuery.event.add
 	if ( !expectSync ) {
-		if ( dataPriv.get( el, type ) === undefined ) {
-			jQuery.event.add( el, type, returnTrue );
-		}
+		jQuery.event.add( el, type, returnTrue );
 		return;
 	}
 
@@ -16676,13 +16672,9 @@ function leverageNative( el, type, expectSync ) {
 			if ( ( event.isTrigger & 1 ) && this[ type ] ) {
 
 				// Interrupt processing of the outer synthetic .trigger()ed event
-				// Saved data should be false in such cases, but might be a leftover capture object
-				// from an async native handler (gh-4350)
-				if ( !saved.length ) {
+				if ( !saved ) {
 
 					// Store arguments for use when handling the inner native event
-					// There will always be at least one argument (an event object), so this array
-					// will not be confused with a leftover capture object.
 					saved = slice.call( arguments );
 					dataPriv.set( this, type, saved );
 
@@ -16695,14 +16687,14 @@ function leverageNative( el, type, expectSync ) {
 					if ( saved !== result || notAsync ) {
 						dataPriv.set( this, type, false );
 					} else {
-						result = {};
+						result = undefined;
 					}
 					if ( saved !== result ) {
 
 						// Cancel the outer synthetic event
 						event.stopImmediatePropagation();
 						event.preventDefault();
-						return result.value;
+						return result;
 					}
 
 				// If this is an inner synthetic event for an event with a bubbling surrogate
@@ -16717,19 +16709,17 @@ function leverageNative( el, type, expectSync ) {
 
 			// If this is a native event triggered above, everything is now in order
 			// Fire an inner synthetic event with the original arguments
-			} else if ( saved.length ) {
+			} else if ( saved ) {
 
 				// ...and capture the result
-				dataPriv.set( this, type, {
-					value: jQuery.event.trigger(
+				dataPriv.set( this, type, jQuery.event.trigger(
 
-						// Support: IE <=9 - 11+
-						// Extend with the prototype to reset the above stopImmediatePropagation()
-						jQuery.extend( saved[ 0 ], jQuery.Event.prototype ),
-						saved.slice( 1 ),
-						this
-					)
-				} );
+					// Support: IE <=9 - 11+
+					// Extend with the prototype to reset the above stopImmediatePropagation()
+					jQuery.extend( saved.shift(), jQuery.Event.prototype ),
+					saved,
+					this
+				) );
 
 				// Abort handling of the native event
 				event.stopImmediatePropagation();
@@ -30024,7 +30014,7 @@ exports.default = _default2;
  /*! 
   * portal-vue © Thorsten Lünborg, 2019 
   * 
-  * Version: 2.1.3
+  * Version: 2.1.2
   * 
   * LICENCE: MIT 
   * 
@@ -30508,9 +30498,6 @@ var MountingPortal = Vue.extend({
       type: Boolean,
       default: false
     },
-    targetSlim: {
-      type: Boolean
-    },
     targetSlotProps: {
       type: Object,
       default: function _default() {
@@ -30523,6 +30510,9 @@ var MountingPortal = Vue.extend({
     },
     transition: {
       type: [String, Object, Function]
+    },
+    transitionGroup: {
+      type: Boolean
     }
   },
   created: function created() {
@@ -30559,9 +30549,8 @@ var MountingPortal = Vue.extend({
 
     var _props = pick(this.$props, targetProps);
 
-    _props.slim = this.targetSlim;
     _props.tag = this.targetTag;
-    _props.slotProps = this.targetSlotProps;
+    _props.slotSprop = this.targetSlotProps;
     _props.name = this.to;
     this.portalTarget = new PortalTarget({
       el: el,
@@ -31016,9 +31005,9 @@ window.Popper = __webpack_require__(68).default;
  */
 
 try {
-    window.$ = window.jQuery = __webpack_require__(162);
+  window.$ = window.jQuery = __webpack_require__(162);
 
-    __webpack_require__(269);
+  __webpack_require__(269);
 } catch (e) {}
 
 /**
@@ -31040,9 +31029,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
 /**
@@ -31056,10 +31045,10 @@ if (token) {
 window.Pusher = __webpack_require__(290);
 
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo__["a" /* default */]({
-    broadcaster: 'pusher',
-    key: "559fa39d5197e7807663",
-    cluster: 'eu',
-    encrypted: true
+  broadcaster: 'pusher',
+  key: "559fa39d5197e7807663",
+  cluster: 'eu',
+  encrypted: true
 });
 
 /***/ }),
@@ -96483,7 +96472,7 @@ var content = __webpack_require__(667);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(669)("0e9ae5ff", content, false, {});
+var update = __webpack_require__(669)("a0fb3cdc", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -96507,7 +96496,7 @@ exports = module.exports = __webpack_require__(668)(true);
 
 
 // module
-exports.push([module.i, "\n.checkboxgroup--container {\n  max-height: 400px;\n  overflow: hidden;\n}\n.checkboxgroup {\n  height: 200px;\n  overflow-y: auto;\n}\n.vueelement {\n  display: unset;\n}\n", "", {"version":3,"sources":["C:/Users/zeronothingzero/Code/platform/resources/js/components/DistrictDecoration.vue"],"names":[],"mappings":";AAAA;EACE,kBAAkB;EAClB,iBAAiB;CAAE;AAErB;EACE,cAAc;EACd,iBAAiB;CAAE;AAErB;EACE,eAAe;CAAE","file":"DistrictDecoration.vue","sourcesContent":[".checkboxgroup--container {\n  max-height: 400px;\n  overflow: hidden; }\n\n.checkboxgroup {\n  height: 200px;\n  overflow-y: auto; }\n\n.vueelement {\n  display: unset; }\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.checkboxgroup--container {\n  max-height: 400px;\n  overflow: hidden;\n}\n.checkboxgroup {\n  height: 200px;\n  overflow-y: auto;\n}\n.vueelement {\n  display: unset;\n}\n", "", {"version":3,"sources":["/Users/silvernitrate/Code/platform/resources/js/components/DistrictDecoration.vue"],"names":[],"mappings":";AAAA;EACE,kBAAkB;EAClB,iBAAiB;CAAE;AAErB;EACE,cAAc;EACd,iBAAiB;CAAE;AAErB;EACE,eAAe;CAAE","file":"DistrictDecoration.vue","sourcesContent":[".checkboxgroup--container {\n  max-height: 400px;\n  overflow: hidden; }\n\n.checkboxgroup {\n  height: 200px;\n  overflow-y: auto; }\n\n.vueelement {\n  display: unset; }\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -97385,6 +97374,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -97397,7 +97387,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     mounted: function mounted() {
-        this.selectedinstanties = this.session.instanties;
+        if (this.session.instanties) {
+            this.selectedinstanties = this.session.instanties;
+        }
     },
 
 
@@ -97439,11 +97431,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {}, [
+  return _c("div", { staticClass: "mt-3" }, [
     _c(
       "div",
       { staticClass: "form-group" },
       [
+        _c("strong", [_vm._v(" Instanties ")]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
         _vm._l(_vm.unSelectedInstanties, function(instantie) {
           return _c(
             "span",
@@ -97459,28 +97455,37 @@ var render = function() {
           )
         }),
         _vm._v(" "),
-        _c("br"),
-        _vm._v(" "),
-        _vm._l(_vm.selectedinstanties, function(instantie) {
-          return _c(
-            "span",
-            {
-              staticClass: "clickable selectable selectable--active",
-              on: {
-                click: function($event) {
-                  return _vm.removeInstantie(instantie)
-                }
-              }
-            },
-            [_vm._v(" " + _vm._s(instantie.title) + " ")]
-          )
-        })
+        _c("br")
       ],
       2
     ),
     _vm._v(" "),
     _vm.selectedinstanties.length
-      ? _c("div", { staticClass: "form-group" })
+      ? _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("strong", [_vm._v(" Geselecteerde instanties ")]),
+            _vm._v(" "),
+            _c("br"),
+            _vm._v(" "),
+            _vm._l(_vm.selectedinstanties, function(instantie) {
+              return _c(
+                "span",
+                {
+                  staticClass: "clickable selectable selectable--active",
+                  on: {
+                    click: function($event) {
+                      return _vm.removeInstantie(instantie)
+                    }
+                  }
+                },
+                [_vm._v(" " + _vm._s(instantie.title) + " ")]
+              )
+            })
+          ],
+          2
+        )
       : _vm._e(),
     _vm._v(" "),
     _c(
@@ -102495,6 +102500,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -102809,15 +102815,27 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("input", {
-        staticClass: "btn btn-primary form-control",
-        attrs: { type: "submit", value: "Bevestig vergelijking" },
-        on: {
-          click: function($event) {
-            return _vm.saveComparison()
-          }
-        }
-      })
+      _vm.filteredScans.length == 0
+        ? _c("div", {}, [
+            _c("em", [
+              _vm._v(
+                " Er zijn geen scans die voldoen aan jouw gekozen criteria "
+              )
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.selectedScans.length
+        ? _c("input", {
+            staticClass: "btn btn-primary form-control",
+            attrs: { type: "submit", value: "Bevestig vergelijking" },
+            on: {
+              click: function($event) {
+                return _vm.saveComparison()
+              }
+            }
+          })
+        : _vm._e()
     ],
     2
   )

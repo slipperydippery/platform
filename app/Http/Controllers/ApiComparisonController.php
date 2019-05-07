@@ -52,6 +52,7 @@ class ApiComparisonController extends Controller
         foreach ($request->scans as $scan) {
             $comparison->scans()->attach(Scan::find($scan['id']));
         }
+        session()->forget('createcomparison');
         return $comparison;
     }
 

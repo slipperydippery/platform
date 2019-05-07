@@ -1,11 +1,12 @@
 <template>
-	<div class="">
+	<div class="mt-3">
 		<div class="form-group">
+            <strong> Instanties </strong> <br>
 		    <span class="clickable selectable selectable--passive" v-for="instantie in unSelectedInstanties" @click="addInstantie(instantie)"> {{ instantie.title }} </span> <br>
-		    <span class="clickable selectable selectable--active" v-for="instantie in selectedinstanties" @click="removeInstantie(instantie)"> {{ instantie.title }} </span>
 		</div>
 		<div class="form-group" v-if="selectedinstanties.length">
-			
+            <strong> Geselecteerde instanties </strong> <br>
+		    <span class="clickable selectable selectable--active" v-for="instantie in selectedinstanties" @click="removeInstantie(instantie)"> {{ instantie.title }} </span>
 		</div>
 		<button class="btn btn-primary" @click="saveInstanties"> Sla instanties op</button>
 	</div>
@@ -29,7 +30,9 @@
         },
 
         mounted() {
-        	this.selectedinstanties = this.session.instanties;
+            if ( this.session.instanties ) {
+            	this.selectedinstanties = this.session.instanties;
+            }
         },
 
         computed: {

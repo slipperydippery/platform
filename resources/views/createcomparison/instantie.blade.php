@@ -8,7 +8,7 @@
 					<h5 class="card-header bg-primary text-white">Nieuwe vergelijking: Instantie</h5>
 					<div class="card-body">
 						<h5 class="card-title">Met welke instanties wil je je scan vergelijken?</h5>
-						<span>Als je geen instanties kiest worden sessies met alle instanties getoond.</span>
+						<span>Klik op een instantie om deze toe te voegen aan of te verwijderen van je selectie. Als je geen instanties kiest worden sessies met alle instanties getoond.</span>
 						<select-instanties
 							:instanties=" {{ json_encode($instanties) }} "
 							:session=" {{ json_encode($session) }} "
