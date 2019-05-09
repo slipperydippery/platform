@@ -7,6 +7,7 @@ use App\Group;
 use App\District;
 use App\Instantie;
 use Illuminate\Http\Request;
+use App\Notifications\GroupRemoved;
 
 class ScanController extends Controller
 {
@@ -116,10 +117,12 @@ class ScanController extends Controller
             if ($scan->group->scan->id == $scan->id) {
                 foreach ($scan->group->scans as $thisscan) {
                     if ($thisscan->id != $scan->id) {
+                        $recipient = $thisscan->user;
                         if ($thisscan->districts->count()) {
                             $thisscan->districts()->detach();
                         }
                         $thisscan->delete();
+                        $recipient->notify(new GroupRemoved($scan->group));
                     }
                 }
             }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use App\Notifications\GroupRemoved;
+use App\Notifications\MessageReceived;
 
 class UserController extends Controller
 {
@@ -90,10 +92,12 @@ class UserController extends Controller
                 if ($scan->group->scan->id == $scan->id) {
                     foreach ($scan->group->scans as $thisscan) {
                         if ($thisscan->id != $scan->id) {
+                            $recipient = $thisscan->user;
                             if ($thisscan->districts->count()) {
                                 $thisscan->districts()->detach();
                             }
                             $thisscan->delete();
+                            $recipient->notify(new GroupRemoved($scan->group));
                         }
                     }
                 }
