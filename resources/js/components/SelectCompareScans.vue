@@ -1,10 +1,10 @@
 <template>
 	<div class="selectscans">
         <strong>Jouw gekozen gemeenten:</strong> 
-            <span v-for="district in session.districts"><span v-html="districtName(district)"></span>, </span> 
+            <span v-for="(district, index) in session.districts"><span v-html="districtName(district)"></span><span v-if="index != session.districts.length - 1">, </span></span> 
             <em v-if="! session.districts.length"> Alle gemeenten </em> <br>
         <strong>Jouw gekozen instanties:</strong> 
-            <span v-for="instantie in session.instanties" v-html="instantie.title"></span> 
+            <span v-for="(instantie, index) in session.instanties"><span v-html="instantie.title"></span><span v-if="index != session.instanties.length - 1">, </span></span> 
             <em v-if="! session.instanties.length"> Alle instanties </em> <br>
         <table class="table table-sm table-hover my-3">
             <thead class="thead-dark">

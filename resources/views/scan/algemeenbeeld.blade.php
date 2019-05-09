@@ -29,7 +29,7 @@
                         </algemeenbeeld>
                         
                     </div>
-                    <div class="card-footer">
+                    <div class="card-footer text-center">
 	                    <p>Geef met een cijfer aan in hoeverre de stelling van toepassing is.</p>
                     </div>
 				</div>

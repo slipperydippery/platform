@@ -109,6 +109,7 @@ Vue.component('edit-scan', require('./components/EditScan.vue'));
 Vue.component('edit-districts', require('./components/EditDistricts'));
 
 Vue.component('scan-overview', require('./components/ScanOverview.vue'));
+Vue.component('comparison-overview', require('./components/ComparisonOverview.vue'));
 
 Vue.component('manage-articletypes', require('./components/ManageArticletypes.vue'));
 Vue.component('manage-articles', require('./components/ManageArticles.vue'));

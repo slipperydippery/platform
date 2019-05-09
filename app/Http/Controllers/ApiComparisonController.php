@@ -64,7 +64,7 @@ class ApiComparisonController extends Controller
      */
     public function show(Comparison $comparison)
     {
-        return Comparison::with('scan.user', 'scan.answers', 'scan.districts', 'scans.user', 'scans.answers', 'scans.instantie')->find($comparison->id);
+        return Comparison::with('scan.user', 'scan.answers', 'scan.districts', 'scans.user', 'scans.answers', 'scans.instantie', 'scans.districts')->find($comparison->id);
     }
 
     /**

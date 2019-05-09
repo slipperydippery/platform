@@ -8,7 +8,7 @@
 					<h5 class="card-header bg-primary text-white">Nieuwe vergelijking: Gemeenten</h5>
 					<div class="card-body">
 						<h5 class="card-title">Met welke gemeente(n) wil je je scan vergelijken?</h5>
-						<span class="subtitle">Als je geen gemeente kiest worden scans met alle gemeenten getoond</span>
+						<span class="subtitle mb-3 d-block">Als je geen gemeente kiest worden scans met alle gemeenten getoond</span>
 
 						<select-districts
 							:session = " {{ json_encode($session) }} "

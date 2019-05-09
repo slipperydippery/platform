@@ -99,21 +99,20 @@
                         </tbody>
                     </table>
                 </div>
-                @if ($scan->comparisons->count())
-                    <div class="col-12">
-                        <h4>Gemaakte vergelijkingen:</h4>
-                        @foreach ($scan->comparisons as $key=>$comparison)
-                            <a href=" {{ route('comparison.show', $comparison) }} "> 
-                                @if ($comparison->title)
-                                    {{ $comparison->title }}
-                                @else
-                                Vergelijking met {{ $comparison->scan->title }} #{{ $key + 1 }}
-                                @endif
-                            </a> <br>
-                        @endforeach
+                <div class="bg-light pt-3 ">
+                    @if ($scan->comparisons->count())
+                        <div class="col-12">
+                            @foreach ($scan->comparisons as $key=>$comparison)
+                                <comparison-overview
+                                    :workcomparison = " {{ json_encode($comparison) }} "
+                                    :scan = " {{ $scan }} "
+                                >
+                                </comparison-overview>
+                            @endforeach
 
-                    </div>
-                @endif
+                        </div>
+                    @endif
+                </div>
             </div>
         @endif
     @endforeach      

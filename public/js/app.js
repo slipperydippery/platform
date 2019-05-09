@@ -1437,6 +1437,7 @@ Vue.component('edit-scan', __webpack_require__(725));
 Vue.component('edit-districts', __webpack_require__(728));
 
 Vue.component('scan-overview', __webpack_require__(731));
+Vue.component('comparison-overview', __webpack_require__(767));
 
 Vue.component('manage-articletypes', __webpack_require__(734));
 Vue.component('manage-articles', __webpack_require__(737));
@@ -1751,7 +1752,7 @@ exports.hasPointerEventSupport = hasPointerEventSupport;
 
 var getEnv = function getEnv(key) {
   var fallback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-  var env = typeof process !== 'undefined' && process ? Object({"MIX_PUSHER_APP_KEY":"559fa39d5197e7807663","MIX_PUSHER_APP_CLUSTER":"eu","NODE_ENV":"development"}) || {} : {};
+  var env = typeof process !== 'undefined' && process ? Object({"MIX_PUSHER_APP_CLUSTER":"eu","MIX_PUSHER_APP_KEY":"559fa39d5197e7807663","NODE_ENV":"development"}) || {} : {};
 
   if (!key) {
     /* istanbul ignore next */
@@ -11237,7 +11238,7 @@ exports.EVENT_FILTER = EVENT_FILTER;
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * jQuery JavaScript Library v3.4.0
+ * jQuery JavaScript Library v3.4.1
  * https://jquery.com/
  *
  * Includes Sizzle.js
@@ -11247,7 +11248,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2019-04-10T19:48Z
+ * Date: 2019-05-01T21:04Z
  */
 ( function( global, factory ) {
 
@@ -11380,7 +11381,7 @@ function toType( obj ) {
 
 
 var
-	version = "3.4.0",
+	version = "3.4.1",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -15736,8 +15737,12 @@ var documentElement = document.documentElement;
 		},
 		composed = { composed: true };
 
+	// Support: IE 9 - 11+, Edge 12 - 18+, iOS 10.0 - 10.2 only
 	// Check attachment across shadow DOM boundaries when possible (gh-3504)
-	if ( documentElement.attachShadow ) {
+	// Support: iOS 10.0-10.2 only
+	// Early iOS 10 versions support `attachShadow` but not `getRootNode`,
+	// leading to errors. We need to check for `getRootNode`.
+	if ( documentElement.getRootNode ) {
 		isAttached = function( elem ) {
 			return jQuery.contains( elem.ownerDocument, elem ) ||
 				elem.getRootNode( composed ) === elem.ownerDocument;
@@ -16597,8 +16602,7 @@ jQuery.event = {
 
 				// Claim the first handler
 				if ( rcheckableType.test( el.type ) &&
-					el.click && nodeName( el, "input" ) &&
-					dataPriv.get( el, "click" ) === undefined ) {
+					el.click && nodeName( el, "input" ) ) {
 
 					// dataPriv.set( el, "click", ... )
 					leverageNative( el, "click", returnTrue );
@@ -16615,8 +16619,7 @@ jQuery.event = {
 
 				// Force setup before triggering a click
 				if ( rcheckableType.test( el.type ) &&
-					el.click && nodeName( el, "input" ) &&
-					dataPriv.get( el, "click" ) === undefined ) {
+					el.click && nodeName( el, "input" ) ) {
 
 					leverageNative( el, "click" );
 				}
@@ -16657,7 +16660,9 @@ function leverageNative( el, type, expectSync ) {
 
 	// Missing expectSync indicates a trigger call, which must force setup through jQuery.event.add
 	if ( !expectSync ) {
-		jQuery.event.add( el, type, returnTrue );
+		if ( dataPriv.get( el, type ) === undefined ) {
+			jQuery.event.add( el, type, returnTrue );
+		}
 		return;
 	}
 
@@ -16672,9 +16677,13 @@ function leverageNative( el, type, expectSync ) {
 			if ( ( event.isTrigger & 1 ) && this[ type ] ) {
 
 				// Interrupt processing of the outer synthetic .trigger()ed event
-				if ( !saved ) {
+				// Saved data should be false in such cases, but might be a leftover capture object
+				// from an async native handler (gh-4350)
+				if ( !saved.length ) {
 
 					// Store arguments for use when handling the inner native event
+					// There will always be at least one argument (an event object), so this array
+					// will not be confused with a leftover capture object.
 					saved = slice.call( arguments );
 					dataPriv.set( this, type, saved );
 
@@ -16687,14 +16696,14 @@ function leverageNative( el, type, expectSync ) {
 					if ( saved !== result || notAsync ) {
 						dataPriv.set( this, type, false );
 					} else {
-						result = undefined;
+						result = {};
 					}
 					if ( saved !== result ) {
 
 						// Cancel the outer synthetic event
 						event.stopImmediatePropagation();
 						event.preventDefault();
-						return result;
+						return result.value;
 					}
 
 				// If this is an inner synthetic event for an event with a bubbling surrogate
@@ -16709,17 +16718,19 @@ function leverageNative( el, type, expectSync ) {
 
 			// If this is a native event triggered above, everything is now in order
 			// Fire an inner synthetic event with the original arguments
-			} else if ( saved ) {
+			} else if ( saved.length ) {
 
 				// ...and capture the result
-				dataPriv.set( this, type, jQuery.event.trigger(
+				dataPriv.set( this, type, {
+					value: jQuery.event.trigger(
 
-					// Support: IE <=9 - 11+
-					// Extend with the prototype to reset the above stopImmediatePropagation()
-					jQuery.extend( saved.shift(), jQuery.Event.prototype ),
-					saved,
-					this
-				) );
+						// Support: IE <=9 - 11+
+						// Extend with the prototype to reset the above stopImmediatePropagation()
+						jQuery.extend( saved[ 0 ], jQuery.Event.prototype ),
+						saved.slice( 1 ),
+						this
+					)
+				} );
 
 				// Abort handling of the native event
 				event.stopImmediatePropagation();
@@ -30014,7 +30025,7 @@ exports.default = _default2;
  /*! 
   * portal-vue © Thorsten Lünborg, 2019 
   * 
-  * Version: 2.1.2
+  * Version: 2.1.3
   * 
   * LICENCE: MIT 
   * 
@@ -30498,6 +30509,9 @@ var MountingPortal = Vue.extend({
       type: Boolean,
       default: false
     },
+    targetSlim: {
+      type: Boolean
+    },
     targetSlotProps: {
       type: Object,
       default: function _default() {
@@ -30510,9 +30524,6 @@ var MountingPortal = Vue.extend({
     },
     transition: {
       type: [String, Object, Function]
-    },
-    transitionGroup: {
-      type: Boolean
     }
   },
   created: function created() {
@@ -30549,8 +30560,9 @@ var MountingPortal = Vue.extend({
 
     var _props = pick(this.$props, targetProps);
 
+    _props.slim = this.targetSlim;
     _props.tag = this.targetTag;
-    _props.slotSprop = this.targetSlotProps;
+    _props.slotProps = this.targetSlotProps;
     _props.name = this.to;
     this.portalTarget = new PortalTarget({
       el: el,
@@ -31005,9 +31017,9 @@ window.Popper = __webpack_require__(68).default;
  */
 
 try {
-  window.$ = window.jQuery = __webpack_require__(162);
+    window.$ = window.jQuery = __webpack_require__(162);
 
-  __webpack_require__(269);
+    __webpack_require__(269);
 } catch (e) {}
 
 /**
@@ -31029,9 +31041,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
 /**
@@ -31045,10 +31057,10 @@ if (token) {
 window.Pusher = __webpack_require__(290);
 
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo__["a" /* default */]({
-  broadcaster: 'pusher',
-  key: "559fa39d5197e7807663",
-  cluster: 'eu',
-  encrypted: true
+    broadcaster: 'pusher',
+    key: "559fa39d5197e7807663",
+    cluster: 'eu',
+    encrypted: true
 });
 
 /***/ }),
@@ -96472,7 +96484,7 @@ var content = __webpack_require__(667);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(669)("a0fb3cdc", content, false, {});
+var update = __webpack_require__(669)("0e9ae5ff", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -96496,7 +96508,7 @@ exports = module.exports = __webpack_require__(668)(true);
 
 
 // module
-exports.push([module.i, "\n.checkboxgroup--container {\n  max-height: 400px;\n  overflow: hidden;\n}\n.checkboxgroup {\n  height: 200px;\n  overflow-y: auto;\n}\n.vueelement {\n  display: unset;\n}\n", "", {"version":3,"sources":["/Users/silvernitrate/Code/platform/resources/js/components/DistrictDecoration.vue"],"names":[],"mappings":";AAAA;EACE,kBAAkB;EAClB,iBAAiB;CAAE;AAErB;EACE,cAAc;EACd,iBAAiB;CAAE;AAErB;EACE,eAAe;CAAE","file":"DistrictDecoration.vue","sourcesContent":[".checkboxgroup--container {\n  max-height: 400px;\n  overflow: hidden; }\n\n.checkboxgroup {\n  height: 200px;\n  overflow-y: auto; }\n\n.vueelement {\n  display: unset; }\n"],"sourceRoot":""}]);
+exports.push([module.i, "\n.checkboxgroup--container {\n  max-height: 400px;\n  overflow: hidden;\n}\n.checkboxgroup {\n  height: 200px;\n  overflow-y: auto;\n}\n.vueelement {\n  display: unset;\n}\n", "", {"version":3,"sources":["C:/Users/zeronothingzero/Code/platform/resources/js/components/DistrictDecoration.vue"],"names":[],"mappings":";AAAA;EACE,kBAAkB;EAClB,iBAAiB;CAAE;AAErB;EACE,cAAc;EACd,iBAAiB;CAAE;AAErB;EACE,eAAe;CAAE","file":"DistrictDecoration.vue","sourcesContent":[".checkboxgroup--container {\n  max-height: 400px;\n  overflow: hidden; }\n\n.checkboxgroup {\n  height: 200px;\n  overflow-y: auto; }\n\n.vueelement {\n  display: unset; }\n"],"sourceRoot":""}]);
 
 // exports
 
@@ -102692,12 +102704,14 @@ var render = function() {
     [
       _c("strong", [_vm._v("Jouw gekozen gemeenten:")]),
       _vm._v(" "),
-      _vm._l(_vm.session.districts, function(district) {
+      _vm._l(_vm.session.districts, function(district, index) {
         return _c("span", [
           _c("span", {
             domProps: { innerHTML: _vm._s(_vm.districtName(district)) }
           }),
-          _vm._v(", ")
+          index != _vm.session.districts.length - 1
+            ? _c("span", [_vm._v(", ")])
+            : _vm._e()
         ])
       }),
       _vm._v(" "),
@@ -102709,8 +102723,13 @@ var render = function() {
       _vm._v(" "),
       _c("strong", [_vm._v("Jouw gekozen instanties:")]),
       _vm._v(" "),
-      _vm._l(_vm.session.instanties, function(instantie) {
-        return _c("span", { domProps: { innerHTML: _vm._s(instantie.title) } })
+      _vm._l(_vm.session.instanties, function(instantie, index) {
+        return _c("span", [
+          _c("span", { domProps: { innerHTML: _vm._s(instantie.title) } }),
+          index != _vm.session.instanties.length - 1
+            ? _c("span", [_vm._v(", ")])
+            : _vm._e()
+        ])
       }),
       _vm._v(" "),
       !_vm.session.instanties.length
@@ -107485,7 +107504,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-	props: ['scan'],
+	props: {
+		scan: Object,
+		comparison_id: {
+			type: Number,
+			default: 0
+		}
+	},
 
 	data: function data() {
 		return {
@@ -107496,7 +107521,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 	mounted: function mounted() {},
 
 
-	computed: {},
+	computed: {
+		toPerson: function toPerson() {
+			if (this.comparison_id) return 'de eignaar van sessie ' + this.scan.title;
+			return this.scan.user.name;
+		},
+		messagemodalID: function messagemodalID() {
+			if (this.comparison_id) return this.scan.id + '_' + this.comparison_id;
+			return this.scan.id;
+		}
+	},
 
 	methods: {
 		resetModal: function resetModal() {
@@ -107512,14 +107546,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		handleSubmit: function handleSubmit() {
 			var _this = this;
 
-			// Exit when the form isn't valid
 			if (!this.checkFormValidity()) {
 				return;
 			}
-			// Push the name to submitted names
-			// this.submittedNames.push(this.name)
 			this.sendMessage();
-			// Hide the modal manually
 			this.$nextTick(function () {
 				_this.$refs.modal.hide();
 			});
@@ -107557,7 +107587,7 @@ var render = function() {
           staticClass: "dropdown-item",
           on: {
             click: function($event) {
-              return _vm.$bvModal.show("messagemodal" + _vm.scan.id)
+              return _vm.$bvModal.show("messagemodal" + _vm.messagemodalID)
             }
           }
         },
@@ -107573,8 +107603,8 @@ var render = function() {
             {
               ref: "modal",
               attrs: {
-                id: "messagemodal" + _vm.scan.id,
-                title: "Stuur een bericht naar " + _vm.scan.user.name
+                id: "messagemodal" + _vm.messagemodalID,
+                title: "Stuur een bericht naar " + _vm.toPerson
               },
               on: {
                 show: _vm.resetModal,
@@ -107653,6 +107683,312 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 764 */,
+/* 765 */,
+/* 766 */,
+/* 767 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(768)
+/* template */
+var __vue_template__ = __webpack_require__(769)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/ComparisonOverview.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0a56ed4d", Component.options)
+  } else {
+    hotAPI.reload("data-v-0a56ed4d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 768 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(17);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['workcomparison', 'scan'],
+
+    data: function data() {
+        return {
+            'comparison': {}
+        };
+    },
+    mounted: function mounted() {
+        this.getComparison();
+    },
+
+
+    computed: {},
+
+    methods: {
+        getComparison: function getComparison() {
+            var _this = this;
+
+            var home = this;
+            axios.get('/api/comparison/' + this.workcomparison.id).then(function (response) {
+                _this.comparison = response.data;
+            });
+        },
+        answercount: function answercount(thisscan) {
+            var answercount = 0;
+            thisscan.answers.forEach(function (thisanswer) {
+                thisanswer.answer ? answercount++ : '';
+            });
+            return answercount;
+        },
+        questioncount: function questioncount(thisscan) {
+            return thisscan.answers.length;
+        }
+    }
+});
+
+/***/ }),
+/* 769 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", {}, [
+    _c("h5", [
+      _c("a", { attrs: { href: "/comparison/" + _vm.comparison.id } }, [
+        _vm._v(_vm._s(_vm.comparison.title))
+      ])
+    ]),
+    _vm._v(" "),
+    _c("table", { staticClass: "table table-sm" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        [
+          _c("tr", { staticClass: "table-primary" }, [
+            _c("th", { attrs: { scope: "col" } }, [
+              _vm._v(" " + _vm._s(_vm.scan.title) + " ")
+            ]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [
+              _vm._v(" " + _vm._s(_vm.scan.instantie.title) + " ")
+            ]),
+            _vm._v(" "),
+            _c(
+              "th",
+              { attrs: { scope: "col" } },
+              _vm._l(_vm.scan.districts, function(district, index) {
+                return _c("span", [
+                  _vm._v(" " + _vm._s(district.name) + " "),
+                  index != _vm.scan.districts.length - 1
+                    ? _c("span", [_vm._v(", ")])
+                    : _vm._e()
+                ])
+              }),
+              0
+            ),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } }, [
+              _vm._v(
+                " " +
+                  _vm._s(_vm.answercount(_vm.scan)) +
+                  " / " +
+                  _vm._s(_vm.questioncount(_vm.scan)) +
+                  " "
+              )
+            ]),
+            _vm._v(" "),
+            _c("th", { attrs: { scope: "col" } })
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.comparison.scans, function(scan) {
+            return _c("tr", [
+              _c("td", [_vm._v(" " + _vm._s(scan.title) + " ")]),
+              _vm._v(" "),
+              _c("td", [_vm._v(" " + _vm._s(scan.instantie.title) + " ")]),
+              _vm._v(" "),
+              _c(
+                "td",
+                _vm._l(scan.districts, function(district, index) {
+                  return _c("span", [
+                    _vm._v(" " + _vm._s(district.name) + " "),
+                    index != scan.districts.length - 1
+                      ? _c("span", [_vm._v(", ")])
+                      : _vm._e()
+                  ])
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _c("td", [
+                _vm._v(
+                  " " +
+                    _vm._s(_vm.answercount(scan)) +
+                    " / " +
+                    _vm._s(_vm.questioncount(scan)) +
+                    " "
+                )
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                _c("div", { staticClass: "dropdown float-right" }, [
+                  _c("button", {
+                    staticClass:
+                      "btn btn-secondary dropdown-toggle dropdown-toggle__round",
+                    attrs: {
+                      type: "button",
+                      id: "dropdownMenuButton",
+                      "data-toggle": "dropdown",
+                      "aria-haspopup": "true",
+                      "aria-expanded": "false"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "dropdown-menu",
+                      attrs: { "aria-labelledby": "dropdownMenuButton" }
+                    },
+                    [
+                      _c("message-user-dropdown-modal", {
+                        attrs: { scan: scan, comparison_id: _vm.comparison.id }
+                      })
+                    ],
+                    1
+                  )
+                ])
+              ])
+            ])
+          })
+        ],
+        2
+      )
+    ]),
+    _vm._v(" "),
+    _c("hr")
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("th", { attrs: { scope: "col" } }, [_vm._v(" Naam ")]),
+      _vm._v(" "),
+      _c("th", { attrs: { scope: "col" } }, [_vm._v(" Instantie ")]),
+      _vm._v(" "),
+      _c("th", { attrs: { scope: "col" } }, [_vm._v(" Gemeenten ")]),
+      _vm._v(" "),
+      _c("th", { attrs: { scope: "col" } }, [_vm._v(" Antwoorden ")]),
+      _vm._v(" "),
+      _c("th", { attrs: { scope: "col" } }, [
+        _vm._v("\n            \t    Menu\n            \t")
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0a56ed4d", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
