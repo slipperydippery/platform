@@ -4,31 +4,58 @@
 			<button class="btn btn-primary mb-4" v-b-modal.newArticleModal> Voeg een item toe </button>
 			<b-modal size="lg" id="newArticleModal" title="Voeg een nieuw item toe" @ok="saveArticle">
 				<div class="form-group">
-				    <input type="text" v-model="newArticle.title" class="form-control" id="inputitle" placeholder="Naam">
+					<h5> Kennisbank Item Type: </h5>
+					<label 
+		                v-for="articletype in orderedArticletypes"
+		                @click="toggleArticletype(articletype)"
+		                class="checkboxlabel btn mr-2 clickable "  
+		                :class="{  'btn-secondary' : isSelected(articletype), 'btn-dark' : !isSelected(articletype) }"
+		                v-b-tooltip:hover :title=" articletype.description "
+					>
+						{{ articletype.title }}
+					</label>
+				</div>
+				<div class="form-group">
+				    <input type="text" v-model="newArticle.title" class="form-control" id="inputitle" placeholder="Naam" required>
 				</div>
 				<div class="form-group">
 				    <textarea class="form-control" rows="3" v-model="newArticle.description" placeholder="Omschrijving"></textarea>
 				</div>
 				<div class="form-group">
+				    <input type="text" v-model="newArticle.year" class="form-control" id="inputitle" placeholder="Jaar" required>
+				</div>
+
+
+				<div class="input-group mb-3">
+					<div class="input-group-prepend" id="button-addon3">
+						<button class="btn" :class=" newArticle.linktype == 'link' ?  'btn-secondary' : 'btn-outline-secondary' " @click="setlinktype('link')" type="button"> Link </button>
+					</div>
+					<div class="input-group-append">
+						<button class="btn" :class=" newArticle.linktype == 'file' ?  'btn-secondary' : 'btn-outline-secondary' " @click="setlinktype('file')" type="button"> Bestand </button>
+					</div>
+				</div>
+				<div class="form-group" v-if="newArticle.linktype == 'link'">
 				    <input type="text" v-model="newArticle.link" class="form-control" id="inputlink" placeholder="http://www">
 				</div>
-				<div class="form-group">
-					<h3> Kennisbank thema's </h3>
-					<div class="form-check" v-for="articletype in orderedArticletypes">
-						<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-						<label class="form-check-label" for="defaultCheck1" v-b-tooltip:hover :title=" articletype.description ">
-							{{ articletype.title }}
-						</label>
-					</div>
+				<div class="form-group" v-if="newArticle.linktype == 'file'">
+					<b-form-file
+						v-model="newArticle.file"
+						placeholder="Kies een bestand"
+						drop-placeholder="Sleep bestand hier..."
+				    ></b-form-file>
 				</div>
+
+				<hr>
 				<div class="form-group">
-					<h3> Participatiescan thema's </h3>
-					<div class="form-check" v-for="theme in scanmodel.themes">
-						<input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-						<label class="form-check-label" for="defaultCheck1" v-b-tooltip:hover :title=" theme.body ">
-							{{ theme.title }}
-						</label>
-					</div>
+					<h3> Participatiescan vragen </h3>
+					<template v-for="theme in scanmodel.themes">
+						<h5 class="mt-3"> {{ theme.title }} </h5>
+						<div class="form-check" v-for="question in theme.questions">
+							<input class="form-check-input" type="checkbox" value="" :id="'question' + question.id">
+							<label class="form-check-label" :for="'question' + question.id" v-b-tooltip:hover :title=" theme.body " v-html="question.title">
+							</label>
+						</div>
+					</template>
 				</div>
 			</b-modal>
 
@@ -124,7 +151,12 @@
             	'addingArticle' : false,
             	'newArticle': {
             		'title': '',
-            		'description': ''
+            		'description': '',
+            		'year': '',
+            		'link': '',
+	            	'file': '',
+	            	'articletypes': [],
+	            	'linktype': '',
             	},
             	'saving': false,
             }
@@ -164,7 +196,7 @@
 						return 1
 					return 0
 				})
-			}
+			},
 
         },
 
@@ -193,6 +225,11 @@
         			this.newArticle = {
 		            		'title': '',
 		            		'description': '',
+		            		'year': '',
+		            		'link': '',
+			            	'file': '',
+			            	'articletypes': [],
+			            	'linktype': '',
 		            	}
 	        		this.addingArticle = false;
 	        		this.saving = false;
@@ -252,6 +289,40 @@
         		this.articles.forEach( (article, index) => {
         			article.order = (index + 1);
         		})
+        	},
+
+        	handleFileUpload() {
+        		console.log('handleFileUpload');
+        		let files = this.$refs.file.files;
+                if (!files.length)
+                    return;
+                this.createFile(files[0]);
+        	},
+
+        	createFile(file) {
+        		console.log('createFile');
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                    this.newArticle.file = e.target.result;
+                };
+                reader.readAsDataURL(file);
+        	},
+
+        	toggleArticletype(article) {
+        		if ( !  this.newArticle.articletypes.includes( article ) ) {
+        			this.newArticle.articletypes.push(article)
+        			return ''
+        		}
+        		this.newArticle.articletypes.splice( this.newArticle.articletypes.indexOf(article), 1 );
+        	},
+
+        	isSelected(articletype) {
+        		if ( this.newArticle.articletypes.includes(articletype) ) return true
+    			return false
+        	},
+
+        	setlinktype(type) {
+        		this.newArticle.linktype = type;
         	},
         }
     }

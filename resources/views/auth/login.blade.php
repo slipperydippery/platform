@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="card card__login">
-                    <div class="card-header text-center"><h4>{{ __('Login') }}</h4></div>
+                    <div class="card-header text-center"><h4> Log in </h4></div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">

@@ -105368,6 +105368,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -105380,7 +105407,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       'addingArticle': false,
       'newArticle': {
         'title': '',
-        'description': ''
+        'description': '',
+        'year': '',
+        'link': '',
+        'file': '',
+        'articletypes': [],
+        'linktype': ''
       },
       'saving': false
     };
@@ -105437,7 +105469,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.articles.push(response.data);
         _this.newArticle = {
           'title': '',
-          'description': ''
+          'description': '',
+          'year': '',
+          'link': '',
+          'file': '',
+          'articletypes': [],
+          'linktype': ''
         };
         _this.addingArticle = false;
         _this.saving = false;
@@ -105489,6 +105526,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.articles.forEach(function (article, index) {
         article.order = index + 1;
       });
+    },
+    handleFileUpload: function handleFileUpload() {
+      console.log('handleFileUpload');
+      var files = this.$refs.file.files;
+      if (!files.length) return;
+      this.createFile(files[0]);
+    },
+    createFile: function createFile(file) {
+      var _this2 = this;
+
+      console.log('createFile');
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        _this2.newArticle.file = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    },
+    toggleArticletype: function toggleArticletype(article) {
+      if (!this.newArticle.articletypes.includes(article)) {
+        this.newArticle.articletypes.push(article);
+        return '';
+      }
+      this.newArticle.articletypes.splice(this.newArticle.articletypes.indexOf(article), 1);
+    },
+    isSelected: function isSelected(articletype) {
+      if (this.newArticle.articletypes.includes(articletype)) return true;
+      return false;
+    },
+    setlinktype: function setlinktype(type) {
+      this.newArticle.linktype = type;
     }
   }
 });
@@ -105532,6 +105599,48 @@ var render = function() {
             on: { ok: _vm.saveArticle }
           },
           [
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("h5", [_vm._v(" Kennisbank Item Type: ")]),
+                _vm._v(" "),
+                _vm._l(_vm.orderedArticletypes, function(articletype) {
+                  return _c(
+                    "label",
+                    {
+                      directives: [
+                        {
+                          name: "b-tooltip",
+                          rawName: "v-b-tooltip:hover",
+                          arg: "hover"
+                        }
+                      ],
+                      staticClass: "checkboxlabel btn mr-2 clickable ",
+                      class: {
+                        "btn-secondary": _vm.isSelected(articletype),
+                        "btn-dark": !_vm.isSelected(articletype)
+                      },
+                      attrs: { title: articletype.description },
+                      on: {
+                        click: function($event) {
+                          return _vm.toggleArticletype(articletype)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n\t\t\t\t\t" +
+                          _vm._s(articletype.title) +
+                          "\n\t\t\t\t"
+                      )
+                    ]
+                  )
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
             _c("div", { staticClass: "form-group" }, [
               _c("input", {
                 directives: [
@@ -105543,7 +105652,12 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", id: "inputitle", placeholder: "Naam" },
+                attrs: {
+                  type: "text",
+                  id: "inputitle",
+                  placeholder: "Naam",
+                  required: ""
+                },
                 domProps: { value: _vm.newArticle.title },
                 on: {
                   input: function($event) {
@@ -105586,114 +105700,174 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.newArticle.link,
-                    expression: "newArticle.link"
+                    value: _vm.newArticle.year,
+                    expression: "newArticle.year"
                   }
                 ],
                 staticClass: "form-control",
                 attrs: {
                   type: "text",
-                  id: "inputlink",
-                  placeholder: "http://www"
+                  id: "inputitle",
+                  placeholder: "Jaar",
+                  required: ""
                 },
-                domProps: { value: _vm.newArticle.link },
+                domProps: { value: _vm.newArticle.year },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(_vm.newArticle, "link", $event.target.value)
+                    _vm.$set(_vm.newArticle, "year", $event.target.value)
                   }
                 }
               })
             ]),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "form-group" },
-              [
-                _c("h3", [_vm._v(" Kennisbank thema's ")]),
-                _vm._v(" "),
-                _vm._l(_vm.orderedArticletypes, function(articletype) {
-                  return _c("div", { staticClass: "form-check" }, [
-                    _c("input", {
-                      staticClass: "form-check-input",
-                      attrs: {
-                        type: "checkbox",
-                        value: "",
-                        id: "defaultCheck1"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        directives: [
-                          {
-                            name: "b-tooltip",
-                            rawName: "v-b-tooltip:hover",
-                            arg: "hover"
-                          }
-                        ],
-                        staticClass: "form-check-label",
-                        attrs: {
-                          for: "defaultCheck1",
-                          title: articletype.description
+            _c("div", { staticClass: "input-group mb-3" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "input-group-prepend",
+                  attrs: { id: "button-addon3" }
+                },
+                [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn",
+                      class:
+                        _vm.newArticle.linktype == "link"
+                          ? "btn-secondary"
+                          : "btn-outline-secondary",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.setlinktype("link")
                         }
+                      }
+                    },
+                    [_vm._v(" Link ")]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group-append" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn",
+                    class:
+                      _vm.newArticle.linktype == "file"
+                        ? "btn-secondary"
+                        : "btn-outline-secondary",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.setlinktype("file")
+                      }
+                    }
+                  },
+                  [_vm._v(" Bestand ")]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _vm.newArticle.linktype == "link"
+              ? _c("div", { staticClass: "form-group" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.newArticle.link,
+                        expression: "newArticle.link"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      id: "inputlink",
+                      placeholder: "http://www"
+                    },
+                    domProps: { value: _vm.newArticle.link },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.newArticle, "link", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.newArticle.linktype == "file"
+              ? _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("b-form-file", {
+                      attrs: {
+                        placeholder: "Kies een bestand",
+                        "drop-placeholder": "Sleep bestand hier..."
                       },
-                      [
-                        _vm._v(
-                          "\n\t\t\t\t\t\t" +
-                            _vm._s(articletype.title) +
-                            "\n\t\t\t\t\t"
-                        )
-                      ]
-                    )
-                  ])
-                })
-              ],
-              2
-            ),
+                      model: {
+                        value: _vm.newArticle.file,
+                        callback: function($$v) {
+                          _vm.$set(_vm.newArticle, "file", $$v)
+                        },
+                        expression: "newArticle.file"
+                      }
+                    })
+                  ],
+                  1
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _c("hr"),
             _vm._v(" "),
             _c(
               "div",
               { staticClass: "form-group" },
               [
-                _c("h3", [_vm._v(" Participatiescan thema's ")]),
+                _c("h3", [_vm._v(" Participatiescan vragen ")]),
                 _vm._v(" "),
                 _vm._l(_vm.scanmodel.themes, function(theme) {
-                  return _c("div", { staticClass: "form-check" }, [
-                    _c("input", {
-                      staticClass: "form-check-input",
-                      attrs: {
-                        type: "checkbox",
-                        value: "",
-                        id: "defaultCheck1"
-                      }
-                    }),
+                  return [
+                    _c("h5", { staticClass: "mt-3" }, [
+                      _vm._v(" " + _vm._s(theme.title) + " ")
+                    ]),
                     _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        directives: [
-                          {
-                            name: "b-tooltip",
-                            rawName: "v-b-tooltip:hover",
-                            arg: "hover"
+                    _vm._l(theme.questions, function(question) {
+                      return _c("div", { staticClass: "form-check" }, [
+                        _c("input", {
+                          staticClass: "form-check-input",
+                          attrs: {
+                            type: "checkbox",
+                            value: "",
+                            id: "question" + question.id
                           }
-                        ],
-                        staticClass: "form-check-label",
-                        attrs: { for: "defaultCheck1", title: theme.body }
-                      },
-                      [
-                        _vm._v(
-                          "\n\t\t\t\t\t\t" +
-                            _vm._s(theme.title) +
-                            "\n\t\t\t\t\t"
-                        )
-                      ]
-                    )
-                  ])
+                        }),
+                        _vm._v(" "),
+                        _c("label", {
+                          directives: [
+                            {
+                              name: "b-tooltip",
+                              rawName: "v-b-tooltip:hover",
+                              arg: "hover"
+                            }
+                          ],
+                          staticClass: "form-check-label",
+                          attrs: {
+                            for: "question" + question.id,
+                            title: theme.body
+                          },
+                          domProps: { innerHTML: _vm._s(question.title) }
+                        })
+                      ])
+                    })
+                  ]
                 })
               ],
               2

@@ -4,8 +4,8 @@
 		<div class="row">
 	        <div class="col-md-12">
 	            <div class="page--title">
-	                <h1 class="pagetitle">Overzicht Kennisbank Thema's</h1>
-	                <p>Hieronder staan de thema's voor de kennisbank. Hier kun je ook thema's toevoegen of bewerken. </p>
+	                <h1 class="pagetitle">Overzicht Kennisbank Item Type's</h1>
+	                <p>Hieronder staan de item type's voor de kennisbank. Hier kun je ook item types toevoegen of bewerken. </p>
 	            </div>
 	        </div>
 		</div>

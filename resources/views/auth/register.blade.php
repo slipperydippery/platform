@@ -103,7 +103,7 @@
                     </div>
                 </div>
                 <div class="card card__login">
-                    <a href=" {{ route('login') }} " class="stretched-link"><div class="card-header text-center"><h4>{{ __('Login') }}</h4></div></a>
+                    <a href=" {{ route('login') }} " class="stretched-link"><div class="card-header text-center"><h4> Log in </h4></div></a>
 
                     <div class="card-body">
 
