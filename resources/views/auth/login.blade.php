@@ -5,7 +5,7 @@
     <div class="row justify-content-center my-5">
         <div class="col-md-12">
             <div class="card-group">
-                <div class="card card__login">
+                <div class="card card__login card__inactive">
                     <a href=" {{ route('register') }} " class="stretched-link"><div class="card-header text-center"><h4>{{ __('Registreer') }}</h4></div></a>
 
                     <div class="card-body">
@@ -67,7 +67,7 @@
                             </div>
                     </div>
                 </div>
-                <div class="card card__login">
+                <div class="card card__login card__active shadow">
                     <div class="card-header text-center"><h4> Log in </h4></div>
 
                     <div class="card-body">
