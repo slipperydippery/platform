@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Theme;
+use App\Question;
 use App\Articletype;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,8 +16,13 @@ class Article extends Model
     	return $this->belongsToMany(Theme::class);
     }
 
-    public function articletype()
+    public function articletypes()
     {
-    	return $this->belongsTo(Articletype::class);
+    	return $this->belongsToMany(Articletype::class);
+    }
+
+    public function questions()
+    {
+    	return $this->belongsToMany(Question::class);
     }
 }

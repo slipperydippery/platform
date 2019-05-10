@@ -6,9 +6,9 @@
 				<div class="form-group">
 					<label 
 		                v-for="articletype in orderedArticletypes"
-		                @click="toggleArticletype(articletype)"
+		                @click="toggleArticletype(newArticle, articletype)"
 		                class="checkboxlabel btn mr-2 clickable "  
-		                :class="{  'btn-secondary' : isSelected(articletype), 'btn-dark' : !isSelected(articletype) }"
+		                :class="{  'btn-secondary' : isSelected(articletype, newArticle), 'btn-dark' : !isSelected(articletype, newArticle) }"
 		                v-b-tooltip:hover :title=" articletype.description "
 					>
 						{{ articletype.title }}
@@ -37,7 +37,7 @@
 				</div>
 
 				
-				<template v-if="baseInfoSet">
+				<template v-if="baseInfoSet(newArticle)">
 					<div class="form-group">
 					    <input type="text" v-model="newArticle.title" class="form-control" id="inputitle" placeholder="Naam" required>
 					</div>
@@ -57,9 +57,8 @@
 						<template v-for="theme in scanmodel.themes">
 							<h5 class="mt-3"> {{ theme.title }} </h5>
 							<div class="form-check" v-for="question in theme.questions">
-								<input class="form-check-input" type="checkbox" value="" :id="'question' + question.id" @input="updateQuestions(question)">
-								<label class="form-check-label" :for="'question' + question.id" v-b-tooltip:hover :title=" theme.body " v-html="question.title">
-								</label>
+								<button class="btn btn-sm mb-1" :class=" isActiveQuestion(newArticle, question)  ?  'btn-secondary' : 'btn-outline-secondary' " @click="updateQuestions(newArticle, question)" type="button" v-html="question.title">
+								</button>
 							</div>
 						</template>
 					</div>
@@ -69,75 +68,116 @@
 	        <table class="table table-sm">
 	            <thead class="thead-dark">
 	                <tr>
-	                	<th scope="col"  style="width: 30%"> Naam </th>
-	                	<th scope="col"> Omschrijving </th>
-	            		<th  style="col" v-for="theme in scanmodel.themes" v-b-tooltip:hover :title="theme.title"> {{ theme.id }} </th>
+	                	<th scope="col"> Type </th>
+	                	<th scope="col"> Naam </th>
+	                	<th scope="col" style="width: 50%"> Omschrijving </th>
+	                	<th scope="col"> Jaar </th>
+	                	<th scope="col"> Vragen </th>
+	            		<th> opties </th>
 	                </tr>
 	            </thead>
-	            <tbody v-if="false">
-	            	<tr v-for="(article, index) in orderedArticles">
+	            <tbody>
+	            	<tr v-for="(article, index) in reverseOrderedArticles">
 	            		<td>
-	            			<span v-html="article.title" v-if="article.editable != true"></span>
-	            			<div class="form-group" v-else>
-	            			    <input type="text" v-model="article.title" class="form-control" id="inputTitle" placeholder="Naam">
-	            			</div>
+	            			<template v-for="articletype in article.articletypes">
+	            				<span v-html="articletype.title"></span> <br>
+	            			</template>
 	            		</td>
 	            		<td>
-	            			<span v-html="article.description" v-if="article.editable != true"></span>
-	            			<div class="form-group" v-else>
-	            			    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" v-model="article.description" placeholder="Omschrijving"></textarea>
-	            			</div>
+	            			<a :href="article.link" v-if="article.linktype = 'link'"><span v-html="article.title"></span></a>
+	            			<a href="#" v-else><span v-html="article.title"></span></a>
 	            		</td>
 	            		<td>
-	            			<div class="float-right" v-if="article.editable != true">
+	            			<span v-html="article.description"></span>
+	            		</td>
+	            		<td>
+	            			<span> {{ article.year }} </span>
+	            		</td>
+	            		<td>
+	            			<template v-for="question in article.questions">
+	            				<span :id="'question' + article.id + '_' + question.id" class="badge badge-pill clickable" v-html="question.id" ></span>
+	            				<b-tooltip :target="'question' + article.id + '_' + question.id"> <span v-html="question.title"></span> </b-tooltip>
+	            			</template>
+	            		</td>
+	            		<td>
+	            			<div class="float-right">
 	            				<i class="material-icons clickable" v-b-tooltip.hover title="Verplaats naar boven" v-if="(index > 0)" @click="moveUp(article, index)">
 		            				keyboard_arrow_up
 	            				</i> <br>
-	            				<i class="material-icons clickable" @click="setEditable(article)" v-b-tooltip.hover title="Bewerk">
+	            				<i class="material-icons clickable" @click="$bvModal.show('editArticleModal' + article.id )" v-b-tooltip.hover title="Bewerk">
 		            				edit
 	            				</i> <br>
 	            				<i class="material-icons clickable" v-b-tooltip.hover title="Verplaats naar beneden" v-if="(index < (articles.length - 1))" @click="moveDown(article, index)">
 		            				keyboard_arrow_down
 	            				</i> 
 	            			</div>
-	            			<div class="float-right" v-else>
-	            				<i class="material-icons clickable" v-b-tooltip.hover title="Sla veranderingen op" v-if="(index > 0)" @click="updateArticle(article)">
-		            				check
-	            				</i> <br>
-	            				<i class="material-icons clickable" v-b-tooltip.hover title="Annuleer" v-if="(index > 0)" @click="cancelEditarticle(article)">
-		            				close
-	            				</i>
-	            			</div>
 	            		</td>
-	            	</tr>
-	            	 <tr v-if="addingArticle">
-	            		<td> 
-	            			<div class="form-group">
-	            			    <input type="text" v-model="newArticle.title" class="form-control" id="inputTitle" placeholder="Naam">
-	            			</div>
-	            		</td>
-	            		<td> 
-	            			<div class="form-group">
-	            			    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" v-model="newArticle.description" placeholder="Omschrijving"></textarea>
-	            			</div>
-	            		</td>
-	            		<td>
-	            			<div class="float-right">
-	            				<i class="material-icons clickable" v-b-tooltip.hover title="Sla veranderingen op" @click="saveArticle()">
-		            				check
-	            				</i>  <br>
-	            				<i class="material-icons clickable" v-b-tooltip.hover title="Annuleer" @click="cancelNewArticle()">
-		            				close
-	            				</i>
-	            			</div>
-	            		</td>
-	            	</tr>
+	            			<b-modal size="lg" :id="'editArticleModal' + article.id " title="Bewerk item" @ok="saveArticleChanges(article)">
+	            				<div class="form-group">
+	            					<label 
+	            		                v-for="articletype in orderedArticletypes"
+	            		                @click="toggleArticletype(article, articletype)"
+	            		                class="checkboxlabel btn mr-2 clickable "  
+	            		                :class="{  'btn-secondary' : isSelected(articletype, article), 'btn-dark' : !isSelected(articletype, article) }"
+	            		                v-b-tooltip:hover :title=" articletype.description "
+	            					>
+	            						{{ articletype.title }}
+	            					</label>
+	            				</div>
+	            				<div class="input-group mb-3">
+	            					<div class="input-group-prepend" id="button-addon3">
+	            						<button class="btn" :class=" article.linktype == 'link' ?  'btn-secondary' : 'btn-outline-secondary' " @click="setlinktype('link')" type="button"> Link </button>
+	            					</div>
+	            					<div class="input-group-append">
+	            						<button class="btn" :class=" article.linktype == 'file' ?  'btn-secondary' : 'btn-outline-secondary' " @click="setlinktype('file')" type="button"> Bestand </button>
+	            					</div>
+	            				</div>
 
+	            				<hr>
+
+	            				<div class="form-group" v-if="article.linktype == 'link'">
+	            				    <input type="text" v-model="article.link" class="form-control" id="inputlink" placeholder="http://www">
+	            				</div>
+	            				<div class="form-group" v-if="article.linktype == 'file'">
+	            					<b-form-file
+	            						v-model="article.file"
+	            						placeholder="Kies een bestand"
+	            						drop-placeholder="Sleep bestand hier..."
+	            				    ></b-form-file>
+	            				</div>
+
+	            				
+	            				<template v-if="baseInfoSet(article)">
+	            					<div class="form-group">
+	            					    <input type="text" v-model="article.title" class="form-control" id="inputitle" placeholder="Naam" required>
+	            					</div>
+	            					<div class="form-group">
+	            					    <textarea class="form-control" rows="3" v-model="article.description" placeholder="Omschrijving"></textarea>
+	            					</div>
+	            					<div class="form-group">
+	            					    <input type="text" v-model="article.year" class="form-control" id="inputitle" placeholder="Jaar" required @input="onlyNumbers" 
+	            			                maxlength="4" >
+	            					</div>
+
+
+
+	            					<hr>
+	            					<div class="form-group">
+	            						<h3> Participatiescan vragen </h3>
+	            						<template v-for="theme in scanmodel.themes">
+	            							<h5 class="mt-3"> {{ theme.title }} </h5>
+	            							<div class="form-check" v-for="question in theme.questions">
+	            								<button class="btn btn-sm mb-1" :class=" isActiveQuestion(article, question)  ?  'btn-secondary' : 'btn-outline-secondary' " @click="updateQuestions(article, question)" type="button" v-html="question.title">
+	            								</button>
+	            							</div>
+	            						</template>
+	            					</div>
+	            				</template>
+	            			</b-modal>
+	            	</tr>
 	            </tbody>
 			</table>
-			<div class="form-group text-right" v-if="! addingArticle">
-				<button class="btn btn-primary form-control" @click.prevent="addArticle">Voeg nog een kennisbank thema toe</button>
-			</div>
+
 		</div>
 	</div>
 
@@ -175,6 +215,17 @@
         },
 
         computed: {
+			reverseOrderedArticles() {
+				function compare(a, b) {
+					if (a.order < b.order)
+						return 1
+					if (a.order > b.order)
+						return -1
+					return 0
+				}
+			    return this.articles.sort(compare);
+			},
+
 			orderedArticles() {
 				function compare(a, b) {
 					if (a.order < b.order)
@@ -206,10 +257,6 @@
 				})
 			},
 
-			baseInfoSet() {
-				return (this.newArticle.articletypes.length && this.newArticle.linktype)
-			},
-
         },
 
         methods: {
@@ -233,7 +280,7 @@
         			'article': home.newArticle,
         		})
         		.then( response => {
-        			this.articles.push(response.data);
+        			this.articles = response.data;
         			this.newArticle = {
 		            		'title': '',
 		            		'description': '',
@@ -244,6 +291,19 @@
 			            	'linktype': '',
 		            	}
 	        		this.addingArticle = false;
+	        		this.saving = false;
+        		} )
+        	},
+
+        	saveArticleChanges(article) {
+        		console.log('saving')
+        		if(this.saving == true) return '';
+        		this.saving = true;
+        		var home = this;
+        		axios.patch('/api/article/' + article.id, {
+        			'article': article,
+        		})
+        		.then( response => {
 	        		this.saving = false;
         		} )
         	},
@@ -279,7 +339,7 @@
 
         	moveUp(article, index) {
         		this.sequentializeOrder();
-        		var otherarticle = this.articles[index - 1];
+        		var otherarticle = this.reverseOrderedArticles[index - 1];
         		var otherorder = otherarticle.order;
         		otherarticle.order = article.order;
         		article.order = otherorder;
@@ -289,7 +349,7 @@
 
         	moveDown(article, index) {
         		this.sequentializeOrder();
-        		var otherarticle = this.articles[index + 1];
+        		var otherarticle = this.reverseOrderedArticles[index + 1];
         		var otherorder = otherarticle.order;
         		otherarticle.order = article.order;
         		article.order = otherorder;
@@ -298,7 +358,7 @@
         	},
 
         	sequentializeOrder() {
-        		this.articles.forEach( (article, index) => {
+        		this.orderedArticles.forEach( (article, index) => {
         			article.order = (index + 1);
         		})
         	},
@@ -320,16 +380,16 @@
                 reader.readAsDataURL(file);
         	},
 
-        	toggleArticletype(article) {
-        		if ( !  this.newArticle.articletypes.includes( article ) ) {
-        			this.newArticle.articletypes.push(article)
+        	toggleArticletype(article, articletype) {
+        		if ( !  article.articletypes.map( articletype => articletype.id ).includes( articletype.id ) ) {
+        			article.articletypes.push(articletype)
         			return ''
         		}
-        		this.newArticle.articletypes.splice( this.newArticle.articletypes.indexOf(article), 1 );
+        		article.articletypes.splice( article.articletypes.map( articletype => articletype.id ).indexOf(articletype.id), 1 );
         	},
 
-        	isSelected(articletype) {
-        		if ( this.newArticle.articletypes.includes(articletype) ) return true
+        	isSelected(articletype, article) {
+        		if ( article.articletypes.map( articletype => articletype.id ).includes(articletype.id) ) return true
     			return false
         	},
 
@@ -341,9 +401,21 @@
 				this.newArticle.year = this.newArticle.year.replace(/[^0-9]/g,'');
 			},
 
-			updateQuestions(question) {
-				console.log(question.id)
+			updateQuestions(article, question) {
+				if (! article.questions.map( question => question.id ).includes( question.id )) {
+					article.questions.push( question );
+					return ''
+				}
+				article.questions.splice( article.questions.map( question => question.id ).indexOf( question.id ), 1 )
 			},
+
+			baseInfoSet(article) {
+				return (article.articletypes && article.articletypes.length && article.linktype)
+			},
+
+			isActiveQuestion(article, question) {
+				return (article.questions.map( question => question.id ).includes(question.id))
+			}
         }
     }
 </script>

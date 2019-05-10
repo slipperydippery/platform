@@ -15,7 +15,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::orderBy('updated_at')->get();
+        $articles = Article::with('articletypes', 'questions')->orderBy('updated_at')->get();
         $scanmodel = Scanmodel::with('themes.questions', 'articletypes')->find(1);
         return view('article.index', compact('articles', 'scanmodel'));
     }

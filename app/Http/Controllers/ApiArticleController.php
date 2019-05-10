@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
+use App\Question;
+use App\Articletype;
 use Illuminate\Http\Request;
 
 class ApiArticleController extends Controller
@@ -34,16 +37,34 @@ class ApiArticleController extends Controller
      */
     public function store(Request $request)
     {
-        return $request->all();
+        $order = Article::get()->count();
+        $article = Article::create([
+            'title' => $request->article['title'],
+            'description' => $request->article['description'],
+            'year' => $request->article['year'],
+            'linktype' => $request->article['linktype'],
+            'link' => $request->article['link'],
+            'order' => $order,
+        ]);
+        foreach ($request->article['articletypes'] as $articletype) {
+            $articletype = Articletype::find($articletype['id']);
+            $article->articletypes()->attach($articletype);
+        }
+        foreach ($request->article['questions'] as $question) {
+            $question = Question::find($question['id']);
+            $article->questions()->attach($question);
+        }
+        $articles = Article::with('articletypes', 'questions')->orderBy('updated_at')->get();
+        return $articles;
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  Article $article
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Article $article)
     {
         //
     }
@@ -51,10 +72,10 @@ class ApiArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  Article $article
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Article $article)
     {
         //
     }
@@ -63,21 +84,42 @@ class ApiArticleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  Article $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Article $article)
     {
-        //
+            $article->title = $request->article['title'];
+            $article->description = $request->article['description'];
+            $article->year = $request->article['year'];
+            $article->linktype = $request->article['linktype'];
+            $article->link = $request->article['link'];
+            $article->order = $request->article['order'];
+            $article->save();
+
+            $article->articletypes()->detach();
+            foreach ($request->article['articletypes'] as $articletype) {
+                $articletype = Articletype::find($articletype['id']);
+                $article->articletypes()->attach($articletype);
+            }
+
+            $article->questions()->detach();
+            foreach ($request->article['questions'] as $question) {
+                $question = Question::find($question['id']);
+                $article->questions()->attach($question);
+            }
+
+            return $article;
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  Article $article
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Article $article)
     {
         //
     }
