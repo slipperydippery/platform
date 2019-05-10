@@ -105687,6 +105687,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -105700,11 +105707,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       'newArticle': {
         'title': '',
         'description': '',
-        'year': '',
+        'linktype': '',
         'link': '',
         'file': '',
+        'year': '',
         'articletypes': [],
-        'linktype': ''
+        'questions': []
       },
       'saving': false
     };
@@ -105736,6 +105744,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         if (a.order > b.order) return 1;
         return 0;
       });
+    },
+    baseInfoSet: function baseInfoSet() {
+      return this.newArticle.articletypes.length && this.newArticle.linktype;
     }
   },
 
@@ -105848,6 +105859,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     setlinktype: function setlinktype(type) {
       this.newArticle.linktype = type;
+    },
+
+
+    onlyNumbers: function onlyNumbers() {
+      this.newArticle.year = this.newArticle.year.replace(/[^0-9]/g, '');
+    },
+
+    updateQuestions: function updateQuestions(question) {
+      console.log(question.id);
     }
   }
 });
@@ -105894,126 +105914,38 @@ var render = function() {
             _c(
               "div",
               { staticClass: "form-group" },
-              [
-                _c("h5", [_vm._v(" Kennisbank Item Type: ")]),
-                _vm._v(" "),
-                _vm._l(_vm.orderedArticletypes, function(articletype) {
-                  return _c(
-                    "label",
-                    {
-                      directives: [
-                        {
-                          name: "b-tooltip",
-                          rawName: "v-b-tooltip:hover",
-                          arg: "hover"
-                        }
-                      ],
-                      staticClass: "checkboxlabel btn mr-2 clickable ",
-                      class: {
-                        "btn-secondary": _vm.isSelected(articletype),
-                        "btn-dark": !_vm.isSelected(articletype)
-                      },
-                      attrs: { title: articletype.description },
-                      on: {
-                        click: function($event) {
-                          return _vm.toggleArticletype(articletype)
-                        }
+              _vm._l(_vm.orderedArticletypes, function(articletype) {
+                return _c(
+                  "label",
+                  {
+                    directives: [
+                      {
+                        name: "b-tooltip",
+                        rawName: "v-b-tooltip:hover",
+                        arg: "hover"
                       }
+                    ],
+                    staticClass: "checkboxlabel btn mr-2 clickable ",
+                    class: {
+                      "btn-secondary": _vm.isSelected(articletype),
+                      "btn-dark": !_vm.isSelected(articletype)
                     },
-                    [
-                      _vm._v(
-                        "\n\t\t\t\t\t" +
-                          _vm._s(articletype.title) +
-                          "\n\t\t\t\t"
-                      )
-                    ]
-                  )
-                })
-              ],
-              2
+                    attrs: { title: articletype.description },
+                    on: {
+                      click: function($event) {
+                        return _vm.toggleArticletype(articletype)
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n\t\t\t\t\t" + _vm._s(articletype.title) + "\n\t\t\t\t"
+                    )
+                  ]
+                )
+              }),
+              0
             ),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.newArticle.title,
-                    expression: "newArticle.title"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  id: "inputitle",
-                  placeholder: "Naam",
-                  required: ""
-                },
-                domProps: { value: _vm.newArticle.title },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.newArticle, "title", $event.target.value)
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("textarea", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.newArticle.description,
-                    expression: "newArticle.description"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { rows: "3", placeholder: "Omschrijving" },
-                domProps: { value: _vm.newArticle.description },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.newArticle, "description", $event.target.value)
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.newArticle.year,
-                    expression: "newArticle.year"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  id: "inputitle",
-                  placeholder: "Jaar",
-                  required: ""
-                },
-                domProps: { value: _vm.newArticle.year },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.newArticle, "year", $event.target.value)
-                  }
-                }
-              })
-            ]),
             _vm._v(" "),
             _c("div", { staticClass: "input-group mb-3" }, [
               _c(
@@ -106063,6 +105995,8 @@ var render = function() {
                 )
               ])
             ]),
+            _vm._v(" "),
+            _c("hr"),
             _vm._v(" "),
             _vm.newArticle.linktype == "link"
               ? _c("div", { staticClass: "form-group" }, [
@@ -106117,54 +106051,158 @@ var render = function() {
                 )
               : _vm._e(),
             _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "form-group" },
-              [
-                _c("h3", [_vm._v(" Participatiescan vragen ")]),
-                _vm._v(" "),
-                _vm._l(_vm.scanmodel.themes, function(theme) {
-                  return [
-                    _c("h5", { staticClass: "mt-3" }, [
-                      _vm._v(" " + _vm._s(theme.title) + " ")
-                    ]),
-                    _vm._v(" "),
-                    _vm._l(theme.questions, function(question) {
-                      return _c("div", { staticClass: "form-check" }, [
-                        _c("input", {
-                          staticClass: "form-check-input",
-                          attrs: {
-                            type: "checkbox",
-                            value: "",
-                            id: "question" + question.id
+            _vm.baseInfoSet
+              ? [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.newArticle.title,
+                          expression: "newArticle.title"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "inputitle",
+                        placeholder: "Naam",
+                        required: ""
+                      },
+                      domProps: { value: _vm.newArticle.title },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
                           }
-                        }),
-                        _vm._v(" "),
-                        _c("label", {
-                          directives: [
-                            {
-                              name: "b-tooltip",
-                              rawName: "v-b-tooltip:hover",
-                              arg: "hover"
-                            }
-                          ],
-                          staticClass: "form-check-label",
-                          attrs: {
-                            for: "question" + question.id,
-                            title: theme.body
-                          },
-                          domProps: { innerHTML: _vm._s(question.title) }
-                        })
-                      ])
+                          _vm.$set(_vm.newArticle, "title", $event.target.value)
+                        }
+                      }
                     })
-                  ]
-                })
-              ],
-              2
-            )
-          ]
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.newArticle.description,
+                          expression: "newArticle.description"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { rows: "3", placeholder: "Omschrijving" },
+                      domProps: { value: _vm.newArticle.description },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.newArticle,
+                            "description",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.newArticle.year,
+                          expression: "newArticle.year"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "inputitle",
+                        placeholder: "Jaar",
+                        required: "",
+                        maxlength: "4"
+                      },
+                      domProps: { value: _vm.newArticle.year },
+                      on: {
+                        input: [
+                          function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.newArticle,
+                              "year",
+                              $event.target.value
+                            )
+                          },
+                          _vm.onlyNumbers
+                        ]
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("hr"),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _c("h3", [_vm._v(" Participatiescan vragen ")]),
+                      _vm._v(" "),
+                      _vm._l(_vm.scanmodel.themes, function(theme) {
+                        return [
+                          _c("h5", { staticClass: "mt-3" }, [
+                            _vm._v(" " + _vm._s(theme.title) + " ")
+                          ]),
+                          _vm._v(" "),
+                          _vm._l(theme.questions, function(question) {
+                            return _c("div", { staticClass: "form-check" }, [
+                              _c("input", {
+                                staticClass: "form-check-input",
+                                attrs: {
+                                  type: "checkbox",
+                                  value: "",
+                                  id: "question" + question.id
+                                },
+                                on: {
+                                  input: function($event) {
+                                    return _vm.updateQuestions(question)
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("label", {
+                                directives: [
+                                  {
+                                    name: "b-tooltip",
+                                    rawName: "v-b-tooltip:hover",
+                                    arg: "hover"
+                                  }
+                                ],
+                                staticClass: "form-check-label",
+                                attrs: {
+                                  for: "question" + question.id,
+                                  title: theme.body
+                                },
+                                domProps: { innerHTML: _vm._s(question.title) }
+                              })
+                            ])
+                          })
+                        ]
+                      })
+                    ],
+                    2
+                  )
+                ]
+              : _vm._e()
+          ],
+          2
         ),
         _vm._v(" "),
         _c("table", { staticClass: "table table-sm" }, [
