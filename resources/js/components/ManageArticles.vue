@@ -1,69 +1,17 @@
-<template>
+	<template>
 	<div class="row">
 		<div class="col-12">
-			<button class="btn btn-primary mb-4" v-b-modal.newArticleModal> Voeg een item toe </button>
-			<b-modal size="lg" id="newArticleModal" title="Voeg een nieuw item toe" @ok="saveArticle">
-				<div class="form-group">
-					<label 
-		                v-for="articletype in orderedArticletypes"
-		                @click="toggleArticletype(newArticle, articletype)"
-		                class="checkboxlabel btn mr-2 clickable "  
-		                :class="{  'btn-secondary' : isSelected(articletype, newArticle), 'btn-dark' : !isSelected(articletype, newArticle) }"
-		                v-b-tooltip:hover :title=" articletype.description "
-					>
-						{{ articletype.title }}
-					</label>
-				</div>
-				<div class="input-group mb-3">
-					<div class="input-group-prepend" id="button-addon3">
-						<button class="btn" :class=" newArticle.linktype == 'link' ?  'btn-secondary' : 'btn-outline-secondary' " @click="setlinktype('link')" type="button"> Link </button>
-					</div>
-					<div class="input-group-append">
-						<button class="btn" :class=" newArticle.linktype == 'file' ?  'btn-secondary' : 'btn-outline-secondary' " @click="setlinktype('file')" type="button"> Bestand </button>
-					</div>
-				</div>
+			<button class="btn btn-secondary mb-4" v-b-modal.newArticleModal> Voeg een item toe </button>
+			<edit-article-modal
+				:value = "newArticle"
+				:modal_id = "'newArticleModal'"
+				:scanmodel = "this.scanmodel"
 
-				<hr>
-
-				<div class="form-group" v-if="newArticle.linktype == 'link'">
-				    <input type="text" v-model="newArticle.link" class="form-control" id="inputlink" placeholder="http://www">
-				</div>
-				<div class="form-group" v-if="newArticle.linktype == 'file'">
-					<b-form-file
-						v-model="newArticle.file"
-						placeholder="Kies een bestand"
-						drop-placeholder="Sleep bestand hier..."
-				    ></b-form-file>
-				</div>
-
-				
-				<template v-if="baseInfoSet(newArticle)">
-					<div class="form-group">
-					    <input type="text" v-model="newArticle.title" class="form-control" id="inputitle" placeholder="Naam" required>
-					</div>
-					<div class="form-group">
-					    <textarea class="form-control" rows="3" v-model="newArticle.description" placeholder="Omschrijving"></textarea>
-					</div>
-					<div class="form-group">
-					    <input type="text" v-model="newArticle.year" class="form-control" id="inputitle" placeholder="Jaar" required @input="onlyNumbers" 
-			                maxlength="4" >
-					</div>
-
-
-
-					<hr>
-					<div class="form-group">
-						<h3> Participatiescan vragen </h3>
-						<template v-for="theme in scanmodel.themes">
-							<h5 class="mt-3"> {{ theme.title }} </h5>
-							<div class="form-check" v-for="question in theme.questions">
-								<button class="btn btn-sm mb-1" :class=" isActiveQuestion(newArticle, question)  ?  'btn-secondary' : 'btn-outline-secondary' " @click="updateQuestions(newArticle, question)" type="button" v-html="question.title">
-								</button>
-							</div>
-						</template>
-					</div>
-				</template>
-			</b-modal>
+				:newarticle = true
+				@saveArticle = "saveArticle"
+				@saveArticleChanges = "saveArticleChanges"
+			>
+			</edit-article-modal>
 
 	        <table class="table table-sm">
 	            <thead class="thead-dark">
@@ -76,7 +24,8 @@
 	            		<th> opties </th>
 	                </tr>
 	            </thead>
-	            <tbody>
+
+	            <tbody v-if="articles && articles.length">
 	            	<tr v-for="(article, index) in reverseOrderedArticles">
 	            		<td>
 	            			<template v-for="articletype in article.articletypes">
@@ -84,7 +33,8 @@
 	            			</template>
 	            		</td>
 	            		<td>
-	            			<a :href="article.link" v-if="article.linktype = 'link'"><span v-html="article.title"></span></a>
+	            			<a :href="'//' + article.link" v-if="article.linktype == 'link'" target="_blank"><span v-html="article.title"></span></a>
+	            			<a :href="article.link" v-if="article.linktype == 'file'" target="_blank"><span v-html="article.title"></span></a>
 	            			<a href="#" v-else><span v-html="article.title"></span></a>
 	            		</td>
 	            		<td>
@@ -107,73 +57,23 @@
 	            				<i class="material-icons clickable" @click="$bvModal.show('editArticleModal' + article.id )" v-b-tooltip.hover title="Bewerk">
 		            				edit
 	            				</i> <br>
-	            				<i class="material-icons clickable" v-b-tooltip.hover title="Verplaats naar beneden" v-if="(index < (articles.length - 1))" @click="moveDown(article, index)">
+	            				<i class="material-icons clickable" v-b-tooltip.hover title="Verplaats naar beneden" v-if="(index < (reverseOrderedArticles.length - 1))" @click="moveDown(article, index)">
 		            				keyboard_arrow_down
 	            				</i> 
+		            			<edit-article-modal
+		            				:value = "article"
+		            				:modal_id = "'editArticleModal' + article.id "
+		            				:scanmodel = "scanmodel"
+
+		            				:newarticle = false
+		            				@saveArticle = "saveArticle"
+		            				@saveArticleChanges = "saveArticleChanges"
+		            			>
+		            			</edit-article-modal>
 	            			</div>
 	            		</td>
-	            			<b-modal size="lg" :id="'editArticleModal' + article.id " title="Bewerk item" @ok="saveArticleChanges(article)">
-	            				<div class="form-group">
-	            					<label 
-	            		                v-for="articletype in orderedArticletypes"
-	            		                @click="toggleArticletype(article, articletype)"
-	            		                class="checkboxlabel btn mr-2 clickable "  
-	            		                :class="{  'btn-secondary' : isSelected(articletype, article), 'btn-dark' : !isSelected(articletype, article) }"
-	            		                v-b-tooltip:hover :title=" articletype.description "
-	            					>
-	            						{{ articletype.title }}
-	            					</label>
-	            				</div>
-	            				<div class="input-group mb-3">
-	            					<div class="input-group-prepend" id="button-addon3">
-	            						<button class="btn" :class=" article.linktype == 'link' ?  'btn-secondary' : 'btn-outline-secondary' " @click="setlinktype('link')" type="button"> Link </button>
-	            					</div>
-	            					<div class="input-group-append">
-	            						<button class="btn" :class=" article.linktype == 'file' ?  'btn-secondary' : 'btn-outline-secondary' " @click="setlinktype('file')" type="button"> Bestand </button>
-	            					</div>
-	            				</div>
-
-	            				<hr>
-
-	            				<div class="form-group" v-if="article.linktype == 'link'">
-	            				    <input type="text" v-model="article.link" class="form-control" id="inputlink" placeholder="http://www">
-	            				</div>
-	            				<div class="form-group" v-if="article.linktype == 'file'">
-	            					<b-form-file
-	            						v-model="article.file"
-	            						placeholder="Kies een bestand"
-	            						drop-placeholder="Sleep bestand hier..."
-	            				    ></b-form-file>
-	            				</div>
-
-	            				
-	            				<template v-if="baseInfoSet(article)">
-	            					<div class="form-group">
-	            					    <input type="text" v-model="article.title" class="form-control" id="inputitle" placeholder="Naam" required>
-	            					</div>
-	            					<div class="form-group">
-	            					    <textarea class="form-control" rows="3" v-model="article.description" placeholder="Omschrijving"></textarea>
-	            					</div>
-	            					<div class="form-group">
-	            					    <input type="text" v-model="article.year" class="form-control" id="inputitle" placeholder="Jaar" required @input="onlyNumbers" 
-	            			                maxlength="4" >
-	            					</div>
-
-
-
-	            					<hr>
-	            					<div class="form-group">
-	            						<h3> Participatiescan vragen </h3>
-	            						<template v-for="theme in scanmodel.themes">
-	            							<h5 class="mt-3"> {{ theme.title }} </h5>
-	            							<div class="form-check" v-for="question in theme.questions">
-	            								<button class="btn btn-sm mb-1" :class=" isActiveQuestion(article, question)  ?  'btn-secondary' : 'btn-outline-secondary' " @click="updateQuestions(article, question)" type="button" v-html="question.title">
-	            								</button>
-	            							</div>
-	            						</template>
-	            					</div>
-	            				</template>
-	            			</b-modal>
+	            		</tr>
+            				
 	            	</tr>
 	            </tbody>
 			</table>
@@ -194,51 +94,44 @@
 
         data() {
             return {
-            	'articles': [],
-            	'addingArticle' : false,
-            	'newArticle': {
-            		'title': '',
-            		'description': '',
-	            	'linktype': '',
-            		'link': '',
-	            	'file': '',
-            		'year': '',
-	            	'articletypes': [],
-	            	'questions': [],
+            	articles: null,
+            	addingArticle : false,
+            	newArticle: {
+            		title: '',
+            		description: '',
+	            	linktype: '',
+            		link: '',
+	            	file: '',
+            		year: '',
+	            	articletypes: [],
+	            	questions: [],
             	},
-            	'saving': false,
+            	saving: false,
             }
         },
 
         mounted() {
-        	this.articles = this.workarticles;
+        	// this.articles = this.workarticles;
+        	this.getArticles();
         },
 
         computed: {
 			reverseOrderedArticles() {
-				function compare(a, b) {
-					if (a.order < b.order)
-						return 1
+				return this.articles;
+				if(! this.articles.length) return ''
+				return this.articles.sort((a, b) => {
 					if (a.order > b.order)
 						return -1
+					if (a.order < b.order)
+						return 1
 					return 0
-				}
-			    return this.articles.sort(compare);
+				})
 			},
 
 			orderedArticles() {
-				function compare(a, b) {
-					if (a.order < b.order)
-						return -1
-					if (a.order > b.order)
-						return 1
-					return 0
-				}
-			    return this.articles.sort(compare);
-			},
-
-			orderedArticletypes() {
-				return this.scanmodel.articletypes.sort( (a, b) => {
+				return this.articles;
+				if(! this.articles.length) return ''
+				return this.articles.sort((a, b) => {
 					if (a.order < b.order)
 						return -1
 					if (a.order > b.order)
@@ -272,36 +165,51 @@
         		} )
         	},
 
-        	saveArticle() {
+        	saveArticle(article) {
         		if(this.saving == true) return '';
         		this.saving = true;
         		var home = this;
-        		axios.post('/api/article', {
-        			'article': home.newArticle,
-        		})
+        		var formData = new FormData();
+        		formData.append('pdf', article.file)
+        		formData.append('article', JSON.stringify(article))
+        		axios.post('/api/article', formData, {
+				    headers: {
+				      'Content-Type': 'multipart/form-data'
+				    }
+				})
         		.then( response => {
         			this.articles = response.data;
         			this.newArticle = {
-		            		'title': '',
-		            		'description': '',
-		            		'year': '',
-		            		'link': '',
-			            	'file': '',
-			            	'articletypes': [],
-			            	'linktype': '',
+	            		title: '',
+	            		description: '',
+		            	linktype: '',
+	            		link: '',
+		            	file: '',
+	            		year: '',
+		            	articletypes: [],
+		            	questions: [],
 		            	}
 	        		this.addingArticle = false;
 	        		this.saving = false;
         		} )
+		        .catch(function () {
+	        		this.addingArticle = false;
+	        		this.saving = false;
+					console.log('FAILURE!!');
+		        });
         	},
 
         	saveArticleChanges(article) {
-        		console.log('saving')
         		if(this.saving == true) return '';
         		this.saving = true;
         		var home = this;
-        		axios.patch('/api/article/' + article.id, {
-        			'article': article,
+        		var formData = new FormData();
+        		formData.append('pdf', article.file)
+        		formData.append('article', JSON.stringify(article))
+        		axios.post('/api/articlepostpatch', formData, {
+				    headers: {
+				      'Content-Type': 'multipart/form-data'
+				    }
         		})
         		.then( response => {
 	        		this.saving = false;
@@ -318,8 +226,12 @@
 
         	updateArticle(article) {
         		var home = this;
-        		axios.patch('/api/article/' + article.id, {
-        			'article': article
+        		var formData = new FormData();
+        		formData.append('article', JSON.stringify(article))
+        		axios.patch('/api/article/' + article.id, formData, {
+				    headers: {
+				      'Content-Type': 'multipart/form-data'
+				    }
         		})
         		.then( response => {
         			article.editable = false;
@@ -363,6 +275,22 @@
         		})
         	},
 
+        	onImageChange(e) {
+        		console.log(e);
+        	    let files = e.target.files || e.dataTransfer.files;
+        	    if (!files.length)
+        	        return;
+        	    this.createImage(files[0]);
+        	},
+
+        	createImage(file) {
+        	    let reader = new FileReader();
+        	    reader.onload = (e) => {
+        	        this.newArticle.file = e.target.result;
+        	    };
+        	    reader.readAsDataURL(file);
+        	},
+
         	handleFileUpload() {
         		console.log('handleFileUpload');
         		let files = this.$refs.file.files;
@@ -380,42 +308,8 @@
                 reader.readAsDataURL(file);
         	},
 
-        	toggleArticletype(article, articletype) {
-        		if ( !  article.articletypes.map( articletype => articletype.id ).includes( articletype.id ) ) {
-        			article.articletypes.push(articletype)
-        			return ''
-        		}
-        		article.articletypes.splice( article.articletypes.map( articletype => articletype.id ).indexOf(articletype.id), 1 );
-        	},
 
-        	isSelected(articletype, article) {
-        		if ( article.articletypes.map( articletype => articletype.id ).includes(articletype.id) ) return true
-    			return false
-        	},
 
-        	setlinktype(type) {
-        		this.newArticle.linktype = type;
-        	},
-
-			onlyNumbers: function() {
-				this.newArticle.year = this.newArticle.year.replace(/[^0-9]/g,'');
-			},
-
-			updateQuestions(article, question) {
-				if (! article.questions.map( question => question.id ).includes( question.id )) {
-					article.questions.push( question );
-					return ''
-				}
-				article.questions.splice( article.questions.map( question => question.id ).indexOf( question.id ), 1 )
-			},
-
-			baseInfoSet(article) {
-				return (article.articletypes && article.articletypes.length && article.linktype)
-			},
-
-			isActiveQuestion(article, question) {
-				return (article.questions.map( question => question.id ).includes(question.id))
-			}
         }
     }
 </script>

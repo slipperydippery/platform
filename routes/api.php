@@ -28,6 +28,7 @@ Route::resource('session', 'ApiSessionController');
 Route::resource('comparison', 'ApiComparisonController');
 Route::resource('articletype', 'ApiArticletypeController');
 Route::resource('article', 'ApiArticleController');
+Route::post('/articlepostpatch', 'ApiArticleController@postpatch');
 
 Route::get('/scan/{scan}/question/{question}/getanswers', 'ApiScanQuestionController@getanswers');
 

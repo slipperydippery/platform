@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 class ArticleController extends Controller
 {
     /**
+     * Enforce middleware.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

@@ -16,7 +16,7 @@ class ApiArticleController extends Controller
      */
     public function index()
     {
-        //
+        return Article::with('articletypes', 'questions')->orderBy('updated_at')->get()->toArray();
     }
 
     /**
@@ -37,23 +37,34 @@ class ApiArticleController extends Controller
      */
     public function store(Request $request)
     {
+        $articleinput = json_decode($request->article);
+
         $order = Article::get()->count();
         $article = Article::create([
-            'title' => $request->article['title'],
-            'description' => $request->article['description'],
-            'year' => $request->article['year'],
-            'linktype' => $request->article['linktype'],
-            'link' => $request->article['link'],
+            'title' => $articleinput->title,
+            'description' => $articleinput->description,
+            'linktype' => $articleinput->linktype,
+            'link' => $articleinput->link,
             'order' => $order,
         ]);
-        foreach ($request->article['articletypes'] as $articletype) {
-            $articletype = Articletype::find($articletype['id']);
+        if($articleinput->year) {
+            $article->year = $articleinput->year;
+        }
+        foreach ($articleinput->articletypes as $articletype) {
+            $articletype = Articletype::find($articletype->id);
             $article->articletypes()->attach($articletype);
         }
-        foreach ($request->article['questions'] as $question) {
-            $question = Question::find($question['id']);
+        foreach ($articleinput->questions as $question) {
+            $question = Question::find($question->id);
             $article->questions()->attach($question);
         }
+
+        if ($articleinput->linktype == 'file' && $pdf = $request->file('pdf')) {
+            $pdf->storeAs('public/pdfs/' . $article->id . '/', $pdf->getClientOriginalName());
+            $article->link = 'storage/pdfs/' . $article->id . '/' . $pdf->getClientOriginalName();
+            $article->save();
+        }
+
         $articles = Article::with('articletypes', 'questions')->orderBy('updated_at')->get();
         return $articles;
     }
@@ -89,27 +100,40 @@ class ApiArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-            $article->title = $request->article['title'];
-            $article->description = $request->article['description'];
-            $article->year = $request->article['year'];
-            $article->linktype = $request->article['linktype'];
-            $article->link = $request->article['link'];
-            $article->order = $request->article['order'];
-            $article->save();
+        $articleinput = json_decode($request->article);
 
+        $article->title = $articleinput->title;
+        $article->description = $articleinput->description;
+        $article->year = $articleinput->year;
+        $article->linktype = $articleinput->linktype;
+        $article->link = $articleinput->link;
+        $article->order = $articleinput->order;
+        $article->save();
+
+        if($article->articletypes){
             $article->articletypes()->detach();
-            foreach ($request->article['articletypes'] as $articletype) {
-                $articletype = Articletype::find($articletype['id']);
-                $article->articletypes()->attach($articletype);
-            }
+        }
+        foreach ($articleinput->articletypes as $articletype) {
+            $articletype = Articletype::find($articletype->id);
+            $article->articletypes()->attach($articletype);
+        }
 
+        if($article->questions){
             $article->questions()->detach();
-            foreach ($request->article['questions'] as $question) {
-                $question = Question::find($question['id']);
-                $article->questions()->attach($question);
-            }
+        }
+        foreach ($articleinput->questions as $question) {
+            $question = Question::find($question->id);
+            $article->questions()->attach($question);
+        }
 
-            return $article;
+        if ($request->file) {
+            $pdf = $request->file('pdf');
+            $pdf->storeAs('public/pdfs/' . $article->id . '/', $pdf->getClientOriginalName());
+            $article->link = 'storage/pdfs/' . $article->id . '/' . $pdf->getClientOriginalName();
+            $article->save();
+        }
+
+        return $article;
 
     }
 
@@ -122,5 +146,44 @@ class ApiArticleController extends Controller
     public function destroy(Article $article)
     {
         //
+    }
+
+    public function postpatch(Request $request)
+    {
+        $articleinput = json_decode($request->article);
+        $article = Article::find($articleinput->id);
+
+        $article->title = $articleinput->title;
+        $article->description = $articleinput->description;
+        $article->year = $articleinput->year;
+        $article->linktype = $articleinput->linktype;
+        $article->link = $articleinput->link;
+        $article->order = $articleinput->order;
+        $article->save();
+
+        if($article->articletypes){
+            $article->articletypes()->detach();
+        }
+        foreach ($articleinput->articletypes as $articletype) {
+            $articletype = Articletype::find($articletype->id);
+            $article->articletypes()->attach($articletype);
+        }
+
+        if($article->questions){
+            $article->questions()->detach();
+        }
+        foreach ($articleinput->questions as $question) {
+            $question = Question::find($question->id);
+            $article->questions()->attach($question);
+        }
+
+        if ($request->file) {
+            $pdf = $request->file('pdf');
+            $pdf->storeAs('public/pdfs/' . $article->id . '/', $pdf->getClientOriginalName());
+            $article->link = 'storage/pdfs/' . $article->id . '/' . $pdf->getClientOriginalName();
+            $article->save();
+        }
+
+        return $article;
     }
 }
