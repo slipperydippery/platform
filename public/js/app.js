@@ -105677,22 +105677,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   computed: {
     reverseOrderedArticles: function reverseOrderedArticles() {
-      return this.articles;
-      if (!this.articles.length) return '';
-      return this.articles.sort(function (a, b) {
-        if (a.order > b.order) return -1;
-        if (a.order < b.order) return 1;
-        return 0;
-      });
+      return this.orderedArticles.reverse();
     },
     orderedArticles: function orderedArticles() {
-      return this.articles;
-      if (!this.articles.length) return '';
-      return this.articles.sort(function (a, b) {
-        if (a.order < b.order) return -1;
-        if (a.order > b.order) return 1;
+      function compare(a, b) {
+        if (a.name < b.name) {
+          return -1;
+        }
+        if (a.name > b.name) {
+          return 1;
+        }
         return 0;
-      });
+      }
+
+      return this.articles.sort(compare);
     },
     orderedThemes: function orderedThemes() {
       return this.scanmodel.themes.sort(function (a, b) {
@@ -105774,7 +105772,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var home = this;
       var formData = new FormData();
       formData.append('article', JSON.stringify(article));
-      axios.patch('/api/article/' + article.id, formData, {
+      axios.post('/api/articlepostpatch/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

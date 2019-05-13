@@ -69,6 +69,7 @@ class Kernel extends HttpKernel
         'owner' => \App\Http\Middleware\VerifyOwner::class,
         'manager' => \App\Http\Middleware\VerifyManager::class,
         'unlocked' => \App\Http\Middleware\CheckUnlocked::class,
+        'scadmin' => \App\Http\Middleware\VerifyScadmin::class,
     ];
 
     /**

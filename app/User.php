@@ -3,6 +3,8 @@
 namespace App;
 
 use Cache;
+use Auth;
+use App\Role;
 use App\Scan;
 use App\Group;
 use App\Dashmessage;
@@ -51,5 +53,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isOnline()
     {
         return Cache::has('user-is-online-' . $this->id);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public static function isAdmin()
+    {
+        return Auth::user()->roles->where('name', 'scadmin')->count();
     }
 }

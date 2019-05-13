@@ -2,19 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Articletype;
+use App\Role;
 use Illuminate\Http\Request;
 
-class ArticletypeController extends Controller
+class RoleController extends Controller
 {
-    /**
-     * Enforce middleware.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
     /**
      * Display a listing of the resource.
      *
@@ -22,8 +14,7 @@ class ArticletypeController extends Controller
      */
     public function index()
     {
-        $articletypes = Articletype::orderBy('order')->get();
-        return view('articletype.index', compact('articletypes'));
+        //
     }
 
     /**
@@ -50,10 +41,10 @@ class ArticletypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Articletype  $articletype
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function show(Articletype $articletype)
+    public function show(Role $role)
     {
         //
     }
@@ -61,10 +52,10 @@ class ArticletypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Articletype  $articletype
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Articletype $articletype)
+    public function edit(Role $role)
     {
         //
     }
@@ -73,10 +64,10 @@ class ArticletypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Articletype  $articletype
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Articletype $articletype)
+    public function update(Request $request, Role $role)
     {
         //
     }
@@ -84,10 +75,10 @@ class ArticletypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Articletype  $articletype
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Articletype $articletype)
+    public function destroy(Role $role)
     {
         //
     }
