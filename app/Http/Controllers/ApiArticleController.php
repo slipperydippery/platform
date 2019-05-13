@@ -14,7 +14,7 @@ class ApiArticleController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('api./sauth');
+        $this->middleware('auth:api');
     }
 
     /**
@@ -47,7 +47,7 @@ class ApiArticleController extends Controller
     {
         $articleinput = json_decode($request->article);
 
-        $order = Article::get()->count();
+        $order = Article::get()->count() + 1;
         $article = Article::create([
             'title' => $articleinput->title,
             'description' => $articleinput->description,
