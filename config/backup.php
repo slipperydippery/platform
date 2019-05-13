@@ -80,14 +80,14 @@ return [
             /*
              * The filename prefix used for the backup zip file.
              */
-            'filename_prefix' => 'participatiescan_v2',
+            'filename_prefix' => 'participatiescan_v2_',
 
             /*
              * The disk names on which the backups will be stored.
              */
             'disks' => [
                 'google',
-                'local',
+                // 'local',
             ],
         ],
 
