@@ -31,6 +31,7 @@
 				:state="Boolean(newValue.file)"
 				placeholder="Kies een bestand"
 				drop-placeholder="Sleep bestand hier..."
+				accept=".pdf"
 		    ></b-form-file>
 		    <div class="mt-3">Selected file: {{ newValue.file ? newValue.file.name : '' }}</div>
 		</div>

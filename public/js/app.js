@@ -106253,6 +106253,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -106477,7 +106478,8 @@ var render = function() {
                     attrs: {
                       state: Boolean(_vm.newValue.file),
                       placeholder: "Kies een bestand",
-                      "drop-placeholder": "Sleep bestand hier..."
+                      "drop-placeholder": "Sleep bestand hier...",
+                      accept: ".pdf"
                     },
                     model: {
                       value: _vm.newValue.file,
