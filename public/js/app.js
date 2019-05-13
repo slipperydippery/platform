@@ -105266,63 +105266,57 @@ var render = function() {
                           : _vm._e()
                       ])
                     : _c("div", { staticClass: "float-right" }, [
-                        index > 0
-                          ? _c(
-                              "i",
+                        _c(
+                          "i",
+                          {
+                            directives: [
                               {
-                                directives: [
-                                  {
-                                    name: "b-tooltip",
-                                    rawName: "v-b-tooltip.hover",
-                                    modifiers: { hover: true }
-                                  }
-                                ],
-                                staticClass: "material-icons clickable",
-                                attrs: { title: "Sla veranderingen op" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.updateArticletype(articletype)
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n\t            \t\t\t\tcheck\n            \t\t\t\t"
-                                )
-                              ]
+                                name: "b-tooltip",
+                                rawName: "v-b-tooltip.hover",
+                                modifiers: { hover: true }
+                              }
+                            ],
+                            staticClass: "material-icons clickable",
+                            attrs: { title: "Sla veranderingen op" },
+                            on: {
+                              click: function($event) {
+                                return _vm.updateArticletype(articletype)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n\t            \t\t\t\tcheck\n            \t\t\t\t"
                             )
-                          : _vm._e(),
+                          ]
+                        ),
                         _vm._v(" "),
                         _c("br"),
                         _vm._v(" "),
-                        index > 0
-                          ? _c(
-                              "i",
+                        _c(
+                          "i",
+                          {
+                            directives: [
                               {
-                                directives: [
-                                  {
-                                    name: "b-tooltip",
-                                    rawName: "v-b-tooltip.hover",
-                                    modifiers: { hover: true }
-                                  }
-                                ],
-                                staticClass: "material-icons clickable",
-                                attrs: { title: "Annuleer" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.cancelEditarticletype(
-                                      articletype
-                                    )
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n\t            \t\t\t\tclose\n            \t\t\t\t"
-                                )
-                              ]
+                                name: "b-tooltip",
+                                rawName: "v-b-tooltip.hover",
+                                modifiers: { hover: true }
+                              }
+                            ],
+                            staticClass: "material-icons clickable",
+                            attrs: { title: "Annuleer" },
+                            on: {
+                              click: function($event) {
+                                return _vm.cancelEditarticletype(articletype)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n\t            \t\t\t\tclose\n            \t\t\t\t"
                             )
-                          : _vm._e()
+                          ]
+                        )
                       ])
                 ])
               ])

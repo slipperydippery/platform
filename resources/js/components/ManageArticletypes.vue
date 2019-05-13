@@ -36,10 +36,10 @@
 	            				</i> 
 	            			</div>
 	            			<div class="float-right" v-else>
-	            				<i class="material-icons clickable" v-b-tooltip.hover title="Sla veranderingen op" v-if="(index > 0)" @click="updateArticletype(articletype)">
+	            				<i class="material-icons clickable" v-b-tooltip.hover title="Sla veranderingen op" @click="updateArticletype(articletype)">
 		            				check
 	            				</i> <br>
-	            				<i class="material-icons clickable" v-b-tooltip.hover title="Annuleer" v-if="(index > 0)" @click="cancelEditarticletype(articletype)">
+	            				<i class="material-icons clickable" v-b-tooltip.hover title="Annuleer" @click="cancelEditarticletype(articletype)">
 		            				close
 	            				</i>
 	            			</div>
