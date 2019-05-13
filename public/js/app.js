@@ -105671,28 +105671,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   computed: {
     reverseOrderedArticles: function reverseOrderedArticles() {
-      return this.orderedArticles.reverse();
+      return _.orderBy(this.articles, 'order', 'desc');
     },
     orderedArticles: function orderedArticles() {
-      // return this.articles;
-      // return this.articles.sort((a, b) => a.order - b.order );
-      function compare(a, b) {
-        console.log('---');
-        console.log(a.order);
-        console.log(b.order);
-        if (a.order < b.order) {
-          console.log('-1');
-          return -1;
-        }
-        if (a.order > b.order) {
-          console.log('1');
-          return 1;
-        }
-        console.log('0');
-        return 0;
-      }
-
-      return this.articles.sort(compare);
+      return _.orderBy(this.articles, 'order', 'asc');
     },
     orderedThemes: function orderedThemes() {
       return this.scanmodel.themes.sort(function (a, b) {
