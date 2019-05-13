@@ -10,6 +10,14 @@ use Illuminate\Http\Request;
 class ApiArticleController extends Controller
 {
     /**
+     * Enforce middleware.
+     */
+    public function __construct()
+    {
+        // $this->middleware('api./sauth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -184,6 +192,7 @@ class ApiArticleController extends Controller
             $article->save();
         }
 
-        return $article;
+        $articles = Article::with('articletypes', 'questions')->orderBy('updated_at')->get();
+        return $articles;
     }
 }

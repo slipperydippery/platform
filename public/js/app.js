@@ -105674,11 +105674,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return this.orderedArticles.reverse();
     },
     orderedArticles: function orderedArticles() {
+      return this.articles.sort(function (a, b) {
+        return a.order - b.order;
+      });
       function compare(a, b) {
-        if (a.name < b.name) {
+        if (a.order < b.order) {
           return -1;
         }
-        if (a.name > b.name) {
+        if (a.order > b.order) {
           return 1;
         }
         return 0;
@@ -105752,6 +105755,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (response) {
+        _this2.articles = response.data;
         _this2.saving = false;
       });
     },

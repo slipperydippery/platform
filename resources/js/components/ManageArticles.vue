@@ -121,11 +121,12 @@
 			},
 
 			orderedArticles() {
+				return this.articles.sort((a, b) => a.order - b.order );
 				function compare(a, b) {
-				    if (a.name < b.name){
+				    if (a.order < b.order){
 				        return -1;
 				    }
-				    if (a.name > b.name){
+				    if (a.order > b.order){
 				        return 1;
 				    }
 				    return 0;
@@ -206,6 +207,7 @@
 				    }
         		})
         		.then( response => {
+        			this.articles = response.data;
 	        		this.saving = false;
         		} )
         	},
