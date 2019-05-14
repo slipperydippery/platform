@@ -25,6 +25,9 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+        Gate::define('do-anything', function($user) {
+            return $user->roles->where('name', 'scadmin')->count();
+        });
 
         Passport::routes();
     }

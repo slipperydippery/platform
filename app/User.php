@@ -59,9 +59,4 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(Role::class);
     }
-
-    public static function isAdmin()
-    {
-        return Auth::user()->roles->where('name', 'scadmin')->count();
-    }
 }
