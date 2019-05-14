@@ -4,8 +4,8 @@
 		<div class="row">
 	        <div class="col-md-12">
 	            <div class="page--title">
-	                <h1 class="pagetitle">Plan een Vervolgafspraak</h1>
-	                <p>Je hebt alle vragen al beantwoord. We adviseren om nu alvast een vervolgafspraak te maken over ongeveer zes weken om de uitgevoerde verbeterpunten om te zetten naar een werkagenda. De beheerder kan op de kalender een datum prikken. Deze afspraak zie je in het overzicht met verbeterpunten. </p>
+	                <h1 class="pagetitle">Plan een vervolgafspraak</h1>
+	                <p>Je hebt alle vragen beantwoord. We adviseren om nu alvast een vervolgafspraak te maken over ongeveer zes weken om de uitgevoerde verbeterpunten om te zetten naar een werkagenda. De beheerder kan op de kalender een datum prikken. Deze afspraak zie je in het overzicht met verbeterpunten. </p>
 	                @if ($scan->group->followup)
 						@if($scan->group->followup->datetime)
 						    <p  class="scandate page-highlight page-highlight-secondary">Er is een vervolgsessie gepland op: {{ date('d-m-Y', strtotime($scan->group->followup->datetime)) }} om {{ date('H:i', strtotime($scan->group->followup->datetime)) }}</p>
