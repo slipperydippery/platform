@@ -2,12 +2,13 @@
 
 namespace App;
 
-use Cache;
 use Auth;
+use Cache;
 use App\Role;
 use App\Scan;
 use App\Group;
 use App\Dashmessage;
+use App\Models\Concerns\UsesUuid;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -15,6 +16,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
+    use UsesUuid;
     use Notifiable, HasApiTokens;
 
     /**

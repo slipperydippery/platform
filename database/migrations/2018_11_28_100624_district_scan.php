@@ -15,7 +15,7 @@ class DistrictScan extends Migration
     {
         Schema::create('district_scan', function (Blueprint $table) {
             $table->integer('district_id')->unsigned();
-            $table->integer('scan_id')->unsigned();
+            $table->string('scan_id');
 
             $table->foreign('scan_id')->references('id')->on('scans');
             $table->foreign('district_id')->references('id')->on('districts');

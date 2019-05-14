@@ -5,12 +5,14 @@ namespace App;
 use App\Scan;
 use App\User;
 use App\Followup;
+use App\Models\Concerns\UsesUuid;
 use Illuminate\Database\Eloquent\Model;
 use Dyrynda\Database\Support\GeneratesUuid;
 
 class Group extends Model
 {
-    use GeneratesUuid;
+    use UsesUuid;
+    
 	protected $fillable = ['title', 'code', 'user_id', 'scan_id', 'unlocked'];
 
     public function scan()

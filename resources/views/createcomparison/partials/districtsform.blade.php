@@ -3,7 +3,7 @@
 <select-districts
 		:session = " {{ json_encode($session) }} "
 		:group = 2
-		:scan_id = " {{ $scan->id }} "
+		:scan_id = " '{{ $scan->id }}' "
 >
 </select-districts>
 

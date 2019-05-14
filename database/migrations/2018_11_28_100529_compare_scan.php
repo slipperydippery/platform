@@ -14,8 +14,8 @@ class CompareScan extends Migration
     public function up()
     {
         Schema::create('compare_scan', function (Blueprint $table) {
-            $table->integer('compare_id')->unsigned();
-            $table->integer('scan_id')->unsigned();
+            $table->string('compare_id');
+            $table->string('scan_id');
 
             $table->foreign('scan_id')->references('id')->on('scans');
             $table->foreign('compare_id')->references('id')->on('scans');

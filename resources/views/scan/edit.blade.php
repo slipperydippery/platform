@@ -11,13 +11,13 @@
             </div>
             
 			<edit-scan
-				:scan_id = " {{ $scan->id }} "
+				:scan_id = " '{{ $scan->id }}' "
 				:instanties = " {{ $instanties }} "
 				:districts = " {{ $districts }} "
 			>
 			</edit-scan>
 			<edit-districts
-			    :scan_id = " {{ $scan->id }} "
+			    :scan_id = " '{{ $scan->id }}' "
 			>
 			</edit-districts>
             

@@ -94,7 +94,7 @@
 	            		<td> {{ scan.instantie.title }} </td>
 	            		<td> {{ answercount(scan) }} / {{ questioncount(scan) }} </td>
 	            		<td>
-	            			<div class="dropdown float-right" v-if="scan.user.id !== user_id ">
+	            			<div class="dropdown float-right" v-if="scan.user.id != user_id ">
 	            			    <button class="btn btn-secondary dropdown-toggle dropdown-toggle__round" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	            			        
 	            			    </button>
@@ -187,10 +187,7 @@
 
         computed: {
         	isAdmin() {
-        		if (this.group.user) {
-	        		return this.group.scan.user.id === this.user_id;
-        		}
-        		return false;
+        		return this.group.scan.user.id == this.user_id;
         	},
 
         	 joinLink() {

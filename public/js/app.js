@@ -104036,10 +104036,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     computed: {
         isAdmin: function isAdmin() {
-            if (this.group.user) {
-                return this.group.scan.user.id === this.user_id;
-            }
-            return false;
+            return this.group.scan.user.id == this.user_id;
         },
         joinLink: function joinLink() {
             return window.location.protocol + '//' + window.location.hostname + '/groep/' + this.group_id + '/sluitaan/' + this.group.code;
@@ -104419,7 +104416,7 @@ var render = function() {
                             _c(
                               "td",
                               [
-                                scan.user.id !== _vm.user_id
+                                scan.user.id != _vm.user_id
                                   ? _c(
                                       "div",
                                       { staticClass: "dropdown float-right" },

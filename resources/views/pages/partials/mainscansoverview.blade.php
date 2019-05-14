@@ -47,8 +47,8 @@
     @foreach (auth()->user()->scans->sortByDesc('updated_at') as $scan)
         @if ($scan->group)
             <scan-overview
-                :scan_id = " {{ $scan->id }} "
-                :group_id = " {{ $scan->group->id }} "
+                :scan_id = " '{{ $scan->id }}' "
+                :group_id = " '{{ $scan->group->id }}' "
                 :user_id = " {{ Auth::user()->id }} "
             >
             </scan-overview>

@@ -11,12 +11,13 @@ use App\Question;
 use App\Instantie;
 use App\Scanmodel;
 use App\Comparison;
+use App\Models\Concerns\UsesUuid;
 use Illuminate\Database\Eloquent\Model;
 use Dyrynda\Database\Support\GeneratesUuid;
 
 class Scan extends Model
 {
-    use GeneratesUuid;
+    use UsesUuid;
 
 	protected $fillable = ['title', 'instantie_id', 'scanmodel_id', 'group_id', 'algemeenbeeld'];
 

@@ -16,6 +16,7 @@ class UserTableSeeder extends Seeder
 
         $users = [
             [
+                'id' => 1,
                 'name' => 'Maarten de Jager',
                 'phone_number' => '+31685033970',
                 'email' => 'maartendejager@gmail.com',
@@ -25,6 +26,7 @@ class UserTableSeeder extends Seeder
                 'email_verified_at' => date('Y-m-d H:i:s'),
             ],
             [
+                'id' => 2,
                 'name' => 'Susanne Meeuwissen',
                 'phone_number' => '+31685033971',
                 'email' => 'susanne@embav.nl',

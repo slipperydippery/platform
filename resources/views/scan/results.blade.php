@@ -44,8 +44,8 @@
 						@foreach ($scan->scanmodel->themes as $theme)
 							<div class="tab-pane fade" id="theme{{ $theme->order }}" role="tabpanel" aria-labelledby="theme{{ $theme->order }}-tab">
 								<scan-results
-									:group_id = " {{ $scan->group->id }} " 
-									:theme_id = " {{ $theme->id }} "
+									:group_id = " '{{ $scan->group->id }}' " 
+									:theme_id = " '{{ $theme->id }}' "
 								>
 								</scan-results>
 							</div>
