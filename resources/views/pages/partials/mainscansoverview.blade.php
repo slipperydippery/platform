@@ -22,7 +22,6 @@
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <a class="nav-item nav-link active" id="nav-groups-tab" data-toggle="tab" href="#nav-groups" role="tab" aria-controls="nav-groups" aria-selected="true">Dit zijn je groepssessies</a>
-
         <a class="nav-item nav-link" id="nav-individual-tab" data-toggle="tab" href="#nav-individual" role="tab" aria-controls="nav-individual" aria-selected="false">
             @if ($thisgroup = Session::get('newsinglesessionflash'))
                 <span  id="singlescan" data-toggle="popover" data-placement="top" title="Nieuwe sessie is gemaakt!" data-content="Je individuele sessie ({{ $thisgroup->title }}) kun je vinden in dit tabblad!">
@@ -34,6 +33,7 @@
         </a>
     </div>
 </nav>
+
 <div class="tab-content" id="nav-tabContent">
   <div class="tab-pane fade show active" id="nav-groups" role="tabpanel" aria-labelledby="nav-groups-tab">
     <div class="">
@@ -42,7 +42,6 @@
             <a href=" {{ route('creategroupscan.title') }} " class="btn btn-secondary">Maak een groepssessie aan</a>
         </div>
     </div>
-
 
     @foreach (auth()->user()->scans->sortByDesc('updated_at') as $scan)
         @if ($scan->group)
@@ -59,10 +58,11 @@
                     @endcomponent
                 </portal>
             @endforeach
+
         @endif
     @endforeach
-      
   </div>
+  
   <div class="tab-pane fade" id="nav-individual" role="tabpanel" aria-labelledby="nav-individual-tab">
     <div class="">
         <div class="col mt-4 d-flex justify-content-end">

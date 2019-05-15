@@ -94,7 +94,7 @@
 	            		<td> {{ scan.instantie.title }} </td>
 	            		<td> {{ answercount(scan) }} / {{ questioncount(scan) }} </td>
 	            		<td>
-	            			<div class="dropdown float-right" v-if="scan.user.id != user_id ">
+	            			<div class="dropdown float-right" v-if="scan.user.id !== user_id ">
 	            			    <button class="btn btn-secondary dropdown-toggle dropdown-toggle__round" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 	            			        
 	            			    </button>
@@ -115,7 +115,7 @@
                                     <remove-user-dropdown-modal
                                         :scan = scan
                                         :isAdmin = isAdmin
-                                        :isSelf = " scan.user.id == user_id "
+                                        :isSelf = " scan.user.id === user_id "
                                         @removeParticipant = "removeParticipant"
                                     >
                                     </remove-user-dropdown-modal>
@@ -126,8 +126,8 @@
                             <remove-user-dropdown-modal
                                 :scan = scan
                                 :isAdmin = isAdmin
-                                :isSelf = " scan.user.id == user_id "
-                                v-if = " scan.user.id == user_id "
+                                :isSelf = " scan.user.id === user_id "
+                                v-if = " scan.user.id === user_id "
                                 @removeParticipant = "removeParticipant"
                             >
                             </remove-user-dropdown-modal>
@@ -187,7 +187,7 @@
 
         computed: {
         	isAdmin() {
-        		return this.group.scan.user.id == this.user_id;
+        		return this.group.scan.user.id === this.user_id;
         	},
 
         	 joinLink() {

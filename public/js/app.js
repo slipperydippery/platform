@@ -104036,7 +104036,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     computed: {
         isAdmin: function isAdmin() {
-            return this.group.scan.user.id == this.user_id;
+            return this.group.scan.user.id === this.user_id;
         },
         joinLink: function joinLink() {
             return window.location.protocol + '//' + window.location.hostname + '/groep/' + this.group_id + '/sluitaan/' + this.group.code;
@@ -104416,7 +104416,7 @@ var render = function() {
                             _c(
                               "td",
                               [
-                                scan.user.id != _vm.user_id
+                                scan.user.id !== _vm.user_id
                                   ? _c(
                                       "div",
                                       { staticClass: "dropdown float-right" },
@@ -104463,7 +104463,7 @@ var render = function() {
                                                 scan: scan,
                                                 isAdmin: _vm.isAdmin,
                                                 isSelf:
-                                                  scan.user.id == _vm.user_id
+                                                  scan.user.id === _vm.user_id
                                               },
                                               on: {
                                                 removeParticipant:
@@ -104477,12 +104477,12 @@ var render = function() {
                                     )
                                   : _vm._e(),
                                 _vm._v(" "),
-                                scan.user.id == _vm.user_id
+                                scan.user.id === _vm.user_id
                                   ? _c("remove-user-dropdown-modal", {
                                       attrs: {
                                         scan: scan,
                                         isAdmin: _vm.isAdmin,
-                                        isSelf: scan.user.id == _vm.user_id
+                                        isSelf: scan.user.id === _vm.user_id
                                       },
                                       on: {
                                         removeParticipant: _vm.removeParticipant
