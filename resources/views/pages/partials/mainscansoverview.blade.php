@@ -49,7 +49,7 @@
             <scan-overview
                 :scan_id = " '{{ $scan->id }}' "
                 :group_id = " '{{ $scan->group->id }}' "
-                :user_id = " {{ Auth::user()->id }} "
+                :user_id = " '{{ Auth::user()->id }}' "
             >
             </scan-overview>
             

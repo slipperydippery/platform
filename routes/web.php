@@ -2,7 +2,7 @@
 
 use App\User;
 
-Route::get('/admin/loginasuser/{user}', 'AdminPagesController@loginasuser')->name('loginasuser');
+Route::get('/admin/loginasuser/{user_nr}', 'AdminPagesController@loginasuser')->name('loginasuser');
 
 Route::get('/', function () {
     return view('pages.dashboard');

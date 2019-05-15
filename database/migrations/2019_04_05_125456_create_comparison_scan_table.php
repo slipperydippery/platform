@@ -17,7 +17,7 @@ class CreateComparisonScanTable extends Migration
             $table->increments('id');
             $table->integer('comparison_id')->unsigned();
             $table->foreign('comparison_id')->references('id')->on('comparisons')->onDelete('cascade');
-            $table->string('scan_id');
+            $table->uuid('scan_id');
             $table->foreign('scan_id')->references('id')->on('scans')->onDelete('cascade');
             $table->timestamps();
         });

@@ -15,11 +15,12 @@ class CreateGroupsTable extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->unsignedInteger('order');
             $table->string('title');
             $table->string('code');
             $table->dateTime('datetime')->nullable();
             $table->tinyInteger('unlocked')->unsigned()->default(0);
-            $table->string('user_id')->nullable();
+            $table->uuid('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

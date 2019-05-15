@@ -12,7 +12,12 @@ trait UsesUuid
             if (! $model->getKey()) {
                 $model->{$model->getKeyName()} = (string) Str::uuid();
             }
+            $model->order = $model->count() + 1;
         });
+
+        // parent::boot();
+        // self::creating(function ($model) {
+        // });
     }
 
     public function getIncrementing()

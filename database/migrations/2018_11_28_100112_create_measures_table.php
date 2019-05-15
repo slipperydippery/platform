@@ -17,11 +17,11 @@ class CreateMeasuresTable extends Migration
             $table->increments('id');
             $table->text('measure')->nullable();
             $table->boolean('active')->default(false);
-            $table->string('scan_id')->nullable();
+            $table->uuid('scan_id')->nullable();
             $table->foreign('scan_id')->references('id')->on('scans')->onDelete('cascade');
             $table->integer('question_id')->unsigned();
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
-            $table->string('frontrunner_id')->nullable();
+            $table->uuid('frontrunner_id')->nullable();
             $table->foreign('frontrunner_id')->references('id')->on('scans')->onDelete('cascade');
             $table->timestamps();
         });

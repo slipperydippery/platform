@@ -16,7 +16,7 @@ class CreateComparisonsTable extends Migration
         Schema::create('comparisons', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->nullable();
-            $table->string('scan_id');
+            $table->uuid('scan_id');
             $table->foreign('scan_id')->references('id')->on('scans')->onDelete('cascade');
             $table->integer('scanmodel_id')->unsigned()->nullable();
             $table->foreign('scanmodel_id')->references('id')->on('scanmodels')->onDelete('cascade');

@@ -15,9 +15,9 @@ class CreateGrouprequestsTable extends Migration
     {
         Schema::create('grouprequests', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('scan_id');
+            $table->uuid('scan_id');
             $table->foreign('scan_id')->references('id')->on('scans')->onDelete('cascade');
-            $table->string('group_id');
+            $table->uuid('group_id');
             $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
             $table->timestamps();
         });
