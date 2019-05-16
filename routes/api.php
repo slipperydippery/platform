@@ -17,7 +17,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('answer', 'ApiAnswerController');
+Route::apiResources([
+	'answer' => 'Api\AnswerController',
+]);
+
 Route::resource('theme', 'ApiThemeController');
 Route::resource('group', 'ApiGroupController');
 Route::resource('scan', 'ApiScanController');
