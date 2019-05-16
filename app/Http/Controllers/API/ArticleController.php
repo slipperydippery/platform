@@ -38,30 +38,10 @@ class ArticleController extends Controller
     {
         $articleinput = json_decode($request->article);
 
-        $order = Article::get()->count() + 1;
-        $article = Article::create([
-            'title' => $articleinput->title,
-            'description' => $articleinput->description,
-            'linktype' => $articleinput->linktype,
-            'link' => $articleinput->link,
-            'order' => $order,
-        ]);
-        if($articleinput->year) {
-            $article->year = $articleinput->year;
-        }
-        foreach ($articleinput->articletypes as $articletype) {
-            $articletype = Articletype::find($articletype->id);
-            $article->articletypes()->attach($articletype);
-        }
-        foreach ($articleinput->questions as $question) {
-            $question = Question::find($question->id);
-            $article->questions()->attach($question);
-        }
+        $article = Article::register($articleinput);
 
-        if ($articleinput->linktype == 'file' && $pdf = $request->file('pdf')) {
-            $pdf->storeAs('public/pdfs/' . $article->id . '/', $pdf->getClientOriginalName());
-            $article->link = 'storage/pdfs/' . $article->id . '/' . $pdf->getClientOriginalName();
-            $article->save();
+        if ($articleinput->linktype == 'file' && $file = $request->file('file')) {
+            Article::registerFile($article, $file);
         }
 
         $articles = Article::with('articletypes', 'questions')->orderBy('updated_at')->get();
@@ -88,40 +68,7 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $articleinput = json_decode($request->article);
-
-        $article->title = $articleinput->title;
-        $article->description = $articleinput->description;
-        $article->year = $articleinput->year;
-        $article->linktype = $articleinput->linktype;
-        $article->link = $articleinput->link;
-        $article->order = $articleinput->order;
-        $article->save();
-
-        if($article->articletypes){
-            $article->articletypes()->detach();
-        }
-        foreach ($articleinput->articletypes as $articletype) {
-            $articletype = Articletype::find($articletype->id);
-            $article->articletypes()->attach($articletype);
-        }
-
-        if($article->questions){
-            $article->questions()->detach();
-        }
-        foreach ($articleinput->questions as $question) {
-            $question = Question::find($question->id);
-            $article->questions()->attach($question);
-        }
-
-        if ($request->file) {
-            $pdf = $request->file('pdf');
-            $pdf->storeAs('public/pdfs/' . $article->id . '/', $pdf->getClientOriginalName());
-            $article->link = 'storage/pdfs/' . $article->id . '/' . $pdf->getClientOriginalName();
-            $article->save();
-        }
-
-        return $article;
+        //
     }
 
     /**
@@ -140,37 +87,12 @@ class ArticleController extends Controller
         $articleinput = json_decode($request->article);
         $article = Article::find($articleinput->id);
 
-        $article->title = $articleinput->title;
-        $article->description = $articleinput->description;
-        $article->year = $articleinput->year;
-        $article->linktype = $articleinput->linktype;
-        $article->link = $articleinput->link;
-        $article->order = $articleinput->order;
-        $article->save();
+        $article->amend($articleinput);
 
-        if($article->articletypes){
-            $article->articletypes()->detach();
+        if ($articleinput->linktype == 'file' && $file = $request->file('file')) {
+            Article::registerFile($article, $file);
         }
-        foreach ($articleinput->articletypes as $articletype) {
-            $articletype = Articletype::find($articletype->id);
-            $article->articletypes()->attach($articletype);
-        }
-
-        if($article->questions){
-            $article->questions()->detach();
-        }
-        foreach ($articleinput->questions as $question) {
-            $question = Question::find($question->id);
-            $article->questions()->attach($question);
-        }
-
-        if ($request->file) {
-            $pdf = $request->file('pdf');
-            $pdf->storeAs('public/pdfs/' . $article->id . '/', $pdf->getClientOriginalName());
-            $article->link = 'storage/pdfs/' . $article->id . '/' . $pdf->getClientOriginalName();
-            $article->save();
-        }
-
+        
         $articles = Article::with('articletypes', 'questions')->orderBy('updated_at')->get();
         return $articles;
     }

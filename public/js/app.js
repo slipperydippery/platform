@@ -105636,7 +105636,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -105699,7 +105698,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.saving = true;
       var home = this;
       var formData = new FormData();
-      formData.append('pdf', article.file);
+      formData.append('file', article.file);
       formData.append('article', JSON.stringify(article));
       axios.post('/api/article', formData, {
         headers: {
@@ -105728,11 +105727,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     saveArticleChanges: function saveArticleChanges(article) {
       var _this2 = this;
 
-      if (this.saving == true) return '';
-      this.saving = true;
       var home = this;
       var formData = new FormData();
-      formData.append('pdf', article.file);
+      formData.append('file', article.file);
       formData.append('article', JSON.stringify(article));
       axios.post('/api/articlepostpatch', formData, {
         headers: {
@@ -105921,11 +105918,7 @@ var render = function() {
                               })
                             ]
                           )
-                        : _c("a", { attrs: { href: "#" } }, [
-                            _c("span", {
-                              domProps: { innerHTML: _vm._s(article.title) }
-                            })
-                          ])
+                        : _vm._e()
                     ]),
                     _vm._v(" "),
                     _c("td", [
