@@ -11,8 +11,7 @@
             <input 
                 type="text" 
                 class="form-control"
-                :class="{ uppercase : code.length }"
-                @keyup="code = code.toUpperCase()"
+                @input="code = code.toUpperCase()"
                 @keydown.enter="submitCode"
                 placeholder="Voer code in" 
                 v-model="code"

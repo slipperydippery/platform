@@ -22,7 +22,11 @@ if (!function_exists('map_array_to_attribute')) {
 	function map_array_to_attribute($original_array, $attribute) {
 		$mapped_array = [];
 		foreach ($original_array as $item) {
-			$mapped_array[] = $item->$attribute;
+			if( gettype($item) == 'array' ) {
+				$mapped_array[] = $item[$attribute];
+			} else { 								// gettype == 'object'
+				$mapped_array[] = $item->$attribute;
+			}
 		}
 		return $mapped_array;
 	}

@@ -106881,7 +106881,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -106971,7 +106970,6 @@ var render = function() {
             ],
             ref: "input",
             staticClass: "form-control",
-            class: { uppercase: _vm.code.length },
             attrs: {
               type: "text",
               placeholder: "Voer code in",
@@ -106980,9 +106978,17 @@ var render = function() {
             },
             domProps: { value: _vm.code },
             on: {
-              keyup: function($event) {
-                _vm.code = _vm.code.toUpperCase()
-              },
+              input: [
+                function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.code = $event.target.value
+                },
+                function($event) {
+                  _vm.code = _vm.code.toUpperCase()
+                }
+              ],
               keydown: function($event) {
                 if (
                   !$event.type.indexOf("key") &&
@@ -106991,12 +106997,6 @@ var render = function() {
                   return null
                 }
                 return _vm.submitCode($event)
-              },
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.code = $event.target.value
               }
             }
           }),

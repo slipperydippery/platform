@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Scan;
 use App\District;
 use App\Comparison;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class ApiComparisonController extends Controller
+class ComparisonController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,16 +16,6 @@ class ApiComparisonController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
     {
         //
     }
@@ -38,21 +29,20 @@ class ApiComparisonController extends Controller
     public function store(Request $request)
     {
         $scan = Scan::find($request->scan['id']);
+
         $title = 'Vergelijking met ' . $scan->title . ' #' . ($scan->comparisons->count() + 1);
+
         $comparison = Comparison::create([
             'scan_id' => $request->scan['id'],
-            // 'scanmodel_id' => $request->scanmodel_id,
-            // 'instantie_id' => $request->instantie_id,
             'title' => $title,
         ]);
-        $comparison->save();
-        foreach ($request->districts as $district) {
-            $comparison->districts()->attach(District::find($district));
-        }
-        foreach ($request->scans as $scan) {
-            $comparison->scans()->attach(Scan::find($scan['id']));
-        }
+
+        $comparison->districts()->sync( $request->districts );
+
+        $comparison->scans()->sync( map_array_to_attribute($request->scans, 'id') );
+
         session()->forget('createcomparison');
+
         return $comparison;
     }
 
@@ -64,18 +54,15 @@ class ApiComparisonController extends Controller
      */
     public function show(Comparison $comparison)
     {
-        return Comparison::with('scan.user', 'scan.answers', 'scan.districts', 'scans.user', 'scans.answers', 'scans.instantie', 'scans.districts')->find($comparison->id);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  Comparison $comparison
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Comparison $comparison)
-    {
-        //
+        return Comparison::with(
+            'scan.user', 
+            'scan.answers', 
+            'scan.districts', 
+            'scans.user', 
+            'scans.answers', 
+            'scans.instantie', 
+            'scans.districts'
+        )->find( $comparison->id );
     }
 
     /**
