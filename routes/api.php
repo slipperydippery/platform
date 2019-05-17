@@ -18,14 +18,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResources([
-	'answer' 		=> 'Api\AnswerController',
-	'article' 		=> 'Api\ArticleController',	
-	'articletype'	=> 'Api\ArticletypeController',
-	'comparison'	=> 'Api\ComparisonController',
-	'district'		=> 'Api\DistrictController',
+	'answer' 		=> 'API\AnswerController',
+	'article' 		=> 'API\ArticleController',	
+	'articletype'	=> 'API\ArticletypeController',
+	'comparison'	=> 'API\ComparisonController',
+	'district'		=> 'API\DistrictController',
 ]);
 
-Route::post('/articlepostpatch', 'Api\ArticleController@postpatch');
+Route::post('/articlepostpatch', 'API\ArticleController@postpatch');
 
 // Route::resource('district', 'ApiDistrictController');
 
