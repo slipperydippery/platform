@@ -19,6 +19,7 @@ Route::apiResources([
 	'measure'		=> 'API\MeasureController',
 	'scan'			=> 'API\ScanController',
 	'message'		=> 'API\MessageController',
+	'theme'			=> 'API\ThemeController'
 ]);
 
 Route::post('/articlepostpatch', 'API\ArticleController@postpatch');
@@ -26,12 +27,3 @@ Route::post('/joingroup/', 'API\ManageGroupController@joinwithcode');
 Route::post('/group/{group}/promote', 'API\ManageGroupController@promoteuser');
 Route::post('/scan/{scan}/updatedistricts', 'API\ScanDistrictController@update');
 Route::get('/question/{question}/group/{group}/answer', 'API\QuestionGroupAnswerController@index');
-
-// ----------------------------------------------------------------------------
-// ----------------------------------------------------------------------------
-
-
-Route::resource('theme', 'ApiThemeController');
-Route::resource('session', 'ApiSessionController');
-
-

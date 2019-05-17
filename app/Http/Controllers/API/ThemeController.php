@@ -1,32 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Theme;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class ApiSessionController extends Controller
+class ThemeController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
     {
         //
     }
@@ -45,33 +32,22 @@ class ApiSessionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  Theme $theme
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Theme $theme)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return Theme::with('questions')->find($theme->id);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  Theme $theme
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Theme $theme)
     {
         //
     }
@@ -79,10 +55,10 @@ class ApiSessionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  Theme $theme
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Theme $theme)
     {
         //
     }
