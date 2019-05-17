@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Articletype;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class ApiArticletypeController extends Controller
+class ArticletypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,16 +19,6 @@ class ApiArticletypeController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -35,13 +26,12 @@ class ApiArticletypeController extends Controller
      */
     public function store(Request $request)
     {
-        $articletype = new Articletype([
+        $articletype = Articletype::create([
             'title' => $request->articletype['title'],
             'description' => $request->articletype['description'],
-            'order' => (Articletype::get()->count() + 1),
             'scanmodel_id' => 1,
         ]);
-        $articletype->save();
+
         return $articletype;
     }
 
@@ -52,17 +42,6 @@ class ApiArticletypeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Articletype $articletype)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  Articletype $articletype
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Articletype $articletype)
     {
         //
     }
@@ -81,6 +60,7 @@ class ApiArticletypeController extends Controller
         $articletype->order = $request->articletype['order'];
 
         $articletype->save();
+        
         return $articletype;
     }
 

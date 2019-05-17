@@ -1,31 +1,30 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Answer;
 use Carbon\Carbon;
 use App\Events\GroupUpdated;
 use Illuminate\Http\Request;
 use App\Events\GroupscoresUpdated;
+use App\Http\Controllers\Controller;
 
-class ApiAnswerController extends Controller
+class AnswerController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
     {
         //
     }
@@ -50,17 +49,6 @@ class ApiAnswerController extends Controller
     public function show(Answer $answer)
     {
         return $answer;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  Answer $answer
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Answer $answer)
-    {
-        //
     }
 
     /**

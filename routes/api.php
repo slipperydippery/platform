@@ -17,18 +17,24 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('answer', 'ApiAnswerController');
+Route::apiResources([
+	'answer' 		=> 'Api\AnswerController',
+	'article' 		=> 'Api\ArticleController',	
+	'articletype'	=> 'Api\ArticletypeController',
+	'comparison'	=> 'Api\ComparisonController',
+	'district'		=> 'Api\DistrictController',
+]);
+
+Route::post('/articlepostpatch', 'Api\ArticleController@postpatch');
+
+// Route::resource('district', 'ApiDistrictController');
+
 Route::resource('theme', 'ApiThemeController');
 Route::resource('group', 'ApiGroupController');
 Route::resource('scan', 'ApiScanController');
 Route::resource('measure', 'ApiMeasureController');
 Route::resource('followup', 'ApiFollowupController');
-Route::resource('district', 'ApiDistrictController');
 Route::resource('session', 'ApiSessionController');
-Route::resource('comparison', 'ApiComparisonController');
-Route::resource('articletype', 'ApiArticletypeController');
-Route::resource('article', 'ApiArticleController');
-Route::post('/articlepostpatch', 'ApiArticleController@postpatch');
 
 Route::get('/scan/{scan}/question/{question}/getanswers', 'ApiScanQuestionController@getanswers');
 

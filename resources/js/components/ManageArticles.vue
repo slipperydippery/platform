@@ -35,7 +35,6 @@
 	            		<td>
 	            			<a :href="'//' + article.link" v-if="article.linktype == 'link'" target="_blank"><span v-html="article.title"></span></a>
 	            			<a :href="article.link" v-if="article.linktype == 'file'" target="_blank"><span v-html="article.title"></span></a>
-	            			<a href="#" v-else><span v-html="article.title"></span></a>
 	            		</td>
 	            		<td>
 	            			<span v-html="article.description"></span>
@@ -154,7 +153,7 @@
         		this.saving = true;
         		var home = this;
         		var formData = new FormData();
-        		formData.append('pdf', article.file)
+        		formData.append('file', article.file)
         		formData.append('article', JSON.stringify(article))
         		axios.post('/api/article', formData, {
 				    headers: {
@@ -184,11 +183,9 @@
         	},
 
         	saveArticleChanges(article) {
-        		if(this.saving == true) return '';
-        		this.saving = true;
         		var home = this;
         		var formData = new FormData();
-        		formData.append('pdf', article.file)
+        		formData.append('file', article.file)
         		formData.append('article', JSON.stringify(article))
         		axios.post('/api/articlepostpatch', formData, {
 				    headers: {
