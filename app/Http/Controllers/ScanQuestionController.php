@@ -73,16 +73,25 @@ class ScanQuestionController extends Controller
         }
     	$next = '/sessie/' . $scan->id . '/thema/' . ($theme->id + 1) . '/introductie';
     	if($theme->id == Theme::get()->last()->id) {
-    		$next = '/sessie/' . $scan->id . '/thema/' . Theme::get()->first()->id . '/actiesuitwerken';
+    		$next = '/sessie/' . $scan->id . '/actiesuitwerkenintro';
     	}
     	return view('scanquestions.measures', compact('scan', 'theme', 'previous', 'next'));
+    }
+
+    public function bigmeasuresintro(Scan $scan)
+    {
+        $previous = '/sessie/' . $scan->id . '/thema/' . Theme::get()->last()->id . '/acties';
+        $next = '/sessie/' . $scan->id . '/thema/' . Theme::get()->first()->id . '/actiesuitwerken';
+
+        return view('scanquestions.bigmeasuresintro', compact('scan', 'previous', 'next'));
+        
     }
 
     public function bigmeasures(Scan $scan, Theme $theme)
     {
         $previous = '/sessie/' . $scan->id . '/thema/' . ($theme->id - 1) . '/actiesuitwerken';
         if($theme->id == Theme::get()->first()->id){
-            $previous = '/sessie/' . $scan->id . '/thema/' . Theme::get()->last()->id . '/acties';
+            $previous = '/sessie/' . $scan->id . '/actiesuitwerkenintro';
         }        
         $next = '/sessie/' . $scan->id . '/thema/' . ($theme->id + 1) . '/actiesuitwerken';
         if($theme->id == Theme::get()->last()->id) {

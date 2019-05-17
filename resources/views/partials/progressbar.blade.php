@@ -121,6 +121,17 @@
                             @endif
                         </div>
                     @endforeach
+                    <div class="progress-element">
+                        @if ( url()->current() == route('scanquestions.bigmeasuresintro', $scan) )
+                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Introductie verbeterpunten uitwerken">
+                                <img src="/img/simplecircle_secondary_full.svg" alt="">
+                            </span>
+                        @else
+                            <a href=" {{ route('scanquestions.bigmeasuresintro', $scan) }} " class="" data-toggle="tooltip" data-placement="top" title="Introductie verbeterpunten uitwerken">
+                                <img src="/img/simplecircle_secondary.svg" alt="">
+                            </a>
+                        @endif
+                    </div>
                     @foreach ($scan->scanmodel->themes as $theme)
                         <div class="progress-element">
                             @if ( url()->current() == route('scanquestions.bigmeasures', [$scan, $theme]) )
