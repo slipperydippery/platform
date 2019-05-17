@@ -58,8 +58,8 @@
 									</div>
 									<div class="col-sm-9">
 										<frontrunner
-											:measure_id = {{ $measure->id }}
-											:group_id = " '{{ $measure->scan->group->id }}' "
+											:measure_id = "{{ $measure->id }}"
+											:group = "{{ json_encode($scan->group) }}"
 											:is_manager=" {{ $is_manager = $scan->group->scan->id == $scan->id ? 1 : 0 }} "
 										>
 										</frontrunner>

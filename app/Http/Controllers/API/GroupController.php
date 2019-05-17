@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Group;
-use App\Events\GroupUpdated;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class ApiGroupController extends Controller
+class GroupController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,16 +14,6 @@ class ApiGroupController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
     {
         //
     }
@@ -47,18 +37,15 @@ class ApiGroupController extends Controller
      */
     public function show(Group $group)
     {
-        return Group::with('scan.user', 'scan.answers', 'scan.districts', 'scans.user', 'scans.answers', 'scans.instantie', 'user')->where('id', $group->id)->get()->first();
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  Group $group
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Group $group)
-    {
-        //
+        return Group::with(
+            'scan.user', 
+            'scan.answers', 
+            'scan.districts', 
+            'scans.user', 
+            'scans.answers', 
+            'scans.instantie', 
+            'user'
+        )->where('id', $group->id)->get()->first();
     }
 
     /**
@@ -76,8 +63,9 @@ class ApiGroupController extends Controller
         $group->unlocked = $request['group']['unlocked'];
 
         $group->save();
-        $event = 'grouplockupdated';
-        GroupUpdated::dispatch($group->id, $event);
+
+        GroupUpdated::dispatch($group->id, 'grouplockupdated');
+        
         return $group;
     }
 

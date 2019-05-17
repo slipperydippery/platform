@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\User;
+use App\Message;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Notifications\MessageReceived;
 
-class ApiMessageController extends Controller
+class MessageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,16 +21,6 @@ class ApiMessageController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -34,7 +28,16 @@ class ApiMessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $recipient = User::find($request->scan['user']['id']);
+
+        $message = Message::create([
+            'user_id' => auth('api')->user()->id,
+            'recipient_id' => $recipient->id,
+            'message' => $request->message,
+        ]);
+
+        $recipient->notify(new MessageReceived($message));
+        return $message;
     }
 
     /**
@@ -44,17 +47,6 @@ class ApiMessageController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
     {
         //
     }

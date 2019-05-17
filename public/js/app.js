@@ -98444,27 +98444,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {};
     },
-    mounted: function mounted() {
-        // this.getAnswers();
-    },
+    mounted: function mounted() {},
 
 
     computed: {},
 
     methods: {
-        getAnswers: function getAnswers() {
-            var home = this;
-            axios.get('/api/scan/' + this.scan_id + '/question/' + this.question_id + '/getanswers').then(function (response) {
-                home.answers = response.data;
-                response.data.forEach(function (answer) {
-                    window.Echo.private('groupscores.' + answer.id).listen('GroupscoresUpdated', function (e) {
-                        home.getAnswers();
-                    });
-                });
-            });
-        },
-
-
         cssPercent: function cssPercent(value) {
             if (value == null) {
                 return 100;
@@ -98585,27 +98570,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {};
     },
-    mounted: function mounted() {
-        // this.getAnswers();
-    },
+    mounted: function mounted() {},
 
 
     computed: {},
 
     methods: {
-        getAnswers: function getAnswers() {
-            var home = this;
-            axios.get('/api/scan/' + this.scan_id + '/question/' + this.question_id + '/getanswers').then(function (response) {
-                home.answers = response.data;
-                response.data.forEach(function (answer) {
-                    window.Echo.private('groupscores.' + answer.id).listen('GroupscoresUpdated', function (e) {
-                        home.getAnswers();
-                    });
-                });
-            });
-        },
-
-
         cssPercent: function cssPercent(value) {
             if (value == null) {
                 return 100;
@@ -98748,7 +98718,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         getAnswers: function getAnswers() {
             var home = this;
-            axios.get('/api/scan/' + this.scan_id + '/question/' + this.question_id + '/getanswers').then(function (response) {
+            axios.get('/api/question/' + this.question_id + '/group/' + this.group_id + '/answer').then(function (response) {
                 home.answers = response.data;
                 window.Echo.private('groupscores.' + home.group_id).listen('GroupscoresUpdated', function (e) {
                     home.getAnswers();
@@ -99342,17 +99312,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['measure_id', 'group_id', 'is_manager'],
+    props: ['measure_id', 'group', 'is_manager'],
 
     data: function data() {
         return {
-            'measure': {},
-            'group': {}
+            'measure': {}
         };
     },
     mounted: function mounted() {
         this.getMeasure();
-        this.getScans();
     },
 
 
@@ -99363,12 +99331,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var home = this;
             axios.get('/api/measure/' + this.measure_id).then(function (response) {
                 home.measure = response.data;
-            });
-        },
-        getScans: function getScans() {
-            var home = this;
-            axios.get('/api/group/' + this.group_id + '/scan').then(function (response) {
-                home.group = response.data;
             });
         },
         setFrontrunner: function setFrontrunner(scan) {
@@ -103660,7 +103622,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/api/scan/' + this.scan_id + '/updatedistricts', {
                 districts: this.selecteddistricts
             }).then(function (response) {
-                window.location.href = '/';
+                // window.location.href = '/'; 
             });
         },
         setSelectedDistricts: function setSelectedDistricts() {
@@ -104024,9 +103986,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     break;
                 case 'groupadminupdated':
                     _this.getGroup(_this.group_id);
+                    _this.notifyNewAdmin(e.scan_id);
                     break;
                 case 'sessionremovedfromgroup':
                     _this.notifyRemoved(e.scan_id);
+                    _this.getGroup(_this.group_id);
+                    break;
+                case 'groupinfoupdated':
                     _this.getGroup(_this.group_id);
                     break;
             }
@@ -104055,6 +104021,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get('api/scan/' + scan_id).then(function (response) {
                 home.group.scans.push(response.data);
                 home.notifyJoined(response.data.user.name);
+            });
+        },
+        notifyNewAdmin: function notifyNewAdmin(scan_id) {
+            var newAdmin = {};
+            this.group.scans.forEach(function (scan) {
+                if (scan.id == scan_id) newAdmin = scan.user.name;
+            });
+            this.$bvToast.toast(newAdmin + ' is nu beheerder voor de groepssessie ' + this.group.title, {
+                title: 'Nieuwe beheerder',
+                autoHideDelay: 5000,
+                appendToast: false,
+                solid: true,
+                variant: 'primary',
+                toaster: 'b-toaster-top-full'
             });
         },
         notifyJoined: function notifyJoined(username) {
@@ -108035,9 +108015,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.messageState = null;
 		},
 		handleOk: function handleOk(bvModalEvt) {
-			// Prevent modal from closing
 			bvModalEvt.preventDefault();
-			// Trigger submit handler
 			this.handleSubmit();
 		},
 		handleSubmit: function handleSubmit() {
@@ -108053,7 +108031,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		sendMessage: function sendMessage() {
 			var home = this;
-			axios.post('api/sendmessage', {
+			axios.post('api/message', {
 				message: home.message,
 				scan: home.scan
 			});

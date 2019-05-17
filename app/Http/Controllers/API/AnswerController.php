@@ -63,6 +63,7 @@ class AnswerController extends Controller
         $answer->answer = $request['answer']['answer'];
         $answer->updated_at = Carbon::now();
         $answer->save();
+        
         if($answer->scan->group) {
             $event = 'groupscoresupdated';
             GroupUpdated::dispatch($answer->scan->group->id, $event);

@@ -176,9 +176,13 @@
                         break;
                     case 'groupadminupdated':
                         this.getGroup(this.group_id);
+                        this.notifyNewAdmin(e.scan_id);
                         break;
                     case 'sessionremovedfromgroup':
                         this.notifyRemoved(e.scan_id);
+                        this.getGroup(this.group_id);
+                        break;
+                    case 'groupinfoupdated':
                         this.getGroup(this.group_id);
                         break;
                 }
@@ -211,6 +215,21 @@
                         home.group.scans.push(response.data);
                         home.notifyJoined(response.data.user.name);
                     })
+            },
+
+            notifyNewAdmin(scan_id) {
+                var newAdmin = {}
+                this.group.scans.forEach( scan => {
+                    if( scan.id == scan_id ) newAdmin = scan.user.name
+                } )
+                this.$bvToast.toast(`${newAdmin} is nu beheerder voor de groepssessie ${this.group.title}`, {
+                    title: 'Nieuwe beheerder',
+                    autoHideDelay: 5000,
+                    appendToast: false,
+                    solid: true,
+                    variant: 'primary',
+                    toaster: 'b-toaster-top-full',
+                })
             },
 
             notifyJoined(username) {

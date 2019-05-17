@@ -73,9 +73,7 @@
         	},
 
 			handleOk(bvModalEvt) {
-				// Prevent modal from closing
 				bvModalEvt.preventDefault()
-				// Trigger submit handler
 				this.handleSubmit()
 			},
 
@@ -91,7 +89,7 @@
 
 			sendMessage() {
 				var home = this;
-				axios.post('api/sendmessage', {
+				axios.post('api/message', {
 					message: home.message,
 					scan: home.scan
 				})

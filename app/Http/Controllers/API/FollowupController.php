@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Followup;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class ApiFollowupController extends Controller
+class FollowupController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,16 +14,6 @@ class ApiFollowupController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
     {
         //
     }
@@ -50,17 +41,6 @@ class ApiFollowupController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  Followup $followup
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Followup $followup)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -70,9 +50,10 @@ class ApiFollowupController extends Controller
     public function update(Request $request, Followup $followup)
     {
         $followup->datetime = $request['followup']['datetime'];
+
         $followup->save();
+        
         return $followup;
-        // return $request->all();
     }
 
     /**

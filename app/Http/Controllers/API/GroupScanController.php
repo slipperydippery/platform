@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Group;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class ApiGroupScanController extends Controller
+class GroupScanController extends Controller
 {
     public function index(Group $group)
     {

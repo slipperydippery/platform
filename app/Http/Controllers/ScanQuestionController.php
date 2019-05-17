@@ -100,6 +100,7 @@ class ScanQuestionController extends Controller
                 $next = '/sessie/' . $scan->id . '/afgerond';
             }
         }
+        $scan = Scan::with('group.scans.user')->find($scan->id);
         return view('scanquestions.bigmeasures', compact('scan', 'theme', 'previous', 'next'));
     }
 

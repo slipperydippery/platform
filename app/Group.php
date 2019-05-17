@@ -68,6 +68,30 @@ class Group extends Model
     	return $group;
     }
 
+    public function amend($attributes)
+    {
+        if (gettype($attributes == 'array')) {
+            $this->title            = $attributes['title'];
+        } else {
+            $this->title            = $attributes->title;
+        }
+
+        $this->save();
+        $this->mirrorToChildren();
+        
+        return $this;
+    }
+
+    public function mirrorToChildren()
+    {
+        foreach ($this->scans as $scan) {
+            $scan->title = $this->title;
+            $scan->description = $this->scan->description;
+            $scan->save();
+        }
+        return $this;
+    }
+
     public static function generateUniqueCode()
     {
         $unique = false;

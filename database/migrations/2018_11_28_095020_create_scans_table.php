@@ -22,6 +22,7 @@ class CreateScansTable extends Migration
             $table->tinyInteger('complete')->default(0);
             $table->tinyInteger('sharepermission')->default(1);
             $table->decimal('algemeenbeeld', 3, 1)->nullable();
+            $table->tinyInteger('involve_youths')->nullable();
             $table->uuid('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('instantie_id')->unsigned();

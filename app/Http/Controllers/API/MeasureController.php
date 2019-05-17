@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Measure;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class ApiMeasureController extends Controller
+class MeasureController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,16 +14,6 @@ class ApiMeasureController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
     {
         //
     }
@@ -46,18 +37,10 @@ class ApiMeasureController extends Controller
      */
     public function show(Measure $measure)
     {
-        return Measure::with('scan.user', 'frontrunner.user')->find($measure->id);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  Measure $measure
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Measure $measure)
-    {
-        //
+        return Measure::with(
+            'scan.user', 
+            'frontrunner.user'
+        )->find($measure->id);
     }
 
     /**

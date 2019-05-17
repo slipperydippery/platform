@@ -123,6 +123,23 @@ class Scan extends Model
         return $scan;
     }
 
+    public function amend($attributes)
+    {
+        if (gettype($attributes == 'array')) {
+            $this->title            = $attributes['title'];
+            $this->description      = $attributes['description'];
+            $this->algemeenbeeld    = $attributes['algemeenbeeld'];
+            $this->instantie_id     = $attributes['instantie_id'];
+        } else {
+            $this->title            = $attributes->title;
+            $this->description      = $attributes->description;
+            $this->algemeenbeeld    = $attributes->algemeenbeeld;
+            $this->instantie_id     = $attributes->instantie_id;
+        }
+
+        return $this->save();
+    }
+
     public function registerDistricts(Scan $scan, $districts)
     {
     	forEach($districts as $district) {
