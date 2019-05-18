@@ -1127,6 +1127,7 @@ Vue.component('edit-scan', __webpack_require__(725));
 Vue.component('edit-districts', __webpack_require__(728));
 
 Vue.component('scan-overview', __webpack_require__(731));
+Vue.component('edit-group-icon-modal', __webpack_require__(773));
 Vue.component('comparison-overview', __webpack_require__(734));
 
 Vue.component('manage-articletypes', __webpack_require__(737));
@@ -103954,6 +103955,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -104135,18 +104141,43 @@ var render = function() {
         { staticClass: "py-2 my-4 bg-white text-secondary border shadow" },
         [
           _c("div", { staticClass: "col-12 pt-2" }, [
-            _c("h4", [
-              _c(
-                "a",
-                {
-                  staticClass: "flex-grow-1 nowrap text-uppercase",
-                  attrs: { href: " #scanstart " }
-                },
-                [_vm._v(" " + _vm._s(_vm.group.title) + " ")]
-              ),
-              _vm._v(" "),
-              _c("a", { attrs: { href: "/scan/" + _vm.scan_id + "/edit" } }, [
+            _c(
+              "h4",
+              [
+                _c(
+                  "a",
+                  {
+                    staticClass: "flex-grow-1 nowrap text-uppercase",
+                    attrs: { href: " #scanstart " }
+                  },
+                  [_vm._v(" " + _vm._s(_vm.group.title) + " ")]
+                ),
+                _vm._v(" "),
                 _vm.isAdmin
+                  ? _c("edit-group-icon-modal", { attrs: { group: _vm.group } })
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("a", { attrs: { href: "/scan/" + _vm.scan_id + "/edit" } }, [
+                  _vm.isAdmin
+                    ? _c(
+                        "i",
+                        {
+                          directives: [
+                            {
+                              name: "b-tooltip",
+                              rawName: "v-b-tooltip.hover",
+                              modifiers: { hover: true }
+                            }
+                          ],
+                          staticClass: "material-icons float-right clickable",
+                          attrs: { title: "Bewerk sessie" }
+                        },
+                        [_vm._v("\n\t            \t\tedit\n\t\t            ")]
+                      )
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                !_vm.group.unlocked
                   ? _c(
                       "i",
                       {
@@ -104157,62 +104188,45 @@ var render = function() {
                             modifiers: { hover: true }
                           }
                         ],
-                        staticClass: "material-icons float-right clickable",
-                        attrs: { title: "Bewerk sessie" }
+                        staticClass: "material-icons float-right",
+                        class: { clickable: _vm.isAdmin },
+                        attrs: { title: "Sessie is vergrendeld" },
+                        on: {
+                          click: function($event) {
+                            return _vm.toggleLock()
+                          }
+                        }
                       },
-                      [_vm._v("\n\t            \t\tedit\n\t\t            ")]
+                      [_vm._v(" \n            \t\tlock \n            \t")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.group.unlocked
+                  ? _c(
+                      "i",
+                      {
+                        directives: [
+                          {
+                            name: "b-tooltip",
+                            rawName: "v-b-tooltip.hover",
+                            modifiers: { hover: true }
+                          }
+                        ],
+                        staticClass: "material-icons float-right",
+                        class: { clickable: _vm.isAdmin },
+                        attrs: { title: "Sessie is ontgrendeld" },
+                        on: {
+                          click: function($event) {
+                            return _vm.toggleLock()
+                          }
+                        }
+                      },
+                      [_vm._v(" \n        \t\t\tlock_open\n        \t\t")]
                     )
                   : _vm._e()
-              ]),
-              _vm._v(" "),
-              !_vm.group.unlocked
-                ? _c(
-                    "i",
-                    {
-                      directives: [
-                        {
-                          name: "b-tooltip",
-                          rawName: "v-b-tooltip.hover",
-                          modifiers: { hover: true }
-                        }
-                      ],
-                      staticClass: "material-icons float-right",
-                      class: { clickable: _vm.isAdmin },
-                      attrs: { title: "Sessie is vergrendeld" },
-                      on: {
-                        click: function($event) {
-                          return _vm.toggleLock()
-                        }
-                      }
-                    },
-                    [_vm._v(" \n            \t\tlock \n            \t")]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.group.unlocked
-                ? _c(
-                    "i",
-                    {
-                      directives: [
-                        {
-                          name: "b-tooltip",
-                          rawName: "v-b-tooltip.hover",
-                          modifiers: { hover: true }
-                        }
-                      ],
-                      staticClass: "material-icons float-right",
-                      class: { clickable: _vm.isAdmin },
-                      attrs: { title: "Sessie is ontgrendeld" },
-                      on: {
-                        click: function($event) {
-                          return _vm.toggleLock()
-                        }
-                      }
-                    },
-                    [_vm._v(" \n        \t\t\tlock_open\n        \t\t")]
-                  )
-                : _vm._e()
-            ])
+              ],
+              1
+            )
           ]),
           _vm._v(" "),
           _c(
@@ -108158,6 +108172,277 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 770 */,
+/* 771 */,
+/* 772 */,
+/* 773 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(7)
+/* script */
+var __vue_script__ = __webpack_require__(774)
+/* template */
+var __vue_template__ = __webpack_require__(775)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/EditGroupIconModal.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5d6c1cca", Component.options)
+  } else {
+    hotAPI.reload("data-v-5d6c1cca", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 774 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(14);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['group'],
+
+    data: function data() {
+        return {};
+    },
+    mounted: function mounted() {},
+
+
+    computed: {},
+
+    methods: {
+        saveChanges: function saveChanges(group) {
+            console.log('saving changes for ' + group.title);
+        }
+    }
+});
+
+/***/ }),
+/* 775 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {},
+    [
+      _c(
+        "i",
+        {
+          directives: [
+            {
+              name: "b-tooltip",
+              rawName: "v-b-tooltip.hover",
+              modifiers: { hover: true }
+            }
+          ],
+          staticClass: "material-icons float-right clickable",
+          attrs: { title: "Bewerk sessie" },
+          on: {
+            click: function($event) {
+              return _vm.$bvModal.show("editgroupmodal" + _vm.group.id)
+            }
+          }
+        },
+        [_vm._v("\n\t\tedit\n    ")]
+      ),
+      _vm._v(" "),
+      _c(
+        "portal",
+        { attrs: { to: "modals" } },
+        [
+          _c(
+            "b-modal",
+            {
+              attrs: {
+                id: "editgroupmodal" + _vm.group.id,
+                size: "lg",
+                title: "Bewerk de groupssessie"
+              },
+              on: {
+                ok: function($event) {
+                  return _vm.saveChanges(_vm.group)
+                }
+              }
+            },
+            [
+              _c("p", { staticClass: "my-4" }, [_vm._v("Bewerk alles")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "titleInput" } }, [
+                  _vm._v("Email address")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.group.title,
+                      expression: "group.title"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "titleInput", type: "text" },
+                  domProps: { value: _vm.group.title },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.group, "title", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "titleInput" } }, [
+                  _vm._v("Datum sessie")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.group.datetime,
+                      expression: "group.datetime"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "titleInput", type: "text" },
+                  domProps: { value: _vm.group.datetime },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.group, "datetime", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "titleInput" } }, [
+                  _vm._v("Gemeenten")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.group.title,
+                      expression: "group.title"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "titleInput", type: "text" },
+                  domProps: { value: _vm.group.title },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.group, "title", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ]
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5d6c1cca", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

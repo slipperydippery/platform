@@ -3,6 +3,11 @@
         <div class="col-12 pt-2">
             <h4>
                 <a href=" #scanstart " class="flex-grow-1 nowrap text-uppercase"> {{ group.title }} </a> 
+                <edit-group-icon-modal
+                    v-if="isAdmin"
+                    :group = "group"
+                >
+                </edit-group-icon-modal>
                 <a :href="'/scan/' + scan_id + '/edit'">
 	                <i class="material-icons float-right clickable"
 	                	v-b-tooltip.hover title="Bewerk sessie"
