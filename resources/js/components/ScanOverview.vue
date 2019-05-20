@@ -1,39 +1,21 @@
 <template>
 	<div class="py-2 my-4 bg-white text-secondary border shadow"  v-if="group.user && isInGroup">
         <div class="col-12 pt-2">
+            <lock-toggle
+                v-model="group.unlocked"
+                :class="{clickable: isAdmin}"
+                class="float-right"
+                @input="updateGroup(group_id)"
+            >
+            </lock-toggle>
             <h4>
-                <a href=" #scanstart " class="flex-grow-1 nowrap text-uppercase"> {{ group.title }} </a> 
-                <edit-group-icon-modal
-                    v-if="isAdmin"
-                    :group = "group"
+                <edit-input
+                    v-model="group.title"
+                    @saveInput="updateGroup(group_id)"
+                    isAdmin="isAdmin"
+                    class="flex-grow-1 nowrap text-uppercase"
                 >
-                </edit-group-icon-modal>
-                <a :href="'/scan/' + scan_id + '/edit'">
-	                <i class="material-icons float-right clickable"
-	                	v-b-tooltip.hover title="Bewerk sessie"
-	                	v-if="isAdmin"
-	            	>
-	            		edit
-		            </i>
-	            </a>
-                <i 
-                	class="material-icons float-right" 
-                	v-b-tooltip.hover title="Sessie is vergrendeld"
-                	:class="{clickable: isAdmin}"
-                	v-if="! group.unlocked"
-                	@click="toggleLock()"
-            	> 
-            		lock 
-            	</i>
-        	    <i 
-        	    	class="material-icons float-right" 
-        	    	v-b-tooltip.hover title="Sessie is ontgrendeld"
-        	    	:class="{clickable: isAdmin}"
-        	    	v-if="group.unlocked"
-        	    	@click="toggleLock()"
-        		> 
-        			lock_open
-        		</i>
+                </edit-input>
 	        </h4>
         </div>
         <div class="col-12">

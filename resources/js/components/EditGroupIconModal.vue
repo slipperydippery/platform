@@ -23,6 +23,12 @@
 				    <label for="titleInput">Datum sessie</label>
 		            <input id="titleInput" type="text" v-model="group.datetime" class="form-control">
 	        	</div>
+	        	
+	        	<date-picker
+	        	    v-model="group.datetime"
+
+	        	>
+	        	</date-picker>
 
 	        	<div class="form-group">
 				    <label for="titleInput">Gemeenten</label>

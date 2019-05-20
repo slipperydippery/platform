@@ -10,6 +10,15 @@
 	cursor: pointer;
 }
 
+
+.hidden-child {
+	opacity: 0;
+	transform: all .5s;
+}
+.show-hidden-child:hover > .hidden-child {
+	opacity: 1;
+}
+
 span.selectable {
 	display: inline-block;
 	padding: .5rem 1rem;

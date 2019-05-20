@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Group;
+use App\Events\GroupUpdated;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

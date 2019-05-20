@@ -1,10 +1,13 @@
 <template>
-	<input 
-		:value = "value"
-		type="text"
-		class="flatpickr--input"
-		ref="input"
-	>
+    <section>
+        hello
+    	<input 
+    		:value = "value"
+    		type="text"
+    		class="flatpickr--input"
+    		ref="input"
+    	>
+    </section>
 </template>
 
 <script>

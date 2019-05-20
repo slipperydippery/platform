@@ -128,6 +128,8 @@ Vue.component('copy-icon', require('./components/CopyIcon.vue'));
 Vue.component('promote-user-dropdown-modal', require('./components/PromoteUserDropdownModal.vue'));
 Vue.component('remove-user-dropdown-modal', require('./components/RemoveUserDropdownModal.vue'));
 Vue.component('message-user-dropdown-modal', require('./components/MessageUserDropdownModal.vue'));
+Vue.component('edit-input', require('./components/EditInput.vue'));
+Vue.component('lock-toggle', require('./components/LockToggle.vue'));
 
 const app = new Vue({
     el: '#app',
