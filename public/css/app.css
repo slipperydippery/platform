@@ -15451,7 +15451,7 @@ input[type=range]:disabled::-moz-range-thumb {
           transform: all .5s;
 }
 
-.show-hidden-child:hover > .hidden-child {
+.reveal-hidden-child:hover > .hidden-child {
   opacity: 1;
 }
 

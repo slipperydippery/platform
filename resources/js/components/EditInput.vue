@@ -4,7 +4,7 @@
 			v-if="! editing" 
            	@click="toggleEditing"
            	:class="{'clickable' : isAdmin}"
-           	class="show-hidden-child"
+           	class="reveal-hidden-child"
            	v-b-tooltip.hover title="Bewerk sessie"
         > 
 			{{ value }} 

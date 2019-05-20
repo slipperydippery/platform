@@ -5,17 +5,20 @@
                 v-model="group.unlocked"
                 :class="{clickable: isAdmin}"
                 class="float-right"
-                @input="updateGroup(group_id)"
+                @input="updateGroupIfAdmin(group_id)"
             >
             </lock-toggle>
-            <h4>
-                <edit-input
-                    v-model="group.title"
-                    @saveInput="updateGroup(group_id)"
-                    isAdmin="isAdmin"
-                    class="flex-grow-1 nowrap text-uppercase"
+            <a :href="'/scan/' + group.scan.id +'/edit'" v-if="isAdmin" v-b-tooltip.hover title="Bewerk sessie">
+                <i 
+                    class="material-icons float-right clickable"
+                    
                 >
-                </edit-input>
+                    edit
+                </i>
+            </a>
+
+            <h4 class="flex-grow-1 nowrap text-uppercase">
+                {{ group.title }}
 	        </h4>
         </div>
         <div class="col-12">
@@ -264,6 +267,10 @@
         				home.group = response.data;
         			});
         	},
+
+            updateGroupIfAdmin(group_id) {
+                if(isAdmin) this.updateGroup(group_id)
+            },
 
         	updateGroup(group_id) {
         		var home = this;

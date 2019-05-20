@@ -32,7 +32,7 @@
 						</div>
 
 						<set-followup
-							:group_id=" {{ $scan->group->id }} "
+							:group_id=" '{{ $scan->group->id }}' "
 							:followup_id=" {{ $scan->group->followup->id }} "
 							:beheerder=" {{ ( $scan->group->scan->id == $scan->id) ? 1 : 0  }} "
 						>

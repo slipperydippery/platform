@@ -1,6 +1,5 @@
 <template>
     <section>
-        hello
     	<input 
     		:value = "value"
     		type="text"
