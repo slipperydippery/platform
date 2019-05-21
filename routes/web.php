@@ -19,6 +19,9 @@ Route::get('/dashboard', 'PagesController@dashboard')->name('dashboard');
 // Info pages
 Route::get('/cookies', 'PagesController@cookies')->name('cookies');
 
+/**
+ *  Create Scans
+ */
 
 // New Single Scan
 Route::get('/nieuwesoloscan/naam', 'CreateSingleScanController@title')->name('createsinglescan.title');
@@ -46,6 +49,7 @@ Route::post('/group/sluitaanmetcode', 'JoinGroupScanController@storecode')->name
 Route::get('/groep/{group}/sluitaan/{code}', 'JoinGroupScanController@addscan')->name('joingroupscan.addscan');	
 Route::post('/groep/{group}/sluitaan/{code}', 'JoinGroupScanController@storescan')->name('joingroupscan.storescan');	
 Route::get('/groep/{scan}/aangesloten', 'JoinGroupScanController@created')->name('joingroupscan.created');	
+
 
 // Manage Scan
 Route::post('/groep/{group}/promoot', 'ManageGroupScanController@promoteuser')->name('managegroupscan.promoteuser');

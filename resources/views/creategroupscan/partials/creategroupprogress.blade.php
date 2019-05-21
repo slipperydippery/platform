@@ -9,7 +9,7 @@
                                 <img src="/img/simplecircle_secondary_full.svg" alt="">
                             </span>
                         @else
-                            <a href="#" class="" data-toggle="tooltip" data-placement="top" title="Nieuwe groep: Naam">
+                            <a href=" {{ route('creategroupscan.title') }} " class="" data-toggle="tooltip" data-placement="top" title="Nieuwe groep: Naam">
                                 <img src="/img/simplecircle_secondary.svg" alt="">
                             </a>
                         @endif
@@ -20,7 +20,7 @@
                                 <img src="/img/simplecircle_secondary_full.svg" alt="">
                             </span>
                         @else
-                            <a href="#" class="" data-toggle="tooltip" data-placement="top" title="Nieuwe groep: Gemeenten">
+                            <a href=" {{ route('creategroupscan.districts') }} " class="" data-toggle="tooltip" data-placement="top" title="Nieuwe groep: Gemeenten">
                                 <img src="/img/simplecircle_secondary.svg" alt="">
                             </a>
                         @endif
@@ -31,7 +31,7 @@
                                 <img src="/img/simplecircle_secondary_full.svg" alt="">
                             </span>
                         @else
-                            <a href="#" class="" data-toggle="tooltip" data-placement="top" title="Nieuwe groep: Instantie">
+                            <a href=" {{ route('creategroupscan.instantie') }} " class="" data-toggle="tooltip" data-placement="top" title="Nieuwe groep: Instantie">
                                 <img src="/img/simplecircle_secondary.svg" alt="">
                             </a>
                         @endif
@@ -42,7 +42,7 @@
                                 <img src="/img/simplecircle_secondary_full.svg" alt="">
                             </span>
                         @else
-                            <a href="#" class="" data-toggle="tooltip" data-placement="top" title="Nieuwe groep: Datum">
+                            <a href=" {{ route('creategroupscan.datetime') }} " class="" data-toggle="tooltip" data-placement="top" title="Nieuwe groep: Datum">
                                 <img src="/img/simplecircle_secondary.svg" alt="">
                             </a>
                         @endif
