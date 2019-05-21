@@ -17,11 +17,10 @@ class CreateArticlesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('description')->nullable();
-            $table->string('link');
-            $table->integer('jaar')->unsigned()->nullable();
-            $table->string('organisatie')->nullable();
-            $table->integer('articletype_id')->unsigned()->nullable();
-            $table->foreign('articletype_id')->references('id')->on('articletypes')->onDelete('cascade');
+            $table->integer('year')->unsigned()->nullable();
+            $table->string('linktype');
+            $table->string('link')->nullable();
+            $table->integer('order')->unsigned();
             $table->timestamps();
         });
     }

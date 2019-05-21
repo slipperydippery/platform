@@ -45,7 +45,7 @@
         	
         	getAnswers() {
         		var home = this;
-        		axios.get('/api/scan/' + this.scan_id + '/question/' + this.question_id + '/getanswers') 
+        		axios.get('/api/question/' + this.question_id + '/group/' + this.group_id + '/answer') 
         			.then(function(response) {
         				home.answers = response.data;
                         window.Echo.private('groupscores.' + home.group_id).listen('GroupscoresUpdated', e => {

@@ -1,0 +1,65 @@
+<?php
+
+namespace App\Http\Controllers\API;
+
+use App\Theme;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+class ThemeController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  Theme $theme
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Theme $theme)
+    {
+        return Theme::with('questions')->find($theme->id);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  Theme $theme
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Theme $theme)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  Theme $theme
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Theme $theme)
+    {
+        //
+    }
+}

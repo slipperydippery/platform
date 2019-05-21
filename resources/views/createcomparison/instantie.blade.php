@@ -12,7 +12,7 @@
 						<select-instanties
 							:instanties=" {{ json_encode($instanties) }} "
 							:session=" {{ json_encode($session) }} "
-						    :scan_id=" {{ $scan->id }} "
+						    :scan_id=" '{{ $scan->id }}' "
 						>
 						</select-instanties>
 						

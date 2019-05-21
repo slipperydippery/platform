@@ -2,10 +2,13 @@
 
 namespace App;
 
+use Auth;
 use Cache;
+use App\Role;
 use App\Scan;
 use App\Group;
 use App\Dashmessage;
+use App\Models\Concerns\UsesUuid;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -13,6 +16,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
+    use UsesUuid;
     use Notifiable, HasApiTokens;
 
     /**
@@ -51,5 +55,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isOnline()
     {
         return Cache::has('user-is-online-' . $this->id);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
     }
 }

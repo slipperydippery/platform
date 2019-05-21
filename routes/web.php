@@ -3,7 +3,7 @@
 use App\User;
 
 // Admin routes
-Route::get('/admin/loginasuser/{user}', 'AdminPagesController@loginasuser')->name('loginasuser');
+Route::get('/admin/loginasuser/{user_nr}', 'AdminPagesController@loginasuser')->name('loginasuser');
 
 // Auth routes
 Auth::routes(['verify' => true]);
@@ -71,6 +71,7 @@ Route::get('/sessie/{scan}/thema/{theme}/introductie', 'ScanQuestionController@i
 Route::get('/sessie/{scan}/thema/{theme}/vraag/{question}', 'ScanQuestionController@show')->name('scanquestions.show');
 Route::get('/sessie/{scan}/thema/{theme}/resultaten', 'ScanQuestionController@results')->name('scanquestions.results');
 Route::get('/sessie/{scan}/thema/{theme}/acties', 'ScanQuestionController@measures')->name('scanquestions.measures');
+Route::get('/sessie/{scan}/actiesuitwerkenintro', 'ScanQuestionController@bigmeasuresintro')->name('scanquestions.bigmeasuresintro');
 Route::get('/sessie/{scan}/thema/{theme}/actiesuitwerken', 'ScanQuestionController@bigmeasures')->name('scanquestions.bigmeasures');
 Route::get('/sessie/{scan}/vervolgafspraak', 'ScanQuestionController@followup')->name('scanquestions.followup');
 Route::post('/scan/{scan}/commitdatetime', 'ScanQuestionController@commitdatetime')->name('scanquestions.commitdatetime');

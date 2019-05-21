@@ -14,13 +14,13 @@ class CreateGroupsTable extends Migration
     public function up()
     {
         Schema::create('groups', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('uuid')->unique();
+            $table->uuid('id')->primary();
+            $table->unsignedInteger('order');
             $table->string('title');
             $table->string('code');
             $table->dateTime('datetime')->nullable();
             $table->tinyInteger('unlocked')->unsigned()->default(0);
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->uuid('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

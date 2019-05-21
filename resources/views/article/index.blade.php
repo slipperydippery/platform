@@ -11,7 +11,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-                <a href=" {{ route('articletype.index') }} " class="btn btn-primary mb-4"> Bewerk item type's </a> 
+                <a href=" {{ route('articletype.index') }} " class="btn btn-primary mb-4"> Bewerk item type's  </a> 
 				<manage-articles
 					:workarticles = " {{ $articles }} "
 					:scanmodel = " {{ $scanmodel }} "

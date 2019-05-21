@@ -14,17 +14,18 @@ class UserTableSeeder extends Seeder
     {
         DB::table('users')->delete();
 
-        $users = [
-            [
-                'name' => 'Maarten de Jager',
-                'phone_number' => '+31685033970',
-                'email' => 'maartendejager@gmail.com',
-                'password' => Hash::make('password'),
-                'dev' => 1,
-                'verified' => 1,
-                'email_verified_at' => date('Y-m-d H:i:s'),
-            ],
-            [
+        $user_maarten = new User([
+            'name' => 'Maarten de Jager',
+            'phone_number' => '+31685033970',
+            'email' => 'maartendejager@gmail.com',
+            'password' => Hash::make('password'),
+            'dev' => 1,
+            'verified' => 1,
+            'email_verified_at' => date('Y-m-d H:i:s'),
+        ]);
+        $user_maarten->save();
+
+        $user_susanne = new User([
                 'name' => 'Susanne Meeuwissen',
                 'phone_number' => '+31685033971',
                 'email' => 'susanne@embav.nl',
@@ -32,9 +33,7 @@ class UserTableSeeder extends Seeder
                 'dev' => 1,
                 'verified' => 1,
                 'email_verified_at' => date('Y-m-d H:i:s'),
-            ],
-        ];
-
-        DB::table('users')->insert($users);
+        ]);
+        $user_susanne->save();
     }
 }

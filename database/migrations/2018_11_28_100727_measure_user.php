@@ -15,7 +15,7 @@ class MeasureUser extends Migration
     {
         Schema::create('measure_user', function (Blueprint $table) {
             $table->integer('measure_id')->unsigned();
-            $table->integer('user_id')->unsigned();
+            $table->uuid('user_id');
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('measure_id')->references('id')->on('measures');

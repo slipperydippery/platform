@@ -11,12 +11,13 @@ use App\Question;
 use App\Instantie;
 use App\Scanmodel;
 use App\Comparison;
+use App\Models\Concerns\UsesUuid;
 use Illuminate\Database\Eloquent\Model;
 use Dyrynda\Database\Support\GeneratesUuid;
 
 class Scan extends Model
 {
-    use GeneratesUuid;
+    use UsesUuid;
 
 	protected $fillable = ['title', 'instantie_id', 'scanmodel_id', 'group_id', 'algemeenbeeld'];
 
@@ -120,6 +121,23 @@ class Scan extends Model
         Question::generateAnswers($scan);
 
         return $scan;
+    }
+
+    public function amend($attributes)
+    {
+        if (gettype($attributes == 'array')) {
+            $this->title            = $attributes['title'];
+            $this->description      = $attributes['description'];
+            $this->algemeenbeeld    = $attributes['algemeenbeeld'];
+            $this->instantie_id     = $attributes['instantie_id'];
+        } else {
+            $this->title            = $attributes->title;
+            $this->description      = $attributes->description;
+            $this->algemeenbeeld    = $attributes->algemeenbeeld;
+            $this->instantie_id     = $attributes->instantie_id;
+        }
+
+        return $this->save();
     }
 
     public function registerDistricts(Scan $scan, $districts)

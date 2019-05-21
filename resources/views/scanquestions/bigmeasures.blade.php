@@ -5,7 +5,7 @@
 	        <div class="col-md-12">
 	            <div class="page--title">
 	                <h1 class="pagetitle">Verbeterpunten uitwerken thema {{ $theme->id }}: {{ $theme->title }}  </h1>
-	                <p>Hieronder zie je de verbeterpunten die tijdens de sessie door de deelnemers zijn geselecteerd. Je kunt per verbeterpunt een duidelijk omschrijving maken van de acties die je neemt en je kunt aangeven wie de trekker is. Alleen de beheerder kan acties omschrijven en een trekker selecteren.</p>
+	                <p>Hieronder zie de verbeterpunten die je tijdens de sessie met elkaar hebt geselecteerd. Bespreek met de groep welke acties je per verbeterpunt kunt ondernemen. Vervolgens kan de beheerder de acties omschrijven en een trekker selecteren.</p>
 	            </div>
 	        </div>
 		</div>
@@ -58,8 +58,8 @@
 									</div>
 									<div class="col-sm-9">
 										<frontrunner
-											:measure_id = {{ $measure->id }}
-											:group_id = {{ $measure->scan->group->id }}
+											:measure_id = "{{ $measure->id }}"
+											:group = "{{ json_encode($scan->group) }}"
 											:is_manager=" {{ $is_manager = $scan->group->scan->id == $scan->id ? 1 : 0 }} "
 										>
 										</frontrunner>

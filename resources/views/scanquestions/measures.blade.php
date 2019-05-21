@@ -46,9 +46,9 @@
 									<div class="col-sm-2">
 										@if ($scan->group)
 											<average-slider
-												:scan_id=" {{ $scan->id }} "
-												:group_id=" {{ $scan->group->id }} "
-												:question_id=" {{ $question->id }} "
+												:scan_id=" '{{ $scan->id }}' "
+												:group_id=" '{{ $scan->group->id }}' "
+												:question_id=" '{{ $question->id }}' "
 											>
 											</average-slider>
 										@else	

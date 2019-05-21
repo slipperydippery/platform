@@ -5,12 +5,14 @@ namespace App;
 use App\Scan;
 use App\User;
 use App\Followup;
+use App\Models\Concerns\UsesUuid;
 use Illuminate\Database\Eloquent\Model;
 use Dyrynda\Database\Support\GeneratesUuid;
 
 class Group extends Model
 {
-    use GeneratesUuid;
+    use UsesUuid;
+    
 	protected $fillable = ['title', 'code', 'user_id', 'scan_id', 'unlocked'];
 
     public function scan()
@@ -64,6 +66,30 @@ class Group extends Model
     	$group->scan()->associate($scan);
 
     	return $group;
+    }
+
+    public function amend($attributes)
+    {
+        if (gettype($attributes == 'array')) {
+            $this->title            = $attributes['title'];
+        } else {
+            $this->title            = $attributes->title;
+        }
+
+        $this->save();
+        $this->mirrorToChildren();
+        
+        return $this;
+    }
+
+    public function mirrorToChildren()
+    {
+        foreach ($this->scans as $scan) {
+            $scan->title = $this->title;
+            $scan->description = $this->scan->description;
+            $scan->save();
+        }
+        return $this;
     }
 
     public static function generateUniqueCode()

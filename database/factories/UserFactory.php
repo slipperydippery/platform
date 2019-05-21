@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
 /*
@@ -15,6 +16,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\User::class, function (Faker $faker) {
     return [
+    	'id' => (string) Str::uuid(),
         'name' => $faker->name,
         'phone_number' => $faker->phoneNumber,
         'email' => $faker->unique()->safeEmail,

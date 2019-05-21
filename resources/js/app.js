@@ -113,6 +113,7 @@ Vue.component('comparison-overview', require('./components/ComparisonOverview.vu
 
 Vue.component('manage-articletypes', require('./components/ManageArticletypes.vue'));
 Vue.component('manage-articles', require('./components/ManageArticles.vue'));
+Vue.component('edit-article-modal', require('./components/EditArticleModal.vue'));
 
 // Utility
 Vue.component('countdown', require('./components/Countdown.vue'));

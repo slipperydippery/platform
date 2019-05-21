@@ -14,7 +14,7 @@ class AddScanGroupsTable extends Migration
     public function up()
     {
         Schema::table('groups', function (Blueprint $table) {
-            $table->integer('scan_id')->unsigned()->after('code');
+            $table->uuid('scan_id')->after('code');
             $table->foreign('scan_id')->references('id')->on('scans')->onDelete('cascade');
         });
     }

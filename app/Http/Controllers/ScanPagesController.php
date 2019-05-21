@@ -88,5 +88,7 @@ class ScanPagesController extends Controller
     public function mailmeasures(Scan $scan)
     {
         Auth::user()->notify(new ResultsRequested($scan));
+        session()->flash('status', 'De verbeterpunten zijn verstuurd naar ' . $scan->user->email);
+        return redirect()->back();
     }
 }

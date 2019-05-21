@@ -1131,6 +1131,7 @@ Vue.component('comparison-overview', __webpack_require__(734));
 
 Vue.component('manage-articletypes', __webpack_require__(737));
 Vue.component('manage-articles', __webpack_require__(740));
+Vue.component('edit-article-modal', __webpack_require__(770));
 
 // Utility
 Vue.component('countdown', __webpack_require__(743));
@@ -98432,27 +98433,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {};
     },
-    mounted: function mounted() {
-        // this.getAnswers();
-    },
+    mounted: function mounted() {},
 
 
     computed: {},
 
     methods: {
-        getAnswers: function getAnswers() {
-            var home = this;
-            axios.get('/api/scan/' + this.scan_id + '/question/' + this.question_id + '/getanswers').then(function (response) {
-                home.answers = response.data;
-                response.data.forEach(function (answer) {
-                    window.Echo.private('groupscores.' + answer.id).listen('GroupscoresUpdated', function (e) {
-                        home.getAnswers();
-                    });
-                });
-            });
-        },
-
-
         cssPercent: function cssPercent(value) {
             if (value == null) {
                 return 100;
@@ -98573,27 +98559,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {};
     },
-    mounted: function mounted() {
-        // this.getAnswers();
-    },
+    mounted: function mounted() {},
 
 
     computed: {},
 
     methods: {
-        getAnswers: function getAnswers() {
-            var home = this;
-            axios.get('/api/scan/' + this.scan_id + '/question/' + this.question_id + '/getanswers').then(function (response) {
-                home.answers = response.data;
-                response.data.forEach(function (answer) {
-                    window.Echo.private('groupscores.' + answer.id).listen('GroupscoresUpdated', function (e) {
-                        home.getAnswers();
-                    });
-                });
-            });
-        },
-
-
         cssPercent: function cssPercent(value) {
             if (value == null) {
                 return 100;
@@ -98736,7 +98707,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         getAnswers: function getAnswers() {
             var home = this;
-            axios.get('/api/scan/' + this.scan_id + '/question/' + this.question_id + '/getanswers').then(function (response) {
+            axios.get('/api/question/' + this.question_id + '/group/' + this.group_id + '/answer').then(function (response) {
                 home.answers = response.data;
                 window.Echo.private('groupscores.' + home.group_id).listen('GroupscoresUpdated', function (e) {
                     home.getAnswers();
@@ -99330,17 +99301,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['measure_id', 'group_id', 'is_manager'],
+    props: ['measure_id', 'group', 'is_manager'],
 
     data: function data() {
         return {
-            'measure': {},
-            'group': {}
+            'measure': {}
         };
     },
     mounted: function mounted() {
         this.getMeasure();
-        this.getScans();
     },
 
 
@@ -99351,12 +99320,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var home = this;
             axios.get('/api/measure/' + this.measure_id).then(function (response) {
                 home.measure = response.data;
-            });
-        },
-        getScans: function getScans() {
-            var home = this;
-            axios.get('/api/group/' + this.group_id + '/scan').then(function (response) {
-                home.group = response.data;
             });
         },
         setFrontrunner: function setFrontrunner(scan) {
@@ -103648,7 +103611,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/api/scan/' + this.scan_id + '/updatedistricts', {
                 districts: this.selecteddistricts
             }).then(function (response) {
-                window.location.href = '/';
+                // window.location.href = '/'; 
             });
         },
         setSelectedDistricts: function setSelectedDistricts() {
@@ -104012,9 +103975,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     break;
                 case 'groupadminupdated':
                     _this.getGroup(_this.group_id);
+                    _this.notifyNewAdmin(e.scan_id);
                     break;
                 case 'sessionremovedfromgroup':
                     _this.notifyRemoved(e.scan_id);
+                    _this.getGroup(_this.group_id);
+                    break;
+                case 'groupinfoupdated':
                     _this.getGroup(_this.group_id);
                     break;
             }
@@ -104024,10 +103991,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     computed: {
         isAdmin: function isAdmin() {
-            if (this.group.user) {
-                return this.group.scan.user.id === this.user_id;
-            }
-            return false;
+            return this.group.scan.user.id === this.user_id;
         },
         joinLink: function joinLink() {
             return window.location.protocol + '//' + window.location.hostname + '/groep/' + this.group_id + '/sluitaan/' + this.group.code;
@@ -104046,6 +104010,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get('api/scan/' + scan_id).then(function (response) {
                 home.group.scans.push(response.data);
                 home.notifyJoined(response.data.user.name);
+            });
+        },
+        notifyNewAdmin: function notifyNewAdmin(scan_id) {
+            var newAdmin = {};
+            this.group.scans.forEach(function (scan) {
+                if (scan.id == scan_id) newAdmin = scan.user.name;
+            });
+            this.$bvToast.toast(newAdmin + ' is nu beheerder voor de groepssessie ' + this.group.title, {
+                title: 'Nieuwe beheerder',
+                autoHideDelay: 5000,
+                appendToast: false,
+                solid: true,
+                variant: 'primary',
+                toaster: 'b-toaster-top-full'
             });
         },
         notifyJoined: function notifyJoined(username) {
@@ -104454,7 +104432,7 @@ var render = function() {
                                                 scan: scan,
                                                 isAdmin: _vm.isAdmin,
                                                 isSelf:
-                                                  scan.user.id == _vm.user_id
+                                                  scan.user.id === _vm.user_id
                                               },
                                               on: {
                                                 removeParticipant:
@@ -104468,12 +104446,12 @@ var render = function() {
                                     )
                                   : _vm._e(),
                                 _vm._v(" "),
-                                scan.user.id == _vm.user_id
+                                scan.user.id === _vm.user_id
                                   ? _c("remove-user-dropdown-modal", {
                                       attrs: {
                                         scan: scan,
                                         isAdmin: _vm.isAdmin,
-                                        isSelf: scan.user.id == _vm.user_id
+                                        isSelf: scan.user.id === _vm.user_id
                                       },
                                       on: {
                                         removeParticipant: _vm.removeParticipant
@@ -105254,63 +105232,57 @@ var render = function() {
                           : _vm._e()
                       ])
                     : _c("div", { staticClass: "float-right" }, [
-                        index > 0
-                          ? _c(
-                              "i",
+                        _c(
+                          "i",
+                          {
+                            directives: [
                               {
-                                directives: [
-                                  {
-                                    name: "b-tooltip",
-                                    rawName: "v-b-tooltip.hover",
-                                    modifiers: { hover: true }
-                                  }
-                                ],
-                                staticClass: "material-icons clickable",
-                                attrs: { title: "Sla veranderingen op" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.updateArticletype(articletype)
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n\t            \t\t\t\tcheck\n            \t\t\t\t"
-                                )
-                              ]
+                                name: "b-tooltip",
+                                rawName: "v-b-tooltip.hover",
+                                modifiers: { hover: true }
+                              }
+                            ],
+                            staticClass: "material-icons clickable",
+                            attrs: { title: "Sla veranderingen op" },
+                            on: {
+                              click: function($event) {
+                                return _vm.updateArticletype(articletype)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n\t            \t\t\t\tcheck\n            \t\t\t\t"
                             )
-                          : _vm._e(),
+                          ]
+                        ),
                         _vm._v(" "),
                         _c("br"),
                         _vm._v(" "),
-                        index > 0
-                          ? _c(
-                              "i",
+                        _c(
+                          "i",
+                          {
+                            directives: [
                               {
-                                directives: [
-                                  {
-                                    name: "b-tooltip",
-                                    rawName: "v-b-tooltip.hover",
-                                    modifiers: { hover: true }
-                                  }
-                                ],
-                                staticClass: "material-icons clickable",
-                                attrs: { title: "Annuleer" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.cancelEditarticletype(
-                                      articletype
-                                    )
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n\t            \t\t\t\tclose\n            \t\t\t\t"
-                                )
-                              ]
+                                name: "b-tooltip",
+                                rawName: "v-b-tooltip.hover",
+                                modifiers: { hover: true }
+                              }
+                            ],
+                            staticClass: "material-icons clickable",
+                            attrs: { title: "Annuleer" },
+                            on: {
+                              click: function($event) {
+                                return _vm.cancelEditarticletype(articletype)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n\t            \t\t\t\tclose\n            \t\t\t\t"
                             )
-                          : _vm._e()
+                          ]
+                        )
                       ])
                 ])
               ])
@@ -105633,67 +105605,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -105702,41 +105613,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   data: function data() {
     return {
-      'articles': [],
-      'addingArticle': false,
-      'newArticle': {
-        'title': '',
-        'description': '',
-        'linktype': '',
-        'link': '',
-        'file': '',
-        'year': '',
-        'articletypes': [],
-        'questions': []
+      articles: null,
+      addingArticle: false,
+      newArticle: {
+        title: '',
+        description: '',
+        linktype: '',
+        link: '',
+        file: '',
+        year: '',
+        articletypes: [],
+        questions: []
       },
-      'saving': false
+      saving: false
     };
   },
   mounted: function mounted() {
-    this.articles = this.workarticles;
+    // this.articles = this.workarticles;
+    this.getArticles();
   },
 
 
   computed: {
-    orderedArticles: function orderedArticles() {
-      function compare(a, b) {
-        if (a.order < b.order) return -1;
-        if (a.order > b.order) return 1;
-        return 0;
-      }
-      return this.articles.sort(compare);
+    reverseOrderedArticles: function reverseOrderedArticles() {
+      return _.orderBy(this.articles, 'order', 'desc');
     },
-    orderedArticletypes: function orderedArticletypes() {
-      return this.scanmodel.articletypes.sort(function (a, b) {
-        if (a.order < b.order) return -1;
-        if (a.order > b.order) return 1;
-        return 0;
-      });
+    orderedArticles: function orderedArticles() {
+      return _.orderBy(this.articles, 'order', 'asc');
     },
     orderedThemes: function orderedThemes() {
       return this.scanmodel.themes.sort(function (a, b) {
@@ -105744,9 +105647,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         if (a.order > b.order) return 1;
         return 0;
       });
-    },
-    baseInfoSet: function baseInfoSet() {
-      return this.newArticle.articletypes.length && this.newArticle.linktype;
     }
   },
 
@@ -105760,27 +105660,53 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         home.articles = response.data;
       });
     },
-    saveArticle: function saveArticle() {
+    saveArticle: function saveArticle(article) {
       var _this = this;
 
       if (this.saving == true) return '';
       this.saving = true;
       var home = this;
-      axios.post('/api/article', {
-        'article': home.newArticle
+      var formData = new FormData();
+      formData.append('file', article.file);
+      formData.append('article', JSON.stringify(article));
+      axios.post('/api/article', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       }).then(function (response) {
-        _this.articles.push(response.data);
+        _this.articles = response.data;
         _this.newArticle = {
-          'title': '',
-          'description': '',
-          'year': '',
-          'link': '',
-          'file': '',
-          'articletypes': [],
-          'linktype': ''
+          title: '',
+          description: '',
+          linktype: '',
+          link: '',
+          file: '',
+          year: '',
+          articletypes: [],
+          questions: []
         };
         _this.addingArticle = false;
         _this.saving = false;
+      }).catch(function () {
+        this.addingArticle = false;
+        this.saving = false;
+        console.log('FAILURE!!');
+      });
+    },
+    saveArticleChanges: function saveArticleChanges(article) {
+      var _this2 = this;
+
+      var home = this;
+      var formData = new FormData();
+      formData.append('file', article.file);
+      formData.append('article', JSON.stringify(article));
+      axios.post('/api/articlepostpatch', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        _this2.articles = response.data;
+        _this2.saving = false;
       });
     },
     cancelNewArticle: function cancelNewArticle() {
@@ -105792,8 +105718,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     updateArticle: function updateArticle(article) {
       var home = this;
-      axios.patch('/api/article/' + article.id, {
-        'article': article
+      var formData = new FormData();
+      formData.append('article', JSON.stringify(article));
+      axios.post('/api/articlepostpatch/', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       }).then(function (response) {
         article.editable = false;
         home.$forceUpdate();
@@ -105809,7 +105739,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     moveUp: function moveUp(article, index) {
       this.sequentializeOrder();
-      var otherarticle = this.articles[index - 1];
+      var otherarticle = this.reverseOrderedArticles[index - 1];
       var otherorder = otherarticle.order;
       otherarticle.order = article.order;
       article.order = otherorder;
@@ -105818,7 +105748,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     moveDown: function moveDown(article, index) {
       this.sequentializeOrder();
-      var otherarticle = this.articles[index + 1];
+      var otherarticle = this.reverseOrderedArticles[index + 1];
       var otherorder = otherarticle.order;
       otherarticle.order = article.order;
       article.order = otherorder;
@@ -105826,9 +105756,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.updateArticle(otherarticle);
     },
     sequentializeOrder: function sequentializeOrder() {
-      this.articles.forEach(function (article, index) {
+      this.orderedArticles.forEach(function (article, index) {
         article.order = index + 1;
       });
+    },
+    onImageChange: function onImageChange(e) {
+      console.log(e);
+      var files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.createImage(files[0]);
+    },
+    createImage: function createImage(file) {
+      var _this3 = this;
+
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        _this3.newArticle.file = e.target.result;
+      };
+      reader.readAsDataURL(file);
     },
     handleFileUpload: function handleFileUpload() {
       console.log('handleFileUpload');
@@ -105837,37 +105782,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.createFile(files[0]);
     },
     createFile: function createFile(file) {
-      var _this2 = this;
+      var _this4 = this;
 
       console.log('createFile');
       var reader = new FileReader();
       reader.onload = function (e) {
-        _this2.newArticle.file = e.target.result;
+        _this4.newArticle.file = e.target.result;
       };
       reader.readAsDataURL(file);
-    },
-    toggleArticletype: function toggleArticletype(article) {
-      if (!this.newArticle.articletypes.includes(article)) {
-        this.newArticle.articletypes.push(article);
-        return '';
-      }
-      this.newArticle.articletypes.splice(this.newArticle.articletypes.indexOf(article), 1);
-    },
-    isSelected: function isSelected(articletype) {
-      if (this.newArticle.articletypes.includes(articletype)) return true;
-      return false;
-    },
-    setlinktype: function setlinktype(type) {
-      this.newArticle.linktype = type;
-    },
-
-
-    onlyNumbers: function onlyNumbers() {
-      this.newArticle.year = this.newArticle.year.replace(/[^0-9]/g, '');
-    },
-
-    updateQuestions: function updateQuestions(question) {
-      console.log(question.id);
     }
   }
 });
@@ -105895,470 +105817,131 @@ var render = function() {
                 modifiers: { newArticleModal: true }
               }
             ],
-            staticClass: "btn btn-primary mb-4"
+            staticClass: "btn btn-secondary mb-4"
           },
           [_vm._v(" Voeg een item toe ")]
         ),
         _vm._v(" "),
-        _c(
-          "b-modal",
-          {
-            attrs: {
-              size: "lg",
-              id: "newArticleModal",
-              title: "Voeg een nieuw item toe"
-            },
-            on: { ok: _vm.saveArticle }
+        _c("edit-article-modal", {
+          attrs: {
+            value: _vm.newArticle,
+            modal_id: "newArticleModal",
+            scanmodel: this.scanmodel,
+            newarticle: true
           },
-          [
-            _c(
-              "div",
-              { staticClass: "form-group" },
-              _vm._l(_vm.orderedArticletypes, function(articletype) {
-                return _c(
-                  "label",
-                  {
-                    directives: [
-                      {
-                        name: "b-tooltip",
-                        rawName: "v-b-tooltip:hover",
-                        arg: "hover"
-                      }
-                    ],
-                    staticClass: "checkboxlabel btn mr-2 clickable ",
-                    class: {
-                      "btn-secondary": _vm.isSelected(articletype),
-                      "btn-dark": !_vm.isSelected(articletype)
-                    },
-                    attrs: { title: articletype.description },
-                    on: {
-                      click: function($event) {
-                        return _vm.toggleArticletype(articletype)
-                      }
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n\t\t\t\t\t" + _vm._s(articletype.title) + "\n\t\t\t\t"
-                    )
-                  ]
-                )
-              }),
-              0
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group mb-3" }, [
-              _c(
-                "div",
-                {
-                  staticClass: "input-group-prepend",
-                  attrs: { id: "button-addon3" }
-                },
-                [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn",
-                      class:
-                        _vm.newArticle.linktype == "link"
-                          ? "btn-secondary"
-                          : "btn-outline-secondary",
-                      attrs: { type: "button" },
-                      on: {
-                        click: function($event) {
-                          return _vm.setlinktype("link")
-                        }
-                      }
-                    },
-                    [_vm._v(" Link ")]
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group-append" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn",
-                    class:
-                      _vm.newArticle.linktype == "file"
-                        ? "btn-secondary"
-                        : "btn-outline-secondary",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        return _vm.setlinktype("file")
-                      }
-                    }
-                  },
-                  [_vm._v(" Bestand ")]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("hr"),
-            _vm._v(" "),
-            _vm.newArticle.linktype == "link"
-              ? _c("div", { staticClass: "form-group" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.newArticle.link,
-                        expression: "newArticle.link"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      id: "inputlink",
-                      placeholder: "http://www"
-                    },
-                    domProps: { value: _vm.newArticle.link },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.newArticle, "link", $event.target.value)
-                      }
-                    }
-                  })
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.newArticle.linktype == "file"
-              ? _c(
-                  "div",
-                  { staticClass: "form-group" },
-                  [
-                    _c("b-form-file", {
-                      attrs: {
-                        placeholder: "Kies een bestand",
-                        "drop-placeholder": "Sleep bestand hier..."
-                      },
-                      model: {
-                        value: _vm.newArticle.file,
-                        callback: function($$v) {
-                          _vm.$set(_vm.newArticle, "file", $$v)
-                        },
-                        expression: "newArticle.file"
-                      }
-                    })
-                  ],
-                  1
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.baseInfoSet
-              ? [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.newArticle.title,
-                          expression: "newArticle.title"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        id: "inputitle",
-                        placeholder: "Naam",
-                        required: ""
-                      },
-                      domProps: { value: _vm.newArticle.title },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.newArticle, "title", $event.target.value)
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.newArticle.description,
-                          expression: "newArticle.description"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { rows: "3", placeholder: "Omschrijving" },
-                      domProps: { value: _vm.newArticle.description },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.newArticle,
-                            "description",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.newArticle.year,
-                          expression: "newArticle.year"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "text",
-                        id: "inputitle",
-                        placeholder: "Jaar",
-                        required: "",
-                        maxlength: "4"
-                      },
-                      domProps: { value: _vm.newArticle.year },
-                      on: {
-                        input: [
-                          function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.newArticle,
-                              "year",
-                              $event.target.value
-                            )
-                          },
-                          _vm.onlyNumbers
-                        ]
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("hr"),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "form-group" },
-                    [
-                      _c("h3", [_vm._v(" Participatiescan vragen ")]),
-                      _vm._v(" "),
-                      _vm._l(_vm.scanmodel.themes, function(theme) {
-                        return [
-                          _c("h5", { staticClass: "mt-3" }, [
-                            _vm._v(" " + _vm._s(theme.title) + " ")
-                          ]),
-                          _vm._v(" "),
-                          _vm._l(theme.questions, function(question) {
-                            return _c("div", { staticClass: "form-check" }, [
-                              _c("input", {
-                                staticClass: "form-check-input",
-                                attrs: {
-                                  type: "checkbox",
-                                  value: "",
-                                  id: "question" + question.id
-                                },
-                                on: {
-                                  input: function($event) {
-                                    return _vm.updateQuestions(question)
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("label", {
-                                directives: [
-                                  {
-                                    name: "b-tooltip",
-                                    rawName: "v-b-tooltip:hover",
-                                    arg: "hover"
-                                  }
-                                ],
-                                staticClass: "form-check-label",
-                                attrs: {
-                                  for: "question" + question.id,
-                                  title: theme.body
-                                },
-                                domProps: { innerHTML: _vm._s(question.title) }
-                              })
-                            ])
-                          })
-                        ]
-                      })
-                    ],
-                    2
-                  )
-                ]
-              : _vm._e()
-          ],
-          2
-        ),
+          on: {
+            saveArticle: _vm.saveArticle,
+            saveArticleChanges: _vm.saveArticleChanges
+          }
+        }),
         _vm._v(" "),
         _c("table", { staticClass: "table table-sm" }, [
-          _c("thead", { staticClass: "thead-dark" }, [
-            _c(
-              "tr",
-              [
-                _c(
-                  "th",
-                  { staticStyle: { width: "30%" }, attrs: { scope: "col" } },
-                  [_vm._v(" Naam ")]
-                ),
-                _vm._v(" "),
-                _c("th", { attrs: { scope: "col" } }, [
-                  _vm._v(" Omschrijving ")
-                ]),
-                _vm._v(" "),
-                _vm._l(_vm.scanmodel.themes, function(theme) {
-                  return _c(
-                    "th",
-                    {
-                      directives: [
-                        {
-                          name: "b-tooltip",
-                          rawName: "v-b-tooltip:hover",
-                          arg: "hover"
-                        }
-                      ],
-                      staticStyle: {},
-                      attrs: { title: theme.title }
-                    },
-                    [_vm._v(" " + _vm._s(theme.id) + " ")]
-                  )
-                })
-              ],
-              2
-            )
-          ]),
+          _vm._m(0),
           _vm._v(" "),
-          false
+          _vm.articles && _vm.articles.length
             ? _c(
                 "tbody",
-                [
-                  _vm._l(_vm.orderedArticles, function(article, index) {
-                    return _c("tr", [
-                      _c("td", [
-                        article.editable != true
-                          ? _c("span", {
-                              domProps: { innerHTML: _vm._s(article.title) }
-                            })
-                          : _c("div", { staticClass: "form-group" }, [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: article.title,
-                                    expression: "article.title"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  type: "text",
-                                  id: "inputTitle",
-                                  placeholder: "Naam"
-                                },
-                                domProps: { value: article.title },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      article,
-                                      "title",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                      ]),
-                      _vm._v(" "),
-                      _c("td", [
-                        article.editable != true
-                          ? _c("span", {
-                              domProps: {
-                                innerHTML: _vm._s(article.description)
+                _vm._l(_vm.reverseOrderedArticles, function(article, index) {
+                  return _c("tr", [
+                    _c(
+                      "td",
+                      [
+                        _vm._l(article.articletypes, function(articletype) {
+                          return [
+                            _c("span", {
+                              domProps: { innerHTML: _vm._s(articletype.title) }
+                            }),
+                            _vm._v(" "),
+                            _c("br")
+                          ]
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c("td", [
+                      article.linktype == "link"
+                        ? _c(
+                            "a",
+                            {
+                              attrs: {
+                                href: "//" + article.link,
+                                target: "_blank"
                               }
-                            })
-                          : _c("div", { staticClass: "form-group" }, [
-                              _c("textarea", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: article.description,
-                                    expression: "article.description"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  id: "exampleFormControlTextarea1",
-                                  rows: "3",
-                                  placeholder: "Omschrijving"
-                                },
-                                domProps: { value: article.description },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      article,
-                                      "description",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
+                            },
+                            [
+                              _c("span", {
+                                domProps: { innerHTML: _vm._s(article.title) }
                               })
-                            ])
-                      ]),
+                            ]
+                          )
+                        : _vm._e(),
                       _vm._v(" "),
-                      _c("td", [
-                        article.editable != true
-                          ? _c("div", { staticClass: "float-right" }, [
-                              index > 0
-                                ? _c(
-                                    "i",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "b-tooltip",
-                                          rawName: "v-b-tooltip.hover",
-                                          modifiers: { hover: true }
-                                        }
-                                      ],
-                                      staticClass: "material-icons clickable",
-                                      attrs: { title: "Verplaats naar boven" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.moveUp(article, index)
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n\t            \t\t\t\tkeyboard_arrow_up\n            \t\t\t\t"
-                                      )
-                                    ]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _c("br"),
-                              _vm._v(" "),
-                              _c(
+                      article.linktype == "file"
+                        ? _c(
+                            "a",
+                            { attrs: { href: article.link, target: "_blank" } },
+                            [
+                              _c("span", {
+                                domProps: { innerHTML: _vm._s(article.title) }
+                              })
+                            ]
+                          )
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("span", {
+                        domProps: { innerHTML: _vm._s(article.description) }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("span", [_vm._v(" " + _vm._s(article.year) + " ")])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      [
+                        _vm._l(article.questions, function(question) {
+                          return [
+                            _c("span", {
+                              staticClass: "badge badge-pill clickable",
+                              attrs: {
+                                id: "question" + article.id + "_" + question.id
+                              },
+                              domProps: { innerHTML: _vm._s(question.id) }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "b-tooltip",
+                              {
+                                attrs: {
+                                  target:
+                                    "question" + article.id + "_" + question.id
+                                }
+                              },
+                              [
+                                _c("span", {
+                                  domProps: {
+                                    innerHTML: _vm._s(question.title)
+                                  }
+                                })
+                              ]
+                            )
+                          ]
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "div",
+                        { staticClass: "float-right" },
+                        [
+                          index > 0
+                            ? _c(
                                 "i",
                                 {
                                   directives: [
@@ -106369,268 +105952,130 @@ var render = function() {
                                     }
                                   ],
                                   staticClass: "material-icons clickable",
-                                  attrs: { title: "Bewerk" },
+                                  attrs: { title: "Verplaats naar boven" },
                                   on: {
                                     click: function($event) {
-                                      return _vm.setEditable(article)
+                                      return _vm.moveUp(article, index)
                                     }
                                   }
                                 },
                                 [
                                   _vm._v(
-                                    "\n\t            \t\t\t\tedit\n            \t\t\t\t"
+                                    "\n\t            \t\t\t\tkeyboard_arrow_up\n            \t\t\t\t"
                                   )
                                 ]
-                              ),
-                              _vm._v(" "),
-                              _c("br"),
-                              _vm._v(" "),
-                              index < _vm.articles.length - 1
-                                ? _c(
-                                    "i",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "b-tooltip",
-                                          rawName: "v-b-tooltip.hover",
-                                          modifiers: { hover: true }
-                                        }
-                                      ],
-                                      staticClass: "material-icons clickable",
-                                      attrs: {
-                                        title: "Verplaats naar beneden"
-                                      },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.moveDown(article, index)
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n\t            \t\t\t\tkeyboard_arrow_down\n            \t\t\t\t"
-                                      )
-                                    ]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          _c(
+                            "i",
+                            {
+                              directives: [
+                                {
+                                  name: "b-tooltip",
+                                  rawName: "v-b-tooltip.hover",
+                                  modifiers: { hover: true }
+                                }
+                              ],
+                              staticClass: "material-icons clickable",
+                              attrs: { title: "Bewerk" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.$bvModal.show(
+                                    "editArticleModal" + article.id
                                   )
-                                : _vm._e()
-                            ])
-                          : _c("div", { staticClass: "float-right" }, [
-                              index > 0
-                                ? _c(
-                                    "i",
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n\t            \t\t\t\tedit\n            \t\t\t\t"
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("br"),
+                          _vm._v(" "),
+                          index < _vm.reverseOrderedArticles.length - 1
+                            ? _c(
+                                "i",
+                                {
+                                  directives: [
                                     {
-                                      directives: [
-                                        {
-                                          name: "b-tooltip",
-                                          rawName: "v-b-tooltip.hover",
-                                          modifiers: { hover: true }
-                                        }
-                                      ],
-                                      staticClass: "material-icons clickable",
-                                      attrs: { title: "Sla veranderingen op" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.updateArticle(article)
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n\t            \t\t\t\tcheck\n            \t\t\t\t"
-                                      )
-                                    ]
+                                      name: "b-tooltip",
+                                      rawName: "v-b-tooltip.hover",
+                                      modifiers: { hover: true }
+                                    }
+                                  ],
+                                  staticClass: "material-icons clickable",
+                                  attrs: { title: "Verplaats naar beneden" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.moveDown(article, index)
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n\t            \t\t\t\tkeyboard_arrow_down\n            \t\t\t\t"
                                   )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _c("br"),
-                              _vm._v(" "),
-                              index > 0
-                                ? _c(
-                                    "i",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "b-tooltip",
-                                          rawName: "v-b-tooltip.hover",
-                                          modifiers: { hover: true }
-                                        }
-                                      ],
-                                      staticClass: "material-icons clickable",
-                                      attrs: { title: "Annuleer" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.cancelEditarticle(article)
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n\t            \t\t\t\tclose\n            \t\t\t\t"
-                                      )
-                                    ]
-                                  )
-                                : _vm._e()
-                            ])
-                      ])
+                                ]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("edit-article-modal", {
+                            attrs: {
+                              value: article,
+                              modal_id: "editArticleModal" + article.id,
+                              scanmodel: _vm.scanmodel,
+                              newarticle: false
+                            },
+                            on: {
+                              saveArticle: _vm.saveArticle,
+                              saveArticleChanges: _vm.saveArticleChanges
+                            }
+                          })
+                        ],
+                        1
+                      )
                     ])
-                  }),
-                  _vm._v(" "),
-                  _vm.addingArticle
-                    ? _c("tr", [
-                        _c("td", [
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.newArticle.title,
-                                  expression: "newArticle.title"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: {
-                                type: "text",
-                                id: "inputTitle",
-                                placeholder: "Naam"
-                              },
-                              domProps: { value: _vm.newArticle.title },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.newArticle,
-                                    "title",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            })
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("textarea", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.newArticle.description,
-                                  expression: "newArticle.description"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: {
-                                id: "exampleFormControlTextarea1",
-                                rows: "3",
-                                placeholder: "Omschrijving"
-                              },
-                              domProps: { value: _vm.newArticle.description },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.newArticle,
-                                    "description",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            })
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("div", { staticClass: "float-right" }, [
-                            _c(
-                              "i",
-                              {
-                                directives: [
-                                  {
-                                    name: "b-tooltip",
-                                    rawName: "v-b-tooltip.hover",
-                                    modifiers: { hover: true }
-                                  }
-                                ],
-                                staticClass: "material-icons clickable",
-                                attrs: { title: "Sla veranderingen op" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.saveArticle()
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n\t            \t\t\t\tcheck\n            \t\t\t\t"
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("br"),
-                            _vm._v(" "),
-                            _c(
-                              "i",
-                              {
-                                directives: [
-                                  {
-                                    name: "b-tooltip",
-                                    rawName: "v-b-tooltip.hover",
-                                    modifiers: { hover: true }
-                                  }
-                                ],
-                                staticClass: "material-icons clickable",
-                                attrs: { title: "Annuleer" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.cancelNewArticle()
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n\t            \t\t\t\tclose\n            \t\t\t\t"
-                                )
-                              ]
-                            )
-                          ])
-                        ])
-                      ])
-                    : _vm._e()
-                ],
-                2
+                  ])
+                }),
+                0
               )
             : _vm._e()
-        ]),
-        _vm._v(" "),
-        !_vm.addingArticle
-          ? _c("div", { staticClass: "form-group text-right" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary form-control",
-                  on: {
-                    click: function($event) {
-                      $event.preventDefault()
-                      return _vm.addArticle($event)
-                    }
-                  }
-                },
-                [_vm._v("Voeg nog een kennisbank thema toe")]
-              )
-            ])
-          : _vm._e()
+        ])
       ],
       1
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", { staticClass: "thead-dark" }, [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v(" Type ")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v(" Naam ")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "50%" }, attrs: { scope: "col" } }, [
+          _vm._v(" Omschrijving ")
+        ]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v(" Jaar ")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v(" Vragen ")]),
+        _vm._v(" "),
+        _c("th", [_vm._v(" opties ")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -106888,7 +106333,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -106978,7 +106422,6 @@ var render = function() {
             ],
             ref: "input",
             staticClass: "form-control",
-            class: { uppercase: _vm.code.length },
             attrs: {
               type: "text",
               placeholder: "Voer code in",
@@ -106987,9 +106430,17 @@ var render = function() {
             },
             domProps: { value: _vm.code },
             on: {
-              keyup: function($event) {
-                _vm.code = _vm.code.toUpperCase()
-              },
+              input: [
+                function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.code = $event.target.value
+                },
+                function($event) {
+                  _vm.code = _vm.code.toUpperCase()
+                }
+              ],
               keydown: function($event) {
                 if (
                   !$event.type.indexOf("key") &&
@@ -106998,12 +106449,6 @@ var render = function() {
                   return null
                 }
                 return _vm.submitCode($event)
-              },
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.code = $event.target.value
               }
             }
           }),
@@ -108042,9 +107487,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.messageState = null;
 		},
 		handleOk: function handleOk(bvModalEvt) {
-			// Prevent modal from closing
 			bvModalEvt.preventDefault();
-			// Trigger submit handler
 			this.handleSubmit();
 		},
 		handleSubmit: function handleSubmit() {
@@ -108060,7 +107503,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		},
 		sendMessage: function sendMessage() {
 			var home = this;
-			axios.post('api/sendmessage', {
+			axios.post('api/message', {
 				message: home.message,
 				scan: home.scan
 			});
@@ -108187,6 +107630,526 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 767 */,
+/* 768 */,
+/* 769 */,
+/* 770 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(8)
+/* script */
+var __vue_script__ = __webpack_require__(771)
+/* template */
+var __vue_template__ = __webpack_require__(772)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/EditArticleModal.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7d955728", Component.options)
+  } else {
+    hotAPI.reload("data-v-7d955728", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 771 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	props: ['value', 'modal_id', 'scanmodel', 'newarticle'],
+
+	data: function data() {
+		return {
+			newValue: null
+		};
+	},
+	mounted: function mounted() {
+		this.newValue = this.value;
+	},
+
+
+	computed: {
+		orderedArticletypes: function orderedArticletypes() {
+			if (!this.scanmodel.articletypes.length) return '';
+			return this.scanmodel.articletypes.sort(function (a, b) {
+				if (a.order < b.order) return -1;
+				if (a.order > b.order) return 1;
+				return 0;
+			});
+		}
+	},
+
+	methods: {
+		saveArticle: function saveArticle() {
+			if (this.newarticle) {
+				this.$emit('saveArticle', this.newValue);
+				return '';
+			}
+			this.$emit('saveArticleChanges', this.newValue);
+		},
+		toggleArticletype: function toggleArticletype(article, articletype) {
+			if (!article.articletypes || !article.articletypes.map(function (articletype) {
+				return articletype.id;
+			}).includes(articletype.id)) {
+				article.articletypes.push(articletype);
+				return '';
+			}
+			article.articletypes.splice(article.articletypes.map(function (articletype) {
+				return articletype.id;
+			}).indexOf(articletype.id), 1);
+		},
+		isSelected: function isSelected(article, articletype) {
+			if (article.articletypes && article.articletypes.map(function (articletype) {
+				return articletype.id;
+			}).includes(articletype.id)) return true;
+			return false;
+		},
+		setlinktype: function setlinktype(article, type) {
+			article.linktype = type;
+		},
+		baseInfoSet: function baseInfoSet(article) {
+			return article.articletypes && article.articletypes.length && article.linktype;
+		},
+
+
+		onlyNumbers: function onlyNumbers() {
+			this.newValue.year = this.newValue.year.replace(/[^0-9]/g, '');
+		},
+
+		isActiveQuestion: function isActiveQuestion(article, question) {
+			return article.questions.map(function (question) {
+				return question.id;
+			}).includes(question.id);
+		},
+		updateQuestions: function updateQuestions(article, question) {
+			if (!article.questions.map(function (question) {
+				return question.id;
+			}).includes(question.id)) {
+				article.questions.push(question);
+				return '';
+			}
+			article.questions.splice(article.questions.map(function (question) {
+				return question.id;
+			}).indexOf(question.id), 1);
+		}
+	}
+});
+
+/***/ }),
+/* 772 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.newValue !== null
+    ? _c(
+        "b-modal",
+        {
+          attrs: {
+            size: "lg",
+            id: _vm.modal_id,
+            title: "Voeg een nieuw item toe"
+          },
+          on: { ok: _vm.saveArticle }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "form-group" },
+            _vm._l(_vm.orderedArticletypes, function(articletype) {
+              return _c(
+                "label",
+                {
+                  directives: [
+                    {
+                      name: "b-tooltip",
+                      rawName: "v-b-tooltip:hover",
+                      arg: "hover"
+                    }
+                  ],
+                  staticClass: "checkboxlabel btn mr-2 clickable ",
+                  class: {
+                    "btn-secondary": _vm.isSelected(_vm.newValue, articletype),
+                    "btn-dark": !_vm.isSelected(_vm.newValue, articletype)
+                  },
+                  attrs: { title: articletype.description },
+                  on: {
+                    click: function($event) {
+                      return _vm.toggleArticletype(_vm.newValue, articletype)
+                    }
+                  }
+                },
+                [_vm._v("\n\t\t\t\t" + _vm._s(articletype.title) + "\n\t\t\t")]
+              )
+            }),
+            0
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group mb-3" }, [
+            _c(
+              "div",
+              {
+                staticClass: "input-group-prepend",
+                attrs: { id: "button-addon3" }
+              },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn",
+                    class:
+                      _vm.newValue.linktype == "link"
+                        ? "btn-secondary"
+                        : "btn-outline-secondary",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        return _vm.setlinktype(_vm.newValue, "link")
+                      }
+                    }
+                  },
+                  [_vm._v(" Link ")]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "input-group-append" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn",
+                  class:
+                    _vm.newValue.linktype == "file"
+                      ? "btn-secondary"
+                      : "btn-outline-secondary",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.setlinktype(_vm.newValue, "file")
+                    }
+                  }
+                },
+                [_vm._v(" Bestand ")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _vm.newValue.linktype == "link"
+            ? _c("div", { staticClass: "form-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.newValue.link,
+                      expression: "newValue.link"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "inputlink",
+                    placeholder: "http://www"
+                  },
+                  domProps: { value: _vm.newValue.link },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.newValue, "link", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.newValue.linktype == "file"
+            ? _c(
+                "div",
+                { staticClass: "form-group" },
+                [
+                  _c("b-form-file", {
+                    attrs: {
+                      state: Boolean(_vm.newValue.file),
+                      placeholder: "Kies een bestand",
+                      "drop-placeholder": "Sleep bestand hier...",
+                      accept: ".pdf"
+                    },
+                    model: {
+                      value: _vm.newValue.file,
+                      callback: function($$v) {
+                        _vm.$set(_vm.newValue, "file", $$v)
+                      },
+                      expression: "newValue.file"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "mt-3" }, [
+                    _vm._v(
+                      "Selected file: " +
+                        _vm._s(_vm.newValue.file ? _vm.newValue.file.name : "")
+                    )
+                  ])
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.baseInfoSet(_vm.newValue)
+            ? [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.newValue.title,
+                        expression: "newValue.title"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      id: "inputitle",
+                      placeholder: "Naam",
+                      required: ""
+                    },
+                    domProps: { value: _vm.newValue.title },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.newValue, "title", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.newValue.description,
+                        expression: "newValue.description"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { rows: "3", placeholder: "Omschrijving" },
+                    domProps: { value: _vm.newValue.description },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.newValue,
+                          "description",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.newValue.year,
+                        expression: "newValue.year"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      id: "inputitle",
+                      placeholder: "Jaar",
+                      required: "",
+                      maxlength: "4"
+                    },
+                    domProps: { value: _vm.newValue.year },
+                    on: {
+                      input: [
+                        function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.newValue, "year", $event.target.value)
+                        },
+                        _vm.onlyNumbers
+                      ]
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("hr"),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("h3", [_vm._v(" Participatiescan vragen ")]),
+                    _vm._v(" "),
+                    _vm._l(_vm.scanmodel.themes, function(theme) {
+                      return [
+                        _c("h5", { staticClass: "mt-3" }, [
+                          _vm._v(" " + _vm._s(theme.title) + " ")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(theme.questions, function(question) {
+                          return _c("div", { staticClass: "form-check" }, [
+                            _c("button", {
+                              staticClass: "btn btn-sm mb-1",
+                              class: _vm.isActiveQuestion(
+                                _vm.newValue,
+                                question
+                              )
+                                ? "btn-secondary"
+                                : "btn-outline-secondary",
+                              attrs: { type: "button" },
+                              domProps: { innerHTML: _vm._s(question.title) },
+                              on: {
+                                click: function($event) {
+                                  return _vm.updateQuestions(
+                                    _vm.newValue,
+                                    question
+                                  )
+                                }
+                              }
+                            })
+                          ])
+                        })
+                      ]
+                    })
+                  ],
+                  2
+                )
+              ]
+            : _vm._e()
+        ],
+        2
+      )
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7d955728", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

@@ -60,7 +60,7 @@ class QuestionTableSeeder extends Seeder
             ],
             [
                 'title'           => 'Goed en breed netwerk',
-                'question'        => 'Beschikken scholen en gemeenten over een goed en breed en divers genoeg netwerk onder regionale werkgevers?',
+                'question'        => 'Beschikken scholen en gemeenten over een goed, breed en divers genoeg netwerk onder regionale werkgevers?',
                 'successfactor'   => 'School en gemeente hebben voldoende netwerk van geschikte bedrijven voor stages en plaatsingskansen.',
                 'riskfactor'      => 'Scholen en gemeenten hebben niet genoeg contacten met werkgevers, waardoor de plaatsingskansen voor leerlingen beperkt zijn. ',
                 'justification'   => '<p>Ook het betrekken van de werkgevers als partner door zowel scholen als gemeenten is van belang om de plaatsingskansen te vergroten. Een goede voorlichting helpt bij het wegnemen van vooroordelen bij werkgevers over het aannemen van jongeren met een arbeidsbeperking als ook het breder bekend maken van voorzieningen die het aannemen van een kwetsbare jongere aantrekkelijk maken. Dit is belangrijk omdat uit onderzoek bekend is dat een snelle plaatsing bij een werkgever belangrijk is voor succesvolle toeleiding naar de arbeidsmarkt. Samenwerking heeft ook betrekking op aspecten als het inzicht in het bedrijf, inzicht in de arbeidsvraag, zorgen voor &eacute;&eacute;n aanspreekpunt en het bieden van ondersteuning aan de werkgever. Het netwerk moet divers en breed genoeg zijn om jongeren op maat werkervaring en competenties te kunnen laten opdoen. </p>',
