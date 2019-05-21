@@ -23,7 +23,6 @@
         		"locale": Dutch,
         		enableTime: true,
         		inline: true,
-        		weekNumbers: true,
         		minDate: "today",
 	    		time_24hr: true,
 	    		onChange: (dateObject, dateString) => {

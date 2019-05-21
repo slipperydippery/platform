@@ -20,20 +20,19 @@
 	        	</div>
 
 	        	<div class="form-group">
-				    <label for="titleInput">Datum sessie</label>
-		            <input id="titleInput" type="text" v-model="group.datetime" class="form-control">
+				    <label for="titleInput">Datum sessie</label> <br>
+		            {{ group.datetime }}
+		        	<date-picker
+		        	    v-model="group.datetime"
+		        	>
+		        	</date-picker>
 	        	</div>
 	        	
-	        	<date-picker
-	        	    v-model="group.datetime"
 
+	        	<district-input
+	        		:group="group"
 	        	>
-	        	</date-picker>
-
-	        	<div class="form-group">
-				    <label for="titleInput">Gemeenten</label>
-		            <input id="titleInput" type="text" v-model="group.title" class="form-control">
-	        	</div>
+	        	</district-input>
 
 	        </b-modal>
 	    </portal>
@@ -63,7 +62,7 @@
 
         methods: {
         	saveChanges(group) {
-        		console.log('saving changes for ' + group.title)
+        		this.$emit('saveChanges')
         	},
         }
     }

@@ -8,6 +8,11 @@
                 @input="updateGroupIfAdmin(group_id)"
             >
             </lock-toggle>
+            <edit-group-icon-modal
+                :group="group"
+                @saveChanges="updateGroupIfAdmin(group_id)"
+            >
+            </edit-group-icon-modal>
             <a :href="'/scan/' + group.scan.id +'/edit'" v-if="isAdmin" v-b-tooltip.hover title="Bewerk sessie">
                 <i 
                     class="material-icons float-right clickable"
@@ -269,10 +274,11 @@
         	},
 
             updateGroupIfAdmin(group_id) {
-                if(isAdmin) this.updateGroup(group_id)
+                if(this.isAdmin) this.updateGroup(group_id)
             },
 
         	updateGroup(group_id) {
+                console.log('updating');
         		var home = this;
         		axios.patch('api/group/' + group_id, {
         			'group' : home.group

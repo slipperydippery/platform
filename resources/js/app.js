@@ -112,6 +112,7 @@ Vue.component('scan-overview', require('./components/ScanOverview.vue'));
 Vue.component('edit-group-icon-modal', require('./components/EditGroupIconModal.vue'));
 Vue.component('edit-group', require('./components/EditGroup.vue'));
 Vue.component('comparison-overview', require('./components/ComparisonOverview.vue'));
+Vue.component('district-input', require('./components/DistrictInput.vue'));
 
 Vue.component('manage-articletypes', require('./components/ManageArticletypes.vue'));
 Vue.component('manage-articles', require('./components/ManageArticles.vue'));

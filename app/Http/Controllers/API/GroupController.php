@@ -58,6 +58,7 @@ class GroupController extends Controller
      */
     public function update(Request $request, Group $group)
     {
+        return $request->all();
         $group->title = $request['group']['title'];
         $group->scan_id = $request['group']['scan_id'];
         $group->datetime = $request['group']['datetime'];
@@ -66,7 +67,7 @@ class GroupController extends Controller
         $group->save();
 
         GroupUpdated::dispatch($group->id, 'grouplockupdated');
-        
+
         return $group;
     }
 
