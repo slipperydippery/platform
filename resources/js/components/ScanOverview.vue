@@ -39,16 +39,6 @@
             <br>
             <strong>Aansluitcode:</strong> {{ group.code }}
             <br>
-            <span class="pt-2 d-inline-block small">Gebruik onderstaande link om jouw netwerkpartners voor deze sessie uit te nodigen:</span>
-            <br>
-            <span class="text-nowrap small">
-                <span class="" id="groupcode" v-html="joinLink"> </span> 
-                <copy-icon
-                    :copy_content= 'joinLink'
-                >
-                </copy-icon>
-            </span>
-            <br>
         </div>
 
         <div class="col-12 my-2 d-flex justify-content-end">

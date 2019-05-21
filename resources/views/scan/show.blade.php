@@ -7,7 +7,7 @@
             <div class="page--title">
                 <h1 class="pagetitle">Afgerond!</h1>
             </div>
-            <p>Gefeliciteerd! Je hebt alle vragen beantwoord. Hieronder zie je een aantal links en artikelen die je kunnen helpen bij het uitvoeren van de verbeterpunten. Je kunt je resultaten ook bekijken en naar jezelf mailen.</p>
+            <p>Hieronder zie je een aantal links en artikelen die je kunnen helpen bij het uitvoeren van de verbeterpunten. Je kunt je resultaten ook bekijken en naar jezelf mailen.</p>
             <a href=" {{ route('scan.results', $scan) }} " class="btn btn-secondary">Bekijk resultaten</a>
             <a href=" {{ route('scan.mailmeasures', $scan) }} " class="btn btn-secondary">E-mail mij de verbeterpunten</a>
             @if (! $scan->group)

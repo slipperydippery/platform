@@ -102855,7 +102855,7 @@ var render = function() {
       _vm.selectedScans.length
         ? _c("input", {
             staticClass: "btn btn-primary form-control",
-            attrs: { type: "submit", value: "Bevestig vergelijking" },
+            attrs: { type: "submit", value: "Vergelijk met deze scans" },
             on: {
               click: function($event) {
                 return _vm.saveComparison()
@@ -103933,16 +103933,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -104229,30 +104219,6 @@ var render = function() {
               _vm._v(" "),
               _c("strong", [_vm._v("Aansluitcode:")]),
               _vm._v(" " + _vm._s(_vm.group.code) + "\n            "),
-              _c("br"),
-              _vm._v(" "),
-              _c("span", { staticClass: "pt-2 d-inline-block small" }, [
-                _vm._v(
-                  "Gebruik onderstaande link om jouw netwerkpartners voor deze sessie uit te nodigen:"
-                )
-              ]),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c(
-                "span",
-                { staticClass: "text-nowrap small" },
-                [
-                  _c("span", {
-                    attrs: { id: "groupcode" },
-                    domProps: { innerHTML: _vm._s(_vm.joinLink) }
-                  }),
-                  _vm._v(" "),
-                  _c("copy-icon", { attrs: { copy_content: _vm.joinLink } })
-                ],
-                1
-              ),
-              _vm._v(" "),
               _c("br")
             ],
             2

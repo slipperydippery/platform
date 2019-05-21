@@ -27,6 +27,10 @@ class RoleUserTableSeeder extends Seeder
                 'role_id' => '2',
                 'user_id' => User::where('email', 'susanne@embav.nl')->first()->id
             ],
+            [
+                'role_id' => '2',
+                'user_id' => User::where('email', 'indra.vandervalk@ecorys.com')->first()->id
+            ],
         ];
 
         DB::table('role_user')->insert($role_user);

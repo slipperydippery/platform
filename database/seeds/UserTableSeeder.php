@@ -35,5 +35,16 @@ class UserTableSeeder extends Seeder
                 'email_verified_at' => date('Y-m-d H:i:s'),
         ]);
         $user_susanne->save();
+
+        $user_indra = new User([
+                'name' => 'Indra van der Valk',
+                'phone_number' => '+31600055500',
+                'email' => 'indra.vandervalk@ecorys.com',
+                'password' => Hash::make('password'),
+                'dev' => 1,
+                'verified' => 1,
+                'email_verified_at' => date('Y-m-d H:i:s'),
+        ]);
+        $user_indra->save();
     }
 }

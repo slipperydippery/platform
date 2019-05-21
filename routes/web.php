@@ -52,7 +52,7 @@ Route::get('/groep/{scan}/aangesloten', 'JoinGroupScanController@created')->name
 
 
 // Manage Scan
-Route::post('/groep/{group}/promoot', 'ManageGroupScanController@promoteuser')->name('managegroupscan.promoteuser');
+// Route::post('/groep/{group}/promoot', 'ManageGroupScanController@promoteuser')->name('managegroupscan.promoteuser');
 Route::get('/groep/{group}/ontgrendel', 'ManageGroupScanController@unlock')->name('managegroupscan.unlock');
 
 // Scan Pages
