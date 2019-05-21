@@ -106,6 +106,6 @@ class UserController extends Controller
             $scan->delete();
         }
         $user->delete();
-        return redirect()->route('home');
+        return redirect()->route('dashboard');
     }
 }

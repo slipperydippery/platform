@@ -2,29 +2,25 @@
 
 use App\User;
 
+// Admin routes
 Route::get('/admin/loginasuser/{user}', 'AdminPagesController@loginasuser')->name('loginasuser');
 
-Route::get('/', function () {
-    return view('pages.dashboard');
-});
-
+// Auth routes
 Auth::routes(['verify' => true]);
 Route::get('/wijzigwachtwoord','Auth\ChangePasswordController@show')->name('changepassword.show');
 Route::post('/wijzigwachtwoord','Auth\ChangePasswordController@update')->name('changepassword.update');
-
-// Two Factor Authentication
 Route::get('2fa', 'TwoFactorController@showTwoFactorForm');
 Route::post('2fa', 'TwoFactorController@verifyTwoFactor');
 
+// Home
+Route::get('/', 'PagesController@dashboard')->name('home');
+Route::get('/dashboard', 'PagesController@dashboard')->name('dashboard');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Info pages
 Route::get('/cookies', 'PagesController@cookies')->name('cookies');
 
-Route::get('/dashboard', 'PagesController@dashboard')->name('dashboard')->middleware('auth');
-Route::get('/introductiefilm', 'PagesController@introductiefilm')->name('introductiefilm');
-Route::get('/cijfersuitderegio', 'PagesController@cijfersuitderegio')->name('cijfersuitderegio');
 
-Route::get('/nieuwescan/start', 'CreateScanController@start')->name('createscan.start');
+// New Single Scan
 Route::get('/nieuwesoloscan/naam', 'CreateSingleScanController@title')->name('createsinglescan.title');
 Route::post('/nieuwesoloscan/naam', 'CreateSingleScanController@storetitle')->name('createsinglescan.storetitle');
 Route::get('/nieuwesoloscan/instantie', 'CreateSingleScanController@instantie')->name('createsinglescan.instantie');
@@ -33,7 +29,7 @@ Route::get('/nieuwesoloscan/gemeenten', 'CreateSingleScanController@districts')-
 Route::post('/nieuwesoloscan/gemeenten', 'CreateSingleScanController@storedistricts')->name('createsinglescan.storedistricts');
 Route::get('/nieuwesoloscan/{scan}/klaar', 'CreateSingleScanController@created')->name('createsinglescan.created');
 
-
+// New Group Scan
 Route::get('/nieuwegroupsscan/naam', 'CreateGroupScanController@title')->name('creategroupscan.title');
 Route::post('/nieuwegroupsscan/naam', 'CreateGroupScanController@storetitle')->name('creategroupscan.storetitle');
 Route::get('/nieuwegroupsscan/gemeenten', 'CreateGroupScanController@districts')->name('creategroupscan.districts');
@@ -44,14 +40,21 @@ Route::get('/nieuwegroupsscan/datum', 'CreateGroupScanController@datetime')->nam
 Route::post('/nieuwegroupsscan/datum', 'CreateGroupScanController@storedatetime')->name('creategroupscan.storedatetime');
 Route::get('/nieuwegroupsscan/{scan}/klaar', 'CreateGroupScanController@created')->name('creategroupscan.created');
 
+// Join Scan
 Route::get('/groep/sluitaanmetcode', 'JoinGroupScanController@entercode')->name('joingroupscan.entercode');
 Route::post('/group/sluitaanmetcode', 'JoinGroupScanController@storecode')->name('joingroupscan.storecode');
 Route::get('/groep/{group}/sluitaan/{code}', 'JoinGroupScanController@addscan')->name('joingroupscan.addscan');	
 Route::post('/groep/{group}/sluitaan/{code}', 'JoinGroupScanController@storescan')->name('joingroupscan.storescan');	
 Route::get('/groep/{scan}/aangesloten', 'JoinGroupScanController@created')->name('joingroupscan.created');	
 
+// Manage Scan
 Route::post('/groep/{group}/promoot', 'ManageGroupScanController@promoteuser')->name('managegroupscan.promoteuser');
 Route::get('/groep/{group}/ontgrendel', 'ManageGroupScanController@unlock')->name('managegroupscan.unlock');
+
+// Scan Pages
+Route::get('/introductiefilm', 'PagesController@introductiefilm')->name('introductiefilm');
+Route::get('/cijfersuitderegio', 'PagesController@cijfersuitderegio')->name('cijfersuitderegio');
+
 
 
 
