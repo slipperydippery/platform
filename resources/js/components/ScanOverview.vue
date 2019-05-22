@@ -10,17 +10,11 @@
             </lock-toggle>
             <edit-group-icon-modal
                 :group="group"
+                v-if="isAdmin"
                 @saveChanges="updateGroupIfAdmin(group_id)"
+                @cancelChanges="getGroup(group_id)"
             >
             </edit-group-icon-modal>
-            <a :href="'/scan/' + group.scan.id +'/edit'" v-if="isAdmin" v-b-tooltip.hover title="Bewerk sessie">
-                <i 
-                    class="material-icons float-right clickable"
-                    
-                >
-                    edit
-                </i>
-            </a>
 
             <h4 class="flex-grow-1 nowrap text-uppercase">
                 {{ group.title }}
@@ -283,6 +277,9 @@
         		axios.patch('api/group/' + group_id, {
         			'group' : home.group
         		})
+                axios.patch('api/scan/' + home.group.scan.id, {
+                    'scan': home.group.scan
+                })
         	},
 
             removeParticipant(scan) {

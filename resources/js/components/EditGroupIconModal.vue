@@ -1,7 +1,7 @@
 <template>
 	<div class="">
 	    <i class="material-icons float-right clickable"
-	    	v-b-tooltip.hover title="Bewerk sessie"
+		    	v-b-tooltip.hover title="Bewerk sessie"
 	    	@click="$bvModal.show('editgroupmodal' + group.id)"
 		>
 			edit
@@ -12,15 +12,15 @@
 	            size="lg"
 	            title="Bewerk de groupssessie" 
 	            @ok="saveChanges(group)"
+	            @cancel="cancelChanges(group)"
 	        >
-	            <p class="my-4">Bewerk alles</p>
 	        	<div class="form-group">
-				    <label for="titleInput">Email address</label>
+				    <label for="titleInput"><h5>Titel</h5></label>
 		            <input id="titleInput" type="text" v-model="group.title" class="form-control">
 	        	</div>
 
 	        	<div class="form-group">
-				    <label for="titleInput">Datum sessie</label> <br>
+				    <label for="titleInput"><h5>Datum sessie</h5></label> <br>
 		            {{ group.datetime }}
 		        	<date-picker
 		        	    v-model="group.datetime"
@@ -29,8 +29,9 @@
 	        	</div>
 	        	
 
+			    <label for="districtInput"><h5>Wijzig gemeente(n)</h5></label>
 	        	<district-input
-	        		:group="group"
+	        		v-model ="group.scan.districts"
 	        	>
 	        	</district-input>
 
@@ -63,6 +64,10 @@
         methods: {
         	saveChanges(group) {
         		this.$emit('saveChanges')
+        	},
+
+        	cancelChanges(group) {
+        		this.$emit('cancelChanges')
         	},
         }
     }

@@ -58,11 +58,8 @@ class GroupController extends Controller
      */
     public function update(Request $request, Group $group)
     {
-        return $request->all();
-        $group->title = $request['group']['title'];
-        $group->scan_id = $request['group']['scan_id'];
-        $group->datetime = $request['group']['datetime'];
-        $group->unlocked = $request['group']['unlocked'];
+        // return $request->all();
+        $group->amend($request->group);
 
         $group->save();
 

@@ -103952,12 +103952,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 
@@ -104094,6 +104088,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.patch('api/group/' + group_id, {
                 'group': home.group
             });
+            axios.patch('api/scan/' + home.group.scan.id, {
+                'scan': home.group.scan
+            });
         },
         removeParticipant: function removeParticipant(scan) {
             this.group.scans.splice(this.group.scans.indexOf(scan), 1);
@@ -104163,39 +104160,18 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("edit-group-icon-modal", {
-                attrs: { group: _vm.group },
-                on: {
-                  saveChanges: function($event) {
-                    return _vm.updateGroupIfAdmin(_vm.group_id)
-                  }
-                }
-              }),
-              _vm._v(" "),
               _vm.isAdmin
-                ? _c(
-                    "a",
-                    {
-                      directives: [
-                        {
-                          name: "b-tooltip",
-                          rawName: "v-b-tooltip.hover",
-                          modifiers: { hover: true }
-                        }
-                      ],
-                      attrs: {
-                        href: "/scan/" + _vm.group.scan.id + "/edit",
-                        title: "Bewerk sessie"
+                ? _c("edit-group-icon-modal", {
+                    attrs: { group: _vm.group },
+                    on: {
+                      saveChanges: function($event) {
+                        return _vm.updateGroupIfAdmin(_vm.group_id)
+                      },
+                      cancelChanges: function($event) {
+                        return _vm.getGroup(_vm.group_id)
                       }
-                    },
-                    [
-                      _c(
-                        "i",
-                        { staticClass: "material-icons float-right clickable" },
-                        [_vm._v("\n                    edit\n                ")]
-                      )
-                    ]
-                  )
+                    }
+                  })
                 : _vm._e(),
               _vm._v(" "),
               _c("h4", { staticClass: "flex-grow-1 nowrap text-uppercase" }, [
@@ -104604,6 +104580,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -104621,6 +104598,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         saveChanges: function saveChanges(group) {
             this.$emit('saveChanges');
+        },
+        cancelChanges: function cancelChanges(group) {
+            this.$emit('cancelChanges');
         }
     }
 });
@@ -104673,15 +104653,16 @@ var render = function() {
               on: {
                 ok: function($event) {
                   return _vm.saveChanges(_vm.group)
+                },
+                cancel: function($event) {
+                  return _vm.cancelChanges(_vm.group)
                 }
               }
             },
             [
-              _c("p", { staticClass: "my-4" }, [_vm._v("Bewerk alles")]),
-              _vm._v(" "),
               _c("div", { staticClass: "form-group" }, [
                 _c("label", { attrs: { for: "titleInput" } }, [
-                  _vm._v("Email address")
+                  _c("h5", [_vm._v("Titel")])
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -104712,7 +104693,7 @@ var render = function() {
                 { staticClass: "form-group" },
                 [
                   _c("label", { attrs: { for: "titleInput" } }, [
-                    _vm._v("Datum sessie")
+                    _c("h5", [_vm._v("Datum sessie")])
                   ]),
                   _vm._v(" "),
                   _c("br"),
@@ -104734,7 +104715,19 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("district-input", { attrs: { group: _vm.group } })
+              _c("label", { attrs: { for: "districtInput" } }, [
+                _c("h5", [_vm._v("Wijzig gemeente(n)")])
+              ]),
+              _vm._v(" "),
+              _c("district-input", {
+                model: {
+                  value: _vm.group.scan.districts,
+                  callback: function($$v) {
+                    _vm.$set(_vm.group.scan, "districts", $$v)
+                  },
+                  expression: "group.scan.districts"
+                }
+              })
             ],
             1
           )
@@ -109309,20 +109302,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['group'],
+    props: ['value'],
 
     data: function data() {
         return {
-            'districts': [],
+            'alldistricts': [],
             'selecteddistricts': [],
             'districtsearch': ''
         };
@@ -109341,13 +109329,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     computed: {
         filtereddistricts: function filtereddistricts() {
-            var filteredarray = this.districts;
+            var filteredarray = this.alldistricts;
             var home = this;
             if (home.districtsearch == '') {
                 return [];
             }
             filteredarray = [];
-            this.districts.forEach(function (thisdistrict) {
+            this.alldistricts.forEach(function (thisdistrict) {
                 if (thisdistrict.name.toLowerCase().includes(home.districtsearch.toLowerCase())) {
                     filteredarray.push(thisdistrict);
                 }
@@ -109386,7 +109374,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getDistricts: function getDistricts() {
             var home = this;
             axios.get('/api/district').then(function (response) {
-                home.districts = response.data;
+                home.alldistricts = response.data;
                 home.setSelectedDistricts();
             });
         },
@@ -109402,10 +109390,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.selecteddistricts.push(thisdistrict);
             this.sortDistricts(this.selecteddistricts);
-            this.districts.splice(this.districts.indexOf(thisdistrict), 1);
+            this.alldistricts.splice(this.alldistricts.indexOf(thisdistrict), 1);
             this.filtereddistricts.splice(this.filtereddistricts.indexOf(thisdistrict), 1);
             // this.$forceUpdate();
             this.districtsearch = '';
+            this.$emit('input', this.selecteddistricts);
             this.$nextTick(function () {
                 return _this2.$refs.input.focus();
             });
@@ -109414,25 +109403,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         removeDistrictFromSelection: function removeDistrictFromSelection(thisdistrict) {
             var _this3 = this;
 
-            this.districts.push(thisdistrict);
+            this.alldistricts.push(thisdistrict);
             this.sortDistricts(this.filtereddistricts);
             this.selecteddistricts.splice(this.selecteddistricts.indexOf(thisdistrict), 1);
             // this.$forceUpdate();
             this.districtsearch = '';
+            this.$emit('input', this.selecteddistricts);
             this.$nextTick(function () {
                 return _this3.$refs.input.focus();
             });
         },
 
-        updateDistricts: function updateDistricts() {
-            if (this.group == 1) {
-                this.updateGroupDistricts();
-            } else if (this.group == 2) {
-                this.updateCompareDistricts();
-            } else {
-                this.updateSingleDistricts();
-            }
-        },
         updateGroupDistricts: function updateGroupDistricts() {
             var numeralDistricts = [];
             this.selecteddistricts.forEach(function (thisdistrict) {
@@ -109462,7 +109443,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.selecteddistricts.forEach(function (thisdistrict) {
                 numeralDistricts.push(thisdistrict.id);
             });
-            console.log(numeralDistricts);
             axios.post('/nieuwesoloscan/gemeenten', {
                 districts: numeralDistricts
             }).then(function (response) {
@@ -109472,16 +109452,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         setSelectedDistricts: function setSelectedDistricts() {
             var _this4 = this;
 
-            console.log('setting selected');
-            console.log(this.group.scan.districts);
-            console.log(this.districts);
-            var intersection = this.districts.filter(function (district) {
-                return _this4.group.scan.districts.map(function (district) {
+            var intersection = this.alldistricts.filter(function (district) {
+                return _this4.value.map(function (district) {
                     return district.id;
                 }).includes(district.id);
             });
             intersection.forEach(function (thisdistrict) {
-                console.log('-');
                 _this4.addDistrictToSelection(thisdistrict);
             });
         }
@@ -109534,7 +109510,7 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "col-12 overflow-hidden nowrap pt-3" },
+      { staticClass: "col-12 overflow-hidden nowrap" },
       _vm._l(_vm.filteredAndSortedDistricts.slice(0, 10), function(district) {
         return _c("label", {
           staticClass: "checkboxlabel btn btn-sm btn-secondary mr-2 clickable",
@@ -109596,27 +109572,7 @@ var render = function() {
         })
       ],
       2
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-12 p-3" }, [
-      _vm.selecteddistricts.length || _vm.group == 2
-        ? _c("div", { staticClass: "form-group text-right" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary form-control",
-                on: {
-                  click: function($event) {
-                    $event.preventDefault()
-                    return _vm.updateDistricts($event)
-                  }
-                }
-              },
-              [_vm._v("Sla gemeente(n) op")]
-            )
-          ])
-        : _vm._e()
-    ])
+    )
   ])
 }
 var staticRenderFns = []

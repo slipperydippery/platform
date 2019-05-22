@@ -66,8 +66,7 @@ class ScanController extends Controller
         $scan->amend($request->scan);
 
         if($scan->group && $scan->group->scan->id == $scan->id) {
-            $scan->group->amend($request->scan);
-            GroupUpdated::dispatch($scan->group->id, 'groupinfoupdated');
+            $scan->group->mirrorScanToGroup($scan);
         }
 
         if($scan->group) {

@@ -11,7 +11,7 @@
                 focus
             >
 		</div>
-		<div class="col-12 overflow-hidden nowrap pt-3">
+		<div class="col-12 overflow-hidden nowrap">
 			<label 
 				class="checkboxlabel btn btn-sm btn-secondary mr-2 clickable" 
 				v-for="district in filteredAndSortedDistricts.slice(0,10)"
@@ -36,11 +36,6 @@
 				{{ district.name }} <i class="material-icons md-18"> close </i>
 			</label>
 		</div>
-		<div class="col-12 p-3">
-			<div class="form-group text-right" v-if="selecteddistricts.length || group == 2">
-				<button class="btn btn-primary form-control" @click.prevent="updateDistricts">Sla gemeente(n) op</button>
-			</div>
-		</div>
 	</div>
 </template>
 
@@ -49,12 +44,12 @@
 
     export default {
         props: [
-            'group',
+            'value',
         ],
 
         data() {
             return {
-            	'districts': [],
+            	'alldistricts': [],
                 'selecteddistricts': [],
             	'districtsearch': '',
             }
@@ -69,13 +64,13 @@
 
         computed: {
         	filtereddistricts () {
-        	    var filteredarray = this.districts;
+        	    var filteredarray = this.alldistricts;
         	    var home = this;
                 if(home.districtsearch == '') {
                     return []
                 }
         	    filteredarray = [];
-    	        this.districts.forEach(function(thisdistrict){
+    	        this.alldistricts.forEach(function(thisdistrict){
     	            if(thisdistrict.name.toLowerCase().includes(home.districtsearch.toLowerCase())) {
     	                filteredarray.push(thisdistrict);
     	            } 
@@ -116,7 +111,7 @@
         		var home = this;
         		axios.get('/api/district')
         			.then(function(response) {
-        				home.districts = response.data;
+        				home.alldistricts = response.data;
         				home.setSelectedDistricts();
         			})
         	},
@@ -130,31 +125,22 @@
             addDistrictToSelection: function(thisdistrict) {
                 this.selecteddistricts.push(thisdistrict);
                 this.sortDistricts(this.selecteddistricts);
-                this.districts.splice(this.districts.indexOf(thisdistrict), 1);
+                this.alldistricts.splice(this.alldistricts.indexOf(thisdistrict), 1);
                 this.filtereddistricts.splice(this.filtereddistricts.indexOf(thisdistrict), 1);
                 // this.$forceUpdate();
                 this.districtsearch = '';
+                this.$emit('input', this.selecteddistricts) ;
                 this.$nextTick(() => this.$refs.input.focus());
             },
 
             removeDistrictFromSelection: function(thisdistrict) {
-                this.districts.push(thisdistrict);
+                this.alldistricts.push(thisdistrict);
                 this.sortDistricts(this.filtereddistricts); 
                 this.selecteddistricts.splice(this.selecteddistricts.indexOf(thisdistrict), 1);
                 // this.$forceUpdate();
                 this.districtsearch = '';
+                this.$emit('input', this.selecteddistricts) ;
                 this.$nextTick(() => this.$refs.input.focus());
-            },
-
-            updateDistricts() {
-                if(this.group == 1) {
-                    this.updateGroupDistricts();
-                } else if(this.group == 2) {
-                    this.updateCompareDistricts();
-                } else {
-                    this.updateSingleDistricts();
-                }
-
             },
 
             updateGroupDistricts() {
@@ -188,7 +174,6 @@
                 this.selecteddistricts.forEach( (thisdistrict) => {
                     numeralDistricts.push(thisdistrict.id);
                 });
-                console.log(numeralDistricts);
                 axios.post('/nieuwesoloscan/gemeenten', {
                     districts: numeralDistricts,
                 })
@@ -198,12 +183,8 @@
             },
 
             setSelectedDistricts() {
-            	console.log('setting selected');
-            	console.log(this.group.scan.districts);
-            	console.log(this.districts);
-                var intersection = this.districts.filter( district => this.group.scan.districts.map( district => district.id ).includes( district.id ) );
+                var intersection = this.alldistricts.filter( district => this.value.map( district => district.id ).includes( district.id ) );
                 intersection.forEach( thisdistrict => {
-                	console.log('-');
                     this.addDistrictToSelection(thisdistrict);
                 } )
             },
