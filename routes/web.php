@@ -16,8 +16,10 @@ Route::post('2fa', 'TwoFactorController@verifyTwoFactor');
 Route::get('/', 'PagesController@dashboard')->name('home');
 Route::get('/dashboard', 'PagesController@dashboard')->name('dashboard');
 
-// Info pages
+// Info & website pages
 Route::get('/cookies', 'PagesController@cookies')->name('cookies');
+Route::get('/introductiefilm', 'PagesController@introductiefilm')->name('introductiefilm');
+Route::get('/cijfersuitderegio', 'PagesController@cijfersuitderegio')->name('cijfersuitderegio');
 
 /**
  *  Create Scans
@@ -50,19 +52,11 @@ Route::get('/groep/{group}/sluitaan/{code}', 'JoinGroupScanController@addscan')-
 Route::post('/groep/{group}/sluitaan/{code}', 'JoinGroupScanController@storescan')->name('joingroupscan.storescan');	
 Route::get('/groep/{scan}/aangesloten', 'JoinGroupScanController@created')->name('joingroupscan.created');	
 
-
-// Manage Scan
-// Route::post('/groep/{group}/promoot', 'ManageGroupScanController@promoteuser')->name('managegroupscan.promoteuser');
+// Manage Scan & Group
 Route::get('/groep/{group}/ontgrendel', 'ManageGroupScanController@unlock')->name('managegroupscan.unlock');
-
-// Scan Pages
-Route::get('/introductiefilm', 'PagesController@introductiefilm')->name('introductiefilm');
-Route::get('/cijfersuitderegio', 'PagesController@cijfersuitderegio')->name('cijfersuitderegio');
-
-
-
-
 Route::resource('scan', 'ScanController');
+
+// Scan and pages
 Route::get('/scan/{scan}/start', 'ScanPagesController@start')->name('scan.start');
 Route::get('/sessie/{scan}/introductiefilm', 'ScanPagesController@introductiefilm')->name('scan.introductiefilm');
 Route::get('/sessie/{scan}/kennismaken', 'ScanPagesController@kennismaken')->name('scan.kennismaken');
@@ -85,6 +79,7 @@ Route::get('/sessie/{scan}/resultaten', 'ScanPagesController@results')->name('sc
 Route::get('/sessie/{scan}/verbeterpunten', 'ScanPagesController@measures')->name('scan.measures');
 Route::get('/sessie/{scan}/mailverbeterpunten', 'ScanPagesController@mailmeasures')->name('scan.mailmeasures');
 
+// Comparison
 Route::get('/sessie/{scan}/vergelijking/regios', 'CreateComparisonController@districts')->name('createcomparison.districts');
 Route::post('/sessie/{scan}/vergelijking/regios', 'CreateComparisonController@storedistricts')->name('createcomparison.storedistricts');
 Route::get('/sessie/{scan}/vergelijking/instantie', 'CreateComparisonController@instantie')->name('createcomparison.instantie');
@@ -92,12 +87,10 @@ Route::post('/sessie/{scan}/vergelijking/instantie', 'CreateComparisonController
 Route::get('/sessie/{scan}/vergelijking/sessies', 'CreateComparisonController@scans')->name('createcomparison.scans');
 Route::post('/sessie/{scan}/vergelijking/sessies', 'CreateComparisonController@storescans')->name('createcomparison.storescans');
 
-
-
+// Resources
 Route::resource('article', 'ArticleController');
 Route::resource('articletype', 'ArticletypeController');
 Route::resource('group', 'GroupController');
 Route::resource('user', 'UserController');
 Route::resource('comparison', 'ComparisonController');
-// Route::resource('inventarisatie', 'InventarisatieController');
 

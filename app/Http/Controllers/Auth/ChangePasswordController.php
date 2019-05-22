@@ -25,11 +25,12 @@ class ChangePasswordController extends Controller
 
     public function update(Request $request)
     {
-    	$user = Auth::user();
     	$validatedData = $request->validate([
     	    'oldpassword' => ['required', 'string', 'min:6'],
     	    'password' => ['required', 'string', 'min:6', 'confirmed'],
     	]);
+
+    	$user = Auth::user();
 
     	if (! Hash::check($request->oldpassword, $user->password)) {
     		return redirect()->back()->withErrors(['oldpassword' => 'Je hebt het verkeerde wachtwoord ingevoerd']);
@@ -37,8 +38,9 @@ class ChangePasswordController extends Controller
 
     	$user->password = Hash::make($request->password);
     	$user->save();
-    	session()->flash('status', 'Je wachtwoord is aangepast');
-    	return redirect()->route('dashboard');
 
+    	session()->flash('status', 'Je wachtwoord is aangepast');
+        
+    	return redirect()->route('dashboard');
     }
 }
