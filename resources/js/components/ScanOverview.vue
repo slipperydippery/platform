@@ -24,7 +24,7 @@
             <strong>Gemeenten: </strong>
             <em v-for="(district, index) in group.scan.districts"><span v-html="district.name"></span><span v-if="index !== group.scan.districts.length - 1">, </span></em>
             <br>
-            <strong>Datum sessie:</strong> {{ group.datetime }}
+            <strong>Datum sessie:</strong> <format-date v-model="group.datetime"></format-date>
             <br>
             <strong>Aansluitcode:</strong> {{ group.code }}
             <br>
@@ -121,7 +121,6 @@
 </template>
 
 <script>
-    import {store} from '../app.js';
 
     export default {
         props: [

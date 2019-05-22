@@ -21,7 +21,11 @@
 
 	        	<div class="form-group">
 				    <label for="titleInput"><h5>Datum sessie</h5></label> <br>
-		            {{ group.datetime }}
+				    <format-date
+			            v-model="group.datetime"
+			            class="mb-2 d-block font-italic"
+				    >
+				    </format-date>
 		        	<date-picker
 		        	    v-model="group.datetime"
 		        	>

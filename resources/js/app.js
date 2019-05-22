@@ -23,6 +23,7 @@ Vue.use(BootstrapVue);
 Vue.use(PortalVue);
 
 
+
 export let store = {
 	scan: {
 		answers: [
@@ -133,6 +134,7 @@ Vue.component('message-user-dropdown-modal', require('./components/MessageUserDr
 Vue.component('edit-input', require('./components/EditInput.vue'));
 Vue.component('edit-dateinput', require('./components/EditDateInput.vue'));
 Vue.component('lock-toggle', require('./components/LockToggle.vue'));
+Vue.component('format-date', require('./components/FormatDate.vue'));
 
 const app = new Vue({
     el: '#app',
