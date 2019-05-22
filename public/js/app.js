@@ -990,6 +990,7 @@ Vue.component('result-slider-average', __webpack_require__(693));
 Vue.component('average-slider', __webpack_require__(696));
 
 Vue.component('mini-measure', __webpack_require__(699));
+Vue.component('involve-youths-checkbox', __webpack_require__(791));
 Vue.component('big-measure', __webpack_require__(702));
 Vue.component('frontrunner', __webpack_require__(705));
 
@@ -1013,7 +1014,6 @@ Vue.component('edit-article-modal', __webpack_require__(749));
 
 // Utility
 Vue.component('countdown', __webpack_require__(752));
-
 Vue.component('join-with-code', __webpack_require__(755));
 
 // Controlled Components
@@ -108153,6 +108153,145 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 785 */,
+/* 786 */,
+/* 787 */,
+/* 788 */,
+/* 789 */,
+/* 790 */,
+/* 791 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(6)
+/* script */
+var __vue_script__ = __webpack_require__(792)
+/* template */
+var __vue_template__ = __webpack_require__(793)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/InvolveYouthsCheckbox.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e5f15eb6", Component.options)
+  } else {
+    hotAPI.reload("data-v-e5f15eb6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 792 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['scan'],
+
+    methods: {
+        saveScan: function saveScan() {
+            var home = this;
+            axios.patch('/api/scan/' + this.scan.id, {
+                scan: home.scan
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 793 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "h5",
+    [
+      _c(
+        "b-form-checkbox",
+        {
+          attrs: {
+            id: "checkbox-1",
+            name: "checkbox-1",
+            value: "1",
+            "unchecked-value": "0"
+          },
+          on: { change: _vm.saveScan },
+          model: {
+            value: _vm.scan.involve_youths,
+            callback: function($$v) {
+              _vm.$set(_vm.scan, "involve_youths", $$v)
+            },
+            expression: "scan.involve_youths"
+          }
+        },
+        [
+          _vm._v(
+            "\n\t\tWij betrekken jongeren bij het uitwerken van de verbeterpunten\n\t"
+          )
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-e5f15eb6", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

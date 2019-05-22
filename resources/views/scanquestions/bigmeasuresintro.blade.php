@@ -11,15 +11,24 @@
 		</div>
 		<div class="row">
 			<div class="col-md-8 offset-md-2">
-				<div class="card">
+				<div class="card my-4">
 					<div class="card-header bg-primary text-white">
 						Betrekken we jongeren?
 					</div>
 					<div class="card-body text-center">
 						<span>
 							
-							
-							<h5> <input type="checkbox" checked> Wij betrekken jongeren bij het uitwerken van de verbeterpunten</h5>
+							@php
+								$mainscan = $scan;
+								if( $scan->group ){
+									$mainscan = $scan->group->scan;
+								}
+							@endphp
+							<involve-youths-checkbox
+								:scan = '{{ json_encode($mainscan) }}'
+							>
+							</involve-youths-checkbox>
+
 							
 						</span>
 					</div>

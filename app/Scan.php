@@ -130,11 +130,13 @@ class Scan extends Model
             $this->description      = $attributes['description'];
             $this->algemeenbeeld    = $attributes['algemeenbeeld'];
             $this->instantie_id     = $attributes['instantie_id'];
+            $this->involve_youths   = $attributes['involve_youths'];
         } else {
             $this->title            = $attributes->title;
             $this->description      = $attributes->description;
             $this->algemeenbeeld    = $attributes->algemeenbeeld;
             $this->instantie_id     = $attributes->instantie_id;
+            $this->involve_youths   = $attributes->involve_youths;
         }
 
         return $this->save();

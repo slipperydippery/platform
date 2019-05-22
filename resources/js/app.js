@@ -94,6 +94,7 @@ Vue.component('result-slider-average', require('./components/ResultSliderAverage
 Vue.component('average-slider', require('./components/AverageSlider.vue'));
 
 Vue.component('mini-measure', require('./components/MiniMeasure.vue'));
+Vue.component('involve-youths-checkbox', require('./components/InvolveYouthsCheckbox.vue'));
 Vue.component('big-measure', require('./components/BigMeasure.vue'));
 Vue.component('frontrunner', require('./components/Frontrunner.vue'));
 
@@ -117,7 +118,6 @@ Vue.component('edit-article-modal', require('./components/EditArticleModal.vue')
 
 // Utility
 Vue.component('countdown', require('./components/Countdown.vue'));
-
 Vue.component('join-with-code', require('./components/JoinWithCode.vue'));
 
 
