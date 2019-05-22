@@ -6,6 +6,7 @@
 				:value = "newArticle"
 				:modal_id = "'newArticleModal'"
 				:scanmodel = "this.scanmodel"
+                ref="newArticleModal"
 
 				:newarticle = true
 				@saveArticle = "saveArticle"
@@ -148,6 +149,23 @@
         		} )
         	},
 
+            resetNewArticle() {
+                console.log('resetting article');
+                console.log(this.newArticle);
+                this.newArticle = {
+                    title: '',
+                    description: '',
+                    linktype: '',
+                    link: '',
+                    file: '',
+                    year: '',
+                    articletypes: [],
+                    questions: [],
+                    }
+                this.$refs.newArticleModal.setArticle(this.newArticle);
+                console.log(this.newArticle);
+            },
+
         	saveArticle(article) {
         		if(this.saving == true) return '';
         		this.saving = true;
@@ -161,17 +179,10 @@
 				    }
 				})
         		.then( response => {
+                    console.log('response is here');
         			this.articles = response.data;
-        			this.newArticle = {
-	            		title: '',
-	            		description: '',
-		            	linktype: '',
-	            		link: '',
-		            	file: '',
-	            		year: '',
-		            	articletypes: [],
-		            	questions: [],
-		            	}
+                    console.log('going to reset the new article');
+        			this.resetNewArticle();
 	        		this.addingArticle = false;
 	        		this.saving = false;
         		} )

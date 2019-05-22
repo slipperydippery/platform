@@ -8,12 +8,12 @@
 					<h5 class="card-header bg-primary text-white">Klaar!</h5>
 					<div class="card-body">
 						<h5 class="card-title">Nodig je netwerkpartners uit</h5>
-						<p>Weet je al precies wie je wilt uitnodigen? Stuur de deelnemers een email met de volgende code:</p>
+						<p>Weet je al precies wie je wilt uitnodigen? Stuur de deelnemers de volgende code:</p>
 
-						<div class="alert alert-primary" role="alert">
-						    <span id="groupcode">{{ Request::root() }}/groep/{{ $scan->group->id }}/sluitaan/{{ $scan->group->code }}</span> 
+						<div class="alert alert-primary text-center" role="alert">
+						    <span id="groupcode">{{ $scan->group->code }}</span> 
 						    <copy-icon
-						        copy_content=" {{ Request::root() }}/groep/{{ $scan->group->id }}/sluitaan/{{ $scan->group->code }} "
+						        copy_content=" {{ $scan->group->code }} "
 						    >
 						    </copy-icon>
 						</div>

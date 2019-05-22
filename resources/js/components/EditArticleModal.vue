@@ -106,6 +106,10 @@
         		this.$emit('saveArticleChanges', this.newValue);
         	},
 
+        	setArticle(article) {
+        		this.newValue = article;
+        	},
+
         	toggleArticletype(article, articletype) {
         		if ( ! article.articletypes || !  article.articletypes.map( articletype => articletype.id ).includes( articletype.id ) ) {
         			article.articletypes.push(articletype)
