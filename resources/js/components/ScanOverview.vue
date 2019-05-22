@@ -21,13 +21,20 @@
 	        </h4>
         </div>
         <div class="col-12">
-            <strong>Gemeenten: </strong>
-            <em v-for="(district, index) in group.scan.districts"><span v-html="district.name"></span><span v-if="index !== group.scan.districts.length - 1">, </span></em>
-            <br>
-            <strong>Datum sessie:</strong> <format-date v-model="group.datetime"></format-date>
-            <br>
-            <strong>Aansluitcode:</strong> {{ group.code }}
-            <br>
+            <div class=" d-flex">
+                <div class="text-right">
+                    <strong>Gemeenten: </strong>   <br>      
+                    <strong>Datum sessie:</strong>  <br>
+                    <strong>Aansluitcode: </strong> <br>
+                </div>
+                <div class="ml-1 flex-grow">
+                    <em v-for="(district, index) in group.scan.districts"><span v-html="district.name"></span><span v-if="index !== group.scan.districts.length - 1">, </span></em> <br>
+                    <format-date v-model="group.datetime"></format-date> <br>
+                    {{ group.code }}
+                </div>
+
+            </div>
+            
         </div>
 
         <div class="col-12 my-2 d-flex justify-content-end">

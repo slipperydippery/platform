@@ -120882,6 +120882,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -121114,45 +121121,48 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "col-12" },
-            [
-              _c("strong", [_vm._v("Gemeenten: ")]),
+          _c("div", { staticClass: "col-12" }, [
+            _c("div", { staticClass: " d-flex" }, [
+              _vm._m(0),
               _vm._v(" "),
-              _vm._l(_vm.group.scan.districts, function(district, index) {
-                return _c("em", [
-                  _c("span", {
-                    domProps: { innerHTML: _vm._s(district.name) }
+              _c(
+                "div",
+                { staticClass: "ml-1 flex-grow" },
+                [
+                  _vm._l(_vm.group.scan.districts, function(district, index) {
+                    return _c("em", [
+                      _c("span", {
+                        domProps: { innerHTML: _vm._s(district.name) }
+                      }),
+                      index !== _vm.group.scan.districts.length - 1
+                        ? _c("span", [_vm._v(", ")])
+                        : _vm._e()
+                    ])
                   }),
-                  index !== _vm.group.scan.districts.length - 1
-                    ? _c("span", [_vm._v(", ")])
-                    : _vm._e()
-                ])
-              }),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c("strong", [_vm._v("Datum sessie:")]),
-              _vm._v(" "),
-              _c("format-date", {
-                model: {
-                  value: _vm.group.datetime,
-                  callback: function($$v) {
-                    _vm.$set(_vm.group, "datetime", $$v)
-                  },
-                  expression: "group.datetime"
-                }
-              }),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c("strong", [_vm._v("Aansluitcode:")]),
-              _vm._v(" " + _vm._s(_vm.group.code) + "\n            "),
-              _c("br")
-            ],
-            2
-          ),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c("format-date", {
+                    model: {
+                      value: _vm.group.datetime,
+                      callback: function($$v) {
+                        _vm.$set(_vm.group, "datetime", $$v)
+                      },
+                      expression: "group.datetime"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.group.code) +
+                      "\n                "
+                  )
+                ],
+                2
+              )
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-12 my-2 d-flex justify-content-end" }, [
             _c(
@@ -121191,7 +121201,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "col-12" }, [
             _c("table", { staticClass: "table table-sm" }, [
-              _vm._m(0),
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -121371,6 +121381,24 @@ var render = function() {
     : _vm._e()
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-right" }, [
+      _c("strong", [_vm._v("Gemeenten: ")]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("strong", [_vm._v("Datum sessie:")]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("strong", [_vm._v("Aansluitcode: ")]),
+      _vm._v(" "),
+      _c("br")
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
