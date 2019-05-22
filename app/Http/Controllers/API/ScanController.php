@@ -64,6 +64,10 @@ class ScanController extends Controller
     public function update(Request $request, Scan $scan)
     {
         $scan->amend($request->scan);
+        if(isset($request->scan['districts']))
+        {
+             $scan->amendDistricts($request->scan['districts']);
+        }
 
         if($scan->group && $scan->group->scan->id == $scan->id) {
             $scan->group->mirrorScanToGroup($scan);
