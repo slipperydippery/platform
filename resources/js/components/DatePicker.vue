@@ -1,10 +1,12 @@
 <template>
-	<input 
-		:value = "value"
-		type="text"
-		class="flatpickr--input"
-		ref="input"
-	>
+    <section>
+    	<input 
+    		:value = "value"
+    		type="text"
+    		class="flatpickr--input"
+    		ref="input"
+    	>
+    </section>
 </template>
 
 <script>
@@ -21,7 +23,6 @@
         		"locale": Dutch,
         		enableTime: true,
         		inline: true,
-        		weekNumbers: true,
         		minDate: "today",
 	    		time_24hr: true,
 	    		onChange: (dateObject, dateString) => {

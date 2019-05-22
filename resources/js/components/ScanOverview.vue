@@ -1,34 +1,23 @@
 <template>
 	<div class="py-2 my-4 bg-white text-secondary border shadow"  v-if="group.user && isInGroup">
         <div class="col-12 pt-2">
-            <h4>
-                <a href=" #scanstart " class="flex-grow-1 nowrap text-uppercase"> {{ group.title }} </a> 
-                <a :href="'/scan/' + scan_id + '/edit'">
-	                <i class="material-icons float-right clickable"
-	                	v-b-tooltip.hover title="Bewerk sessie"
-	                	v-if="isAdmin"
-	            	>
-	            		edit
-		            </i>
-	            </a>
-                <i 
-                	class="material-icons float-right" 
-                	v-b-tooltip.hover title="Sessie is vergrendeld"
-                	:class="{clickable: isAdmin}"
-                	v-if="! group.unlocked"
-                	@click="toggleLock()"
-            	> 
-            		lock 
-            	</i>
-        	    <i 
-        	    	class="material-icons float-right" 
-        	    	v-b-tooltip.hover title="Sessie is ontgrendeld"
-        	    	:class="{clickable: isAdmin}"
-        	    	v-if="group.unlocked"
-        	    	@click="toggleLock()"
-        		> 
-        			lock_open
-        		</i>
+            <lock-toggle
+                v-model="group.unlocked"
+                :class="{clickable: isAdmin}"
+                class="float-right"
+                @input="updateGroupIfAdmin(group_id)"
+            >
+            </lock-toggle>
+            <edit-group-icon-modal
+                :group="group"
+                v-if="isAdmin"
+                @saveChanges="updateGroupIfAdmin(group_id)"
+                @cancelChanges="getGroup(group_id)"
+            >
+            </edit-group-icon-modal>
+
+            <h4 class="flex-grow-1 nowrap text-uppercase">
+                {{ group.title }}
 	        </h4>
         </div>
         <div class="col-12">
@@ -268,11 +257,19 @@
         			});
         	},
 
+            updateGroupIfAdmin(group_id) {
+                if(this.isAdmin) this.updateGroup(group_id)
+            },
+
         	updateGroup(group_id) {
+                console.log('updating');
         		var home = this;
         		axios.patch('api/group/' + group_id, {
         			'group' : home.group
         		})
+                axios.patch('api/scan/' + home.group.scan.id, {
+                    'scan': home.group.scan
+                })
         	},
 
             removeParticipant(scan) {

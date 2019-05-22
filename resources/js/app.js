@@ -110,7 +110,10 @@ Vue.component('edit-scan', require('./components/EditScan.vue'));
 Vue.component('edit-districts', require('./components/EditDistricts'));
 
 Vue.component('scan-overview', require('./components/ScanOverview.vue'));
+Vue.component('edit-group-icon-modal', require('./components/EditGroupIconModal.vue'));
+Vue.component('edit-group', require('./components/EditGroup.vue'));
 Vue.component('comparison-overview', require('./components/ComparisonOverview.vue'));
+Vue.component('district-input', require('./components/DistrictInput.vue'));
 
 Vue.component('manage-articletypes', require('./components/ManageArticletypes.vue'));
 Vue.component('manage-articles', require('./components/ManageArticles.vue'));
@@ -127,6 +130,9 @@ Vue.component('copy-icon', require('./components/CopyIcon.vue'));
 Vue.component('promote-user-dropdown-modal', require('./components/PromoteUserDropdownModal.vue'));
 Vue.component('remove-user-dropdown-modal', require('./components/RemoveUserDropdownModal.vue'));
 Vue.component('message-user-dropdown-modal', require('./components/MessageUserDropdownModal.vue'));
+Vue.component('edit-input', require('./components/EditInput.vue'));
+Vue.component('edit-dateinput', require('./components/EditDateInput.vue'));
+Vue.component('lock-toggle', require('./components/LockToggle.vue'));
 
 const app = new Vue({
     el: '#app',

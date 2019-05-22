@@ -51,6 +51,8 @@
                 :user_id = " '{{ Auth::user()->id }}' "
             >
             </scan-overview>
+            @component('components.editgroupcomponent', ['thisgroup' =>$scan->group])
+            @endcomponent
             
             @foreach ($scan->group->scans as $thisscan)
                 <portal to="modals">

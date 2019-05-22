@@ -5,6 +5,7 @@ namespace App;
 use App\Scan;
 use App\User;
 use App\Followup;
+use App\Events\GroupUpdated;
 use App\Models\Concerns\UsesUuid;
 use Illuminate\Database\Eloquent\Model;
 use Dyrynda\Database\Support\GeneratesUuid;
@@ -70,16 +71,25 @@ class Group extends Model
 
     public function amend($attributes)
     {
-        if (gettype($attributes == 'array')) {
-            $this->title            = $attributes['title'];
-        } else {
-            $this->title            = $attributes->title;
+        if (gettype($attributes == 'object')) {
+            $attributes = (array) $attributes;
         }
+
+        $this->title            = $attributes['title'];
+        $this->scan_id          = $attributes['scan_id'];
+        $this->datetime         = $attributes['datetime'];
+        $this->unlocked         = $attributes['unlocked'];
 
         $this->save();
         $this->mirrorToChildren();
         
         return $this;
+    }
+
+    public function mirrorScanToGroup($scan)
+    {
+        $this->title            = $scan->title;
+        $this->mirrorToChildren();
     }
 
     public function mirrorToChildren()
@@ -89,6 +99,7 @@ class Group extends Model
             $scan->description = $this->scan->description;
             $scan->save();
         }
+        GroupUpdated::dispatch($scan->group->id, 'groupinfoupdated');
         return $this;
     }
 

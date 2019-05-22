@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Group;
+use App\Events\GroupUpdated;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -57,15 +58,13 @@ class GroupController extends Controller
      */
     public function update(Request $request, Group $group)
     {
-        $group->title = $request['group']['title'];
-        $group->scan_id = $request['group']['scan_id'];
-        $group->datetime = $request['group']['datetime'];
-        $group->unlocked = $request['group']['unlocked'];
+        // return $request->all();
+        $group->amend($request->group);
 
         $group->save();
 
         GroupUpdated::dispatch($group->id, 'grouplockupdated');
-        
+
         return $group;
     }
 

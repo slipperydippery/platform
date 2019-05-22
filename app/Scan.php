@@ -138,8 +138,12 @@ class Scan extends Model
             $this->instantie_id     = $attributes->instantie_id;
             $this->involve_youths   = $attributes->involve_youths;
         }
-
         return $this->save();
+    }
+
+    public function amendDistricts($attributes)
+    {
+        $this->districts()->sync(map_array_to_attribute($attributes, 'id'));
     }
 
     public function registerDistricts(Scan $scan, $districts)
