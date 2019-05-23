@@ -4,6 +4,7 @@ use App\User;
 
 // Admin routes
 Route::get('/admin/loginasuser/{user_nr}', 'AdminPagesController@loginasuser')->name('loginasuser');
+Route::get('/overzichtresultaten', 'AdminPagesController@globalresults')->name('globalresults');
 
 // Auth routes
 Auth::routes(['verify' => true]);

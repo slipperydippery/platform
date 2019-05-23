@@ -47,6 +47,8 @@
 
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href=" {{ route('articletype.index') }} "> Bewerk Kennisbank </a>
+                                <a class="dropdown-item" href=" {{ route('globalresults') }} "> Bekijk alle resultaten </a>
+
                             </div>
                         </li>
                     @endif
