@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Group;
 use App\Events\GroupUpdated;
 use Illuminate\Http\Request;
+use App\Notifications\GroupRemoved;
 use App\Http\Controllers\Controller;
 
 class GroupController extends Controller
@@ -76,6 +77,22 @@ class GroupController extends Controller
      */
     public function destroy(Group $group)
     {
-        //
+        $scan = $group->scan;
+        // GroupUpdated::dispatch($group->id, 'groupinfoupdated');
+        foreach ($group->scans as $thisscan) {
+            if ($thisscan->id != $scan->id) {
+                $recipient = $thisscan->user;
+                if ($thisscan->districts->count()) {
+                    $thisscan->districts()->detach();
+                }
+                $thisscan->delete();
+                $recipient->notify(new GroupRemoved($group));
+
+            }
+        }
+        $scan->districts()->detach();
+        $scan->delete();
+        $group->delete();
+        return 'success';
     }
 }

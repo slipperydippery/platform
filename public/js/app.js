@@ -120889,6 +120889,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -121028,6 +121029,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'scan': home.group.scan
             });
         },
+        deleteGroup: function deleteGroup(group_id) {
+            var _this3 = this;
+
+            var home = this;
+            axios.delete('/api/group/' + group_id).then(function (response) {
+                _this3.group = {};
+            });
+        },
         removeParticipant: function removeParticipant(scan) {
             this.group.scans.splice(this.group.scans.indexOf(scan), 1);
             var home = this;
@@ -121105,6 +121114,9 @@ var render = function() {
                       },
                       cancelChanges: function($event) {
                         return _vm.getGroup(_vm.group_id)
+                      },
+                      deleteGroup: function($event) {
+                        return _vm.deleteGroup(_vm.group_id)
                       }
                     }
                   })
@@ -121528,6 +121540,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -121548,6 +121573,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         cancelChanges: function cancelChanges(group) {
             this.$emit('cancelChanges');
+        },
+        deleteGroup: function deleteGroup(group) {
+            this.$refs['editmodal'].hide();
+            this.$emit('deleteGroup');
         }
     }
 });
@@ -121592,10 +121621,11 @@ var render = function() {
           _c(
             "b-modal",
             {
+              ref: "editmodal",
               attrs: {
                 id: "editgroupmodal" + _vm.group.id,
                 size: "lg",
-                title: "Bewerk de groupssessie"
+                title: "Bewerk de groepssessie"
               },
               on: {
                 ok: function($event) {
@@ -121607,7 +121637,22 @@ var render = function() {
               }
             },
             [
-              _c("div", { staticClass: "form-group" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger float-right",
+                  on: {
+                    click: function($event) {
+                      return _vm.$bvModal.show(
+                        "deletegroupmodal" + _vm.group.id
+                      )
+                    }
+                  }
+                },
+                [_vm._v("verwijder scan")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group pt-5" }, [
                 _c("label", { attrs: { for: "titleInput" } }, [
                   _c("h5", [_vm._v("Titel")])
                 ]),
@@ -121681,7 +121726,44 @@ var render = function() {
                   },
                   expression: "group.scan.districts"
                 }
-              })
+              }),
+              _vm._v(" "),
+              _c(
+                "b-modal",
+                {
+                  attrs: {
+                    id: "deletegroupmodal" + _vm.group.id,
+                    title: "Weet je zeker dat je deze sessie wilt verwijderen?"
+                  },
+                  on: {
+                    ok: function($event) {
+                      return _vm.deleteGroup(_vm.group)
+                    }
+                  }
+                },
+                [
+                  _c("p", [
+                    _vm._v(
+                      "Je staat op het punt om de sessie " +
+                        _vm._s(_vm.group.scan.title) +
+                        " te verwijderen. Weet je zeker dat je dit wilt doen? "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "alert alert-danger",
+                      attrs: { role: "alert" }
+                    },
+                    [
+                      _vm._v(
+                        "\n        \t\t    Dit is een groepssessie, door deze te verwijderen worden ook alle aangesloten sessies met gegevens verwijderd!\n        \t\t"
+                      )
+                    ]
+                  )
+                ]
+              )
             ],
             1
           )

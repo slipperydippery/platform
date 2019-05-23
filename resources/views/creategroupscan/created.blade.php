@@ -13,7 +13,7 @@
 						<div class="alert alert-primary text-center" role="alert">
 						    <span id="groupcode">{{ $scan->group->code }}</span> 
 						    <copy-icon
-						        copy_content=" {{ $scan->group->code }} "
+						        copy_content="{{ $scan->group->code }}"
 						    >
 						    </copy-icon>
 						</div>

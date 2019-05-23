@@ -13,6 +13,7 @@
                 v-if="isAdmin"
                 @saveChanges="updateGroupIfAdmin(group_id)"
                 @cancelChanges="getGroup(group_id)"
+                @deleteGroup="deleteGroup(group_id)"
             >
             </edit-group-icon-modal>
 
@@ -277,6 +278,14 @@
                     'scan': home.group.scan
                 })
         	},
+
+            deleteGroup(group_id) {
+                var home = this
+                axios.delete('/api/group/' + group_id)
+                .then( response => {
+                    this.group = {};
+                } )
+            },
 
             removeParticipant(scan) {
                 this.group.scans.splice(this.group.scans.indexOf(scan), 1);

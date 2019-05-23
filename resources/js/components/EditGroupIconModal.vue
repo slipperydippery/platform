@@ -10,11 +10,13 @@
 	        <b-modal 
 	            :id="'editgroupmodal' + group.id" 
 	            size="lg"
-	            title="Bewerk de groupssessie" 
+	            title="Bewerk de groepssessie" 
+	            ref="editmodal"
 	            @ok="saveChanges(group)"
 	            @cancel="cancelChanges(group)"
 	        >
-	        	<div class="form-group">
+	        	<button class="btn btn-danger float-right" @click="$bvModal.show('deletegroupmodal' + group.id)">verwijder scan</button>
+	        	<div class="form-group pt-5">
 				    <label for="titleInput"><h5>Titel</h5></label>
 		            <input id="titleInput" type="text" v-model="group.title" class="form-control">
 	        	</div>
@@ -38,6 +40,17 @@
 	        		v-model ="group.scan.districts"
 	        	>
 	        	</district-input>
+
+	        	<b-modal 
+	        	    :id="'deletegroupmodal' + group.id" 
+	        	    title="Weet je zeker dat je deze sessie wilt verwijderen?" 
+	        	    @ok="deleteGroup(group)"
+	        	>
+	        		<p>Je staat op het punt om de sessie {{ group.scan.title }} te verwijderen. Weet je zeker dat je dit wilt doen? </p>
+	        		<div class="alert alert-danger" role="alert">
+	        		    Dit is een groepssessie, door deze te verwijderen worden ook alle aangesloten sessies met gegevens verwijderd!
+	        		</div>
+		        </b-modal>
 
 	        </b-modal>
 	    </portal>
@@ -72,6 +85,11 @@
 
         	cancelChanges(group) {
         		this.$emit('cancelChanges')
+        	},
+
+        	deleteGroup(group) {
+        		this.$refs['editmodal'].hide()
+        		this.$emit('deleteGroup')
         	},
         }
     }
