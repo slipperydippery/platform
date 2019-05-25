@@ -19,7 +19,6 @@ Route::get('/dashboard', 'PagesController@dashboard')->name('dashboard');
 
 // Info & website pages
 Route::get('/cookies', 'PagesController@cookies')->name('cookies');
-Route::get('/introductiefilm', 'PagesController@introductiefilm')->name('introductiefilm');
 Route::get('/cijfersuitderegio', 'PagesController@cijfersuitderegio')->name('cijfersuitderegio');
 
 /**

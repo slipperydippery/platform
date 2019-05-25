@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 
 class CreateComparisonController extends Controller
 {
+    /**
+     * Enforce middleware.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('owner');
+    }
+    
     public function districts(Scan $scan)
     {
         $districts = District::get();

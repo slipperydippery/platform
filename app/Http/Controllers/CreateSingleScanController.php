@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class CreateSingleScanController extends Controller
 {
+    /**
+     * Enforce middleware.
+     */
     public function __construct()
     {
         $this->middleware('auth');

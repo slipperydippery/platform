@@ -17,7 +17,6 @@ class JoinGroupScanController extends Controller
 		$this->middleware('auth');
 	}
 
-
     public function addscan(Group $group, $code)
     {
         foreach (Auth::user()->scans as $thisscan) {

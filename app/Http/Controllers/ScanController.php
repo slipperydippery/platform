@@ -12,6 +12,15 @@ use App\Notifications\GroupRemoved;
 class ScanController extends Controller
 {
     /**
+     * Enforce middleware.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('owner', ['except' => 'store']);
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -28,14 +37,7 @@ class ScanController extends Controller
      */
     public function create()
     {
-        $instanties = Instantie::get();
-        $districts = District::get();
-        $groups = Group::with('user')->get();
-        $isgroup = false;
-        if (request()->query('group')){
-            $isgroup = true;
-        }
-        return view('scan.create', compact('instanties', 'districts', 'isgroup', 'groups'));
+        //
     }
 
     /**
@@ -46,25 +48,25 @@ class ScanController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->isgroup) {
-            request()->validate([
-                'group_id' => 'required|integer',
-                'instantie_id' => 'required|integer',
-            ]);
-            if(Group::find($request->group_id)->authhasscan()){
-                return 'sorry you have a scan already bro';
-            }
-        } else {
-            request()->validate([
-                'title' => 'required|min:3|max:255',
-                'instantie_id' => 'required|integer',
-                'districts' => 'required'
-            ]);
-        }
+        // if($request->isgroup) {
+        //     request()->validate([
+        //         'group_id' => 'required|integer',
+        //         'instantie_id' => 'required|integer',
+        //     ]);
+        //     if(Group::find($request->group_id)->authhasscan()){
+        //         return 'sorry you have a scan already bro';
+        //     }
+        // } else {
+        //     request()->validate([
+        //         'title' => 'required|min:3|max:255',
+        //         'instantie_id' => 'required|integer',
+        //         'districts' => 'required'
+        //     ]);
+        // }
 
-        $scan = Scan::register($request->all());
+        // $scan = Scan::register($request->all());
 
-        return redirect()->route('scan.created', $scan);
+        // return redirect()->route('scan.created', $scan);
     }
 
     /**
@@ -86,7 +88,6 @@ class ScanController extends Controller
      */
     public function edit(Scan $scan)
     {
-        // $isgroup = $scan->group ? true : false;
         $isgroup = false;   // $isgroup = true will allow a scan to select a group to join
         $instanties = Instantie::get();
         $districts = District::get();

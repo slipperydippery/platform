@@ -10,18 +10,6 @@ use Illuminate\Http\Request;
 class PagesController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth', ['except' => ['dashboard']]);
-        $this->middleware('verified', ['except' => 'dashboard']);
-        // $this->middleware('two_factor');
-    }
-    
-    /**
      * Show the dashboard page
      * 
      * @param  User   $user the active user
@@ -37,18 +25,7 @@ class PagesController extends Controller
         session()->flash('newsinglesessionflash', session('newsinglesession'));
         session()->forget('newsinglesession');
 
-
     	return view('pages.dashboard', compact('user'));
-    }
-
-    /**
-     * Show the films page
-     * 
-     * @return \Illuminate\Http\Response
-     */
-    public function introductiefilm()
-    {
-    	return view('pages.introductiefilm');
     }
 
     /**
