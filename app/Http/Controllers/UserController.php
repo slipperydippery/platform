@@ -101,7 +101,7 @@ class UserController extends Controller
                         }
                     }
                 }
-            }
+        
             $scan->districts()->detach();
             $scan->delete();
         }

@@ -9,9 +9,18 @@
                                 <img src="/img/simplecircle_secondary_full.svg" alt="">
                             </span>
                         @else
-                            <a href=" {{ route('createcomparison.districts', $scan) }} " class="" data-toggle="tooltip" data-placement="top" title="Nieuwe vergelijking: Gemeenten">
-                                <img src="/img/simplecircle_secondary.svg" alt="">
-                            </a>
+                            @if ( $session )
+                            hol
+                            {{ $session }}
+                            hollls
+                                <a href=" {{ route('createcomparison.districts', $scan) }} " class="" data-toggle="tooltip" data-placement="top" title="Nieuwe vergelijking: Gemeenten">
+                                    <img src="/img/simplecircle_secondary_answered.svg" alt="">
+                                </a>
+                            @else
+                                <a href=" {{ route('createcomparison.districts', $scan) }} " class="" data-toggle="tooltip" data-placement="top" title="Nieuwe vergelijking: Gemeenten">
+                                    <img src="/img/simplecircle_secondary.svg" alt="">
+                                </a>
+                            @endif
                         @endif
                     </div>
                     <div class="progress-element">
