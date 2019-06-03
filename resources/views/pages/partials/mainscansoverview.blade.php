@@ -13,7 +13,7 @@
 
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body">
-                <p>De Participatiescan is een online kennis- en procestool. Via een resultaatgerichte analyse- en actiesessie ondersteunt de tool je om te komen tot een heldere werkagenda. Een lokaal/regionaal actieplan voor effectieve samenwerking voor het naar werk begeleiden van jongeren waarbij de focus ligt op werk en talent, de kwaliteit van begeleiding, effectieve samenwerking en overige randvoorwaarden. Onderzoek toont aan dat dit de belangrijkste succesfactoren zijn voor kansvergroting op de arbeidsmarkt. Met behulp van de Participatiescan wordt tijdens de analyse- en verbetersessie door jou en jouw netwerkpartners de huidige aanpak gelegd naast twintig op onderzoek gebaseerde kwaliteitsnormen. Dit mondt automatisch uit in een selectie van concrete actie- en verbeterpunten waar jullie mee aan de slag gaan. Ook biedt de Participatiescan een schat aan informatie over tools, goede praktijkvoorbeelden, cijfers, en tips om  jongeren in een kwetsbare positie succesvol te begeleiden naar de arbeidsmarkt.</p>
+                <p>De Participatiescan is een online analysetool met het doel om jongeren in een kwetsbare positie naar werk te begeleiden. Samen met netwerkpartners bekijk je de actuele situatie in jouw gemeente. Na het doorlopen van de scan heb je een concrete verbeteragenda. <a href="#" data-toggle="modal" data-target="#instructieModal">Wil je weten hoe het werkt? Klik hier.</a> </p>
             </div>
         </div>
     </div>
@@ -88,7 +88,7 @@
                 </div>
                 <div class="col-12 my-2 d-flex justify-content-end">
                     <a href=" {{ route('createcomparison.districts', $scan) }} " class="btn btn-outline-secondary btn-outline-secondary--nooutline btn-sm">Start vergelijking</a>
-                    <a href=" {{ route('scan.start', $scan) }} " class="btn btn-outline-secondary btn-sm">Start sessie</a>
+                    <a href=" {{ route('scan.start', $scan) }} " class="btn btn-secondary btn-sm">Start sessie</a>
                 </div>
                 <div class="col-12">
                     <table class="table table-sm">

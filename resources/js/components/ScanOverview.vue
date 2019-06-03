@@ -42,7 +42,7 @@
             <a href="#"  class="btn btn-outline-secondary btn-outline-secondary--nooutline btn-sm" data-toggle="modal" :data-target="'#voorbeeldmail' + group_id">Voorbeeld e-mail</a>
             
             <a :href="resultsLink" class="btn btn-outline-secondary btn-outline-secondary--nooutline btn-sm">Bekijk resultaten</a>
-            <a :href="startLink" class="btn btn-outline-secondary btn-sm">Start sessie</a>
+            <a :href="startLink" class="btn btn-secondary btn-sm">Start sessie</a>
         </div>
 
         <div class="col-12">
