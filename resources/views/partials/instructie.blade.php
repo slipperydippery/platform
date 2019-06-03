@@ -1,6 +1,6 @@
     <!-- Modal -->
     <div class="modal fade" id="instructieModal" tabindex="-1" role="dialog" aria-labelledby="instructieModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="instructieModalLabel">Hoe werkt het?</h5>
@@ -26,10 +26,8 @@
 
                     <p>Doe je de participatiescan individueel? Dan doorloop je hetzelfde proces en kun je jouw scan vergelijken met deelnemers die ook een individuele scan hebben gemaakt. Je kunt in contact komen met deelnemers door een bericht te sturen en eventueel later een groepssessie te organiseren.</p>
 
-                    <p>Weet je niet welke netwerkpartners je wilt selecteren? Klik dan hier (link naar netwerktoop). Wil je de uitgebreide handleiding lezen? Klik dan hier (link naar handleiding).</p>
-
+                    <p>Weet je niet welke netwerkpartners je wilt selecteren? Klik dan hier (link naar netwerktoop). Wil je de uitgebreide handleiding lezen?  <a href="#" class="btn"> Klik dan hier</a>.</p>
                     
-                    <a href="#" class="btn"> Lees de handleiding</a>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluit</button>

@@ -85,6 +85,12 @@ class ScanPagesController extends Controller
         return view('scan.results', compact('scan'));
     }
 
+    public function measures(Scan $scan)
+    {
+        $scan = Scan::with('group.scans.user')->find($scan->id);
+        return view('scan.measures', compact('scan'));
+    }
+
     public function mailmeasures(Scan $scan)
     {
         Auth::user()->notify(new ResultsRequested($scan));

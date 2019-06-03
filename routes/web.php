@@ -21,6 +21,7 @@ Route::get('/dashboard', 'PagesController@dashboard')->name('dashboard');
 Route::get('/cookies', 'PagesController@cookies')->name('cookies');
 Route::get('/introductiefilm', 'PagesController@introductiefilm')->name('introductiefilm');
 Route::get('/cijfersuitderegio', 'PagesController@cijfersuitderegio')->name('cijfersuitderegio');
+Route::get('/contact', 'PagesController@contact')->name('contact');
 
 /**
  *  Create Scans

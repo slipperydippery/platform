@@ -13,7 +13,7 @@
 
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
             <div class="card-body">
-                <p>De Participatiescan is een online analysetool met het doel om jongeren in een kwetsbare positie naar werk te begeleiden. Samen met netwerkpartners bekijk je de actuele situatie in jouw gemeente. Na het doorlopen van de scan heb je een concrete verbeteragenda. <a href="#" data-toggle="modal" data-target="#instructieModal">Wil je weten hoe het werkt? Klik hier.</a> </p>
+                <p>De Participatiescan is een online analysetool met het doel om jongeren in een kwetsbare positie naar werk te begeleiden. Samen met netwerkpartners bekijk je de actuele situatie in jouw gemeente. Na het doorlopen van de scan heb je een concrete verbeteragenda. Wil je weten hoe het werkt? <a href="#" data-toggle="modal" data-target="#instructieModal">Klik hier.</a>  </p>
             </div>
         </div>
     </div>
