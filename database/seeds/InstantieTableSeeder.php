@@ -40,8 +40,8 @@ class InstantieTableSeeder extends Seeder
                 'scanmodel_id' => '1'
             ],
             [
-                'title' => 'Overheid',
-                'description' => 'Overheid',
+                'title' => 'Gemeente',
+                'description' => 'Gemeente',
                 'scanmodel_id' => '1'
             ],
             [

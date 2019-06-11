@@ -16,7 +16,6 @@
                     <li>Namens welke organisatie zit je hier?</li>
                     <li>Wat doet deze organisatie?</li>
                     <li>Wat is je rol/functie binnen deze organisatie?</li>
-                    <li>Wat hoop je dat er uit deze sessie komt (wens of droom)?</li>
                 </ul>
 	        </div>
 	        <div class="align-self-end">
