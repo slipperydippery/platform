@@ -20,10 +20,11 @@
 	        </div>
 	        <div class="align-self-end">
 	        	@php
-	        		$time = (1 + $scan->group->scans->count()) * 60;
+	        		$time = $scan->group->scans->count() * 60;
 	        	@endphp
 	            <countdown 
 	            	date= " {{ $time }} "
+	            	:autostart= false
             	>
             	</countdown>
 	        </div>

@@ -1,6 +1,10 @@
 <template>
 	<div class="countdown d-flex flex-column text-center">
-        <div class="countdown--block align-self-center nowrap px-4 py-2 shadow" title="Deze klok is handig bij het uitvoeren van de scan in groepsverband.">
+
+        <div class="countdown--block align-self-center nowrap px-4 py-2 shadow clickable" v-if="! started" @click="startTimer">
+            start de tijd
+        </div>
+        <div class="countdown--block align-self-center nowrap px-4 py-2 shadow" v-if="started">
             <span class="digit">{{ minutes }}</span>:<span class="digit">{{ seconds }}</span>
         </div> 
         <div class="countdown--span font-italic text-muted mt-2">Probeer dit onderdeel binnen de tijd af te ronden</div>
@@ -9,25 +13,25 @@
 
 <script>
    export default {
-        props: [
-	        'date'
-        ],
+        props: {
+	        date: String,
+            autostart:  {
+                type: Boolean,
+                default: true
+            }
+        },
 
         data() {
             return {
             	now: Math.trunc((new Date()).getTime() / 1000),
             	event: 0,
+                started: false,
             }
         },
 
         mounted() {
-        	this.event = parseInt(this.now) + parseInt(this.date);
-        	window.setInterval(() => {
-				this.now = Math.trunc((new Date()).getTime() / 1000);
-				if(parseInt(this.now) >= parseInt(this.event)){
-					this.event = this.now;
-				}
-        	}, 1000)
+            this.started = this.autostart;
+        	this.countdown();
         },
 
         ready() {   
@@ -57,6 +61,20 @@
         },
 
         methods: {
+            startTimer() {
+                this.started = true;
+                this.countdown();
+            },
+
+            countdown() {
+                this.event = parseInt(this.now) + parseInt(this.date);
+                window.setInterval(() => {
+                    this.now = Math.trunc((new Date()).getTime() / 1000);
+                    if(parseInt(this.now) >= parseInt(this.event)){
+                        this.event = this.now;
+                    }
+                }, 1000);
+            }
         }
     }
 </script>
