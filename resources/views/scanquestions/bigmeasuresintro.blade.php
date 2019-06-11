@@ -34,6 +34,47 @@
 					</div>
 				</div>
 			</div>
+			<div class="col-md-12">
+				<div class="section__panel">
+					<div class="section__panel--title">
+						<h3>
+							Betrekken wij jongeren?
+							<i class="material-icons clickable md-36 md-36-24 bounce-fade-top" data-toggle="modal" data-target="#youthsModal"> info </i>
+						</h3>
+					</div>
+					<div class="row">
+						<div class="col-sm-3">
+							Hoe ga je jongeren betrekken?
+						</div>
+						<div class="col-sm-9 form-group">
+
+							<actionplan-youths-textarea
+								:scan = '{{ json_encode($mainscan) }}'
+							>
+							</actionplan-youths-textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="youthsModal" tabindex="-1" role="dialog" aria-labelledby="youthsModalLabel" aria-hidden="true">
+		    <div class="modal-dialog" role="document">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <h5 class="modal-title" id="youthsModalLabel"> Titel </h5>
+		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			                <span aria-hidden="true">&times;</span>
+		                </button>
+		            </div>
+		            <div class="modal-body">
+		                Body body lorem
+		            </div>
+		            <div class="modal-footer">
+		                <button type="button" class="btn btn-primary" data-dismiss="modal">sluit</button>
+		            </div>
+		        </div>
+		    </div>
 		</div>
 @stop
 

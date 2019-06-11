@@ -96,6 +96,7 @@ Vue.component('average-slider', require('./components/AverageSlider.vue'));
 
 Vue.component('mini-measure', require('./components/MiniMeasure.vue'));
 Vue.component('involve-youths-checkbox', require('./components/InvolveYouthsCheckbox.vue'));
+Vue.component('actionplan-youths-textarea', require('./components/ActionplanYouthsTextarea.vue'));
 Vue.component('big-measure', require('./components/BigMeasure.vue'));
 Vue.component('frontrunner', require('./components/Frontrunner.vue'));
 
