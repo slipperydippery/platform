@@ -30,7 +30,8 @@
                 </div>
                 <div class="ml-1 flex-grow">
                     <em v-for="(district, index) in group.scan.districts"><span v-html="district.name"></span><span v-if="index !== group.scan.districts.length - 1">, </span></em> <br>
-                    <format-date v-model="group.datetime"></format-date> <br>
+                    <format-date v-model="group.datetime" v-if="group.datetime"></format-date> 
+                    <em v-else>- nader te bepalen -</em> <br>
                     {{ group.code }}
                 </div>
 

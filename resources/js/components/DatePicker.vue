@@ -19,7 +19,8 @@
         },
 
         mounted() {
-        	flatpickr( this.$refs.input, {
+        	// flatpickr( this.$refs.input, {
+            const fp = flatpickr( this.$refs.input, {
         		"locale": Dutch,
         		enableTime: true,
         		inline: true,
@@ -31,5 +32,26 @@
 	    		defaultDate: this.value
         	});
         },
+
+        watch: {
+            value(newVal, oldVal) {// watch it
+                if(newVal == '') {
+                    flatpickr( this.$refs.input, {
+                                    "locale": Dutch,
+                                    enableTime: true,
+                                    inline: true,
+                                    minDate: "today",
+                                    time_24hr: true,
+                                    onChange: (dateObject, dateString) => {
+                                        this.$emit("input", dateString)
+                                    },
+                                    defaultDate: this.value
+                                });
+                }
+            }
+        },
+
+        methods: {
+        }
     }
 </script>

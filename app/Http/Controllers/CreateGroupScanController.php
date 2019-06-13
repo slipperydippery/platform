@@ -77,10 +77,6 @@ class CreateGroupScanController extends Controller
 
     public function storedatetime(Request $request)
     {
-        request()->validate([
-            'datetime' => 'required',
-        ]);
-
         if($missing = $this->sessionIsIncomplete()){
             return redirect()->route($missing);
         }

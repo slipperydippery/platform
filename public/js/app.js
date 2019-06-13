@@ -116047,7 +116047,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_js__ = __webpack_require__(13);
 //
 //
 //
@@ -116058,7 +116057,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -116066,7 +116067,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            'datetime': ''
+            'datetime': '',
+            nodate: false
         };
     },
     mounted: function mounted() {},
@@ -116074,7 +116076,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     computed: {},
 
-    methods: {}
+    methods: {
+        clearDate: function clearDate() {
+            this.datetime = '';
+            this.nodate = true;
+        },
+        dateSet: function dateSet() {
+            this.nodate = false;
+        }
+    }
 });
 
 /***/ }),
@@ -116111,6 +116121,7 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("date-picker", {
+        on: { input: _vm.dateSet },
         model: {
           value: _vm.datetime,
           callback: function($$v) {
@@ -116118,7 +116129,27 @@ var render = function() {
           },
           expression: "datetime"
         }
-      })
+      }),
+      _vm._v(" "),
+      !_vm.nodate
+        ? _c(
+            "button",
+            {
+              staticClass: "btn btn-secondary clickable mt-2",
+              on: {
+                click: function($event) {
+                  $event.preventDefault()
+                  return _vm.clearDate($event)
+                }
+              }
+            },
+            [_vm._v("Ik wil later een datum vaststellen")]
+          )
+        : _c(
+            "button",
+            { staticClass: "btn btn-secondary mt-2", attrs: { disabled: "" } },
+            [_vm._v(" Datum wordt later bepaald ")]
+          )
     ],
     1
   )
@@ -116213,7 +116244,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         var _this = this;
 
-        __WEBPACK_IMPORTED_MODULE_0_flatpickr___default()(this.$refs.input, {
+        // flatpickr( this.$refs.input, {
+        var fp = __WEBPACK_IMPORTED_MODULE_0_flatpickr___default()(this.$refs.input, {
             "locale": __WEBPACK_IMPORTED_MODULE_1_flatpickr_dist_l10n_nl_js__["Dutch"],
             enableTime: true,
             inline: true,
@@ -116224,7 +116256,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
             defaultDate: this.value
         });
-    }
+    },
+
+
+    watch: {
+        value: function value(newVal, oldVal) {
+            var _this2 = this;
+
+            // watch it
+            if (newVal == '') {
+                __WEBPACK_IMPORTED_MODULE_0_flatpickr___default()(this.$refs.input, {
+                    "locale": __WEBPACK_IMPORTED_MODULE_1_flatpickr_dist_l10n_nl_js__["Dutch"],
+                    enableTime: true,
+                    inline: true,
+                    minDate: "today",
+                    time_24hr: true,
+                    onChange: function onChange(dateObject, dateString) {
+                        _this2.$emit("input", dateString);
+                    },
+                    defaultDate: this.value
+                });
+            }
+        }
+    },
+
+    methods: {}
 });
 
 /***/ }),
@@ -120344,6 +120400,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -120608,15 +120665,17 @@ var render = function() {
                   _vm._v(" "),
                   _c("br"),
                   _vm._v(" "),
-                  _c("format-date", {
-                    model: {
-                      value: _vm.group.datetime,
-                      callback: function($$v) {
-                        _vm.$set(_vm.group, "datetime", $$v)
-                      },
-                      expression: "group.datetime"
-                    }
-                  }),
+                  _vm.group.datetime
+                    ? _c("format-date", {
+                        model: {
+                          value: _vm.group.datetime,
+                          callback: function($$v) {
+                            _vm.$set(_vm.group, "datetime", $$v)
+                          },
+                          expression: "group.datetime"
+                        }
+                      })
+                    : _c("em", [_vm._v("- nader te bepalen -")]),
                   _vm._v(" "),
                   _c("br"),
                   _vm._v(
