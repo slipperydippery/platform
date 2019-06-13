@@ -62,13 +62,15 @@
 		    <div class="modal-dialog" role="document">
 		        <div class="modal-content">
 		            <div class="modal-header">
-		                <h5 class="modal-title" id="youthsModalLabel"> Titel </h5>
+		                <h5 class="modal-title" id="youthsModalLabel"> Hoe betrekken wij jongeren </h5>
 		                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			                <span aria-hidden="true">&times;</span>
 		                </button>
 		            </div>
 		            <div class="modal-body">
-		                Body body lorem
+		            	<p>Bekijk de volgende documenten om inspiratie op te doen over het betrekken van jongeren:</p>
+		                <a href="/pdf/In_gesprek_met_Robin.pdf" target="_blank">In gesprek met Robin</a> <br>
+		                <a href="/pdf/voorbeeld_persona_tess.pdf" target="_blank">Voorbeeld persona Tess</a>
 		            </div>
 		            <div class="modal-footer">
 		                <button type="button" class="btn btn-primary" data-dismiss="modal">sluit</button>
@@ -76,7 +78,7 @@
 		        </div>
 		    </div>
 		</div>
-@stop
+@stop.
 
 @section('prevnext')
     <div class="row row__prevnext justify-content-between">
