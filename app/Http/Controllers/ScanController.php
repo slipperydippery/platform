@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Scan;
 use App\Group;
+use App\Measure;
 use App\District;
+use App\Question;
 use App\Instantie;
+use App\scanmodel;
 use Illuminate\Http\Request;
 use App\Notifications\GroupRemoved;
 
@@ -75,7 +78,16 @@ class ScanController extends Controller
      */
     public function show(Scan $scan)
     {
-        return view('scan.show', compact('scan'));
+        $articles = [];
+        foreach ($scan->measures as $measure) {
+            if ($measure->active) {
+                foreach ($measure->question->articles as $article) {
+                    $articles[] = $article;
+                }
+            }
+        }
+        $articles = collect($articles);
+        return view('scan.show', compact('scan', 'articles'));
     }
 
     /**

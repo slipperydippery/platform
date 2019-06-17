@@ -5,6 +5,7 @@ namespace App;
 use App\Scan;
 use App\Theme;
 use App\Answer;
+use App\Article;
 use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
@@ -22,6 +23,11 @@ class Question extends Model
     public function measures()
     {
         return $this->hasMany(Measure::class);
+    }
+
+    public function articles()
+    {
+        return $this->belongsToMany(Article::class);
     }
 
     public static function generateAnswers(Scan $scan)

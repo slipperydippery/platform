@@ -23,86 +23,35 @@
 		<div class="bd-example">
 		  <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
 		    <ol class="carousel-indicators">
-		      <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-		      <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
-		      <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+		    	@for ($chunck = 0; $chunck < ( $articles->count() / 3 ); $chunck++)
+		    		@if ($chunck == 0)
+						<li data-target="#carouselExampleCaptions" data-slide-to=" {{ $chunck }} " class="active"></li>
+	    			@else
+						<li data-target="#carouselExampleCaptions" data-slide-to=" {{ $chunck }} " class=""></li>
+		    		@endif
+		    	@endfor
 		    </ol>
 		    <div class="carousel-inner">
-		      <div class="carousel-item active">
-		      	<div class="row justify-content-center py-5">
-		      		<div class="col-3">
-				        <img src="/img/carousel2.jpg" class="d-block w-100" alt="/img/carousel2.jpg">	
-				        <div class=" d-none d-md-block">
-				          <h5>Second slide label</h5>
-				          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-				        </div>
-		      		</div>
-		      		<div class="col-3">
-				        <img src="/img/carousel2.jpg" class="d-block w-100" alt="/img/carousel2.jpg">	
-				        <div class=" d-none d-md-block">
-				          <h5>Second slide label</h5>
-				          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-				        </div>
-		      		</div>
-		      		<div class="col-3">
-				        <img src="/img/carousel2.jpg" class="d-block w-100" alt="/img/carousel2.jpg">	
-				        <div class=" d-none d-md-block">
-				          <h5>Second slide label</h5>
-				          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-				        </div>
-		      		</div>
-		      	</div>
-		      </div>
-		      <div class="carousel-item">
-		      	<div class="row justify-content-center py-5">
-		      		<div class="col-3">
-				        <img src="/img/carousel2.jpg" class="d-block w-100" alt="/img/carousel2.jpg">	
-				        <div class=" d-none d-md-block">
-				          <h5>Second slide label</h5>
-				          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-				        </div>
-		      		</div>
-		      		<div class="col-3">
-				        <img src="/img/carousel2.jpg" class="d-block w-100" alt="/img/carousel2.jpg">	
-				        <div class=" d-none d-md-block">
-				          <h5>Second slide label</h5>
-				          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-				        </div>
-		      		</div>
-		      		<div class="col-3">
-				        <img src="/img/carousel2.jpg" class="d-block w-100" alt="/img/carousel2.jpg">	
-				        <div class=" d-none d-md-block">
-				          <h5>Second slide label</h5>
-				          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-				        </div>
-		      		</div>
-		      	</div>
-		      </div>
-		      <div class="carousel-item">
-		      	<div class="row justify-content-center py-5">
-		      		<div class="col-3">
-				        <img src="/img/carousel2.jpg" class="d-block w-100" alt="/img/carousel2.jpg">	
-				        <div class=" d-none d-md-block">
-				          <h5>Second slide label</h5>
-				          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-				        </div>
-		      		</div>
-		      		<div class="col-3">
-				        <img src="/img/carousel2.jpg" class="d-block w-100" alt="/img/carousel2.jpg">	
-				        <div class=" d-none d-md-block">
-				          <h5>Second slide label</h5>
-				          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-				        </div>
-		      		</div>
-		      		<div class="col-3">
-				        <img src="/img/carousel2.jpg" class="d-block w-100" alt="/img/carousel2.jpg">	
-				        <div class=" d-none d-md-block">
-				          <h5>Second slide label</h5>
-				          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-				        </div>
-		      		</div>
-		      	</div>
-		      </div>
+		    	@foreach($articles->chunk(3) as $chunk)
+		    		@if ($loop->first)
+						<div class="carousel-item active">
+					@else
+						<div class="carousel-item">
+		    		@endif
+						<div class="row justify-content-center py-5">
+			    	        @foreach($chunk as $article)
+								<div class="col-3">
+							        <img src="/img/carousel2.jpg" class="d-block w-100" alt="/img/carousel2.jpg">	
+							        <div class=" d-none d-md-block">
+							          <h5> {!! $article->title !!} </h5>
+							          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+							        </div>
+								</div>
+			    	        @endforeach 
+						</div>
+					</div>
+		    	@endforeach
+		      
 		    </div>
 		    <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
 		      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
