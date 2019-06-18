@@ -20,7 +20,10 @@
                 @endif
             </div>
             <div class="col-md-4 main--sidebar ">
-                @include('pages.partials.sidebar')
+                <interesting-sidebar
+                    :scanmodel = " {{ json_encode( $scanmodel ) }} "
+                >
+                </interesting-sidebar>
             </div>
         </div>
     </div>

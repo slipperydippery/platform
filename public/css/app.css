@@ -15174,6 +15174,18 @@ input[type=range]:disabled::-moz-range-thumb {
   cursor: auto;
 }
 
+.sidebar--item h5 {
+  max-height: 2.6rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar--item p {
+  max-height: 4rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .container__locked {
   position: absolute;
   top: 0;
@@ -15688,6 +15700,11 @@ input.uppercase {
 
 .tooltip ul {
   text-align: left;
+}
+
+.carousel-item a {
+  text-decoration: none;
+  color: #1C154B;
 }
 
 

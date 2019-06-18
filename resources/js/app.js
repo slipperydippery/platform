@@ -114,6 +114,8 @@ Vue.component('edit-districts', require('./components/EditDistricts'));
 Vue.component('scan-overview', require('./components/ScanOverview.vue'));
 Vue.component('edit-group-icon-modal', require('./components/EditGroupIconModal.vue'));
 Vue.component('edit-group', require('./components/EditGroup.vue'));
+Vue.component('interesting-sidebar', require('./components/InterestingSidebar.vue'));
+
 Vue.component('comparison-overview', require('./components/ComparisonOverview.vue'));
 Vue.component('district-input', require('./components/DistrictInput.vue'));
 

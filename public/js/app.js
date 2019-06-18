@@ -5965,6 +5965,8 @@ Vue.component('edit-districts', __webpack_require__(866));
 Vue.component('scan-overview', __webpack_require__(869));
 Vue.component('edit-group-icon-modal', __webpack_require__(872));
 Vue.component('edit-group', __webpack_require__(875));
+Vue.component('interesting-sidebar', __webpack_require__(933));
+
 Vue.component('comparison-overview', __webpack_require__(878));
 Vue.component('district-input', __webpack_require__(881));
 
@@ -126553,6 +126555,409 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 930 */,
+/* 931 */,
+/* 932 */,
+/* 933 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(6)
+/* script */
+var __vue_script__ = __webpack_require__(934)
+/* template */
+var __vue_template__ = __webpack_require__(935)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/InterestingSidebar.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2ad76b6f", Component.options)
+  } else {
+    hotAPI.reload("data-v-2ad76b6f", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 934 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['scanmodel'],
+
+    data: function data() {
+        return {
+            'questions': [],
+            'articles': [],
+            'selectedquestion': {}
+        };
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.scanmodel.themes.forEach(function (theme) {
+            theme.questions.forEach(function (question) {
+                _this.questions.push(question);
+            });
+        });
+        this.scanmodel.articletypes.forEach(function (articletype) {
+            articletype.articles.forEach(function (article) {
+                _this.articles.push(article);
+            });
+        });
+    },
+
+
+    computed: {
+        filteredArticles: function filteredArticles() {
+            var _this2 = this;
+
+            return this.articles.filter(function (thisarticle) {
+                return thisarticle.questions.map(function (question) {
+                    return question.id;
+                }).includes(_this2.selectedquestion.id) ? true : '';
+            });
+        }
+    },
+
+    methods: {
+        setActive: function setActive(question) {
+            this.selectedquestion = question;
+        }
+    }
+});
+
+/***/ }),
+/* 935 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", {}, [
+    _c("h3", [_vm._v("Ook interessant voor jou")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("div", { staticClass: "dropdown mb-3" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "dropdown-menu",
+              attrs: { "aria-labelledby": "dropdownMenuButton" }
+            },
+            _vm._l(_vm.questions, function(question) {
+              return _c("a", {
+                staticClass: "dropdown-item",
+                attrs: { href: "#" },
+                domProps: {
+                  innerHTML: _vm._s(
+                    "Thema " +
+                      question.theme_id +
+                      " Vraag " +
+                      question.order +
+                      ": " +
+                      question.title
+                  )
+                },
+                on: {
+                  click: function($event) {
+                    return _vm.setActive(question)
+                  }
+                }
+              })
+            }),
+            0
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _vm.selectedquestion.id
+      ? _c(
+          "div",
+          _vm._l(_vm.filteredArticles, function(article) {
+            return _c(
+              "div",
+              { staticClass: "row sidebar--item position-relative mb-3" },
+              [
+                _c("div", { staticClass: "col-6" }, [
+                  _c("img", {
+                    staticClass: "img-fluid",
+                    attrs: {
+                      src:
+                        "/img/questionthumbs/question" +
+                        article.questions[0].id +
+                        ".jpg",
+                      alt: ""
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-6 px-0 position-static" }, [
+                  _c("h5", [_vm._v(" " + _vm._s(article.title) + " ")]),
+                  _vm._v(" "),
+                  _c("p", [
+                    _vm._v("\n\t\t\t\t\t" + _vm._s(article.description) + " "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "stretched-link",
+                        attrs: {
+                          href: "http://" + article.link,
+                          target: "_blank"
+                        }
+                      },
+                      [_vm._v("Bekijk")]
+                    )
+                  ])
+                ])
+              ]
+            )
+          }),
+          0
+        )
+      : _c("div", [_vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3)])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-secondary dropdown-toggle",
+        attrs: {
+          type: "button",
+          id: "dropdownMenuButton",
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false"
+        }
+      },
+      [
+        _c("i", { staticClass: "material-icons" }, [_vm._v(" search ")]),
+        _vm._v(" Informatie per succesfactor\n\t\t\t\t")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row sidebar--item position-relative" }, [
+      _c("div", { staticClass: "col-6" }, [
+        _c("img", {
+          staticClass: "img-fluid",
+          attrs: { src: "/img/individueel_thumb.jpg", alt: "" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-6 px-0 position-static" }, [
+        _c("h5", [_vm._v("Doe een individuele scan")]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v("\n\t\t\t\t\tJe kunt online ook een eigen scan maken. "),
+          _c("br"),
+          _vm._v(" "),
+          _c("a", { staticClass: "stretched-link", attrs: { href: " # " } }, [
+            _vm._v("Bekijk")
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row sidebar--item position-relative" }, [
+      _c("div", { staticClass: "col-6" }, [
+        _c("img", {
+          staticClass: "img-fluid",
+          attrs: { src: "/img/cijfers_thumb.jpg", alt: "" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-6 px-0 position-static" }, [
+        _c("h5", [_vm._v("Cijfers uit jouw regio")]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v("\n\t\t\t\t\tBekijk hier hoe jouw regio presteert. "),
+          _c("br"),
+          _vm._v(" "),
+          _c("a", { staticClass: "stretched-link", attrs: { href: " # " } }, [
+            _vm._v("Bekijk")
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row sidebar--item position-relative" }, [
+      _c("div", { staticClass: "col-6" }, [
+        _c("img", {
+          staticClass: "img-fluid",
+          attrs: { src: "/img/films_thumb.jpg", alt: "" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-6 px-0 position-static" }, [
+        _c("h5", [_vm._v("Bekijk films")]),
+        _vm._v(" "),
+        _c("p", [
+          _vm._v("\n\t\t\t\t\tWil je meer weten over de thema's van de scan? "),
+          _c("br"),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "stretched-link",
+              attrs: {
+                href: "#",
+                "data-toggle": "modal",
+                "data-target": "#filmsModal"
+              }
+            },
+            [_vm._v("Bekijk")]
+          )
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2ad76b6f", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

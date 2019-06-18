@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Scan;
 use App\User;
+use App\Scanmodel;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -37,8 +38,9 @@ class PagesController extends Controller
         session()->flash('newsinglesessionflash', session('newsinglesession'));
         session()->forget('newsinglesession');
 
+        $scanmodel = Scanmodel::with('articletypes.articles.questions', 'themes.questions')->find(1);
 
-    	return view('pages.dashboard', compact('user'));
+    	return view('pages.dashboard', compact('user', 'scanmodel'));
     }
 
     /**

@@ -10,6 +10,7 @@ use App\Question;
 use App\Instantie;
 use App\scanmodel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use App\Notifications\GroupRemoved;
 
 class ScanController extends Controller
@@ -78,14 +79,30 @@ class ScanController extends Controller
      */
     public function show(Scan $scan)
     {
+
         $articles = [];
         foreach ($scan->measures as $measure) {
             if ($measure->active) {
                 foreach ($measure->question->articles as $article) {
-                    $articles[] = $article;
+                    if(! in_array($article->id, map_array_to_attribute($articles, 'id'))){
+                        $article->matchcount = 1;
+                        // $article->relatedmeasures = [$measure];
+                        $articles[] = $article;
+                    } 
+                    else {
+                        foreach ($articles as $key => $value) {
+                            if( $value->id == $article->id ){
+                                $value->matchcount++;
+                                // $value->relatedmeasures[] = $measure;
+                            }
+                        }
+                    }
                 }
             }
         }
+        usort($articles, function($item1, $item2){
+            return $item2['matchcount'] <=> $item1['matchcount'];
+        });
         $articles = collect($articles);
         return view('scan.show', compact('scan', 'articles'));
     }
