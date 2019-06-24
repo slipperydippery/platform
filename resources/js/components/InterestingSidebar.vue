@@ -45,7 +45,7 @@
 					<h5>Doe een individuele scan</h5>
 					<p>
 						Je kunt online ook een eigen scan maken. <br>
-						<a href=" # " class="stretched-link">Bekijk</a>	
+						<a href="/nieuwesoloscan/naam" class="stretched-link">Bekijk</a>	
 					</p>
 				</div>
 			</div>
@@ -58,7 +58,7 @@
 					<h5>Cijfers uit jouw regio</h5>
 					<p>
 						Bekijk hier hoe jouw regio presteert. <br>
-						<a href=" # " class="stretched-link">Bekijk</a>	
+						<a href="/cijfersuitderegio" class="stretched-link">Bekijk</a>	
 					</p>
 				</div>
 			</div>
@@ -71,7 +71,7 @@
 					<h5>Bekijk films</h5>
 					<p>
 						Wil je meer weten over de thema's van de scan? <br>
-						<a class="stretched-link" href="#" data-toggle="modal" data-target="#filmsModal">Bekijk</a>
+						<a class="stretched-link" href="/introductiefilm" data-toggle="modal" data-target="#filmsModal">Bekijk</a>
 					</p>
 				</div>
 			</div>

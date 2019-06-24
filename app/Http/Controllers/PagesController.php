@@ -17,8 +17,8 @@ class PagesController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['dashboard']]);
-        $this->middleware('verified', ['except' => 'dashboard']);
+        // $this->middleware('auth', ['except' => ['dashboard']]);
+        // $this->middleware('verified', ['except' => 'dashboard']);
         // $this->middleware('two_factor');
     }
     

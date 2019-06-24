@@ -121834,9 +121834,14 @@ var staticRenderFns = [
           _vm._v("\n\t\t\t\t\tJe kunt online ook een eigen scan maken. "),
           _c("br"),
           _vm._v(" "),
-          _c("a", { staticClass: "stretched-link", attrs: { href: " # " } }, [
-            _vm._v("Bekijk")
-          ])
+          _c(
+            "a",
+            {
+              staticClass: "stretched-link",
+              attrs: { href: "/nieuwesoloscan/naam" }
+            },
+            [_vm._v("Bekijk")]
+          )
         ])
       ])
     ])
@@ -121860,9 +121865,14 @@ var staticRenderFns = [
           _vm._v("\n\t\t\t\t\tBekijk hier hoe jouw regio presteert. "),
           _c("br"),
           _vm._v(" "),
-          _c("a", { staticClass: "stretched-link", attrs: { href: " # " } }, [
-            _vm._v("Bekijk")
-          ])
+          _c(
+            "a",
+            {
+              staticClass: "stretched-link",
+              attrs: { href: "/cijfersuitderegio" }
+            },
+            [_vm._v("Bekijk")]
+          )
         ])
       ])
     ])
@@ -121891,7 +121901,7 @@ var staticRenderFns = [
             {
               staticClass: "stretched-link",
               attrs: {
-                href: "#",
+                href: "/introductiefilm",
                 "data-toggle": "modal",
                 "data-target": "#filmsModal"
               }
