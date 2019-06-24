@@ -4,10 +4,9 @@
 	<div class="container">
 		<div class="row ">
 			<h1 class="">Cijfers uit jouw regio</h1>
-			<p>Aenean commodo ligula eget dolor. Quisque id odio. Curabitur at lacus ac velit ornare lobortis. Morbi mollis tellus ac sapien. Quisque id mi.</p>
+			<p>In het kaartje links ziet u per arbeidsmarktregio het percentage jongeren (16-27 jaar oud) die niet naar school gaan een geen baan hebben (de zogenoemde NEET-jongeren). Hoe donkerder de regio, hoe hoger het percentage. Als u met de muis over een regio gaat, ziet u het betreffende percentage en het aantal. Aan de rechterkant kunt u verdiepende informatie in beeld brengen: voorgeschiedenis van NEET-jongeren, relatief risico, VSV/JH.</p>
 
-			<p>Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero. Donec venenatis vulputate lorem. Etiam imperdiet imperdiet orci. Nunc nec neque.</p>
-
+            <p>Deze cijfers maken inzichtelijk hoe het er in uw regio voorstaat. Cijfers zijn niet het verhaal op zich, maar vooral deel van de voedingsbodem voor een goed gesprek. <i class="material-icons clickable md-36 md-36-24 bounce-fade-top" data-toggle="modal" data-target="#regioModal"> info </i> </p>
 		</div>
 		
 		<div class="row">

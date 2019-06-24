@@ -28,17 +28,6 @@
                         </div>
                     @endif
                     <div class="progress-element">
-                        @if ( url()->current() == route('scan.regioincijfers', $scan) )
-                            <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Kennismaken">
-                                <img src="/img/simplecircle_secondary_full.svg" alt="">
-                            </span>
-                        @else
-                            <a href=" {{ route('scan.regioincijfers', $scan) }} " class="" data-toggle="tooltip" data-placement="top" title="Regio in cijfers">
-                                <img src="/img/simplecircle_secondary.svg" alt="">
-                            </a>
-                        @endif
-                    </div>
-                    <div class="progress-element">
                         @if ( url()->current() == route('scan.algemeenbeeld', $scan) )
                             <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Beoordeel de huidige gezamenlijke aanpak">
                                 <img src="/img/simplecircle_secondary_full.svg" alt="">

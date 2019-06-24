@@ -6,7 +6,7 @@
         </button>
     </div>
     <div class="modal-body">
-        <p><span><em>Hieronder zie je een voorbeeld van een e-mail die je kunt kopiëren en plakken. Als je de link ook meestuurt, kunnen jouw netwerkpartners zich direct aanmelden bij jouw sessie.</em></span></p>
+        <p><span><em>Hieronder zie je een voorbeeld van een e-mail die je kunt kopiëren en plakken. Als je de aansluitcode ook meestuurt, kunnen jouw netwerkpartners zich direct aanmelden bij jouw sessie.</em></span></p>
 
         <p>Beste netwerkpartner,</p>
 
@@ -14,7 +14,7 @@
 
         <p>Daarmee kunnen we met meerdere partijen in de regio in gesprek gaan over het vergroten van kansen op de arbeidsmarkt voor jongeren in een kwetsbare positie.</p>
 
-        <p>Klik op deze link om aan deze scan mee te doen: <a href="{{ Request::root() }}/groep/{{ $group->id }}/sluitaan/{{ $group->code }}">{{ Request::root() }}/groep/{{ $group->id }}/sluitaan/{{ $group->code }}</a></p>
+        <p>Je kunt de Participatiescan het beste doen in een moderne browser zoals Google Chrome, Firefox, Safari of Edge. Klik op deze link om aan deze scan aan te sluiten bij de groep: <a href="{{ Request::root() }}/groep/{{ $group->id }}/sluitaan/{{ $group->code }}">{{ Request::root() }}/groep/{{ $group->id }}/sluitaan/{{ $group->code }}</a></p>
 
         <p>De sessie staat gepland op: {{ date('d-m-Y', strtotime($scan->group->datetime)) }} om {{ date('H:i', strtotime($scan->group->datetime)) }}</p>
 

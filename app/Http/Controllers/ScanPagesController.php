@@ -42,7 +42,7 @@ class ScanPagesController extends Controller
     public function kennismaken(Scan $scan)
     {
         $previous = '/sessie/' . $scan->id . '/introductiefilm';
-        $next = '/sessie/' . $scan->id . '/regioincijfers';
+        $next = '/sessie/' . $scan->id . '/algemeenbeeld';
     	return view('scan.kennismaken', compact('scan', 'previous', 'next'));
     }
 
@@ -58,7 +58,10 @@ class ScanPagesController extends Controller
 
     public function algemeenbeeld(Scan $scan)
     {
-        $previous = '/sessie/' . $scan->id . '/regioincijfers';
+        $previous = '/sessie/' . $scan->id . '/introductiefilm';
+        if($scan->group) {
+            $previous = '/sessie/' . $scan->id . '/kennismaken';
+        }
         $next = '/sessie/' . $scan->id . '/algemeenbeeldresultaten';
         if( ! $scan->group) {
             $theme_id = $scan->scanmodel->themes->first()->id;
