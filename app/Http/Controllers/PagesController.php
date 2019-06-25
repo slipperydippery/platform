@@ -37,6 +37,8 @@ class PagesController extends Controller
         // Remember new Single session messessage until dashboard is viewed, and display it once.
         session()->flash('newsinglesessionflash', session('newsinglesession'));
         session()->forget('newsinglesession');
+        session()->flash('newcomparisonflash', session('newcomparison'));
+        session()->forget('newcomparison');
 
         $scanmodel = Scanmodel::with('articletypes.articles.questions', 'themes.questions')->find(1);
 

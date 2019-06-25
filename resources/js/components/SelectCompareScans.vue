@@ -37,7 +37,7 @@
             </tbody>
         </table>
         <div class="" v-if="filteredScans.length == 0"> <em> Er zijn geen scans die voldoen aan jouw gekozen criteria </em> </div>
-        <input type="submit" value="Vergelijk met deze scans" class="btn btn-primary form-control" @click="saveComparison()" v-if="selectedScans.length" />
+        <input type="submit" value="Vergelijk met deze scans" class="btn btn-primary form-control" @click.prevent="saveComparison()" v-if="selectedScans.length" />
 	</div>
 </template>
 

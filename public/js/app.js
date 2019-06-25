@@ -119331,6 +119331,7 @@ var render = function() {
             attrs: { type: "submit", value: "Vergelijk met deze scans" },
             on: {
               click: function($event) {
+                $event.preventDefault()
                 return _vm.saveComparison()
               }
             }

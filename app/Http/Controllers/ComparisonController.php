@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Comparison;
 use Illuminate\Http\Request;
 
@@ -46,6 +47,10 @@ class ComparisonController extends Controller
      */
     public function show(Comparison $comparison)
     {
+        if (Carbon::now()->subMinutes(1) <= $comparison->created_at) { //comparison is created in the past minute
+             session()->forget('createcomparison');
+             session()->put('newcomparison', $comparison);
+         } 
         return view('comparison.show', compact('comparison'));
     }
 

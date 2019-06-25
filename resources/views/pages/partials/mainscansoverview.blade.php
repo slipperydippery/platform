@@ -27,7 +27,7 @@
                 <span  id="singlescan" data-toggle="popover" data-placement="top" title="Nieuwe sessie is gemaakt!" data-content="Je individuele sessie ({{ $thisgroup->title }}) kun je vinden in dit tabblad!">
                     Dit zijn je individuele scans
                 </span>
-            @elseif ($thiscomparison = Session::get('newcomparison'))
+            @elseif ($thiscomparison = Session::get('newcomparisonflash'))
                 <span  id="singlescan" data-toggle="popover" data-placement="top" title="Nieuwe vergelijking is gemaakt!" data-content="Je nieuwe vergelijking ({{ $thiscomparison->title }}) kun je vinden in dit tabblad!">
                     Dit zijn je individuele scans
                 </span>

@@ -6,6 +6,7 @@ use App\Scan;
 use App\District;
 use App\Comparison;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 
 class ComparisonController extends Controller
@@ -40,8 +41,6 @@ class ComparisonController extends Controller
         $comparison->districts()->sync( $request->districts );
 
         $comparison->scans()->sync( map_array_to_attribute($request->scans, 'id') );
-
-        session()->forget('createcomparison');
 
         return $comparison;
     }

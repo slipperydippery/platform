@@ -37,6 +37,7 @@ class ApiComparisonController extends Controller
      */
     public function store(Request $request)
     {
+        return 'hello';
         $scan = Scan::find($request->scan['id']);
         $title = 'Vergelijking met ' . $scan->title . ' #' . ($scan->comparisons->count() + 1);
         $comparison = Comparison::create([
@@ -55,6 +56,11 @@ class ApiComparisonController extends Controller
         session()->forget('createcomparison');
 
         session()->put('newcomparison', $comparison);
+
+        Log::debug(session('newcomparison'));
+        return 'hello';
+        return $comparison;
+
         return $comparison;
     }
 
