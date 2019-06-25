@@ -2,14 +2,31 @@
 	img {
 		
 	}
+	.text-container {
+		max-height: 5.3rem;
+		overflow: hidden;
+	}
 	h5 {
 		max-height: 2.6rem;
+		// max-height: 1.3rem;
 		overflow: hidden;
 		text-overflow: ellipsis;
+		margin-bottom: 0;
+		// white-space: nowrap;
 	}
 	p {
 		max-height: 4rem;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
+	.bekijk-link {
+		// float: right;
+		display: block;
+		margin-top: -1rem;
+		opacity: 0;
+		transform: all .5s;
+	}
+}
+.sidebar--item:hover .bekijk-link {
+	opacity: 1;
 }

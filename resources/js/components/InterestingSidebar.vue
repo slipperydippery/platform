@@ -27,17 +27,19 @@
 					<img :src="'/img/questionthumbs/question' + article.questions[0].id + '.jpg'" alt="" class="img-fluid">
 				</div>
 				<div class="col-6 px-0 position-static">
-					<h5> {{ article.title }} </h5>
-					<p>
-						{{ article.description }} <br>
-						<a :href="'http://' + article.link " target="_blank" class="stretched-link">Bekijk</a>	
-					</p>
+					<div class="text-container">
+						<h5> {{ article.title }} </h5>
+						<p>
+							{{ article.description }} <br>
+						</p>
+					</div>
+					<a :href="'http://' + article.link " target="_blank" class="stretched-link bekijk-link badge badge-primary">Bekijk</a>	
 				</div>
 			</div>
 		</div>
 
 		<div v-else>
-			<div class="row sidebar--item position-relative">
+			<div class="row sidebar--item position-relative mb-3">
 				<div class="col-6">
 					<img src="/img/individueel_thumb.jpg" alt="" class="img-fluid">
 				</div>
@@ -45,12 +47,12 @@
 					<h5>Doe een individuele scan</h5>
 					<p>
 						Je kunt online ook een eigen scan maken. <br>
-						<a href="/nieuwesoloscan/naam" class="stretched-link">Bekijk</a>	
 					</p>
+					<a href="/nieuwesoloscan/naam" class="stretched-link bekijk-link badge badge-primary">Bekijk</a>	
 				</div>
 			</div>
 
-			<div class="row sidebar--item position-relative">
+			<div class="row sidebar--item position-relative mb-3">
 				<div class="col-6">
 					<img src="/img/cijfers_thumb.jpg" alt="" class="img-fluid">
 				</div>
@@ -58,12 +60,12 @@
 					<h5>Cijfers uit jouw regio</h5>
 					<p>
 						Bekijk hier hoe jouw regio presteert. <br>
-						<a href="/cijfersuitderegio" class="stretched-link">Bekijk</a>	
 					</p>
+					<a href="/cijfersuitderegio" class="stretched-link bekijk-link badge badge-primary">Bekijk</a>	
 				</div>
 			</div>
 
-			<div class="row sidebar--item position-relative">
+			<div class="row sidebar--item position-relative mb-3">
 				<div class="col-6">
 					<img src="/img/films_thumb.jpg" alt="" class="img-fluid">
 				</div>
@@ -71,8 +73,8 @@
 					<h5>Bekijk films</h5>
 					<p>
 						Wil je meer weten over de thema's van de scan? <br>
-						<a class="stretched-link" href="/introductiefilm" data-toggle="modal" data-target="#filmsModal">Bekijk</a>
 					</p>
+					<a class="stretched-link bekijk-link badge badge-primary" href="/introductiefilm" data-toggle="modal" data-target="#filmsModal">Bekijk</a>
 				</div>
 			</div>
 		</div>

@@ -121648,6 +121648,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -121766,24 +121768,29 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-6 px-0 position-static" }, [
-                  _c("h5", [_vm._v(" " + _vm._s(article.title) + " ")]),
-                  _vm._v(" "),
-                  _c("p", [
-                    _vm._v("\n\t\t\t\t\t" + _vm._s(article.description) + " "),
-                    _c("br"),
+                  _c("div", { staticClass: "text-container" }, [
+                    _c("h5", [_vm._v(" " + _vm._s(article.title) + " ")]),
                     _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "stretched-link",
-                        attrs: {
-                          href: "http://" + article.link,
-                          target: "_blank"
-                        }
-                      },
-                      [_vm._v("Bekijk")]
-                    )
-                  ])
+                    _c("p", [
+                      _vm._v(
+                        "\n\t\t\t\t\t\t" + _vm._s(article.description) + " "
+                      ),
+                      _c("br")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "stretched-link bekijk-link badge badge-primary",
+                      attrs: {
+                        href: "http://" + article.link,
+                        target: "_blank"
+                      }
+                    },
+                    [_vm._v("Bekijk")]
+                  )
                 ])
               ]
             )
@@ -121820,87 +121827,101 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row sidebar--item position-relative" }, [
-      _c("div", { staticClass: "col-6" }, [
-        _c("img", {
-          staticClass: "img-fluid",
-          attrs: { src: "/img/individueel_thumb.jpg", alt: "" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-6 px-0 position-static" }, [
-        _c("h5", [_vm._v("Doe een individuele scan")]),
+    return _c(
+      "div",
+      { staticClass: "row sidebar--item position-relative mb-3" },
+      [
+        _c("div", { staticClass: "col-6" }, [
+          _c("img", {
+            staticClass: "img-fluid",
+            attrs: { src: "/img/individueel_thumb.jpg", alt: "" }
+          })
+        ]),
         _vm._v(" "),
-        _c("p", [
-          _vm._v("\n\t\t\t\t\tJe kunt online ook een eigen scan maken. "),
-          _c("br"),
+        _c("div", { staticClass: "col-6 px-0 position-static" }, [
+          _c("h5", [_vm._v("Doe een individuele scan")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v("\n\t\t\t\t\tJe kunt online ook een eigen scan maken. "),
+            _c("br")
+          ]),
           _vm._v(" "),
           _c(
             "a",
             {
-              staticClass: "stretched-link",
+              staticClass: "stretched-link bekijk-link badge badge-primary",
               attrs: { href: "/nieuwesoloscan/naam" }
             },
             [_vm._v("Bekijk")]
           )
         ])
-      ])
-    ])
+      ]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row sidebar--item position-relative" }, [
-      _c("div", { staticClass: "col-6" }, [
-        _c("img", {
-          staticClass: "img-fluid",
-          attrs: { src: "/img/cijfers_thumb.jpg", alt: "" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-6 px-0 position-static" }, [
-        _c("h5", [_vm._v("Cijfers uit jouw regio")]),
+    return _c(
+      "div",
+      { staticClass: "row sidebar--item position-relative mb-3" },
+      [
+        _c("div", { staticClass: "col-6" }, [
+          _c("img", {
+            staticClass: "img-fluid",
+            attrs: { src: "/img/cijfers_thumb.jpg", alt: "" }
+          })
+        ]),
         _vm._v(" "),
-        _c("p", [
-          _vm._v("\n\t\t\t\t\tBekijk hier hoe jouw regio presteert. "),
-          _c("br"),
+        _c("div", { staticClass: "col-6 px-0 position-static" }, [
+          _c("h5", [_vm._v("Cijfers uit jouw regio")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v("\n\t\t\t\t\tBekijk hier hoe jouw regio presteert. "),
+            _c("br")
+          ]),
           _vm._v(" "),
           _c(
             "a",
             {
-              staticClass: "stretched-link",
+              staticClass: "stretched-link bekijk-link badge badge-primary",
               attrs: { href: "/cijfersuitderegio" }
             },
             [_vm._v("Bekijk")]
           )
         ])
-      ])
-    ])
+      ]
+    )
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row sidebar--item position-relative" }, [
-      _c("div", { staticClass: "col-6" }, [
-        _c("img", {
-          staticClass: "img-fluid",
-          attrs: { src: "/img/films_thumb.jpg", alt: "" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-6 px-0 position-static" }, [
-        _c("h5", [_vm._v("Bekijk films")]),
+    return _c(
+      "div",
+      { staticClass: "row sidebar--item position-relative mb-3" },
+      [
+        _c("div", { staticClass: "col-6" }, [
+          _c("img", {
+            staticClass: "img-fluid",
+            attrs: { src: "/img/films_thumb.jpg", alt: "" }
+          })
+        ]),
         _vm._v(" "),
-        _c("p", [
-          _vm._v("\n\t\t\t\t\tWil je meer weten over de thema's van de scan? "),
-          _c("br"),
+        _c("div", { staticClass: "col-6 px-0 position-static" }, [
+          _c("h5", [_vm._v("Bekijk films")]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n\t\t\t\t\tWil je meer weten over de thema's van de scan? "
+            ),
+            _c("br")
+          ]),
           _vm._v(" "),
           _c(
             "a",
             {
-              staticClass: "stretched-link",
+              staticClass: "stretched-link bekijk-link badge badge-primary",
               attrs: {
                 href: "/introductiefilm",
                 "data-toggle": "modal",
@@ -121910,8 +121931,8 @@ var staticRenderFns = [
             [_vm._v("Bekijk")]
           )
         ])
-      ])
-    ])
+      ]
+    )
   }
 ]
 render._withStripped = true

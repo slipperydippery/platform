@@ -71,11 +71,11 @@
                         @foreach ($theme->questions as $question)
                             <div class="progress-element progress-element__layer2">
                                 @if ( url()->current() == route('scanquestions.show', [$scan, $theme, $question]) )
-                                    <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Vraag {{ $question->id }}">
+                                    <span class="imgcontainer" data-toggle="tooltip" data-placement="top" title="Vraag {{ $question->order }}">
                                         <img src="/img/simplecircle_secondary_full.svg" alt="">
                                     </span>
                                 @else
-                                    <a href=" {{ route('scanquestions.show', [$scan, $theme, $question]) }} " class="" data-toggle="tooltip" data-placement="top" title="Vraag {{ $question->id }}">
+                                    <a href=" {{ route('scanquestions.show', [$scan, $theme, $question]) }} " class="" data-toggle="tooltip" data-placement="top" title="Vraag {{ $question->order }}">
                                         @if ( ($question->answers->where('scan_id', $scan->id)->first)->answer )
                                             <img src="/img/simplecircle_secondary_answered.svg" alt="">
                                         @else

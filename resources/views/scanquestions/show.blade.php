@@ -15,7 +15,7 @@
 			<div class="col-md-12">	
 				<div class="card card__question shadow">
                     <div class="card-body">
-                        <h5 class="card-title">Vraag {{ $question->id }}/20 </h5>
+                        <h5 class="card-title">Vraag {{ $question->order }}/20 </h5>
 
                         <span class="card-text card-text__question"> 
 			                <h5> {!! $question->question !!} <i class="material-icons clickable md-36 md-36-24 bounce-fade-top" data-toggle="modal" data-target="#justificationModal"> info </i></h5>

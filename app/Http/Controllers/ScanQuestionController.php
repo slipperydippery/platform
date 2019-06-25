@@ -42,17 +42,22 @@ class ScanQuestionController extends Controller
 
     	$answer = $scan->answers->where('question_id', $question->id)->first();
 
-    	$previous = '/sessie/' . $scan->id . '/thema/' . $theme->id . '/vraag/' . ($question->id - 1);
-    	if($question->id == $theme->questions->first()->id){
-    		$previous = '/sessie/' . $scan->id . '/thema/' . $theme->id . '/introductie';
+
+		$previous = '/sessie/' . $scan->id . '/thema/' . $theme->id . '/introductie';
+    	if($question->id !== $theme->questions->first()->id){
+            $previousquestion = Question::where('order', $question->order - 1)->first();
+            $previous = route('scanquestions.show', [$scan->id, $theme->id, $previousquestion->id]);
+        	// $previous = '/sessie/' . $scan->id . '/thema/' . $theme->id . '/vraag/' . ($question->id - 1);
     	}
 
-    	$next = '/sessie/' . $scan->id . '/thema/' . $theme->id . '/vraag/' . ($question->id + 1);
-    	if($question->id == $theme->questions->last()->id){
-    		$next = '/sessie/' . $scan->id . '/thema/' . $theme->id . '/resultaten';
-            if (! $scan->group) {
-                $next = '/sessie/' . $scan->id . '/thema/' . $theme->id . '/acties';
-            }
+		$next = '/sessie/' . $scan->id . '/thema/' . $theme->id . '/resultaten';
+        if (! $scan->group) {
+            $next = '/sessie/' . $scan->id . '/thema/' . $theme->id . '/acties';
+        }
+    	if($question->id !== $theme->questions->last()->id){
+            $nextquestion = Question::where('order', $question->order + 1)->first();
+            $next = route('scanquestions.show', [$scan->id, $theme->id, $nextquestion->id]);
+        	// $next = '/sessie/' . $scan->id . '/thema/' . $theme->id . '/vraag/' . ($question->id + 1);
     	}
 
     	return view('scanquestions.show', compact('scan', 'theme', 'question', 'previous', 'next', 'answer'));
