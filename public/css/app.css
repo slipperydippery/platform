@@ -15174,6 +15174,36 @@ input[type=range]:disabled::-moz-range-thumb {
   cursor: auto;
 }
 
+.sidebar--item .text-container {
+  max-height: 5.3rem;
+  overflow: hidden;
+}
+
+.sidebar--item h5 {
+  max-height: 2.6rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 0;
+}
+
+.sidebar--item p {
+  max-height: 4rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar--item .bekijk-link {
+  display: block;
+  margin-top: -1rem;
+  opacity: 0;
+  -webkit-transform: all .5s;
+          transform: all .5s;
+}
+
+.sidebar--item:hover .bekijk-link {
+  opacity: 1;
+}
+
 .container__locked {
   position: absolute;
   top: 0;
@@ -15688,6 +15718,11 @@ input.uppercase {
 
 .tooltip ul {
   text-align: left;
+}
+
+.carousel-item a {
+  text-decoration: none;
+  color: #1C154B;
 }
 
 
