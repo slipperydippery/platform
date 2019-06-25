@@ -61,12 +61,21 @@
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href=" {{ route('contact') }} "> Contact </a>
-                        <a class="dropdown-item" href=" # " target="blank"> Handleiding </a>
                         <a class="dropdown-item" href="#"> Privacyverklaring </a>
                         <a class="dropdown-item" href=" # "> Cookieverklaring </a>
                     </div>
                 </li>
-                <li class="nav-item"><a class="nav-link nav-link--main mr-4" href="#" data-toggle="modal" data-target="#instructieModal">Instructie</a></li>
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle mr-4" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        Instructie <span class="caret"></span>
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#instructieModal"> Hoe werkt het? </a>
+                        <a class="dropdown-item" href="http://embav.nl/participatiescaninstructie/" target="blank"> Handleiding voor gebruikers </a>
+                        <a class="dropdown-item" href="#"> Handleiding voor voorzitter/beheerder </a>
+                    </div>
+                </li>
                 @auth
                     <li class="nav-item"><a class="nav-link nav-link--main mr-4 align-top" href=" {{ route('dashboard') }} ">Startpagina</a></li>
                 @endauth

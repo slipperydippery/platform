@@ -125844,6 +125844,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -125867,7 +125868,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 	computed: {
 		toPerson: function toPerson() {
-			if (this.comparison_id) return 'de eignaar van sessie ' + this.scan.title;
+			if (this.comparison_id) return 'de eigenaar van sessie ' + this.scan.title;
 			return this.scan.user.name;
 		},
 		messagemodalID: function messagemodalID() {
@@ -125946,7 +125947,7 @@ var render = function() {
               ref: "modal",
               attrs: {
                 id: "messagemodal" + _vm.messagemodalID,
-                title: "Stuur een bericht naar " + _vm.toPerson
+                title: "Stuur bericht naar " + _vm.toPerson
               },
               on: {
                 show: _vm.resetModal,
@@ -125973,7 +125974,7 @@ var render = function() {
                     {
                       attrs: {
                         state: _vm.messageState,
-                        label: "Name",
+                        label: "Bericht",
                         "label-for": "message-input",
                         "invalid-feedback": "het bericht mag niet leeg zijn"
                       }
@@ -125984,8 +125985,10 @@ var render = function() {
                           id: "message-input",
                           state: _vm.messageState,
                           required: "",
-                          rows: "3",
-                          "max-rows": "6"
+                          rows: "4",
+                          "max-rows": "8",
+                          placeholder:
+                            "Schrijf hier je bericht. Vermeld ook je eigen e-mailadres zodat de ontvanger contact met je op kan nemen."
                         },
                         model: {
                           value: _vm.message,

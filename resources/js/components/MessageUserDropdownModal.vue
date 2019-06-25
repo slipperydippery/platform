@@ -5,7 +5,7 @@
 		    <b-modal 
 		        :id="'messagemodal' + messagemodalID" 
 				ref="modal"
-		        :title="'Stuur een bericht naar ' + toPerson" 
+		        :title="'Stuur bericht naar ' + toPerson" 
 				@show="resetModal"
 				@hidden="resetModal"
 				@ok="handleOk"
@@ -13,7 +13,7 @@
 		        <form ref="form" @submit.stop.prevent="handleSubmit">
 					<b-form-group
 						:state="messageState"
-						label="Name"
+						label="Bericht"
 						label-for="message-input"
 						invalid-feedback="het bericht mag niet leeg zijn"
 					>
@@ -22,8 +22,9 @@
 							v-model="message"
 							:state="messageState"
 							required
-							rows="3"
-							max-rows="6"
+							rows="4"
+							max-rows="8"
+							placeholder="Schrijf hier je bericht. Vermeld ook je eigen e-mailadres zodat de ontvanger contact met je op kan nemen."
 						></b-form-textarea>
 					</b-form-group>
 				</form>
@@ -56,7 +57,7 @@
 
         computed: {
         	toPerson() {
-        		if( this.comparison_id ) return 'de eignaar van sessie ' + this.scan.title
+        		if( this.comparison_id ) return 'de eigenaar van sessie ' + this.scan.title
     			return this.scan.user.name
         	},
 
