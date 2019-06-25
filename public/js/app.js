@@ -121650,6 +121650,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -121779,18 +121780,28 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass:
-                        "stretched-link bekijk-link badge badge-primary",
-                      attrs: {
-                        href: "http://" + article.link,
-                        target: "_blank"
-                      }
-                    },
-                    [_vm._v("Bekijk")]
-                  )
+                  article.linktype == "link"
+                    ? _c(
+                        "a",
+                        {
+                          staticClass:
+                            "stretched-link bekijk-link badge badge-primary",
+                          attrs: {
+                            href: "http://" + article.link,
+                            target: "_blank"
+                          }
+                        },
+                        [_vm._v("Bekijk")]
+                      )
+                    : _c(
+                        "a",
+                        {
+                          staticClass:
+                            "stretched-link bekijk-link badge badge-primary",
+                          attrs: { href: article.link, target: "_blank" }
+                        },
+                        [_vm._v("Bekijk")]
+                      )
                 ])
               ]
             )

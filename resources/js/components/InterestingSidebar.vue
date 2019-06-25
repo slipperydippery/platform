@@ -33,7 +33,8 @@
 							{{ article.description }} <br>
 						</p>
 					</div>
-					<a :href="'http://' + article.link " target="_blank" class="stretched-link bekijk-link badge badge-primary">Bekijk</a>	
+					<a :href="'http://' + article.link " target="_blank" class="stretched-link bekijk-link badge badge-primary" v-if="article.linktype == 'link'">Bekijk</a>	
+					<a :href="article.link " target="_blank" class="stretched-link bekijk-link badge badge-primary" v-else>Bekijk</a>	
 				</div>
 			</div>
 		</div>
