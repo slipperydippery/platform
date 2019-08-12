@@ -17,7 +17,7 @@ class ThemeTableSeeder extends Seeder
             [
                 'id' => '1',
                 'title' => 'Focus op werk en talent',
-                'short' => '',
+                'short' => 'QkgxPzrw830',
                 'body' => '',
                 'scanmodel_id' => '1',
                 'order' => '1',
@@ -25,7 +25,7 @@ class ThemeTableSeeder extends Seeder
             [
                 'id' => '2',
                 'title' => 'Kwaliteit begeleiding',
-                'short' => '',
+                'short' => '5GvoHHA8R4A',
                 'body' => '',
                 'scanmodel_id' => '1',
                 'order' => '2',
@@ -33,7 +33,7 @@ class ThemeTableSeeder extends Seeder
             [
                 'id' => '3',
                 'title' => 'Randvoorwaarden voor goede begeleiding',
-                'short' => '',
+                'short' => '5sucjfXzDUY',
                 'body' => '',
                 'scanmodel_id' => '1',
                 'order' => '3',
@@ -41,7 +41,7 @@ class ThemeTableSeeder extends Seeder
             [
                 'id' => '4',
                 'title' => 'Effectieve samenwerking',
-                'short' => '',
+                'short' => 'FALozhQ_q5c',
                 'body' => '',
                 'scanmodel_id' => '1',
                 'order' => '4',
