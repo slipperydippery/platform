@@ -18,7 +18,7 @@
 							<p class="card-text">
 								<address>
 									<strong> Nederlands jeugdinstituut </strong> <br>
-									Paulina Hublart <br>
+									Receptie <br>
 									030-2306344 <br>
 									<a href="mailto:info@inji.nl">info@inji.nl</a>.<br> 
 								</address>
@@ -49,7 +49,7 @@
 								<address>
 									<strong> ECORYS </strong> <br>
 									Henk Bakker <br>
-									010-4538800 <br>
+									0613000603 <br>
 									<a href="mailto:henk.bakker@ecorys.com">henk.bakker@ecorys.com</a>.<br> 
 								</address>
 							</p>
