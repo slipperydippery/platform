@@ -73,7 +73,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#instructieModal"> Hoe werkt het? </a>
                         <a class="dropdown-item" href="http://embav.nl/participatiescaninstructie/" target="blank"> Handleiding voor gebruikers </a>
-                        <a class="dropdown-item" href="#"> Handleiding voor voorzitter/beheerder </a>
+                        <a class="dropdown-item" href="http://embav.nl/participatiescaninstructievoorzitter/"> Handleiding voor voorzitter/beheerder </a>
                     </div>
                 </li>
                 @auth
