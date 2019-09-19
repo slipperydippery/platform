@@ -6,7 +6,7 @@
 	        <div class="col-md-12">
 	            <div class="page--title">
 	                <h1 class="pagetitle">
-	                	Resultaten thema {{ $theme->id }}: {{ $theme->name }}
+	                	Resultaten thema {{ $theme->id }}: {{ $theme->title }}
 	                	@if ($theme->info)
 	                		<i class="material-icons clickable muted h1" data-toggle="tooltip" data-placement="top" title=" {{ $theme->info }} "> info </i>
 	                	@endif

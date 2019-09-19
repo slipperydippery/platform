@@ -40,19 +40,9 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-
-                                <div class="col-md-12">
-                                    <label for="phone_number" class="col-sm-12 col-form-label">{{ __('Mobiel telefoonnummer') }}</label>
-                                    <input id="phone_number" type="phone_number" class="form-control{{ $errors->has('phone_number') ? ' is-invalid' : '' }}" name="phone_number" value="{{ old('phone_number') }}" required autofocus placeholder="06">
-
-                                    @if ($errors->has('phone_number'))
-                                        <span class="invalid-feedback">
-                                            <strong>{{ $errors->first('phone_number') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
+                            <!-- Hidden phone_number Type Form Input -->
+                            <input type="hidden" id="phone_number" name="phone_number" value="0000000000">
+                                
 
                             <div class="form-group row">
 

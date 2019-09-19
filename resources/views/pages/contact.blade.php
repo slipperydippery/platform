@@ -20,7 +20,7 @@
 									<strong> Nederlands jeugdinstituut </strong> <br>
 									Receptie <br>
 									030-2306344 <br>
-									<a href="mailto:info@inji.nl">info@inji.nl</a>.<br> 
+									<a href="mailto:info@nji.nl">info@nji.nl</a>.<br> 
 								</address>
 							</p>
 						</div>

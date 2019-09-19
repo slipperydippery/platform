@@ -25,14 +25,15 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-93563705-6"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-93563705-8"></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-      gtag('config', 'UA-93563705-6');
+        gtag('config', 'UA-93563705-8');
     </script>
+
 </head>
 
 <body class="d-flex flex-column">
