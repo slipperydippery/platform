@@ -34,6 +34,7 @@ class Article extends Model
         $article = Article::create([
             'title' => $attributes->title,
             'description' => $attributes->description,
+            'imagenumber' => $attributes->imagenumber,
             'linktype' => $attributes->linktype,
             'link' => $attributes->link,
             'order' => $order,
@@ -62,6 +63,7 @@ class Article extends Model
     {
         $this->title = $attributes->title;
         $this->description = $attributes->description;
+        $this->imagenumber = $attributes->imagenumber;
         $this->year = $attributes->year;
         $this->linktype = $attributes->linktype;
         $this->link = $attributes->link;
