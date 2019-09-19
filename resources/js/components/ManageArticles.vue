@@ -1,4 +1,4 @@
-	<template>
+<template>
 	<div class="row">
 		<div class="col-12">
 			<button class="btn btn-secondary mb-4" v-b-modal.newArticleModal> Voeg een item toe </button>
@@ -21,6 +21,7 @@
 	                	<th scope="col"> Naam </th>
 	                	<th scope="col" style="width: 50%"> Omschrijving </th>
 	                	<th scope="col"> Jaar </th>
+                        <th scope="col"> Foto </th>
 	                	<th scope="col"> Vragen </th>
 	            		<th> opties </th>
 	                </tr>
@@ -40,9 +41,12 @@
 	            		<td>
 	            			<span v-html="article.description"></span>
 	            		</td>
-	            		<td>
-	            			<span> {{ article.year }} </span>
-	            		</td>
+                        <td>
+                            <span> {{ article.year }} </span>
+                        </td>
+                        <td>
+                            <span> {{ article.imagenumber }} </span>
+                        </td>
 	            		<td>
 	            			<template v-for="question in article.questions">
 	            				<span :id="'question' + article.id + '_' + question.id" class="badge badge-pill clickable" v-html="question.id" ></span>

@@ -45,7 +45,7 @@
 											$firstquestion = $article->questions->first()->id;
 										@endphp
 					    	        	<a href=" {{ $article->link }} ">
-									        <img src="/img/questionthumbs/question{{ $firstquestion }}.jpg" class="d-block w-100" alt="/img/carousel2.jpg">	
+									        <img src="/img/questionthumbs/question{{ $article->imagenumber }}.jpg" class="d-block w-100" alt="/img/carousel2.jpg">	
 									        <div class=" d-none d-md-block mt-2">
 									          <h5> {!! $article->title !!} </h5>
 									          <p> {!! $article->description !!} </p>

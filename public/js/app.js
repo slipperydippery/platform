@@ -124108,6 +124108,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -124413,6 +124417,12 @@ var render = function() {
                       _c("span", [_vm._v(" " + _vm._s(article.year) + " ")])
                     ]),
                     _vm._v(" "),
+                    _c("td", [
+                      _c("span", [
+                        _vm._v(" " + _vm._s(article.imagenumber) + " ")
+                      ])
+                    ]),
+                    _vm._v(" "),
                     _c(
                       "td",
                       [
@@ -124582,6 +124592,8 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v(" Jaar ")]),
         _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v(" Foto ")]),
+        _vm._v(" "),
         _c("th", { attrs: { scope: "col" } }, [_vm._v(" Vragen ")]),
         _vm._v(" "),
         _c("th", [_vm._v(" opties ")])
@@ -124717,6 +124729,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -124724,6 +124746,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   data: function data() {
     return {
+      imagenumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
       newValue: null
     };
   },
@@ -124958,7 +124981,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "mt-3" }, [
                     _vm._v(
-                      "Selected file: " +
+                      "Gekozen bestand: " +
                         _vm._s(_vm.newValue.file ? _vm.newValue.file.name : "")
                     )
                   ])
@@ -125058,6 +125081,44 @@ var render = function() {
                     }
                   })
                 ]),
+                _vm._v(" "),
+                _c(
+                  "b-form-group",
+                  {
+                    attrs: {
+                      id: "input-group-3",
+                      label: "Afbeelding:",
+                      "label-for": "input-3"
+                    }
+                  },
+                  [
+                    _c("b-form-select", {
+                      attrs: {
+                        id: "input-3",
+                        options: _vm.imagenumbers,
+                        required: ""
+                      },
+                      model: {
+                        value: _vm.newValue.imagenumber,
+                        callback: function($$v) {
+                          _vm.$set(_vm.newValue, "imagenumber", $$v)
+                        },
+                        expression: "newValue.imagenumber"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("img", {
+                  attrs: {
+                    src:
+                      "img/questionthumbs/question" +
+                      _vm.newValue.imagenumber +
+                      ".jpg",
+                    alt: ""
+                  }
+                }),
                 _vm._v(" "),
                 _c("hr"),
                 _vm._v(" "),

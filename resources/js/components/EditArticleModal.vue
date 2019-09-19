@@ -33,7 +33,7 @@
 				drop-placeholder="Sleep bestand hier..."
 				accept=".pdf"
 		    ></b-form-file>
-		    <div class="mt-3">Selected file: {{ newValue.file ? newValue.file.name : '' }}</div>
+		    <div class="mt-3">Gekozen bestand: {{ newValue.file ? newValue.file.name : '' }}</div>
 		</div>
 
 		
@@ -48,6 +48,16 @@
 			    <input type="text" v-model="newValue.year" class="form-control" id="inputitle" placeholder="Jaar" required @input="onlyNumbers" 
 	                maxlength="4" >
 			</div>
+			<b-form-group id="input-group-3" label="Afbeelding:" label-for="input-3">
+				<b-form-select
+					id="input-3"
+					v-model="newValue.imagenumber"
+					:options="imagenumbers"
+					required
+				>
+				</b-form-select>
+			</b-form-group>
+			<img :src="'img/questionthumbs/question' + newValue.imagenumber + '.jpg'" alt="">
 
 			<hr>
 			<div class="form-group">
@@ -76,6 +86,7 @@
 
         data() {
             return {
+            	imagenumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
             	newValue: null
             }
         },
