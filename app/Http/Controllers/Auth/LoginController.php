@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -38,11 +38,11 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function authenticated()
+    public function authenticated($request, $user)
     {
-        $user = Auth::user();
+        // $user = Auth::user();
         $user->token_2fa_expiry = \Carbon\Carbon::now();
         $user->save();
-        return redirect()->intended('dashboard');
+        return redirect()->intended('/');
     }
 }

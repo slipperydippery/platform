@@ -31,7 +31,7 @@ class ScanPagesController extends Controller
     public function introductiefilm(Scan $scan)
     {
         $next = '/sessie/' . $scan->id . '/regioincijfers';
-        $previous = '/dashboard';
+        $previous = '/';
         if($scan->group) {
             $next = '/sessie/' . $scan->id . '/kennismaken';
         }

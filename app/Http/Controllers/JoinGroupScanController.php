@@ -60,6 +60,6 @@ class JoinGroupScanController extends Controller
             return redirect()->route('joingroupscan.addscan', [$group, $code]);
         }
         return redirect()->back()->withErrors(['code' => ['We hebben geen groep met deze code kunnen vinden']]);
-        // return redirect()->route('dashboard');//////
+        // return redirect()->route('dashboard');
     }
 }

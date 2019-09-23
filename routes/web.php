@@ -10,12 +10,11 @@ Route::get('/overzichtresultaten', 'AdminPagesController@globalresults')->name('
 Auth::routes(['verify' => true]);
 Route::get('/wijzigwachtwoord','Auth\ChangePasswordController@show')->name('changepassword.show');
 Route::post('/wijzigwachtwoord','Auth\ChangePasswordController@update')->name('changepassword.update');
-Route::get('2fa', 'TwoFactorController@showTwoFactorForm');
-Route::post('2fa', 'TwoFactorController@verifyTwoFactor');
+// Route::get('2fa', 'TwoFactorController@showTwoFactorForm');
+// Route::post('2fa', 'TwoFactorController@verifyTwoFactor');
 
 // Home
-Route::get('/', 'PagesController@dashboard')->name('home');
-Route::get('/dashboard', 'PagesController@dashboard')->name('dashboard');
+Route::get('/', 'PagesController@dashboard')->name('dashboard');
 
 // Info & website pages
 Route::get('/cookies', 'PagesController@cookies')->name('cookies');

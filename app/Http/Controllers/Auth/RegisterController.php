@@ -29,7 +29,6 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = '/dashboard';
     public function redirectTo()
     {
         $intended = Session::get('url.intended');
@@ -39,7 +38,7 @@ class RegisterController extends Controller
             return $intended;
         }
 
-        return '/dashboard';
+        return '/';
     }
 
     /**
@@ -60,7 +59,6 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        // $input = array_map('trim', $data('phone_number'));
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],

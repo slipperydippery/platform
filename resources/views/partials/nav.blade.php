@@ -62,7 +62,6 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href=" {{ route('contact') }} "> Contact </a>
                         <a class="dropdown-item" href="https://www.16-27.nl/privacyverklaring" target="_blank"> Privacyverklaring </a>
-                        <a class="dropdown-item" href=" # "> Cookieverklaring </a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">

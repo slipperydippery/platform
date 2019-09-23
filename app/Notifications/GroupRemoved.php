@@ -46,7 +46,7 @@ class GroupRemoved extends Notification
                     ->subject('Groepssessie ' . $this->group->title . ' is verwijderd')
                     ->line('De groepssessie ' . $this->group->title . ' waar jij aan deelnam is verwijderd door de beheerder. Je zal de sessie dus niet meer zien op je startpagina volgende keer dat je inlogt.')
                     ->line('Kom naar de Participatie.scan om de overzicht van je sessies te bekijken, of om een nieuwe sessie te starten!')
-                    ->action('Ga naar de Participatie.scan', url('/dashboard'))
+                    ->action('Ga naar de Participatie.scan', url('/'))
                     ->line('Bedankt!');
     }
 
