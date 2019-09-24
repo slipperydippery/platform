@@ -24,7 +24,7 @@ class CreateSingleScanController extends Controller
         request()->validate([
             'title' => 'required|min:3|max:255',
         ]);
-        $request->session()->put('createsinglescan.title', $request->title);
+        $request->session()->put('createsinglescan.title', $request->input('title'));
     	return redirect()->route('createsinglescan.districts');
     }
 
@@ -41,7 +41,7 @@ class CreateSingleScanController extends Controller
                 'districts' => 'required',
                 'districts.*' => 'integer'
         ]);
-        $request->session()->put('createsinglescan.districts', $request->districts);
+        $request->session()->put('createsinglescan.districts', $request->input('districts'));
 
         return redirect()->route('createsinglescan.instantie');
 
@@ -58,7 +58,7 @@ class CreateSingleScanController extends Controller
     	request()->validate([
     		'instantie_id' => 'required|integer',
     	]);
-        $request->session()->put('createsinglescan.instantie_id', $request->instantie_id);
+        $request->session()->put('createsinglescan.instantie_id', $request->input('instantie_id'));
         $request->session()->put('createsinglescan.isgroup', false);
         $request->session()->put('createsinglescan.scanmodel_id', 1);
 

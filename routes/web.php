@@ -2,16 +2,16 @@
 
 use App\User;
 
-// Admin routes
-Route::get('/admin/loginasuser/{user_nr}', 'AdminPagesController@loginasuser')->name('loginasuser');
-Route::get('/overzichtresultaten', 'AdminPagesController@globalresults')->name('globalresults');
-
 // Auth routes
 Auth::routes(['verify' => true]);
 Route::get('/wijzigwachtwoord','Auth\ChangePasswordController@show')->name('changepassword.show');
 Route::post('/wijzigwachtwoord','Auth\ChangePasswordController@update')->name('changepassword.update');
-// Route::get('2fa', 'TwoFactorController@showTwoFactorForm');
-// Route::post('2fa', 'TwoFactorController@verifyTwoFactor');
+
+// Admin routes
+Route::get('/admin/loginasuser/{user_nr}', 'AdminPagesController@loginasuser')->name('loginasuser');
+Route::get('/overzichtresultaten', 'AdminPagesController@globalresults')->name('globalresults');
+Route::resource('article', 'ArticleController');
+Route::resource('articletype', 'ArticletypeController');
 
 // Home
 Route::get('/', 'PagesController@dashboard')->name('dashboard');
@@ -89,8 +89,6 @@ Route::get('/sessie/{scan}/vergelijking/sessies', 'CreateComparisonController@sc
 Route::post('/sessie/{scan}/vergelijking/sessies', 'CreateComparisonController@storescans')->name('createcomparison.storescans');
 
 // Resources
-Route::resource('article', 'ArticleController');
-Route::resource('articletype', 'ArticletypeController');
 Route::resource('group', 'GroupController');
 Route::resource('user', 'UserController');
 Route::resource('comparison', 'ComparisonController');
