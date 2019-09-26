@@ -114531,6 +114531,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -114651,44 +114665,88 @@ var render = function() {
         _vm._m(0),
         _vm._v(" "),
         _vm._l(_vm.store.group.scans, function(scan) {
-          return _c("div", { staticClass: "row" }, [
-            _c(
-              "div",
-              {
-                staticClass: "col-sm-2 nowrap",
-                class: [
-                  "instantietype-" + scan.instantie.id + "-leftborder",
-                  { "owner-leftborder": _vm.isGroupOwner(scan) }
-                ]
-              },
-              [_vm._v(" " + _vm._s(scan.user.name) + " ")]
-            ),
-            _vm._v(" "),
-            _vm.isBeheerder(scan)
-              ? _c("div", { staticClass: "col-sm-2 table--instantie" }, [
-                  _vm._v(" Beheerder ")
-                ])
-              : _c("div", { staticClass: "col-sm-2 table--instantie" }, [
-                  _vm._v(" " + _vm._s(scan.instantie.title) + " ")
+          return _vm.workscan.group
+            ? _c("div", { staticClass: "row" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "col-sm-2 nowrap",
+                    class: [
+                      "instantietype-" + scan.instantie.id + "-leftborder",
+                      { "owner-leftborder": _vm.isGroupOwner(scan) }
+                    ]
+                  },
+                  [_vm._v(" " + _vm._s(scan.user.name) + " ")]
+                ),
+                _vm._v(" "),
+                _vm.isBeheerder(scan)
+                  ? _c("div", { staticClass: "col-sm-2 table--instantie" }, [
+                      _vm._v(" Beheerder ")
+                    ])
+                  : _c("div", { staticClass: "col-sm-2 table--instantie" }, [
+                      _vm._v(" " + _vm._s(scan.instantie.title) + " ")
+                    ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-1 table--score" }, [
+                  _vm._v(" " + _vm._s(scan.algemeenbeeld) + " ")
                 ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-1 table--score" }, [
-              _vm._v(" " + _vm._s(scan.algemeenbeeld) + " ")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-7" }, [
-              _c("div", { staticClass: "resultslider" }, [
-                _c("div", {
-                  staticClass: "resultslider--result",
-                  style: {
-                    width: _vm.cssPercent(scan.algemeenbeeld),
-                    background: _vm.nullColor(scan.algemeenbeeld)
-                  }
-                })
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-7" }, [
+                  _c("div", { staticClass: "resultslider" }, [
+                    _c("div", {
+                      staticClass: "resultslider--result",
+                      style: {
+                        width: _vm.cssPercent(scan.algemeenbeeld),
+                        background: _vm.nullColor(scan.algemeenbeeld)
+                      }
+                    })
+                  ])
+                ])
+              ])
+            : _vm._e()
+        }),
+        _vm._v(" "),
+        !_vm.workscan.group
+          ? _c("div", { staticClass: "row" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "col-sm-2 nowrap",
+                  class: [
+                    "instantietype-" +
+                      _vm.workscan.instantie.id +
+                      "-leftborder",
+                    { "owner-leftborder": true }
+                  ]
+                },
+                [_vm._v(" " + _vm._s(_vm.workscan.user.name) + " ")]
+              ),
+              _vm._v(" "),
+              _vm.isBeheerder(_vm.workscan)
+                ? _c("div", { staticClass: "col-sm-2 table--instantie" }, [
+                    _vm._v(" Beheerder ")
+                  ])
+                : _c("div", { staticClass: "col-sm-2 table--instantie" }, [
+                    _vm._v(" " + _vm._s(_vm.workscan.instantie.title) + " ")
+                  ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-1 table--score" }, [
+                _vm._v(" " + _vm._s(_vm.workscan.algemeenbeeld) + " ")
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-7" }, [
+                _c("div", { staticClass: "resultslider" }, [
+                  _c("div", {
+                    staticClass: "resultslider--result",
+                    style: {
+                      width: _vm.cssPercent(_vm.workscan.algemeenbeeld),
+                      background: _vm.nullColor(_vm.workscan.algemeenbeeld)
+                    }
+                  })
+                ])
               ])
             ])
-          ])
-        })
+          : _vm._e()
       ],
       2
     )

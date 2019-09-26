@@ -8,18 +8,32 @@
 	            <div class="col-sm-7">
 	            </div>
 	        </div>
-            <div class="row" v-for="scan in store.group.scans">
+            <div class="row" v-for="scan in store.group.scans" v-if="workscan.group">
                 <div class="col-sm-2 nowrap" :class="['instantietype-' + scan.instantie.id + '-leftborder', {'owner-leftborder': isGroupOwner(scan)}]"> {{ scan.user.name }} </div>
                 <div class="col-sm-2 table--instantie" v-if="isBeheerder(scan)"> Beheerder </div>
                 <div class="col-sm-2 table--instantie" v-else> {{ scan.instantie.title }} </div>
                 <div class="col-sm-1 table--score"> {{ scan.algemeenbeeld }} </div>
                 <div class="col-sm-7">
-                	<div class="resultslider">
-                	    <div class="resultslider--result"
-                	        :style="{ width: cssPercent(scan.algemeenbeeld), background: nullColor(scan.algemeenbeeld) }"
-                	    >
-                	    </div>
-                	</div>
+                    <div class="resultslider">
+                        <div class="resultslider--result"
+                            :style="{ width: cssPercent(scan.algemeenbeeld), background: nullColor(scan.algemeenbeeld) }"
+                        >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" v-if="! workscan.group">
+                <div class="col-sm-2 nowrap" :class="['instantietype-' + workscan.instantie.id + '-leftborder', {'owner-leftborder': true}]"> {{ workscan.user.name }} </div>
+                <div class="col-sm-2 table--instantie" v-if="isBeheerder(workscan)"> Beheerder </div>
+                <div class="col-sm-2 table--instantie" v-else> {{ workscan.instantie.title }} </div>
+                <div class="col-sm-1 table--score"> {{ workscan.algemeenbeeld }} </div>
+                <div class="col-sm-7">
+                    <div class="resultslider">
+                        <div class="resultslider--result"
+                            :style="{ width: cssPercent(workscan.algemeenbeeld), background: nullColor(workscan.algemeenbeeld) }"
+                        >
+                        </div>
+                    </div>
                 </div>
             </div>
 	    </div>

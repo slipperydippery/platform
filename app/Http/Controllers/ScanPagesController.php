@@ -85,6 +85,7 @@ class ScanPagesController extends Controller
 
     public function results(Scan $scan)
     {
+        $scan = Scan::with('instantie', 'user')->find($scan->id);
         return view('scan.results', compact('scan'));
     }
 
