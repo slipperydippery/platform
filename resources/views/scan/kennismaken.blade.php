@@ -71,7 +71,6 @@
 					                             </span>
 					                         @endif
 					                     </div>
-					                     <img src="/img/user.svg" alt="">
 					                     <div class="card-body align-bottom text-secondary text-center">
 						                         <h5>{{ $thisscan->user->name }}</h5>
 					                     </div>
@@ -125,7 +124,6 @@
 					                    <i class="material-icons clickable" data-toggle="tooltip" data-placement="top" title="offline"> wifi_off </i>
 					                @endif
 					            </div>
-					            <img src="/img/user.svg" alt="">
 					            <div class="card-footer">
 					                {{ $scan->user->name }} <br>
 			                         {{ $scan->instantie->title }}
@@ -144,7 +142,7 @@
             <a href=" {{ url($previous) }} " class="btn btn-secondary btn-block btn__prevnext"><i class="material-icons"> navigate_before </i> vorige</a>
         </div>
         <div class="col-md-4">
-            <a href=" {{ url($next) }} " class="btn btn-secondary btn-block btn__prevnext">volgende <i class="material-icons"> navigate_next </i></a>
+	            <a href=" {{ url($next) }} " class="btn btn-secondary btn-block btn__prevnext">volgende <i class="material-icons"> navigate_next </i></a>
         </div>
     </div>
 @stop
