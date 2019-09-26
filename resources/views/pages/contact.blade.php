@@ -3,7 +3,7 @@
 @section('content')
 	<div class="container">
 		<div class="row ">
-			<h1 class="">Contact gegevens</h1>
+			<h1 class="">Contactgegevens</h1>
 
 		</div>
 		
@@ -32,7 +32,7 @@
 						<div class="card-body">
 							<p class="card-text">
 								<address>
-									<strong> EMBAV </strong> <br>
+									<strong> EMB AV </strong> <br>
 									Susanne Meeuwissen <br>
 									0641306310 <br>
 									<a href="mailto:susanne@embav.nl">susanne@embav.nl</a>.<br> 
