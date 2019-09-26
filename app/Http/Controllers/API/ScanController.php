@@ -89,7 +89,8 @@ class ScanController extends Controller
     {
         if ($scan->group) {
             $group = $scan->group;
-            GroupUpdated::dispatch($scan->group->id, $event, 'sessionremovedfromgroup');
+            $event = 'sessionremovedfromgroup';
+            GroupUpdated::dispatch($scan->group->id, $event, $scan->id);
         }
 
         $scan->districts()->detach();

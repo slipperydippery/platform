@@ -108,7 +108,7 @@
         				}
         			} )
         		} )
-        		return scantotal /  scancount;
+        		return Math.round(10 * scantotal /  scancount) / 10;
         	},
         }
     }

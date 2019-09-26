@@ -114876,7 +114876,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     }
                 });
             });
-            return scantotal / scancount;
+            return Math.round(10 * scantotal / scancount) / 10;
         }
     }
 });
