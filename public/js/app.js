@@ -114960,7 +114960,7 @@ var render = function() {
           _vm._l(_vm.theme.questions, function(question) {
             return _c("div", { staticClass: "col-sm-2" }, [
               _c("strong", [
-                _vm._v("Vraag " + _vm._s(question.id) + " "),
+                _vm._v("Vraag " + _vm._s(question.order) + " "),
                 _c("br")
               ]),
               _vm._v(" "),

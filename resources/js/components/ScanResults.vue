@@ -3,7 +3,7 @@
 		<div class="row resultstable--row--questions pt-2 pb-1">
 			<div class="col-sm-2"></div>
 				<div class="col-sm-2" v-for="question in theme.questions">
-					<strong>Vraag {{ question.id }} <br></strong>
+					<strong>Vraag {{ question.order }} <br></strong>
 					<span v-b-tooltip.html :title="question.question" html="true" v-html="question.title"></span>
 				</div>
 		</div>
