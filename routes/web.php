@@ -13,10 +13,8 @@ Route::get('/overzichtresultaten', 'AdminPagesController@globalresults')->name('
 Route::resource('article', 'ArticleController');
 Route::resource('articletype', 'ArticletypeController');
 
-// Home
-Route::get('/', 'PagesController@dashboard')->name('dashboard');
-
 // Info & website pages
+Route::get('/', 'PagesController@dashboard')->name('dashboard');
 Route::get('/cookies', 'PagesController@cookies')->name('cookies');
 Route::get('/introductiefilm', 'PagesController@introductiefilm')->name('introductiefilm');
 Route::get('/cijfersuitderegio', 'PagesController@cijfersuitderegio')->name('cijfersuitderegio');
@@ -45,6 +43,9 @@ Route::post('/nieuwegroupsscan/instantie', 'CreateGroupScanController@storeinsta
 Route::get('/nieuwegroupsscan/datum', 'CreateGroupScanController@datetime')->name('creategroupscan.datetime');
 Route::post('/nieuwegroupsscan/datum', 'CreateGroupScanController@storedatetime')->name('creategroupscan.storedatetime');
 Route::get('/nieuwegroupsscan/{scan}/klaar', 'CreateGroupScanController@created')->name('creategroupscan.created');
+
+// Netwerkpartners
+Route::get('/group/{group}/netwerkanalyse', 'NetwerkanalyseController@create');
 
 // Join Scan
 Route::get('/groep/sluitaanmetcode', 'JoinGroupScanController@entercode')->name('joingroupscan.entercode');

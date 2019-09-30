@@ -4,7 +4,10 @@ namespace App;
 
 use App\Scan;
 use App\User;
+use App\Divisie;
 use App\Followup;
+use App\Netwerkanalyse;
+use App\Netwerkpartner;
 use App\Events\GroupUpdated;
 use App\Models\Concerns\UsesUuid;
 use Illuminate\Database\Eloquent\Model;
@@ -39,6 +42,21 @@ class Group extends Model
     public function usercount()
     {
     	return $this->scans->count();
+    }
+
+    public function netwerkpartners()
+    {
+        return $this->hasMany(Netwerkpartner::class);
+    }
+
+    public function divisies()
+    {
+        return $this->hasManyTrough(Divisie::class, Netwerkpartner::class);
+    }
+
+    public function netwerkanalyse()
+    {
+        return $this->hasOne(Netwerkanalyse::class);
     }
 
     public function authhasscan()

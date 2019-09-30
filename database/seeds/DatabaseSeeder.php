@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionTableSeeder::class);
         $this->call(RoleUserTableSeeder::class);
         $this->call(QuestionTableSeeder::class);
+        $this->call(DivisieTableSeeder::class);
 
         
         factory(App\User::class, 10)->create()->each(function ($user) {

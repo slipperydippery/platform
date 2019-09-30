@@ -25,8 +25,8 @@ class AddImagenumberArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::table('scans', function($table){
-            $table->dropColumn('actionplan_youths');
+        Schema::table('articles', function($table){
+            $table->dropColumn('imagenumber');
         });
     }
 }
