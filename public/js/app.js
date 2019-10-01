@@ -128088,7 +128088,7 @@ exports = module.exports = __webpack_require__(267)(true);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"NetwerkpartnerManager.vue","sourceRoot":""}]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"NetwerkpartnerManager.vue","sourceRoot":""}]);
 
 // exports
 
@@ -128142,14 +128142,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         isActiveInstantie: function isActiveInstantie(instantie) {
-            return instantie.id == this.activeInstantie.id ? true : false;
+            return instantie.id === this.activeInstantie.id;
         },
         isActiveDivisie: function isActiveDivisie(divisie) {
             this.netwerkanalyse.netwerkpartners.forEach(function (netwerkpartner) {
-                if (netwerkpartner.divisie_id == divisie.id) {
-                    console.log(netwerkpartner.divisie_id + ' - ' + divisie.id);
+                if (netwerkpartner.divisie_id === divisie.id) {
                     console.log(netwerkpartner.active ? 'true' : 'false');
-                    return netwerkpartner.active ? 'true' : 'false';
+                    return !!netwerkpartner.active;
                 }
             });
         },
@@ -128157,10 +128156,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.activeInstantie = instantie;
         },
         toggleActiveDivisie: function toggleActiveDivisie(divisie) {
-            console.log('toggling');
             this.netwerkanalyse.netwerkpartners.forEach(function (netwerkpartner) {
-                if (netwerkpartner.divisie_id == divisie.id) {
-                    console.log('found');
+                if (netwerkpartner.divisie_id === divisie.id) {
                     netwerkpartner.active = !netwerkpartner.active;
                 }
             });
@@ -128182,68 +128179,75 @@ var render = function() {
     "div",
     {},
     _vm._l(_vm.instanties, function(instantie) {
-      return _c("div", { key: "instantie.id", staticClass: "card" }, [
-        _c(
-          "div",
-          {
-            staticClass: "card-header clickable",
-            class: {
-              "bg-primary text-white": _vm.isActiveInstantie(instantie)
-            },
-            on: {
-              click: function($event) {
-                return _vm.setActiveInstantie(instantie)
+      return _c(
+        "div",
+        { key: "instantie-" + instantie.id, staticClass: "card" },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "card-header clickable",
+              class: {
+                "bg-primary text-white": _vm.isActiveInstantie(instantie)
+              },
+              on: {
+                click: function($event) {
+                  return _vm.setActiveInstantie(instantie)
+                }
               }
-            }
-          },
-          [_vm._v("\n            " + _vm._s(instantie.title) + "\n        ")]
-        ),
-        _vm._v(" "),
-        _vm.isActiveInstantie(instantie)
-          ? _c("div", { staticClass: "card-body clickable" }, [
-              _c(
-                "div",
-                { staticClass: "row" },
-                _vm._l(instantie.divisies, function(divisie) {
-                  return _c(
-                    "div",
-                    { key: "divisie.id", staticClass: "col-3 mb-2" },
-                    [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "border px-3 py-5 h-100 justify-content-center d-flex align-items-center",
-                          class: {
-                            "bg-primary text-white": _vm.isActiveDivisie(
-                              divisie
-                            )
-                          },
-                          on: {
-                            click: function($event) {
-                              return _vm.toggleActiveDivisie(divisie)
+            },
+            [_vm._v("\n            " + _vm._s(instantie.title) + "\n        ")]
+          ),
+          _vm._v(" "),
+          _vm.isActiveInstantie(instantie)
+            ? _c("div", { staticClass: "card-body clickable" }, [
+                _c(
+                  "div",
+                  { staticClass: "row" },
+                  _vm._l(instantie.divisies, function(divisie) {
+                    return _c(
+                      "div",
+                      {
+                        key: "divisie-" + divisie.id,
+                        staticClass: "col-3 mb-2"
+                      },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "border px-3 py-5 h-100 justify-content-center d-flex align-items-center",
+                            class: {
+                              "bg-primary text-white": _vm.isActiveDivisie(
+                                divisie
+                              )
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.toggleActiveDivisie(divisie)
+                              }
                             }
-                          }
-                        },
-                        [
-                          _c("h5", { staticClass: "text-center" }, [
-                            _vm._v(
-                              _vm._s(divisie.title) +
-                                " " +
-                                _vm._s(_vm.isActiveDivisie(divisie)) +
-                                " "
-                            )
-                          ])
-                        ]
-                      )
-                    ]
-                  )
-                }),
-                0
-              )
-            ])
-          : _vm._e()
-      ])
+                          },
+                          [
+                            _c("h5", { staticClass: "text-center" }, [
+                              _vm._v(
+                                _vm._s(divisie.title) +
+                                  " " +
+                                  _vm._s(_vm.isActiveDivisie(divisie)) +
+                                  " "
+                              )
+                            ])
+                          ]
+                        )
+                      ]
+                    )
+                  }),
+                  0
+                )
+              ])
+            : _vm._e()
+        ]
+      )
     }),
     0
   )
