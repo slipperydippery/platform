@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\Instantie;
 use App\Netwerkanalyse;
 use Illuminate\Http\Request;
 
 class NetwerkanalyseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,17 +31,21 @@ class NetwerkanalyseController extends Controller
      */
     public function create()
     {
+        $netwerkanalyses = Netwerkanalyse::get();
+        return view('netwerkanalyse.create', compact ('netwerkanalyses') );
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $netwerkanalyse = Netwerkanalyse::create([
+            ''
+        ]);
     }
 
     /**
@@ -57,7 +67,9 @@ class NetwerkanalyseController extends Controller
      */
     public function edit(Netwerkanalyse $netwerkanalyse)
     {
-        //
+        $instanties = Instantie::with('divisies')->get();
+        $netwerkanalyse = Netwerkanalyse::with('netwerkpartners')->find($netwerkanalyse->id);
+        return view('netwerkanalyse.edit', compact('netwerkanalyse', 'instanties'));
     }
 
     /**

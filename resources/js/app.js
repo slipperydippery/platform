@@ -123,6 +123,10 @@ Vue.component('manage-articletypes', require('./components/ManageArticletypes.vu
 Vue.component('manage-articles', require('./components/ManageArticles.vue'));
 Vue.component('edit-article-modal', require('./components/EditArticleModal.vue'));
 
+// Create Netwerkanalyse
+Vue.component('create-netwerkanalyse', require('./components/CreateNetwerkanalyse.vue'));
+Vue.component('netwerkpartner-manager', require('./components/NetwerkpartnerManager.vue'));
+
 // Utility
 Vue.component('countdown', require('./components/Countdown.vue'));
 Vue.component('join-with-code', require('./components/JoinWithCode.vue'));

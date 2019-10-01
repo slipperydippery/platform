@@ -42,7 +42,7 @@
 
                             <!-- Hidden phone_number Type Form Input -->
                             <input type="hidden" id="phone_number" name="phone_number" value="0000000000">
-                                
+
 
                             <div class="form-group row">
 
@@ -69,8 +69,8 @@
                             <div class="form-group{{ $errors->has('terms') ? ' has-error' : '' }} form-check">
                                 <label>
                                     <input type="checkbox" class="form-check-input" id="voorwaarden" required>
-                                    <label class="form-check-label" for="voorwaarden"> Ik accepteer de <a href="#" data-toggle="modal" data-target="#voorwaardenmodal"> algemene voorwaarden</a> </label>
-                                    
+                                    <label class="form-check-label" for="voorwaarden"> Ik accepteer de <a href="https://www.nji.nl/nl/Download-NJi/Voorwaarden-Nederlands-Jeugdinstituut.pdf" target="_blank" > algemene voorwaarden</a> </label>
+
                                 </label>
 
                                 <div class="col-md-4">

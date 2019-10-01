@@ -4,6 +4,7 @@ namespace App;
 
 use App\Group;
 use App\Instantie;
+use App\Scanmodel;
 use App\Netwerkpartner;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,8 +22,18 @@ class Divisie extends Model
     	return $this->hasMany(Netwerkpartner::class);
     }
 
-    public function group()
+    public static function generateNetwerkpartners($netwerkanalyse)
     {
-    	return $this->hasManyThrough(Group::class, Netwerkpartner::class);
+        foreach(Scanmodel::find(1)->instanties as $instantie)
+        {
+            foreach($instantie->divisies as $divisie)
+            {
+                Netwerkpartner::create([
+                    'netwerkanalyse_id' => $netwerkanalyse->id,
+                    'divisie_id' => $divisie->id,
+                ]);
+            }
+
+        }
     }
 }

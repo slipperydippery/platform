@@ -6,8 +6,6 @@ use App\Scan;
 use App\User;
 use App\Divisie;
 use App\Followup;
-use App\Netwerkanalyse;
-use App\Netwerkpartner;
 use App\Events\GroupUpdated;
 use App\Models\Concerns\UsesUuid;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +14,7 @@ use Dyrynda\Database\Support\GeneratesUuid;
 class Group extends Model
 {
     use UsesUuid;
-    
+
 	protected $fillable = ['title', 'code', 'user_id', 'scan_id', 'unlocked'];
 
     public function scan()
@@ -42,21 +40,6 @@ class Group extends Model
     public function usercount()
     {
     	return $this->scans->count();
-    }
-
-    public function netwerkpartners()
-    {
-        return $this->hasMany(Netwerkpartner::class);
-    }
-
-    public function divisies()
-    {
-        return $this->hasManyTrough(Divisie::class, Netwerkpartner::class);
-    }
-
-    public function netwerkanalyse()
-    {
-        return $this->hasOne(Netwerkanalyse::class);
     }
 
     public function authhasscan()
@@ -100,7 +83,7 @@ class Group extends Model
 
         $this->save();
         $this->mirrorToChildren();
-        
+
         return $this;
     }
 

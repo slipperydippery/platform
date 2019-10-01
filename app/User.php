@@ -8,6 +8,7 @@ use App\Role;
 use App\Scan;
 use App\Group;
 use App\Dashmessage;
+use App\Netwerkanalyse;
 use App\Models\Concerns\UsesUuid;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -45,6 +46,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function groups()
     {
         return $this->hasMany(Group::class);
+    }
+
+    public function netwerkanalyses()
+    {
+        return $this->hasMany(Netwerkanalyse::class);
     }
 
     public function dashmessages()

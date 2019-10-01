@@ -9,17 +9,18 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::apiResources([
-	'answer' 		=> 'API\AnswerController',
-	'article' 		=> 'API\ArticleController',	
-	'articletype'	=> 'API\ArticletypeController',
-	'comparison'	=> 'API\ComparisonController',
-	'district'		=> 'API\DistrictController',
-	'followup'		=> 'API\FollowupController',
-	'group'			=> 'API\GroupController',
-	'measure'		=> 'API\MeasureController',
-	'scan'			=> 'API\ScanController',
-	'message'		=> 'API\MessageController',
-	'theme'			=> 'API\ThemeController'
+	'answer' 		    => 'API\AnswerController',
+	'article' 		    => 'API\ArticleController',
+	'articletype'	    => 'API\ArticletypeController',
+	'comparison'	    => 'API\ComparisonController',
+	'district'		    => 'API\DistrictController',
+	'followup'		    => 'API\FollowupController',
+	'group'			    => 'API\GroupController',
+	'measure'		    => 'API\MeasureController',
+	'scan'			    => 'API\ScanController',
+	'message'		    => 'API\MessageController',
+	'theme'			    => 'API\ThemeController',
+    'netwerkanalyse'    => 'API\NetwerkanalyseController'
 ]);
 
 Route::post('/articlepostpatch', 'API\ArticleController@postpatch');
