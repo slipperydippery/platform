@@ -26,7 +26,7 @@
 
                     <p>Doe je de participatiescan individueel? Dan doorloop je hetzelfde proces en kun je jouw scan vergelijken met deelnemers die ook een individuele scan hebben gemaakt. Je kunt in contact komen met deelnemers door een bericht te sturen en eventueel later een groepssessie te organiseren.</p>
 
-                    <p>Weet je niet welke netwerkpartners je wilt selecteren? <a href="#">Klik dan hier</a>. Wil je de uitgebreide handleiding lezen?  <a href="/participatiescaninstructie/" target="_blank" class="">Klik dan hier</a>.</p>
+                    <p>Weet je niet welke netwerkpartners je wilt selecteren? <a href=" {{ route('netwerkanalyse.create')  }} ">Klik dan hier</a>. Wil je de uitgebreide handleiding lezen?  <a href="http://embav.nl/participatiescaninstructie/" target="_blank" class="">Klik dan hier</a>.</p>
 
                 </div>
                 <div class="modal-footer">

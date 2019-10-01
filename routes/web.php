@@ -46,13 +46,14 @@ Route::get('/nieuwegroupsscan/{scan}/klaar', 'CreateGroupScanController@created'
 
 // Netwerkpartners
 Route::get('/group/{group}/netwerkanalyse', 'NetwerkanalyseController@create');
+Route::resource('netwerkanalyse', 'NetwerkanalyseController');
 
 // Join Scan
 Route::get('/groep/sluitaanmetcode', 'JoinGroupScanController@entercode')->name('joingroupscan.entercode');
 Route::post('/group/sluitaanmetcode', 'JoinGroupScanController@storecode')->name('joingroupscan.storecode');
-Route::get('/groep/{group}/sluitaan/{code}', 'JoinGroupScanController@addscan')->name('joingroupscan.addscan');	
-Route::post('/groep/{group}/sluitaan/{code}', 'JoinGroupScanController@storescan')->name('joingroupscan.storescan');	
-Route::get('/groep/{scan}/aangesloten', 'JoinGroupScanController@created')->name('joingroupscan.created');	
+Route::get('/groep/{group}/sluitaan/{code}', 'JoinGroupScanController@addscan')->name('joingroupscan.addscan');
+Route::post('/groep/{group}/sluitaan/{code}', 'JoinGroupScanController@storescan')->name('joingroupscan.storescan');
+Route::get('/groep/{scan}/aangesloten', 'JoinGroupScanController@created')->name('joingroupscan.created');
 
 // Manage Scan & Group
 Route::get('/groep/{group}/ontgrendel', 'ManageGroupScanController@unlock')->name('managegroupscan.unlock');

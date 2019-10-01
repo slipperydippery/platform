@@ -6,7 +6,7 @@
 	        <div class="col-md-12">
 	            <div class="page--title">
 	                <h1 class="pagetitle">
-	                	Verbeterpunten thema {{ $theme->id }}: {{ $theme->title }} 
+	                	Verbeterpunten thema {{ $theme->id }}: {{ $theme->title }}
 	                	@if ($theme->info)
 	                		<i class="material-icons clickable muted h1" data-toggle="tooltip" data-placement="top" title=" {{ $theme->info }} "> info </i>
 	                	@endif
@@ -35,7 +35,7 @@
 								<div class="col-sm-2"></div>
 								@foreach ($theme->questions as $question)
 									<div class="col-sm-2">
-										<strong>Vraag {{ $question->id }} <br></strong>
+										<strong>Vraag {{ $question->order }} <br></strong>
 										<span data-toggle="tooltip" data-placement="top" title=" {{ $question->question }} ">{!! $question->title !!}</span>
 									</div>
 								@endforeach
@@ -51,21 +51,21 @@
 												:question_id=" '{{ $question->id }}' "
 											>
 											</average-slider>
-										@else	
+										@else
 											@php
 												$thisvalue = $scan->answers->where('question_id', $question->id)->first()->answer ? $scan->answers->where('question_id', $question->id)->first()->answer : "null";
 											@endphp
 											<result-slider
 												:value=" {{ $thisvalue }} "
 											>
-											</result-slider>										
+											</result-slider>
 										@endif
 
 
 									</div>
 								@endforeach
 							</div>
-							
+
 							<div class="row">
 
 								<div class="col-sm-2"> Verbeterpunten - <em>steekwoorden</em></div>
@@ -84,13 +84,13 @@
 											>
 											</mini-measure>
 										@endif
-									</div>	
+									</div>
 								@endforeach
 							</div>
 						</div>
 						</div>
 					</div>
-					
+
 			</div>
 		</div>
 	</div>

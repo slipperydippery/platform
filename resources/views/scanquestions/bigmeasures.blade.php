@@ -5,7 +5,7 @@
 	        <div class="col-md-12">
 	            <div class="page--title">
 	                <h1 class="pagetitle">Verbeterpunten uitwerken thema {{ $theme->id }}: {{ $theme->title }}  </h1>
-	                <p>Hieronder zie de verbeterpunten die je tijdens de sessie met elkaar hebt geselecteerd. Bespreek met de groep welke acties je per verbeterpunt kunt ondernemen. Vervolgens kan de beheerder de acties omschrijven en een trekker selecteren.</p>
+	                <p>Hieronder zie je de verbeterpunten die je tijdens de sessie met elkaar hebt geselecteerd. Bespreek met de groep welke acties je per verbeterpunt kunt ondernemen. Vervolgens kan de beheerder de acties omschrijven en een trekker selecteren.</p>
 	            </div>
 	        </div>
 		</div>
@@ -48,7 +48,7 @@
 										>
 										</big-measure>
 									@endif
-									
+
 								</div>
 							</div>
 							@if ($scan->group)

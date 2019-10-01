@@ -23,11 +23,8 @@ class NetwerkanalyseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Group $group)
+    public function create()
     {
-        if(! $group->netwerkanalyse()->exists()) {
-            $group->netwerkanalyse()->create([]);
-        }
     }
 
     /**
