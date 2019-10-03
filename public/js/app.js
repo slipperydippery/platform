@@ -126094,7 +126094,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "tbody",
-        _vm._l(_vm.maxOrganisaties - 1, function(organisatieNr) {
+        _vm._l(_vm.maxOrganisaties, function(organisatieNr) {
           return _c(
             "tr",
             { staticClass: "tr" },

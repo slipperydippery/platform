@@ -9,7 +9,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="tr" v-for="organisatieNr in (maxOrganisaties - 1)">
+                <tr class="tr" v-for="organisatieNr in (maxOrganisaties)">
                     <td
                         v-for="leefgebied in leefgebieds"
                         :class="{'bg-info' : ! netwerkpartnerActiveByLeefgebiedAndNumber(leefgebied, (organisatieNr - 1)),
