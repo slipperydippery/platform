@@ -4,7 +4,7 @@ namespace App;
 
 use App\Scan;
 use App\User;
-use App\Divisie;
+use App\Organisatie;
 use App\Followup;
 use App\Events\GroupUpdated;
 use App\Models\Concerns\UsesUuid;

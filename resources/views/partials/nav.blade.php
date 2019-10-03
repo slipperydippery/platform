@@ -8,7 +8,7 @@
                 <h4 class="align-self-center ml-3 pt-1"><span class="text-primary">Participatie</span><span class="text-secondary"></span><span class="text-muted">scan</span></h4>
             @endif
         </a>
-        
+
         <button class="navbar-toggler hidden-lg-up pull-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -71,8 +71,10 @@
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#instructieModal"> Hoe werkt het? </a>
-                        <a class="dropdown-item" href="http://embav.nl/participatiescaninstructie/" target="blank"> Handleiding voor gebruikers </a>
-                        <a class="dropdown-item" href="http://embav.nl/participatiescaninstructievoorzitter/" target="blank"> Handleiding voor voorzitter/beheerder </a>
+                        <a class="dropdown-item" href="http://embav.nl/participatiescaninstructie/" target="blank"> Handleiding voor gebruikers - bladerbaar</a>
+                        <a class="dropdown-item" href="/pdf/handleiding_participatiescan_gebruikers.pdf" download> Handleiding voor gebruikers - download</a>
+                        <a class="dropdown-item" href="http://embav.nl/participatiescaninstructievoorzitter/" target="blank"> Handleiding voor voorzitter/beheerder - bladerbaar</a>
+                        <a class="dropdown-item" href="/pdf/handleiding_participatiescan_voorzitter.pdf" download> Handleiding voor voorzitter/beheerder - download</a>
                     </div>
                 </li>
                 @auth

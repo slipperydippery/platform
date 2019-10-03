@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Divisie;
+use App\Organisatie;
 use App\Netwerkanalyse;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,13 +10,13 @@ class Netwerkpartner extends Model
 {
     protected $guarded = [];
 
-    public function divisies()
+    public function organisatie()
     {
-        return $this->hasMany(Divisie::class);
+        return $this->belongsTo(Organisatie::class);
     }
 
     public function netwerkanalyses()
     {
-        return $this->hasMany(Netwerkanalyse::class);
+        return $this->belongsTo(Netwerkanalyse::class);
     }
 }

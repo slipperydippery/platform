@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Group;
 use App\Instantie;
+use App\Leefgebied;
 use App\Netwerkanalyse;
 use Illuminate\Http\Request;
 
@@ -67,9 +68,9 @@ class NetwerkanalyseController extends Controller
      */
     public function edit(Netwerkanalyse $netwerkanalyse)
     {
-        $instanties = Instantie::with('divisies')->get();
+        $leefgebeids = Leefgebied::with('organisaties')->get();
         $netwerkanalyse = Netwerkanalyse::with('netwerkpartners')->find($netwerkanalyse->id);
-        return view('netwerkanalyse.edit', compact('netwerkanalyse', 'instanties'));
+        return view('netwerkanalyse.edit', compact('netwerkanalyse', 'leefgebeids'));
     }
 
     /**

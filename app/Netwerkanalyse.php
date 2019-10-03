@@ -3,17 +3,17 @@
 namespace App;
 
 use App\User;
-use App\Divisie;
+use App\Organisatie;
 use App\Netwerkpartner;
 use Illuminate\Database\Eloquent\Model;
 
 class Netwerkanalyse extends Model
 {
-	protected $guarded = [];
+    protected $guarded = [];
 
     public function user()
     {
-    	return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function netwerkpartners()
@@ -33,7 +33,7 @@ class Netwerkanalyse extends Model
             'user_id' => $attributes['user_id'],
         ]);
 
-        Divisie::generateNetwerkpartners($netwerkanalyse);
+        Organisatie::generateNetwerkpartners($netwerkanalyse);
 
         return $netwerkanalyse;
     }

@@ -27,7 +27,13 @@ class NetwerkanalyseController extends Controller
      */
     public function store(Request $request)
     {
-        $netwerkanalyse = Netwerkanalyse::register($request->input('netwerkanalyse'));
+        $attributes = $request->input('netwerkanalyse');
+        $netwerkanalyse = Netwerkanalyse::create([
+            'title' => $attributes['title'],
+            'user_id' => $attributes['user_id'],
+        ]);
+
+//        $netwerkanalyse = Netwerkanalyse::register($request->input('netwerkanalyse'));
 
         return $netwerkanalyse;
     }

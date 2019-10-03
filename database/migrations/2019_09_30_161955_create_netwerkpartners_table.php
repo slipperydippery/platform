@@ -18,8 +18,8 @@ class CreateNetwerkpartnersTable extends Migration
             $table->tinyInteger('active')->default(0);
             $table->integer('netwerkanalyse_id')->unsigned();
             $table->foreign('netwerkanalyse_id')->references('id')->on('netwerkanalyses')->onDelete('cascade');
-            $table->integer('divisie_id')->unsigned();
-            $table->foreign('divisie_id')->references('id')->on('divisies')->onDelete('cascade');
+            $table->integer('organisatie_id')->unsigned();
+            $table->foreign('organisatie_id')->references('id')->on('organisaties')->onDelete('cascade');
             $table->timestamps();
         });
     }

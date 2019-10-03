@@ -6,7 +6,7 @@
 			<h1 class="">Contactgegevens</h1>
 
 		</div>
-		
+
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card-group mt-5">
@@ -17,10 +17,10 @@
 						<div class="card-body">
 							<p class="card-text">
 								<address>
-									<strong> Nederlands jeugdinstituut </strong> <br>
+									<strong> 16-27 </strong> <br>
 									Receptie <br>
 									030-2306344 <br>
-									<a href="mailto:info@nji.nl">info@nji.nl</a><br> 
+									<a href="mailto:info@16-27.nl">info@16-27.nl</a><br>
 								</address>
 							</p>
 						</div>
@@ -35,7 +35,7 @@
 									<strong> EMB AV </strong> <br>
 									Susanne Meeuwissen <br>
 									0641306310 <br>
-									<a href="mailto:susanne@embav.nl">susanne@embav.nl</a><br> 
+									<a href="mailto:susanne@embav.nl">susanne@embav.nl</a><br>
 								</address>
 							</p>
 						</div>
@@ -50,14 +50,14 @@
 									<strong> ECORYS </strong> <br>
 									Henk Bakker <br>
 									0613000603 <br>
-									<a href="mailto:henk.bakker@ecorys.com">henk.bakker@ecorys.com</a><br> 
+									<a href="mailto:henk.bakker@ecorys.com">henk.bakker@ecorys.com</a><br>
 								</address>
 							</p>
 						</div>
 					</div>
 
 				</div>
-				
+
 			</div>
 		</div>
 	</div>

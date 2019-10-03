@@ -8,7 +8,7 @@
 		    <button class="js-cookie-consent-agree cookie-consent__agree btn btn-primary">
 		        {{ trans('cookieConsent::texts.agree') }}
 		    </button> <br>
-		    <a href=" {{ route('cookies') }} ">Lees hier meer over de cookies die gebruikt worden op deze site.</a>
+		    <a href="https://www.16-27.nl/privacyverklaring" target="_blank">Lees hier meer over de cookies die gebruikt worden op deze site.</a>
 	    </div>
 	</div>
 

@@ -23,9 +23,10 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionTableSeeder::class);
         $this->call(RoleUserTableSeeder::class);
         $this->call(QuestionTableSeeder::class);
-        $this->call(DivisieTableSeeder::class);
+        $this->call(LeefgebiedTableSeeder::class);
+        $this->call(OrganisatieTableSeeder::class);
 
-        
+
         factory(App\User::class, 10)->create()->each(function ($user) {
     		$scan = $user->scans()->save(factory(App\Scan::class)->make());
     		$group = $scan->ownsgroups()->save(factory(App\Group::class)->make());
@@ -40,7 +41,7 @@ class DatabaseSeeder extends Seeder
     		$scan->group()->associate($group);
     		$scan->save();
     		Question::generateAnswers($scan);
-    		
+
     	});
     }
 }
