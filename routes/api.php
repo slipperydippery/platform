@@ -20,8 +20,12 @@ Route::apiResources([
 	'scan'			    => 'API\ScanController',
 	'message'		    => 'API\MessageController',
 	'theme'			    => 'API\ThemeController',
-    'netwerkanalyse'    => 'API\NetwerkanalyseController'
+    'netwerkanalyse'    => 'API\NetwerkanalyseController',
+    'organisatie'       => 'API\OrganisatieController',
+    'netwerkpartner'    => 'API\NetwerkpartnerController',
 ]);
+
+
 
 Route::post('/articlepostpatch', 'API\ArticleController@postpatch');
 Route::post('/joingroup/', 'API\ManageGroupController@joinwithcode');

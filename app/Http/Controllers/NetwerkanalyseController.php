@@ -57,7 +57,9 @@ class NetwerkanalyseController extends Controller
      */
     public function show(Netwerkanalyse $netwerkanalyse)
     {
-        //
+        $leefgebieds = Leefgebied::with('organisaties')->get();
+        $netwerkanalyse = Netwerkanalyse::with('netwerkpartners')->find($netwerkanalyse->id);
+        return view('netwerkanalyse.show', compact('netwerkanalyse', 'leefgebieds'));
     }
 
     /**
@@ -68,9 +70,9 @@ class NetwerkanalyseController extends Controller
      */
     public function edit(Netwerkanalyse $netwerkanalyse)
     {
-        $leefgebeids = Leefgebied::with('organisaties')->get();
+        $leefgebieds = Leefgebied::with('organisaties')->get();
         $netwerkanalyse = Netwerkanalyse::with('netwerkpartners')->find($netwerkanalyse->id);
-        return view('netwerkanalyse.edit', compact('netwerkanalyse', 'leefgebeids'));
+        return view('netwerkanalyse.edit', compact('netwerkanalyse', 'leefgebieds'));
     }
 
     /**

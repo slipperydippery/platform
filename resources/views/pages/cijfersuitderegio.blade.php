@@ -8,10 +8,10 @@
 
             <p>Deze cijfers maken inzichtelijk hoe het er in uw regio voorstaat. Cijfers zijn niet het verhaal op zich, maar vooral deel van de voedingsbodem voor een goed gesprek. <i class="material-icons clickable md-36 md-36-24 bounce-fade-top" data-toggle="modal" data-target="#regioModal"> info </i> </p>
 		</div>
-		
+
 		<div class="row">
 			<div class="col-md-12">
-				<iframe scrolling="no" src="https://monitoraoj.nl/arbeidsregio1/#primary" class="iframe--monitor" style="border: 0px none; height: 1000px; width: 1180px;"></iframe>
+				<iframe scrolling="no" src="https://neet-rate-risicos-arbeidsregio.nl/" class="iframe--monitor" style="border: 0px none; height: 1000px; width: 1180px;"></iframe>
 			</div>
 		</div>
 	</div>
