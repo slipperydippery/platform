@@ -11,7 +11,7 @@
 						<p>Weet je al precies wie je wilt uitnodigen? Stuur de deelnemers de volgende code:</p>
 
 						<div class="alert alert-primary text-center" role="alert">
-						    <span id="groupcode">{{ $scan->group->code }}</span> 
+						    <span id="groupcode">{{ $scan->group->code }}</span>
 						    <copy-icon
 						        copy_content="{{ $scan->group->code }}"
 						    >
@@ -21,14 +21,14 @@
 						<p>Je kunt ook gebruik maken van onze <a href="#" data-toggle="modal" data-target="#voorbeeldmail">voorbeeld e-mail</a>.</p>
 
 						<p>Verder hebben wij een handige tool om te inventariseren wie je het beste uit kunt nodigen. Heb je dit straks allemaal gedaan? Dan kan je vanuit de startpagina je scan beheren en later aan de slag gaan.</p>
-	
+
 						<div class="text-right">
 							<a href=" {{ route('dashboard') }} " class="btn btn-outline-primary btn-outline-primary--nooutline">Naar de startpagina</a>
-							<a href=" {{ route('dashboard') }} " class="btn btn-secondary">Wie zijn je netwerkpartners?</a>
+							<a href=" {{ route('netwerkanalysecontroller.create', $group->title) }} " class="btn btn-secondary">Wie zijn je netwerkpartners?</a>
 						</div>
 					</div>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>

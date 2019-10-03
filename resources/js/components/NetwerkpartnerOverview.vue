@@ -1,8 +1,8 @@
 <template>
     <div class="">
-        <table class="table table-bordered">
+        <table class="table table-bordered border shadow">
             <thead>
-                <tr class="bg-primary">
+                <tr class="bg-primary text-white">
                     <th v-for="leefgebied in leefgebieds">
                         {{ leefgebied.title }}
                     </th>
@@ -12,7 +12,9 @@
                 <tr class="tr" v-for="organisatieNr in (maxOrganisaties - 1)">
                     <td
                         v-for="leefgebied in leefgebieds"
-                        :class="{'bg-info' : ! netwerkpartnerActiveByLeefgebiedAndNumber(leefgebied, (organisatieNr - 1))}"
+                        :class="{'bg-info' : ! netwerkpartnerActiveByLeefgebiedAndNumber(leefgebied, (organisatieNr - 1)),
+                            'text-muted' : netwerkpartnerActiveByLeefgebiedAndNumber(leefgebied, (organisatieNr - 1))}"
+
                     >
                         {{ organisatieTitleByLeefgebiedAndNumber(leefgebied, (organisatieNr - 1)) }}
                     </td>

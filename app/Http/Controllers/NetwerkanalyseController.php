@@ -30,10 +30,10 @@ class NetwerkanalyseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(String $title = '')
     {
         $netwerkanalyses = Netwerkanalyse::get();
-        return view('netwerkanalyse.create', compact ('netwerkanalyses') );
+        return view('netwerkanalyse.create', compact ('netwerkanalyses', 'title') );
     }
 
     /**

@@ -45,6 +45,7 @@ Route::post('/nieuwegroupsscan/datum', 'CreateGroupScanController@storedatetime'
 Route::get('/nieuwegroupsscan/{scan}/klaar', 'CreateGroupScanController@created')->name('creategroupscan.created');
 
 // Netwerkpartners
+Route::get('/netwerkanalyse/create/{title?}', 'NetwerkanalyseController@create')->name('netwerkanalysecontroller.create');
 Route::resource('netwerkanalyse', 'NetwerkanalyseController');
 Route::get('/netwerkanalyse/storeviaget', 'NetwerkanalyseController@storeviaget')->name('netwerkanalysecontroller.storeviaget');
 

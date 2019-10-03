@@ -30,6 +30,7 @@
             <div class="col-md-8 offset-md-2 border shadow my-2">
 
                 <create-netwerkanalyse
+                    title = " {{ $title  }} "
                     user_id = " {{ Auth::user()->id  }} "
                 >
                 </create-netwerkanalyse>
