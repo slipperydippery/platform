@@ -36,6 +36,11 @@
 
                 <p><em>Disclaimer: Deze lijst is niet uitputtend maar dient als een hulpmiddel om de juiste partijen om tafel te
                         krijgen voor de Participatiescan.</em></p>
+
+                        <br>
+                        <div class="alert alert-primary text-center" role="alert">
+                            Selecteer hieronder met welke organisatie(s) je al een samenwerking hebt.
+                        </div>
             </div>
         </div>
         <div class="row">
