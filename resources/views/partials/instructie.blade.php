@@ -16,7 +16,7 @@
                         <li>focus op werk en talent</li>
                         <li>kwaliteit begeleiding</li>
                         <li>randvoorwaarden goede begeleiding</li>
-                        <li>overige randvoorwaarden </li>
+                        <li>effectieve samenwerking </li>
 
                     </ul>
 
