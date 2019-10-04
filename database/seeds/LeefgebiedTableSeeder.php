@@ -19,15 +19,7 @@ class LeefgebiedTableSeeder extends Seeder
                 'description' => ''
             ],
             [
-                'title' => 'Overheid (gemeente)',
-                'description' => ''
-            ],
-            [
-                'title' => 'Werk',
-                'description' => ''
-            ],
-            [
-                'title' => 'Inkomen',
+                'title' => 'Werk, Inkomen en schulden',
                 'description' => ''
             ],
             [
@@ -35,7 +27,15 @@ class LeefgebiedTableSeeder extends Seeder
                 'description' => ''
             ],
             [
-                'title' => 'Overig',
+                'title' => 'Wonen',
+                'description' => ''
+            ],
+            [
+                'title' => 'Vrije tijd',
+                'description' => ''
+            ],
+            [
+                'title' => 'Veiligheid',
                 'description' => ''
             ],
         ];
