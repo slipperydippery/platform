@@ -81,6 +81,8 @@ class ScanController extends Controller
     {
 
         $articles = [];
+
+        return $scan->measures;
         foreach ($scan->measures as $measure) {
             if ($measure->active) {
                 foreach ($measure->question->articles as $article) {
@@ -100,7 +102,6 @@ class ScanController extends Controller
                 }
             }
         }
-        return $articles;
         usort($articles, function($item1, $item2){
             return $item2['matchcount'] <=> $item1['matchcount'];
         });
