@@ -79,7 +79,6 @@ class ScanController extends Controller
      */
     public function show(Scan $scan)
     {
-
         $articles = [];
         foreach ($scan->measures as $measure) {
             if ($measure->active) {
