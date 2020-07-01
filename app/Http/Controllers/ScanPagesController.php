@@ -80,7 +80,7 @@ class ScanPagesController extends Controller
         if ($scan->group_id) {
             AlgemeenbeeldUpdated::dispatch($scan->group_id);
         }
-        $scan = Scan::with('instantie', 'user')->find($scan->id);
+        $scan = Scan::with('instantie', 'user', 'group')->find($scan->id);
     	return view('scan.algemeenbeeldresultaten', compact('scan', 'scanmodel', 'previous', 'next'));
     }
 
