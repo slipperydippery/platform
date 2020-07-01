@@ -145,8 +145,8 @@ class ScanQuestionController extends Controller
     {
         if ( $scan->group && $scan->group->scan->id == $scan->id) {
             $incompletescans = [];
-            foreach ($scan->group->scans as $scan) {
-                if(! $scan->isComplete()) $incompletescans[] = $scan ;
+            foreach ($scan->group->scans as $thisscan) {
+                if(! $thisscan->isComplete()) $incompletescans[] = $thisscan ;
             }
             $previous = '/sessie/' . $scan->id . '/vervolgafspraak';
             $next = '/scan/' . $scan->id;

@@ -81,8 +81,6 @@ class ScanController extends Controller
     {
 
         $articles = [];
-
-        return $scan->measures;
         foreach ($scan->measures as $measure) {
             if ($measure->active) {
                 foreach ($measure->question->articles as $article) {
