@@ -100,6 +100,7 @@ class ScanController extends Controller
                 }
             }
         }
+        return $articles;
         usort($articles, function($item1, $item2){
             return $item2['matchcount'] <=> $item1['matchcount'];
         });
