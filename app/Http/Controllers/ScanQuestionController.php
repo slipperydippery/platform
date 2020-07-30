@@ -156,10 +156,10 @@ class ScanQuestionController extends Controller
             $previous = '/sessie/' . $scan->id . '/vervolgafspraak';
             return view('scanquestions.incomplete', compact('scan', 'previous'));
         }
-        if ($scan_group){
+        if ($scan->group){
             return redirect()->route('scan.show', $scan->group->scan);
         }
-        
+
         return view('scanquestions.complete', compact('scan'));
     }
 
