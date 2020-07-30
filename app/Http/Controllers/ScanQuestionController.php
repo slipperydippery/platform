@@ -159,6 +159,7 @@ class ScanQuestionController extends Controller
         if ($scan->group){
             return redirect()->route('scan.show', $scan->group->scan);
         }
+        return redirect()->route('scan.show', $scan);
 
         return view('scanquestions.complete', compact('scan'));
     }
