@@ -47,10 +47,10 @@
 						<div class="card-body">
 							<p class="card-text">
 								<address>
-									<strong> ECORYS </strong> <br>
-									Henk Bakker <br>
-									0613000603 <br>
-									<a href="mailto:henk.bakker@ecorys.com">henk.bakker@ecorys.com</a><br>
+									<strong> 16-27 </strong> <br>
+									Receptie <br>
+									030-2306344 <br>
+									<a href="mailto:info@16-27.nl">info@16-27.nl</a><br>
 								</address>
 							</p>
 						</div>
