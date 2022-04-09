@@ -25,7 +25,7 @@
     "flatpickr": "^4.5.7",
     "laravel-echo": "^1.5.3",
     "lazysizes": "^4.1.7",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "portal-vue": "^1.5.1",
     "pusher-js": "^4.4.0",
     "vue-clipboard2": "^0.3.0"
