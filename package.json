@@ -24,7 +24,7 @@
     "bootstrap-vue": "^2.0.0-rc.14",
     "flatpickr": "^4.5.7",
     "laravel-echo": "^1.5.3",
-    "lazysizes": "^4.1.7",
+    "lazysizes": "^5.2.1",
     "moment": "^2.29.4",
     "portal-vue": "^1.5.1",
     "pusher-js": "^4.4.0",
